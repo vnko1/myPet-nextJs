@@ -1,0 +1,20 @@
+html {
+  @apply text-base;
+}
+
+body {
+  @apply text-base leading-[22px] tracking-[0.64px];
+}
+
+* {
+  @apply font-manrope font-regular m-0 p-0 box-border;
+}
+
+button {
+  @apply border-transparent;
+}
+
+ul,
+ol {
+  @apply list-none;
+}

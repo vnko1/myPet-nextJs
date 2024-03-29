@@ -1,6 +1,9 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  corePlugins: {
+    preflight: false,
+  },
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -24,6 +27,20 @@ const config: Config = {
       },
       backgroundImage: {
         grBlue: "linear-gradient(290deg, #419EF1 0%, #9BD0FF 107.89%)",
+      },
+      fontSize: {
+        xxs: "10px",
+        xs: "12px",
+        sm: "14px",
+        base: "16px",
+        lg: "20px",
+        xl: "24px",
+        xxl: "26px",
+      },
+      fontFamily: {
+        manrope: ["var(--font-manrope)"],
+        inter: ["var(--font-inter)"],
+        poppins: ["var(--font-poppins)"],
       },
     },
   },
