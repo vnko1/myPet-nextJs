@@ -10,7 +10,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${manrope.variable} ${inter.variable} ${poppins.variable}`}
+        className={`${manrope.variable} ${inter.variable} ${poppins.variable} container`}
       >
         {children}
       </body>
