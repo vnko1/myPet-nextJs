@@ -31,8 +31,6 @@ const config: Config = {
         bg_mob: "url('/images/bg-mob.webp')",
         bg_tab: "url('/images/bg-tab.webp')",
         bg: "url('/images/bg.webp')",
-        hero: "url('/images/hero.webp')",
-        hero_tab: "url('/images/hero-tab.webp')",
         hero_desc: "url('/images/hero-desc.webp')",
       },
       spacing: {
