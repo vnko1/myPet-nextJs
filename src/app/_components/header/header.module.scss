@@ -19,7 +19,7 @@
 }
 
 .auth {
-  @apply hidden base:block;
+  @apply hidden base:flex gap-[20px];
 }
 
 .icon {

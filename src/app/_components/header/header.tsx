@@ -31,7 +31,9 @@ const Header: FC = () => {
             <Icon icon={IconEnum.MENU} size={24} className={styles["icon"]} />
           </UIButton>
         </div>
-        <div className={styles["auth"]}>AUTH</div>
+        <div className={styles["auth"]}>
+          <UIButton></UIButton>
+        </div>
       </div>
     </header>
   );

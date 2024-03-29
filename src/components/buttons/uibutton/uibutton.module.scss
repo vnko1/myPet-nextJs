@@ -1,5 +1,5 @@
 .btn {
-  @apply cursor-pointer relative inline-flex items-center justify-center transition-all duration-150;
+  @apply cursor-pointer relative inline-flex items-center justify-center transition-all duration-150 rounded-[40px];
 
   &.btn--loading {
     @apply animate-pulse pointer-events-none;
@@ -14,11 +14,12 @@
   }
 
   &.btn--medium {
-    // @apply py-0-md px-2-md text-base laptop:text-lg;
+    @apply text-base font-bold px-4-xs py-0-md;
   }
 
   &.btn--large {
-    // @apply py-1-xl laptop:py-1-sm px-2-md text-lg laptop:text-xxl laptop:tracking-[0.468px] leading-[1.46];
+    @apply text-lg font-medium;
+    // @apply py-1-xl laptop:py-1-sm px-2-md text-lg laptop:text-xxl laptop:tracking-[0.468px] leading-[1.46];;
   }
 
   &.btn--small.btn--icon-right {
@@ -34,6 +35,8 @@
   }
 
   &.btn--primary.btn--contained {
+    @apply bg-yellow text-white;
+
     // @apply bg-primary border-solid text-white;
 
     &:active,
@@ -68,10 +71,11 @@
   }
 
   &.btn--primary.btn--text {
-    @apply bg-transparent text-black text-lg font-medium;
+    @apply bg-transparent text-black;
 
-    &::hover,
-    &::focus {
+    &:hover,
+    &:focus,
+    &:active {
       @apply text-yellow;
     }
   }
