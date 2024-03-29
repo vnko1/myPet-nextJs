@@ -1,4 +1,6 @@
+"use client";
 import { FC } from "react";
+import { usePathname } from "next/navigation";
 
 import styles from "./header.module.scss";
 import { Icon, Logo, UIButton } from "@/components";
@@ -11,6 +13,8 @@ const links = [
 ];
 
 const Header: FC = () => {
+  const pathName = usePathname();
+
   return (
     <header className={styles["header"]}>
       <div className={`container ${styles["header__wrapper"]}`}>
@@ -19,7 +23,11 @@ const Header: FC = () => {
           <ul className={styles["nav__links"]}>
             {links.map((link, index) => (
               <li key={index}>
-                <UIButton href={link.href} variant="text">
+                <UIButton
+                  href={link.href}
+                  variant="text"
+                  isCurrent={link.href === pathName}
+                >
                   {link.label}
                 </UIButton>
               </li>

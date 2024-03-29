@@ -34,7 +34,7 @@
   }
 
   &.btn--primary.btn--contained {
-    @apply bg-yellow text-accentWhite border-[1px] border-solid border-yellow;
+    @apply bg-yellow text-accentWhite border-2 border-solid border-yellow;
 
     &:active,
     &:hover,
@@ -72,11 +72,12 @@
     @apply bg-transparent text-black;
 
     &:hover,
-    &:focus {
+    &:focus,
+    &:active {
       @apply text-blue;
     }
 
-    &:active {
+    &.current {
       @apply text-yellow;
     }
   }

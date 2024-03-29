@@ -19,6 +19,7 @@ const UIButton: FC<IUIButton> = ({
   isCustomIcon,
   alignIcon,
   href,
+  isCurrent,
   ...props
 }) => {
   const variantClassName = cn({
@@ -55,6 +56,7 @@ const UIButton: FC<IUIButton> = ({
     {
       [styles["btn--fullwidth"]]: fullWidth,
     },
+    { [styles["current"]]: isCurrent },
     className
   );
 

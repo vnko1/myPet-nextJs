@@ -3,5 +3,5 @@
 }
 
 .title {
-  @apply text-[30px] font-bold leading-[44px] md:text-[68px] md:leading-[100px] base:leading-[88.4px] base:font-extrabold md:max-w-[588px] base:max-w-[510px];
+  @apply text-[30px] font-bold leading-[44px] md:text-[68px] md:leading-[100px] base:leading-[88.4px] base:font-extrabold max-w-[280px] md:max-w-[588px] base:max-w-[510px];
 }

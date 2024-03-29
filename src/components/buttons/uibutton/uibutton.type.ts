@@ -19,4 +19,5 @@ export interface IUIButton
   isCustomIcon?: boolean;
   alignIcon?: AlignIconType;
   href?: string;
+  isCurrent?: boolean;
 }
