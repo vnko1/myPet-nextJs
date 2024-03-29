@@ -1,0 +1,3 @@
+export enum LinksEnum {
+  HOME = "/",
+}

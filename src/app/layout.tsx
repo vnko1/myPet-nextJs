@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Header } from "@/components";
+import { Header } from "@/app/_components";
 import { manrope, inter, poppins } from "@/fonts/fonts";
 import "../styles/globals.scss";
 

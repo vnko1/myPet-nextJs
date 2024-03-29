@@ -1,1 +1,1 @@
-export * from "./enums/icons";
+export * from "./enums";

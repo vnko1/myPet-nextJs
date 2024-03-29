@@ -1,0 +1,11 @@
+.header {
+  @apply py-2-md;
+
+  &__wrapper {
+    @apply flex items-center justify-between;
+  }
+}
+
+.icon {
+  @apply text-yellow;
+}

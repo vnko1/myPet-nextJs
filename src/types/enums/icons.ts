@@ -1,4 +1,4 @@
-export enum Icon {
+export enum IconEnum {
   PET = "pet",
   ARROW = "arrow-left",
   CAMERA = "camera",
