@@ -6,6 +6,22 @@
   }
 }
 
+.nav {
+  @apply flex items-center gap-[160px];
+
+  &__links {
+    @apply hidden base:flex items-center gap-[40px];
+  }
+}
+
+.menu {
+  @apply base:hidden;
+}
+
+.auth {
+  @apply hidden base:block;
+}
+
 .icon {
-  @apply text-yellow;
+  @apply text-yellow bg-transparent;
 }
