@@ -1,9 +1,9 @@
 "use client";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { usePathname } from "next/navigation";
 
 import styles from "./header.module.scss";
-import { Icon, Logo, UIButton } from "@/components";
+import { Icon, Logo, Modal, UIButton } from "@/components";
 import { IconEnum, LinksEnum } from "@/types";
 
 const links = [
@@ -12,7 +12,15 @@ const links = [
   { label: "Our friends", href: LinksEnum.FRIENDS },
 ];
 
+const transitionClassNames = {
+  enter: styles["modal-enter"],
+  enterActive: styles["modal-enter-active"],
+  exit: styles["modal-exit"],
+  exitActive: styles["modal-exit-active"],
+};
+
 const Header: FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const pathName = usePathname();
 
   return (
@@ -26,6 +34,7 @@ const Header: FC = () => {
                 <UIButton
                   href={link.href}
                   variant="text"
+                  size="medium"
                   isCurrent={link.href === pathName}
                 >
                   {link.label}
@@ -34,25 +43,70 @@ const Header: FC = () => {
             ))}
           </ul>
         </nav>
-        <div className={styles["menu"]}>
-          <UIButton variant="text">
-            <Icon icon={IconEnum.MENU} size={24} className={styles["icon"]} />
-          </UIButton>
+        <div className={styles["btn-wrapper"]}>
+          <div className={styles["auth"]}>
+            <UIButton
+              variant="contained"
+              size="small"
+              icon={IconEnum.PET}
+              alignIcon="right"
+            >
+              Log IN
+            </UIButton>
+            <UIButton variant="outlined" size="small">
+              Registration
+            </UIButton>
+          </div>
+          <div className={styles["menu"]}>
+            <UIButton variant="text" onClick={() => setIsOpen(!isOpen)}>
+              <Icon
+                icon={isOpen ? IconEnum.CROSS : IconEnum.MENU}
+                size={24}
+                className={styles["icon"]}
+              />
+            </UIButton>
+          </div>
         </div>
-        <div className={styles["auth"]}>
+      </div>
+      <Modal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        backdropClassName={styles["modal"]}
+        bodyClassName={styles["modal__body"]}
+        transitionClassName={transitionClassNames}
+        enableSwipe
+      >
+        <div className={styles["menu__auth"]}>
           <UIButton
             variant="contained"
-            size="medium"
+            size="small"
             icon={IconEnum.PET}
             alignIcon="right"
           >
             Log IN
           </UIButton>
-          <UIButton variant="outlined" size="medium">
+          <UIButton variant="outlined" size="small">
             Registration
           </UIButton>
         </div>
-      </div>
+        <nav className={styles["menu-nav"]}>
+          <ul className={styles["menu-nav__links"]}>
+            {links.map((link, index) => (
+              <li key={index} className="text-center">
+                <UIButton
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  variant="text"
+                  size="large"
+                  isCurrent={link.href === pathName}
+                >
+                  {link.label}
+                </UIButton>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </Modal>
     </header>
   );
 };

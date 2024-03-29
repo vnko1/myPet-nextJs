@@ -20,6 +20,7 @@ const UIButton: FC<IUIButton> = ({
   alignIcon,
   href,
   isCurrent,
+  onClick,
   ...props
 }) => {
   const variantClassName = cn({
@@ -62,13 +63,13 @@ const UIButton: FC<IUIButton> = ({
 
   if (href)
     return (
-      <Link href={href} className={baseClassNames}>
+      <Link href={href} className={baseClassNames} onClick={onClick}>
         {icon ? <Icon className="btn__icon" icon={icon} /> : null}
         {children}
       </Link>
     );
   return (
-    <button type={type} className={baseClassNames} {...props}>
+    <button type={type} className={baseClassNames} {...props} onClick={onClick}>
       {icon ? <Icon icon={icon} /> : null}
       {children}
     </button>
