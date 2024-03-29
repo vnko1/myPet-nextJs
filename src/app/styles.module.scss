@@ -1,0 +1,7 @@
+.hero {
+  @apply h-[91vh] pt-[60px] md:pt-[80px] base:pt-[188px] bg-no-repeat bg-contain bg-bottom bg-hero_desc md:bg-right-bottom;
+}
+
+.title {
+  @apply text-[30px] font-bold leading-[44px] md:text-[68px] md:leading-[100px] base:leading-[88.4px] base:font-extrabold md:max-w-[588px] base:max-w-[510px];
+}

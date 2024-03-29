@@ -14,12 +14,11 @@
   }
 
   &.btn--medium {
-    @apply text-base font-bold px-4-xs py-0-md;
+    @apply text-base font-bold px-2-xs py-0-md;
   }
 
   &.btn--large {
-    @apply text-lg font-medium;
-    // @apply py-1-xl laptop:py-1-sm px-2-md text-lg laptop:text-xxl laptop:tracking-[0.468px] leading-[1.46];;
+    // @apply text-lg font-medium;
   }
 
   &.btn--small.btn--icon-right {
@@ -35,13 +34,12 @@
   }
 
   &.btn--primary.btn--contained {
-    @apply bg-yellow text-white;
-
-    // @apply bg-primary border-solid text-white;
+    @apply bg-yellow text-accentWhite border-[1px] border-solid border-yellow;
 
     &:active,
-    &:hover {
-      // @apply bg-primaryHover;
+    &:hover,
+    &:focus {
+      @apply text-yellow bg-transparent;
     }
 
     &:disabled {
@@ -50,7 +48,7 @@
   }
 
   &.btn--text {
-    @apply p-0;
+    @apply p-0 text-lg font-medium;
   }
 
   &.btn--outlined {
@@ -58,11 +56,11 @@
   }
 
   &.btn--primary.btn--outlined {
-    // @apply border-2 border-solid border-primary text-primary;
+    @apply border-2 border-solid border-yellow text-yellow;
 
     &:active,
     &:hover {
-      @apply bg-white;
+      @apply bg-yellow text-accentWhite;
     }
 
     &:disabled {
@@ -74,7 +72,10 @@
     @apply bg-transparent text-black;
 
     &:hover,
-    &:focus,
+    &:focus {
+      @apply text-blue;
+    }
+
     &:active {
       @apply text-yellow;
     }
@@ -111,13 +112,13 @@
 
   > svg,
   &.btn__icon {
-    // @apply w-[32px] mr-[10px];
+    @apply w-[24px] mr-[8px];
   }
 
   &.btn--icon-right {
     > svg,
     .btn__icon {
-      @apply right-0 ml-[10px] mr-0;
+      @apply right-0 ml-[8px] mr-0;
     }
   }
 }

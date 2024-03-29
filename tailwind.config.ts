@@ -15,6 +15,7 @@ const config: Config = {
       colors: {
         yellow: "#FFC107",
         white: "#FDF7F2",
+        accentWhite: "#FEF9F9",
         black: "#111111",
         blue: "#54ADFF",
         blueLight: "#CCE4FB",
@@ -27,9 +28,12 @@ const config: Config = {
       },
       backgroundImage: {
         grBlue: "linear-gradient(290deg, #419EF1 0%, #9BD0FF 107.89%)",
-        hero_mob: "url('/images/bg-mob.webp')",
-        hero_tab: "url('/images/bg-tab.webp')",
-        hero: "url('/images/bg.webp')",
+        bg_mob: "url('/images/bg-mob.webp')",
+        bg_tab: "url('/images/bg-tab.webp')",
+        bg: "url('/images/bg.webp')",
+        hero: "url('/images/hero.webp')",
+        hero_tab: "url('/images/hero-tab.webp')",
+        hero_desc: "url('/images/hero-desc.webp')",
       },
       spacing: {
         "0-sm": "4px",

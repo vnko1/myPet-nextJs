@@ -32,7 +32,17 @@ const Header: FC = () => {
           </UIButton>
         </div>
         <div className={styles["auth"]}>
-          <UIButton></UIButton>
+          <UIButton
+            variant="contained"
+            size="medium"
+            icon={IconEnum.PET}
+            alignIcon="right"
+          >
+            Log IN
+          </UIButton>
+          <UIButton variant="outlined" size="medium">
+            Registration
+          </UIButton>
         </div>
       </div>
     </header>

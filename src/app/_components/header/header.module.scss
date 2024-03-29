@@ -1,5 +1,5 @@
 .header {
-  @apply py-2-md;
+  @apply pt-2-xl pb-0-sm md:pt-3-sm md:pb-0-md base:pt-4-xs base:pb-1-xs;
 
   &__wrapper {
     @apply flex items-center justify-between;
