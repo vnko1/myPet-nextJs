@@ -49,6 +49,12 @@ const UIButton: FC<IUIButton> = ({
     sizeClassName,
     colorClassName,
     alignIconClassName,
+    {
+      [styles["btn--loading"]]: isLoading,
+    },
+    {
+      [styles["btn--fullwidth"]]: fullWidth,
+    },
     className
   );
 
