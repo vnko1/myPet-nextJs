@@ -1,20 +1,32 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
+      screens: { sm: "320px", md: "768px", base: "1280px" },
+      colors: {
+        yellow: "#FFC107",
+        white: "#FDF7F2",
+        black: "#111111",
+        blue: "#54ADFF",
+        blueLight: "#CCE4FB",
+        green: "#00C3AD",
+        red: "#F43F5E",
+      },
+      dropShadow: {
+        sm: "3px 8px 14px rgba(136, 198, 253, 0.19)",
+        md: "7px 13px 14px rgba(116, 177, 232, 0.24)",
+      },
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        grBlue: "linear-gradient(290deg, #419EF1 0%, #9BD0FF 107.89%)",
       },
     },
   },
   plugins: [],
-}
-export default config
+};
+export default config;
