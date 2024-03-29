@@ -27,9 +27,9 @@ const config: Config = {
       },
       backgroundImage: {
         grBlue: "linear-gradient(290deg, #419EF1 0%, #9BD0FF 107.89%)",
-        hero_mob: "url('src/assets/images/bg-mob.webp')",
-        hero_tab: "url('src/assets/images/bg-tab.webp')",
-        hero: "url('src/assets/images/bg.webp')",
+        hero_mob: "url('/images/bg-mob.webp')",
+        hero_tab: "url('/images/bg-tab.webp')",
+        hero: "url('/images/bg.webp')",
       },
       fontSize: {
         xxs: "10px",

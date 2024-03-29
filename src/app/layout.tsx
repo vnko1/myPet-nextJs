@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
-import { manrope, inter, poppins } from "@/app/fonts";
+import { Header } from "@/components";
+import { manrope, inter, poppins } from "@/fonts/fonts";
 import "../styles/globals.scss";
+
+export const metadata: Metadata = {
+  title: "My Pet App",
+  description: "My Pet app - applications about pets",
+};
 
 export default function RootLayout({
   children,
@@ -10,8 +16,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${manrope.variable} ${inter.variable} ${poppins.variable} container`}
+        className={`${manrope.variable} ${inter.variable} ${poppins.variable}`}
       >
+        <Header />
         {children}
       </body>
     </html>

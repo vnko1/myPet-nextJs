@@ -1,3 +1,7 @@
+body {
+  @apply h-screen bg-contain  bg-center bg-hero_mob md:bg-hero_tab base:bg-hero;
+}
+
 .container {
-  @apply h-screen w-screen bg-hero_mob md:bg-hero_tab base:bg-hero;
+  @apply w-full;
 }
