@@ -1,6 +1,3 @@
-"use client";
-import { Loader } from "@/components";
-
 export default function Loading() {
-  return <Loader />;
+  return <div>Loading page...</div>;
 }
