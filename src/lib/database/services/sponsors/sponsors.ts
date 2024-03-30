@@ -5,7 +5,7 @@ class Sponsors extends DBConstructor {
   constructor() {
     super();
   }
-  get sponsors() {
+  getSponsors() {
     return Sponsor.find();
   }
 }
