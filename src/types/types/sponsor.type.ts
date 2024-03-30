@@ -1,3 +1,7 @@
-import { ISponsor as Sponsor } from "@/lib";
+import { SponsorType, WorkDays as DayOfWork } from "@/lib";
 
-export interface ISponsor extends Sponsor {}
+export type WorkDays = DayOfWork;
+
+export interface ISponsor extends SponsorType {
+  _id: string | number;
+}

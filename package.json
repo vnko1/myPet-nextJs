@@ -16,6 +16,7 @@
     "react-dom": "^18",
     "react-hook-form": "^7.51.2",
     "react-icomoon": "^2.5.7",
+    "react-loader-spinner": "^6.1.6",
     "react-transition-group": "^4.4.5"
   },
   "devDependencies": {

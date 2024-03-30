@@ -1,13 +1,11 @@
-import { getSponsors } from "../../lib";
-import { ISponsor } from "@/types";
+import { Sponsors } from "./_components";
 
 export default async function Page() {
-  const res: ISponsor[] | undefined = await getSponsors();
-  res;
   return (
     <section className="section">
       <div className="container">
         <h1 className="title">Our friends</h1>
+        <Sponsors />
       </div>
     </section>
   );

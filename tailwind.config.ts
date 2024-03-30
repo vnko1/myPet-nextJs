@@ -21,8 +21,9 @@ const config: Config = {
         blueLight: "#CCE4FB",
         green: "#00C3AD",
         red: "#F43F5E",
+        originWhite: "#fff",
       },
-      dropShadow: {
+      boxShadow: {
         sm: "3px 8px 14px rgba(136, 198, 253, 0.19)",
         md: "7px 13px 14px rgba(116, 177, 232, 0.24)",
       },

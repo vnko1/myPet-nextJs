@@ -1,0 +1,14 @@
+.dropdown {
+  @apply mb-1-sm font-semibold;
+}
+
+.time {
+  @apply relative;
+  &__list {
+    @apply absolute top-0 left-0 w-[120px] h-[160px] flex flex-col items-start justify-center bg-[#fff] shadow-sm border border-blue rounded-[8px] p-1-sm overflow-hidden overflow-y-auto;
+  }
+
+  &__item {
+    @apply font-medium text-xs leading-[16px] w-full flex justify-between items-center;
+  }
+}

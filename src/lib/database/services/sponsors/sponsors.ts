@@ -1,4 +1,5 @@
-import { ISponsor, Sponsor } from "../../models";
+import { ISponsor } from "@/types";
+import { Sponsor } from "../../models";
 import DBConstructor from "../dbConstructor/dbConstructor";
 
 class Sponsors extends DBConstructor {

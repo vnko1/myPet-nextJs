@@ -7,7 +7,7 @@ const sponsorSchema: Schema = new Schema(
     url: String,
     addressUrl: String,
     imageUrl: String,
-    addres: String,
+    address: String,
     phone: String,
     email: String,
     workDays: [{ isOpen: Boolean, from: String, to: String }],
