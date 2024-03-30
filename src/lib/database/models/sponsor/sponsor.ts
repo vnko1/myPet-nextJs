@@ -1,5 +1,5 @@
 import { Schema, model, models } from "mongoose";
-import { ISponsor } from "..";
+import { ISponsor } from "./sponsor.type";
 
 const sponsorSchema: Schema = new Schema(
   {
