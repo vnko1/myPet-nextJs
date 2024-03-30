@@ -1,21 +1,12 @@
-import { getSponsors } from "@/lib";
-import Card from "./_components/card";
+import { Sponsors } from "./_components";
 
-const Sponsors = async () => {
-  const res = await getSponsors();
-
+export default async function Page() {
   return (
-    <div>
-      {res &&
-        res.map((el) => {
-          return (
-            <div key={el._id}>
-              <Card data={el} />
-            </div>
-          );
-        })}
-    </div>
+    <section className="section">
+      <div className="container">
+        <h1 className="title">Our friends</h1>
+        <Sponsors />
+      </div>
+    </section>
   );
-};
-
-export default Sponsors;
+}

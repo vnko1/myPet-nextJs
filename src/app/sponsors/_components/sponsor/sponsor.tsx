@@ -2,24 +2,19 @@ import { FC } from "react";
 import { SponsorProps } from "./sponsor.type";
 import styles from "./sponsor.module.scss";
 import Image from "next/image";
-import { WorkDays } from "@/types";
+import { DropDown } from "./components";
 
-function getDefaultTime(workDays: WorkDays[] | null) {
-  if (workDays && workDays.length > 0) {
-    const firstWorkDay = workDays[0];
-    const from = firstWorkDay.from ? firstWorkDay.from : "11:00";
-    const to = firstWorkDay.to ? firstWorkDay.to : "16:00";
-    return `${from} - ${to}`;
-  } else {
-    return "Day and night";
-  }
-}
-
-const Sponsor: FC<SponsorProps> = ({ classNames, sponsor }) => {
-  const { title, url, address, addressUrl, imageUrl, phone, email, workDays } =
-    sponsor;
-
-  const defaultTime = getDefaultTime(workDays);
+const Sponsor: FC<SponsorProps> = ({
+  classNames,
+  title,
+  url,
+  address,
+  addressUrl,
+  imageUrl,
+  phone,
+  email,
+  workDays,
+}) => {
   return (
     <div className={`${styles["card"]} ${classNames}`}>
       <a
@@ -37,14 +32,7 @@ const Sponsor: FC<SponsorProps> = ({ classNames, sponsor }) => {
           ) : null}
         </div>
         <div className={styles["card__content"]}>
-          <div className={styles["dropdown"]}>
-            <div>
-              <p className={styles["text"]}>
-                <strong>Time:</strong>
-                <br /> {defaultTime}
-              </p>
-            </div>
-          </div>
+          <DropDown workDays={workDays} />
           <p className={styles["text"]}>
             <strong>Address:</strong>
             <br />
