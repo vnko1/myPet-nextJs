@@ -1,0 +1,15 @@
+main {
+  @apply bg-contain  bg-center bg-bg_mob md:bg-bg_tab base:bg-bg;
+}
+
+.container {
+  @apply w-full max-w-full mx-auto px-2-xs md:px-3-sm base:px-1-xl;
+}
+
+.section {
+  @apply h-[91vh] pt-4-xs md:pt-[80px];
+}
+
+.title {
+  @apply mb-2-md md:mb-4-xs;
+}
