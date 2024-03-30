@@ -1,8 +1,20 @@
 import mongoose from "mongoose";
+import { CB } from "./dbConstrucor.type";
 
 abstract class DBConstructor {
-  mongoUri = process.env.MONGODB_URI!;
-  connection: { isConnected?: number } = {};
+  private mongoUri = process.env.MONGODB_URI!;
+  private connection: { isConnected?: number } = {};
+
+  static tryCatchWrapper(cb: CB) {
+    return async function () {
+      try {
+        return await cb();
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  }
+
   constructor() {
     this.connect();
   }
@@ -12,6 +24,7 @@ abstract class DBConstructor {
     try {
       if (connection.isConnected) return;
       const db = await mongoose.connect(mongoUri);
+
       connection.isConnected = db.connections[0].readyState;
     } catch (error) {
       console.log(error);

@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, models } from "mongoose";
 import { ISponsor } from "..";
 
 const sponsorSchema: Schema = new Schema(
@@ -15,6 +15,6 @@ const sponsorSchema: Schema = new Schema(
   { versionKey: false, timestamps: false }
 );
 
-const Sponsor = model<ISponsor>("sponsor", sponsorSchema);
+const Sponsor = models.sponsor || model<ISponsor>("sponsor", sponsorSchema);
 
 export default Sponsor;
