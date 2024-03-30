@@ -4,6 +4,8 @@ class Articles extends DBConstructor {
   constructor() {
     super();
   }
+
+  getArticles() {}
 }
 
 export default Articles;

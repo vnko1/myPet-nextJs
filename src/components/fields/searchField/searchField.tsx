@@ -1,9 +1,18 @@
 import { FC } from "react";
+import { SearchFieldProps } from "./searchField.type";
 
-const SearchField: FC = () => {
+import styles from "./searchField.module.scss";
+
+const SearchField: FC<SearchFieldProps> = ({ classNames, label, ...props }) => {
   return (
-    <label>
-      <input />
+    <label
+      className={`${styles["field"]} ${classNames}`}
+      aria-label="search input"
+    >
+      {label ? <span>{label}</span> : null}
+      <span>
+        <input className={styles["input"]} {...props} />
+      </span>
     </label>
   );
 };

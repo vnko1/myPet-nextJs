@@ -1,11 +1,14 @@
+import { Search } from "./_components";
 import styles from "./styles.module.scss";
 
 export default function Page() {
   return (
     <section className={`${styles["news"]} section`}>
       <div className="container">
-        <h1 className={styles["title"]}>News</h1>
-        <div className={styles["search"]}></div>
+        <h1 className={"title"}>News</h1>
+        <div className={styles["search"]}>
+          <Search />
+        </div>
       </div>
     </section>
   );
