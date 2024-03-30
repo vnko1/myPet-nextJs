@@ -1,11 +1,11 @@
-import { Sponsor } from "../../models";
+import { ISponsor, Sponsor } from "../../models";
 import DBConstructor from "../dbConstructor/dbConstructor";
 
 class Sponsors extends DBConstructor {
   constructor() {
     super();
   }
-  getSponsors() {
+  getSponsors(): Promise<ISponsor[]> {
     return Sponsor.find();
   }
 }
