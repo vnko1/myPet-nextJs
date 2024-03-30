@@ -9,3 +9,7 @@ main {
 .section {
   @apply h-[91vh] pt-4-xs md:pt-[80px];
 }
+
+.title {
+  @apply mb-2-md md:mb-4-xs;
+}
