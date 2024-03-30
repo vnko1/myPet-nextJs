@@ -36,27 +36,3 @@
 .icon {
   @apply text-yellow bg-transparent;
 }
-
-.modal {
-  @apply w-screen h-[91vh] top-[62px] left-0 md:top-[85px] base:hidden;
-
-  &__body {
-    @apply bg-[#fff] w-full h-full flex flex-col gap-4-xs items-center pt-4-xs md:pt-[92px];
-  }
-
-  &-enter {
-    @apply translate-x-full;
-
-    &-active {
-      @apply translate-x-0 transition-all duration-300;
-    }
-  }
-
-  &-exit {
-    @apply translate-x-0;
-
-    &-active {
-      @apply translate-x-full  transition-all duration-300;
-    }
-  }
-}
