@@ -1,8 +1,9 @@
-import { Sponsors } from "../services";
+import { Sponsors } from "../../services";
+
+const sponsors = new Sponsors();
 
 export const getSponsors = async () => {
   try {
-    const sponsors = new Sponsors();
     const res = await sponsors.getSponsors();
     return res;
   } catch (error) {
