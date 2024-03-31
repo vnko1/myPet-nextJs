@@ -5,7 +5,6 @@ import { QueryParams } from "@/types";
 export default abstract class DBConstructor {
   private mongoUri = process.env.MONGODB_URI!;
   private connection: { isConnected?: number } = {};
-  protected limit = 10;
 
   constructor(protected sort: Sort = "desc") {
     this.connect();

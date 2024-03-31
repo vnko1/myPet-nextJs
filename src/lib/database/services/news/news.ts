@@ -8,6 +8,7 @@ interface INews {
   getArticlesData(params: QueryParams): Promise<[ArticleTypes[], number]>;
 }
 class News extends DBConstructor implements INews {
+  protected limit = 10;
   constructor(sort: Sort) {
     super(sort);
   }

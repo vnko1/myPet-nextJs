@@ -7,7 +7,8 @@ const Articles: FC<ArticlesParams> = async ({ query, page }) => {
 
   const [articles, total] = await getArticles({ query, page: currentPage });
   articles;
-  console.log(total);
+  total;
+  // console.log(articles);
 
   return <div>Articles</div>;
 };
