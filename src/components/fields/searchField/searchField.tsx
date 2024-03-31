@@ -2,16 +2,30 @@ import { FC } from "react";
 import { SearchFieldProps } from "./searchField.type";
 
 import styles from "./searchField.module.scss";
+import { Icon } from "@/components";
+import { IconEnum } from "@/types";
 
-const SearchField: FC<SearchFieldProps> = ({ classNames, label, ...props }) => {
+const SearchField: FC<SearchFieldProps> = ({
+  classNames,
+  placeholder = "Search",
+  label,
+  ...props
+}) => {
   return (
     <label
-      className={`${styles["field"]} ${classNames}`}
+      className={`${styles["search"]} ${classNames}`}
       aria-label="search input"
     >
-      {label ? <span>{label}</span> : null}
-      <span>
-        <input className={styles["input"]} {...props} />
+      {label ? <span className={styles["search__label"]}>{label}</span> : null}
+      <span className={styles["search__wrapper"]}>
+        <input
+          className={styles["search__field"]}
+          placeholder={placeholder}
+          {...props}
+        />
+        <span className={styles["search__icon"]}>
+          <Icon icon={IconEnum.SEARCH} size={24} />
+        </span>
       </span>
     </label>
   );

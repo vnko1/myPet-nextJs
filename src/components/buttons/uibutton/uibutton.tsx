@@ -63,13 +63,24 @@ const UIButton: FC<IUIButton> = ({
 
   if (href)
     return (
-      <Link href={href} className={baseClassNames} onClick={onClick}>
+      <Link
+        href={href}
+        className={baseClassNames}
+        onClick={onClick}
+        aria-label="navigation link"
+      >
         {icon ? <Icon className="btn__icon" icon={icon} /> : null}
         {children}
       </Link>
     );
   return (
-    <button type={type} className={baseClassNames} {...props} onClick={onClick}>
+    <button
+      type={type}
+      className={baseClassNames}
+      aria-label="button"
+      {...props}
+      onClick={onClick}
+    >
       {icon ? <Icon icon={icon} /> : null}
       {children}
     </button>

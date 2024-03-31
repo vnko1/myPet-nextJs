@@ -24,8 +24,8 @@ const config: Config = {
         originWhite: "#fff",
       },
       boxShadow: {
-        sm: "3px 8px 14px rgba(136, 198, 253, 0.19)",
-        md: "7px 13px 14px rgba(116, 177, 232, 0.24)",
+        sm: "3px 8px 14px 0px rgba(136, 198, 253, 0.19)",
+        md: "7px 13px 14px 0px rgba(116, 177, 232, 0.24)",
       },
       backgroundImage: {
         grBlue: "linear-gradient(290deg, #419EF1 0%, #9BD0FF 107.89%)",

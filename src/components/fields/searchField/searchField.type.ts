@@ -1,5 +1,6 @@
-import { HTMLAttributes } from "react";
+import { InputHTMLAttributes } from "react";
 
-export type SearchFieldProps = { classNames?: string } & Partial<
-  HTMLAttributes<HTMLInputElement>
->;
+export type SearchFieldProps = {
+  classNames?: string;
+  label?: string;
+} & Partial<InputHTMLAttributes<HTMLInputElement>>;
