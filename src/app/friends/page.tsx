@@ -12,3 +12,5 @@ export default async function Page() {
     </section>
   );
 }
+
+export const fetchCache = "force-no-store";
