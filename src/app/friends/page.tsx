@@ -1,7 +1,8 @@
 import { getSponsors } from "@/lib";
 import { Sponsors } from "./_components";
 
-// export const dynamic = "force-static";
+// export const dynamic = "force-dynamic";
+// export const revalidate = 5;
 
 export default async function Page() {
   const res = await getSponsors();
