@@ -4,11 +4,8 @@ import { getArticles } from "@/lib";
 
 const Articles: FC<ArticlesParams> = async ({ query, page }) => {
   const currentPage = +page;
-
-  const [articles, total] = await getArticles({ query, page: currentPage });
+  const articles = await getArticles({ query, page: currentPage });
   articles;
-  total;
-  // console.log(articles);
 
   return <div>Articles</div>;
 };

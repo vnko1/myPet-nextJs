@@ -15,6 +15,7 @@ const Search: FC<SearchProps> = ({ classNames }) => {
 
   const onHandleSearch = useDebouncedCallback((term: string) => {
     const params = new URLSearchParams(searchParams);
+    params.set(ConstantsEnum.PAGE_PARAM, "1");
     term
       ? params.set(ConstantsEnum.QUERY_PARAM, term)
       : params.delete(ConstantsEnum.QUERY_PARAM);
