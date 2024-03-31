@@ -1,9 +1,14 @@
 import React, { FC } from "react";
 import { ArticlesParams } from "./articles.type";
+import { getArticles } from "@/lib";
 
-const Articles: FC<ArticlesParams> = ({ query, page }) => {
+const Articles: FC<ArticlesParams> = async ({ query, page }) => {
   const currentPage = +page;
-  console.log(currentPage, query);
+
+  const res = await getArticles({ query, page: currentPage });
+
+  console.log(res);
+
   return <div>Articles</div>;
 };
 

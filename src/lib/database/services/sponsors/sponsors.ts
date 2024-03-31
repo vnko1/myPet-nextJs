@@ -1,12 +1,16 @@
-import { ISponsor } from "@/types";
-import { Sponsor } from "../../models";
 import DBConstructor from "../dbConstructor/dbConstructor";
+import { Sponsor } from "../../models";
+import { ISponsor } from "@/types";
 
-class Sponsors extends DBConstructor {
+interface ISponsors {
+  getSponsorsData(): Promise<ISponsor[]>;
+}
+
+class Sponsors extends DBConstructor implements ISponsors {
   constructor() {
     super();
   }
-  getSponsorsData(): Promise<ISponsor[]> {
+  getSponsorsData() {
     return Sponsor.find();
   }
 }

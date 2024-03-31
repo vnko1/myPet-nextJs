@@ -1,15 +1,14 @@
-import { ArticleTypes } from "@/types";
-import { Articles } from "../..";
+import { ArticleTypes, QueryParams } from "@/types";
+import { Articles } from "@/lib/database/services";
 
-const { tryCatchWrapper, getArticlesData } = new Articles();
+const articles = new Articles("desc");
 
-type Params = { query: string; page: string };
+export const getArticles = articles.tryCatchWrapper<
+  ArticleTypes[],
+  QueryParams
+>(async function (params: QueryParams) {
+  params;
+  const res = await articles.getArticlesData(params);
 
-export const getArticles = tryCatchWrapper<ArticleTypes[], Params>(
-  async (params: Params) => {
-    params;
-    const res = await getArticlesData();
-
-    return res;
-  }
-);
+  return res;
+});

@@ -1,11 +1,13 @@
 import mongoose from "mongoose";
-import { CB } from "./dbConstrucor.type";
+import { CB, Sort } from "./dbConstrucor.type";
+import { QueryParams } from "@/types";
 
-abstract class DBConstructor {
+export default abstract class DBConstructor {
   private mongoUri = process.env.MONGODB_URI!;
   private connection: { isConnected?: number } = {};
+  protected limit = 10;
 
-  constructor() {
+  constructor(protected sort: Sort = "desc") {
     this.connect();
   }
 
@@ -21,6 +23,21 @@ abstract class DBConstructor {
     }
   }
 
+  protected genSearchOptions({ query }: QueryParams = {}) {
+    return query
+      ? {
+          $or: [
+            { title: { $regex: query, $options: "i" } },
+            { text: { $regex: query, $options: "i" } },
+          ],
+        }
+      : {};
+  }
+
+  protected genSortingOptions(key: string) {
+    return { [key]: this.sort };
+  }
+
   tryCatchWrapper<T, K>(cb: CB<T, K>) {
     return async function (data: K) {
       try {
@@ -32,5 +49,3 @@ abstract class DBConstructor {
     };
   }
 }
-
-export default DBConstructor;

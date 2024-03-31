@@ -1,2 +1,2 @@
-export * from "./data/friends";
+export * from "./data";
 export * from "./services";
