@@ -6,7 +6,7 @@ import { Sponsors } from "./_components";
 // export const fetchCache = "force-no-store";
 
 export default async function Page() {
-  const res = await getSponsors();
+  const res = await getSponsors(undefined);
   return (
     <section className="section">
       <div className="container">

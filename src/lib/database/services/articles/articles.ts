@@ -5,7 +5,7 @@ class Articles extends DBConstructor {
     super();
   }
 
-  getArticles() {}
+  getArticlesData() {}
 }
 
 export default Articles;

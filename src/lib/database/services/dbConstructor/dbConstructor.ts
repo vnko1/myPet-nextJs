@@ -5,17 +5,6 @@ abstract class DBConstructor {
   private mongoUri = process.env.MONGODB_URI!;
   private connection: { isConnected?: number } = {};
 
-  static tryCatchWrapper<T, K>(cb: CB<T, K>) {
-    return async function (data?: K) {
-      try {
-        return await cb(data);
-      } catch (error) {
-        console.log(error);
-        throw new Error("Something went wrong");
-      }
-    };
-  }
-
   constructor() {
     this.connect();
   }
@@ -30,6 +19,17 @@ abstract class DBConstructor {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  tryCatchWrapper<T, K>(cb: CB<T, K>) {
+    return async function (data: K) {
+      try {
+        return await cb(data);
+      } catch (error) {
+        console.log(error);
+        throw new Error("Something went wrong");
+      }
+    };
   }
 }
 

@@ -1,13 +1,15 @@
+import { ArticleTypes } from "@/types";
 import { Articles } from "../..";
 
-const articles = new Articles();
+const { tryCatchWrapper, getArticlesData } = new Articles();
 
-export const getArticles = async () => {
-  try {
-    const res = await articles;
+type Params = { query: string; page: string };
+
+export const getArticles = tryCatchWrapper<ArticleTypes[], Params>(
+  async (params: Params) => {
+    params;
+    const res = await getArticlesData();
 
     return res;
-  } catch (error) {
-    console.log(error);
   }
-};
+);

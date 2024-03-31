@@ -6,7 +6,7 @@ class Sponsors extends DBConstructor {
   constructor() {
     super();
   }
-  getSponsors(): Promise<ISponsor[]> {
+  getSponsorsData(): Promise<ISponsor[]> {
     return Sponsor.find();
   }
 }

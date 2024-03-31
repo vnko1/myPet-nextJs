@@ -2,12 +2,10 @@
 import { Sponsors } from "../../services";
 import { ISponsor } from "@/types";
 
-const sponsors = new Sponsors();
+const { tryCatchWrapper, getSponsorsData } = new Sponsors();
 
-export const getSponsors = Sponsors.tryCatchWrapper<ISponsor[], undefined>(
-  async () => {
-    // noStore();
-    const res = await sponsors.getSponsors();
-    return res;
-  }
-);
+export const getSponsors = tryCatchWrapper<ISponsor[], undefined>(async () => {
+  // noStore();
+  const res = await getSponsorsData();
+  return res;
+});

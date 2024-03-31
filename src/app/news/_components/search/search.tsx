@@ -1,11 +1,33 @@
 "use client";
+import { FC } from "react";
+import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import { useDebouncedCallback } from "use-debounce";
+
+import { SearchProps } from "./search.type";
+import { ConstantsEnum } from "@/types";
 
 import { SearchField } from "@/components";
-import { FC } from "react";
-import { SearchProps } from "./search.type";
 
 const Search: FC<SearchProps> = ({ classNames }) => {
-  return <SearchField classNames={classNames} />;
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
+  const onHandleSearch = useDebouncedCallback((term: string) => {
+    const params = new URLSearchParams(searchParams);
+    term
+      ? params.set(ConstantsEnum.QUERY_PARAM, term)
+      : params.delete(ConstantsEnum.QUERY_PARAM);
+    replace(pathname + "?" + params.toString());
+  }, ConstantsEnum.DEBOUNCE_VALUE);
+
+  return (
+    <SearchField
+      defaultValue={searchParams.get(ConstantsEnum.QUERY_PARAM)?.toString()}
+      classNames={classNames}
+      onHandleChange={onHandleSearch}
+    />
+  );
 };
 
 export default Search;
