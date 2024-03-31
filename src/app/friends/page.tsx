@@ -4,6 +4,8 @@ import { Sponsors } from "./_components";
 // export const dynamic = "force-dynamic";
 // export const revalidate = 5;
 
+// export const fetchCache = "force-no-store";
+
 export default async function Page() {
   const res = await getSponsors();
   return (
