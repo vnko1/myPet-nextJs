@@ -2,14 +2,14 @@ import { Sponsors } from "@/lib";
 // import { revalidatePath } from "next/cache";
 // import { NextRequest } from "next/server";
 
-const { getSponsorsData } = new Sponsors();
+const sponsors = new Sponsors();
 
 // export const dynamic = "force-dynamic";
 // export const revalidate = 1;
 
 export async function GET() {
   try {
-    const res = await getSponsorsData();
+    const res = await sponsors.getSponsorsData();
 
     // const path = request.nextUrl.pathname;
 

@@ -4,10 +4,10 @@ import { ArticleTypes, QueryParams } from "@/types";
 import { Sort } from "../dbConstructor/dbConstrucor.type";
 import { Article } from "../../models";
 
-interface IArticles {
+interface INews {
   getArticlesData(params: QueryParams): Promise<ArticleTypes[]>;
 }
-class Articles extends DBConstructor implements IArticles {
+class News extends DBConstructor implements INews {
   constructor(sort: Sort) {
     super(sort);
   }
@@ -21,4 +21,4 @@ class Articles extends DBConstructor implements IArticles {
   }
 }
 
-export default Articles;
+export default News;

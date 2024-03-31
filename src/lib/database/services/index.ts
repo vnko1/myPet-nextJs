@@ -1,2 +1,2 @@
 export { default as Sponsors } from "./sponsors/sponsors";
-export { default as Articles } from "./articles/articles";
+export { default as News } from "./news/news";
