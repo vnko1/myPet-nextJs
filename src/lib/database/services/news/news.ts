@@ -1,11 +1,11 @@
 import DBConstructor from "../dbConstructor/dbConstructor";
-
-import { ArticleTypes, QueryParams } from "@/types";
+import { QueryParams } from "@/types";
 import { Sort } from "../dbConstructor/dbConstrucor.type";
 import { Article } from "../../models";
+import { IArticle } from "../../models/article/article.type";
 
 interface INews {
-  getArticlesData(params: QueryParams): Promise<ArticleTypes[]>;
+  getArticlesData(params: QueryParams): Promise<IArticle[]>;
   getArticlesPagesData(params: QueryParams): Promise<number>;
 }
 class News extends DBConstructor implements INews {

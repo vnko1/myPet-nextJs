@@ -22,6 +22,7 @@ const config: Config = {
         green: "#00C3AD",
         red: "#F43F5E",
         originWhite: "#fff",
+        grey: "#888",
       },
       boxShadow: {
         sm: "3px 8px 14px 0px rgba(136, 198, 253, 0.19)",

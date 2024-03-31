@@ -1,5 +1,5 @@
 export type ArticleTypes = {
-  imageUrl: string;
+  imgUrl: string;
   title: string;
   text: string;
   date: Date;

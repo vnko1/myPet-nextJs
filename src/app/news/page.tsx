@@ -11,7 +11,7 @@ export default async function Page({
 
   return (
     <section className={`${styles["news"]} section`}>
-      <div className="container">
+      <div className={`${styles["news__wrapper"]} container`}>
         <h1 className="title">News</h1>
         <Search />
         <Articles page={page} query={query} />

@@ -3,7 +3,7 @@ import { IArticle } from "./article.type";
 
 const articleSchema: Schema = new Schema(
   {
-    imageUrl: String,
+    imgUrl: String,
     title: String,
     text: String,
     date: Date,

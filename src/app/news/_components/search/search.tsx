@@ -6,9 +6,11 @@ import { useDebouncedCallback } from "use-debounce";
 import { SearchProps } from "./search.type";
 import { ConstantsEnum } from "@/types";
 
+import styles from "./search.module.scss";
+
 import { SearchField } from "@/components";
 
-const Search: FC<SearchProps> = ({ classNames }) => {
+const Search: FC<SearchProps> = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -25,7 +27,7 @@ const Search: FC<SearchProps> = ({ classNames }) => {
   return (
     <SearchField
       defaultValue={searchParams.get(ConstantsEnum.QUERY_PARAM)?.toString()}
-      classNames={classNames}
+      classNames={styles["search"]}
       onHandleChange={onHandleSearch}
     />
   );
