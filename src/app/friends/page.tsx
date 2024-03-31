@@ -1,6 +1,8 @@
 import { getSponsors } from "@/lib";
 import { Sponsors } from "./_components";
 
+// export const dynamic = "force-static";
+
 export default async function Page() {
   const res = await getSponsors();
   return (
@@ -12,5 +14,3 @@ export default async function Page() {
     </section>
   );
 }
-
-export const fetchCache = "force-no-store";

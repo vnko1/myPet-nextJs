@@ -1,5 +1,6 @@
 export async function getSponsors() {
-  const response = await fetch("/sponsors/api", { next: { revalidate: 1 } });
+  const response = await fetch("/sponsors/api");
 
   return await response.json();
 }
+// { next: { revalidate: 1 } }

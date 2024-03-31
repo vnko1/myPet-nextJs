@@ -1,5 +1,7 @@
 import { Sponsors } from "./_components";
 
+// export const dynamic = "force-dynamic";
+
 export default async function Page() {
   return (
     <section className="section">
@@ -10,5 +12,3 @@ export default async function Page() {
     </section>
   );
 }
-
-export const fetchCache = "force-no-store";

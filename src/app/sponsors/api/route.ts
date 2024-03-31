@@ -4,6 +4,8 @@ import { Sponsors } from "@/lib";
 
 const sponsors = new Sponsors();
 
+// export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     const res = await sponsors.getSponsors();
