@@ -15,9 +15,7 @@ class News extends DBConstructor implements INews {
   }
 
   getArticlesData({ query, page = 1 }: QueryParams) {
-    const queryParams = this.genSearchOptions({ query });
-
-    return Article.find(queryParams, "-id")
+    return Article.find(this.genSearchOptions({ query }), "-id")
       .skip(page)
       .limit(this.limit)
       .sort(this.genSortingOptions("date"));
