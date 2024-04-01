@@ -1,12 +1,9 @@
-import React, {
-  FC,
-  MouseEvent,
-  MouseEventHandler,
-  ReactEventHandler,
-} from "react";
+"use client";
+import React, { FC, MouseEvent } from "react";
 
 import cn from "classnames";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { IconEnum } from "@/types";
 import { ButtonProps } from "./button.type";
@@ -16,22 +13,24 @@ import { Icon } from "@/components";
 const Button: FC<ButtonProps> = ({
   classNames,
   href,
-  value,
+  page,
   currentPage,
   icon = false,
-  arrow = "left",
-  onClick,
+  type,
   disabled,
+  onClick,
 }) => {
+  const router = useRouter();
   const onHandleClick = (event: MouseEvent<HTMLButtonElement>) => {
     onClick && onClick(event);
+    router.push(href);
   };
   const iconButtonClassNames = cn(
     styles["button"],
     styles["icon"],
     {
-      [styles["left"]]: arrow === "left",
-      [styles["right"]]: arrow === "right",
+      [styles["left"]]: type === "previous",
+      [styles["right"]]: type === "next",
     },
     classNames
   );
@@ -39,7 +38,7 @@ const Button: FC<ButtonProps> = ({
   const buttonClassNames = cn(
     styles["button"],
     {
-      [styles["current"]]: currentPage === value,
+      [styles["current"]]: currentPage === page,
     },
     classNames
   );
@@ -57,7 +56,7 @@ const Button: FC<ButtonProps> = ({
 
   return (
     <Link className={buttonClassNames} href={href} scroll={false}>
-      {value}
+      {page}
     </Link>
   );
 };

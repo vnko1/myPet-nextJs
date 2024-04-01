@@ -17,19 +17,37 @@ const createPaginationItem = (
 ) => {
   if (type === "start-ellipsis" || type === "end-ellipsis") return "...";
 
-  if (type === "page" && page)
+  if (page && type === "page")
     return (
       <Button
         href={createPageUrl(page)}
         currentPage={currentPage}
-        value={page}
+        page={page}
+        type={type}
         {...item}
       />
     );
 
-  if (type === "previous") return <Button icon {...item} />;
+  if (page && type === "next")
+    return (
+      <Button
+        href={createPageUrl(page)}
+        page={page}
+        type={type}
+        icon
+        {...item}
+      />
+    );
 
-  return <Button arrow="right" icon {...item} />;
+  return (
+    <Button
+      href={createPageUrl(page || 0)}
+      page={page}
+      type={type}
+      icon
+      {...item}
+    />
+  );
 };
 
 const PaginationButtons: FC<PaginationButtonsProps> = ({
@@ -41,8 +59,6 @@ const PaginationButtons: FC<PaginationButtonsProps> = ({
   const { items } = usePagination({
     count: Math.floor(totalPages / NEWS_LIMIT),
   });
-
-  console.log(items);
 
   return (
     <ul className={`${styles["pagination"]} ${classNames}`}>
