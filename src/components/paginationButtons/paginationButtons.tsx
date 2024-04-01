@@ -15,7 +15,7 @@ const PaginationButtons: FC<PaginationButtonsProps> = ({
   createPageUrl;
   return (
     <div className={`${styles["pagination"]} ${classNames}`}>
-      <Button href="#" icon currentPage={currentPage} />
+      <Button href="#" currentPage={currentPage} />
     </div>
   );
 };

@@ -1,8 +1,8 @@
 export type ButtonProps = {
-  classNames?: string;
-  currentPage: number;
   href: string;
+  classNames?: string;
   value?: number;
   icon?: boolean;
   arrow?: "left" | "right";
+  currentPage?: number;
 };
