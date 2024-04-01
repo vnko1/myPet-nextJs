@@ -23,9 +23,9 @@ const Button: FC<ButtonProps> = ({
   onClick,
   disabled,
 }) => {
-  const onHandleClick = (
-    event: MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {};
+  const onHandleClick = (event: MouseEvent<HTMLButtonElement>) => {
+    onClick(event);
+  };
   const iconButtonClassNames = cn(
     styles["button"],
     styles["icon"],
