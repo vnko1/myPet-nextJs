@@ -1,10 +1,11 @@
 "use client";
 import React, { FC } from "react";
-import Link from "next/link";
+
 import { usePathname, useSearchParams } from "next/navigation";
 
 import { PaginationProps } from "./pagination.type";
 import { ConstantsEnum } from "@/types";
+import { PaginationButtons } from "@/components";
 
 const Pagination: FC<PaginationProps> = ({ classNames, totalPages }) => {
   const pathname = usePathname();
@@ -17,11 +18,13 @@ const Pagination: FC<PaginationProps> = ({ classNames, totalPages }) => {
     return `${pathname}?${params.toString()}`;
   };
 
-  totalPages;
-  currentPage;
   return (
     <div className={`${classNames}`}>
-      <Link href={createPageUrl(1)}>Pagination</Link>
+      <PaginationButtons
+        totalPages={totalPages}
+        currentPage={currentPage}
+        createPageUrl={createPageUrl}
+      />
     </div>
   );
 };
