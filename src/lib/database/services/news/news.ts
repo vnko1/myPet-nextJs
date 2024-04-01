@@ -15,19 +15,18 @@ class News extends DBConstructor implements INews {
   }
 
   async getArticlesData({ query, page }: QueryParams) {
-    const queryPattern = this.genSearchOptions({ query });
-    const sortPattern = this.genSortingOptions("date");
-    console.log(page);
-    return (
-      Article.find(queryPattern, "-id")
-        // .skip(page)
-        .limit(this.limit)
-        .sort(sortPattern)
-    );
+    const queryPattern = this.getSearchPattern({ query });
+    const sortPattern = this.getSortingPattern("date");
+    const perPage = this.getSkipPattern(page, this.limit);
+
+    return Article.find(queryPattern, "-id")
+      .skip(perPage)
+      .limit(this.limit)
+      .sort(sortPattern);
   }
 
   getArticlesPagesData({ query }: QueryParams) {
-    const queryParams = this.genSearchOptions({ query });
+    const queryParams = this.getSearchPattern({ query });
     return Article.countDocuments(queryParams);
   }
 }

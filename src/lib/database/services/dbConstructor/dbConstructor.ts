@@ -5,6 +5,7 @@ import { QueryParams } from "@/types";
 export default abstract class DBConstructor {
   private mongoUri = process.env.MONGODB_URI!;
   private connection: { isConnected?: number } = {};
+  protected page = 1;
 
   constructor(protected sort: Sort = "desc") {
     this.connect();
@@ -22,7 +23,7 @@ export default abstract class DBConstructor {
     }
   }
 
-  protected genSearchOptions({ query }: QueryParams = {}) {
+  protected getSearchPattern({ query }: QueryParams = {}) {
     return query
       ? {
           $or: [
@@ -33,8 +34,12 @@ export default abstract class DBConstructor {
       : {};
   }
 
-  protected genSortingOptions(key: string) {
+  protected getSortingPattern(key: string) {
     return { [key]: this.sort };
+  }
+
+  protected getSkipPattern(page = this.page, limit: number) {
+    return page > 0 ? (page - 1) * limit : 0;
   }
 
   tryCatchWrapper<T, K>(cb: CB<T, K>) {
