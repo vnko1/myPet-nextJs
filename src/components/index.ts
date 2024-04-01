@@ -6,3 +6,4 @@ export { SearchField } from "./fields";
 export { default as Loader } from "./loader/loader";
 export { default as Icon } from "./icon/icon";
 export { default as PaginationButtons } from "./paginationButtons/paginationButtons";
+export { SearchForm } from "./forms";
