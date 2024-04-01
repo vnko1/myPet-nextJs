@@ -1,4 +1,5 @@
 .news {
+  @apply pb-4-xs;
   &__wrapper {
     @apply flex flex-col items-center;
   }
