@@ -16,11 +16,21 @@ const Button: FC<ButtonProps> = ({
   icon = false,
   arrow = "left",
 }) => {
-  const iconButtonClassNames = cn(styles["button"], classNames);
+  const iconButtonClassNames = cn(
+    styles["button"],
+    styles["icon"],
+    {
+      [styles["left"]]: arrow === "left",
+      [styles["right"]]: arrow === "right",
+    },
+    classNames
+  );
 
   const buttonClassNames = cn(
     styles["button"],
-    { [styles["current"]]: currentPage === value },
+    {
+      [styles["current"]]: currentPage === value,
+    },
     classNames
   );
 

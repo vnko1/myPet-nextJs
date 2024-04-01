@@ -9,4 +9,20 @@
   &:focus {
     @apply bg-blue text-accentWhite;
   }
+
+  &.icon {
+    @apply text-blue;
+
+    &.left {
+      @apply rotate-0;
+    }
+    &.right {
+      @apply rotate-180;
+    }
+
+    &:hover,
+    &:focus {
+      @apply text-accentWhite;
+    }
+  }
 }
