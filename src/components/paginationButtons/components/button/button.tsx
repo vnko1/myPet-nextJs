@@ -1,6 +1,6 @@
 import React, { FC } from "react";
+import { useRouter } from "next/router";
 import cn from "classnames";
-
 import Link from "next/link";
 
 import { IconEnum } from "@/types";
@@ -15,7 +15,13 @@ const Button: FC<ButtonProps> = ({
   currentPage,
   icon = false,
   arrow = "left",
+  disabled,
 }) => {
+  const router = useRouter();
+
+  const onHandleClick = () => {
+    router.push(href);
+  };
   const iconButtonClassNames = cn(
     styles["button"],
     styles["icon"],
@@ -36,9 +42,13 @@ const Button: FC<ButtonProps> = ({
 
   if (icon)
     return (
-      <Link href={href} className={iconButtonClassNames} scroll={false}>
+      <button
+        className={iconButtonClassNames}
+        onClick={onHandleClick}
+        disabled={disabled}
+      >
         <Icon icon={IconEnum.ARROW} size={16} />
-      </Link>
+      </button>
     );
 
   return (

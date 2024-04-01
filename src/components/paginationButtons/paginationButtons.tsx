@@ -4,16 +4,33 @@ import usePagination, { UsePaginationItem } from "@mui/material/usePagination";
 import { NEWS_LIMIT } from "@/types";
 import styles from "./paginationButtons.module.scss";
 
-import { PaginationButtonsProps } from "./paginationButtons.type";
+import {
+  CreatePageUrl,
+  PaginationButtonsProps,
+} from "./paginationButtons.type";
 import { Button } from "./components";
 
-const createPagimationItem = ({
-  page,
-  type,
-  selected,
-  ...item
-}: UsePaginationItem) => {
-  let children = null;
+const createPaginationItem = (
+  { page, type, selected, ...item }: UsePaginationItem,
+  currentPage: number,
+  createPageUrl: CreatePageUrl
+) => {
+  if (type === "start-ellipsis" || type === "end-ellipsis") return "...";
+
+  if (type === "page" && page)
+    return (
+      <Button
+        href={createPageUrl(page)}
+        currentPage={currentPage}
+        value={page}
+        {...item}
+      />
+    );
+
+  if (type === "previous" && page) {
+    if (page > 1) return <Button href={createPageUrl(page - 1)} />;
+    if (page < 2) return <Button href={createPageUrl(1)} />;
+  }
 };
 
 const PaginationButtons: FC<PaginationButtonsProps> = ({
@@ -22,9 +39,6 @@ const PaginationButtons: FC<PaginationButtonsProps> = ({
   classNames,
   createPageUrl,
 }) => {
-  totalPages;
-  createPageUrl;
-
   const { items } = usePagination({
     count: Math.floor(totalPages / NEWS_LIMIT),
   });
