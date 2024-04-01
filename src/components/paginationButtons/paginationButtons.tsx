@@ -8,7 +8,7 @@ import { Button } from "./components";
 const PaginationButtons: FC<PaginationButtonsProps> = () => {
   return (
     <div className={styles["pagination"]}>
-      <Button href="#">button</Button>
+      <Button href="#">1</Button>
     </div>
   );
 };
