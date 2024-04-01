@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { CB, Sort } from "./dbConstrucor.type";
+import { CB, Sort } from "./dbConstructor.type";
 import { QueryParams } from "@/types";
 
 export default abstract class DBConstructor {

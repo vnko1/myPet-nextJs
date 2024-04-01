@@ -1,6 +1,6 @@
 import DBConstructor from "../dbConstructor/dbConstructor";
-import { QueryParams } from "@/types";
-import { Sort } from "../dbConstructor/dbConstrucor.type";
+import { NEWS_LIMIT, QueryParams } from "@/types";
+import { Sort } from "../dbConstructor/dbConstructor.type";
 import { Article } from "../../models";
 import { IArticle } from "../../models/article/article.type";
 
@@ -9,7 +9,7 @@ interface INews {
   getArticlesPagesData(params: QueryParams): Promise<number>;
 }
 class News extends DBConstructor implements INews {
-  protected limit = 6;
+  protected limit = NEWS_LIMIT;
   constructor(sort: Sort) {
     super(sort);
   }

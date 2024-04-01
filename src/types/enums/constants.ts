@@ -3,3 +3,5 @@ export enum ConstantsEnum {
   PAGE_PARAM = "page",
   DEBOUNCE_VALUE = 300,
 }
+
+export const NEWS_LIMIT = 6;

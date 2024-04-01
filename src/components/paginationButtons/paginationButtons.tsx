@@ -1,9 +1,20 @@
 import React, { FC } from "react";
-// import Link from "next/link";
+import usePagination, { UsePaginationItem } from "@mui/material/usePagination";
+
+import { NEWS_LIMIT } from "@/types";
 import styles from "./paginationButtons.module.scss";
 
 import { PaginationButtonsProps } from "./paginationButtons.type";
 import { Button } from "./components";
+
+const createPagimationItem = ({
+  page,
+  type,
+  selected,
+  ...item
+}: UsePaginationItem) => {
+  let children = null;
+};
 
 const PaginationButtons: FC<PaginationButtonsProps> = ({
   currentPage,
@@ -13,10 +24,19 @@ const PaginationButtons: FC<PaginationButtonsProps> = ({
 }) => {
   totalPages;
   createPageUrl;
+
+  const { items } = usePagination({
+    count: Math.floor(totalPages / NEWS_LIMIT),
+  });
+
+  console.log(items);
+
   return (
-    <div className={`${styles["pagination"]} ${classNames}`}>
-      <Button href="#" currentPage={currentPage} />
-    </div>
+    <ul className={`${styles["pagination"]} ${classNames}`}>
+      {items.map((item, index) => (
+        <li key={index}></li>
+      ))}
+    </ul>
   );
 };
 
