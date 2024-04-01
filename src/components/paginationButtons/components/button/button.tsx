@@ -27,7 +27,7 @@ const Button: FC<ButtonProps> = ({
   if (icon)
     return (
       <Link href={href} className={iconButtonClassNames} scroll={false}>
-        <Icon icon={IconEnum.ARROW} size={24} />
+        <Icon icon={IconEnum.ARROW} size={16} />
       </Link>
     );
 
