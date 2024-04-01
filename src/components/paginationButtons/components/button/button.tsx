@@ -1,6 +1,8 @@
 import React, { FC } from "react";
-import Link from "next/link";
 import cn from "classnames";
+
+import Link from "next/link";
+
 import { IconEnum } from "@/types";
 import { ButtonProps } from "./button.type";
 import styles from "./button.module.scss";
@@ -9,13 +11,18 @@ import { Icon } from "@/components";
 const Button: FC<ButtonProps> = ({
   classNames,
   href,
-  children,
+  value,
+  currentPage,
   icon = false,
   arrow = "left",
 }) => {
   const iconButtonClassNames = cn(styles["button"], classNames);
 
-  const buttonClassNames = cn(styles["button"], classNames);
+  const buttonClassNames = cn(
+    styles["button"],
+    { [styles["current"]]: currentPage === value },
+    classNames
+  );
 
   if (icon)
     return (
@@ -26,7 +33,7 @@ const Button: FC<ButtonProps> = ({
 
   return (
     <Link className={buttonClassNames} href={href} scroll={false}>
-      {children}
+      {value}
     </Link>
   );
 };

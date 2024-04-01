@@ -2,8 +2,9 @@ import { ReactNode } from "react";
 
 export type ButtonProps = {
   classNames?: string;
+  currentPage: number;
   href: string;
-  children?: ReactNode;
+  value?: number;
   icon?: boolean;
   arrow?: "left" | "right";
 };
