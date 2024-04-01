@@ -1,9 +1,6 @@
-"use client";
 import React, { FC, MouseEvent } from "react";
-
 import cn from "classnames";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 import { IconEnum } from "@/types";
 import { ButtonProps } from "./button.type";
@@ -13,24 +10,20 @@ import { Icon } from "@/components";
 const Button: FC<ButtonProps> = ({
   classNames,
   href,
-  page,
+  value,
   currentPage,
   icon = false,
-  type,
-  disabled,
-  onClick,
+  arrow = "left",
 }) => {
-  const router = useRouter();
   const onHandleClick = (event: MouseEvent<HTMLButtonElement>) => {
-    onClick && onClick(event);
-    router.push(href);
+    console.log(event);
   };
   const iconButtonClassNames = cn(
     styles["button"],
     styles["icon"],
     {
-      [styles["left"]]: type === "previous",
-      [styles["right"]]: type === "next",
+      [styles["left"]]: arrow === "left",
+      [styles["right"]]: arrow === "right",
     },
     classNames
   );
@@ -38,25 +31,21 @@ const Button: FC<ButtonProps> = ({
   const buttonClassNames = cn(
     styles["button"],
     {
-      [styles["current"]]: currentPage === page,
+      [styles["current"]]: currentPage === value,
     },
     classNames
   );
 
   if (icon)
     return (
-      <button
-        className={iconButtonClassNames}
-        onClick={onHandleClick}
-        disabled={disabled}
-      >
+      <button className={iconButtonClassNames} onClick={onHandleClick}>
         <Icon icon={IconEnum.ARROW} size={16} />
       </button>
     );
 
   return (
     <Link className={buttonClassNames} href={href} scroll={false}>
-      {page}
+      {value}
     </Link>
   );
 };
