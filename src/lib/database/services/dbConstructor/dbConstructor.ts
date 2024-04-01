@@ -1,21 +1,13 @@
 import mongoose from "mongoose";
-import { CB } from "./dbConstrucor.type";
+import { CB, Sort } from "./dbConstructor.type";
+import { QueryParams } from "@/types";
 
-abstract class DBConstructor {
+export default abstract class DBConstructor {
   private mongoUri = process.env.MONGODB_URI!;
   private connection: { isConnected?: number } = {};
+  protected page = 1;
 
-  static tryCatchWrapper(cb: CB) {
-    return async function () {
-      try {
-        return await cb();
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  }
-
-  constructor() {
+  constructor(protected sort: Sort = "desc") {
     this.connect();
   }
 
@@ -30,6 +22,34 @@ abstract class DBConstructor {
       console.log(error);
     }
   }
-}
 
-export default DBConstructor;
+  protected getSearchPattern({ query }: QueryParams = {}) {
+    return query
+      ? {
+          $or: [
+            { title: { $regex: query, $options: "i" } },
+            { text: { $regex: query, $options: "i" } },
+          ],
+        }
+      : {};
+  }
+
+  protected getSortingPattern(key: string) {
+    return { [key]: this.sort };
+  }
+
+  protected getSkipPattern(page = this.page, limit: number) {
+    return page > 0 ? (page - 1) * limit : 0;
+  }
+
+  tryCatchWrapper<T, K>(cb: CB<T, K>) {
+    return async function (data: K) {
+      try {
+        return await cb(data);
+      } catch (error) {
+        console.log(error);
+        throw new Error("Something went wrong");
+      }
+    };
+  }
+}

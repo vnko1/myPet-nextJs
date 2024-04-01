@@ -3,3 +3,4 @@ export async function getSponsors() {
 
   return await response.json();
 }
+// { next: { revalidate: 1 } }

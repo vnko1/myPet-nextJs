@@ -11,6 +11,7 @@ const links = [
   { label: "News", href: LinksEnum.NEWS },
   { label: "Find pet", href: LinksEnum.PETS },
   { label: "Our friends", href: LinksEnum.FRIENDS },
+  { label: "Sponsors", href: "/sponsors" },
 ];
 
 const Header: FC = () => {

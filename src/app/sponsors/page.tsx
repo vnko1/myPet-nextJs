@@ -1,5 +1,10 @@
 import { Sponsors } from "./_components";
 
+// export const dynamic = "force-dynamic";
+
+// export const dynamic = "force-dynamic";
+// export const revalidate = 1;
+
 export default async function Page() {
   return (
     <section className="section">

@@ -1,10 +1,6 @@
 .news {
-  //   @apply h-[91vh];
+  @apply pb-4-xs;
+  &__wrapper {
+    @apply flex flex-col items-center;
+  }
 }
-
-.title {
-  @apply text-center;
-}
-
-// .search {
-// }
