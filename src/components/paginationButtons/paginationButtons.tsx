@@ -22,6 +22,7 @@ const PaginationButtons: FC<PaginationButtonsProps> = ({
 
   return (
     <Pagination
+      // size="large"
       count={count}
       variant="outlined"
       page={currentPage}
