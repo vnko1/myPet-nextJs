@@ -1,5 +1,3 @@
-import { ReactNode } from "react";
-
 export type ButtonProps = {
   classNames?: string;
   currentPage: number;
