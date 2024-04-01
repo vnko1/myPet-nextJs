@@ -9,16 +9,21 @@ interface INews {
   getArticlesPagesData(params: QueryParams): Promise<number>;
 }
 class News extends DBConstructor implements INews {
-  protected limit = 10;
+  protected limit = 6;
   constructor(sort: Sort) {
     super(sort);
   }
 
-  getArticlesData({ query, page = 1 }: QueryParams) {
-    return Article.find(this.genSearchOptions({ query }), "-id")
-      .skip(page)
-      .limit(this.limit)
-      .sort(this.genSortingOptions("date"));
+  async getArticlesData({ query, page }: QueryParams) {
+    const queryPattern = this.genSearchOptions({ query });
+    const sortPattern = this.genSortingOptions("date");
+    console.log(page);
+    return (
+      Article.find(queryPattern, "-id")
+        // .skip(page)
+        .limit(this.limit)
+        .sort(sortPattern)
+    );
   }
 
   getArticlesPagesData({ query }: QueryParams) {
