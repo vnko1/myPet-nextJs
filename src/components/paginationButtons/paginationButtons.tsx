@@ -27,9 +27,9 @@ const createPaginationItem = (
       />
     );
 
-  if (type === "previous") return <Button {...item} icon />;
+  if (type === "previous") return <Button icon {...item} />;
 
-  return <Button {...item} arrow="right" icon />;
+  return <Button arrow="right" icon {...item} />;
 };
 
 const PaginationButtons: FC<PaginationButtonsProps> = ({

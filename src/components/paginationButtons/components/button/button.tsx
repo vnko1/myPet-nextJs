@@ -1,4 +1,9 @@
-import React, { FC } from "react";
+import React, {
+  FC,
+  MouseEvent,
+  MouseEventHandler,
+  ReactEventHandler,
+} from "react";
 
 import cn from "classnames";
 import Link from "next/link";
@@ -18,6 +23,9 @@ const Button: FC<ButtonProps> = ({
   onClick,
   disabled,
 }) => {
+  const onHandleClick = (
+    event: MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {};
   const iconButtonClassNames = cn(
     styles["button"],
     styles["icon"],
@@ -40,7 +48,7 @@ const Button: FC<ButtonProps> = ({
     return (
       <button
         className={iconButtonClassNames}
-        onClick={onClick}
+        onClick={onHandleClick}
         disabled={disabled}
       >
         <Icon icon={IconEnum.ARROW} size={16} />
