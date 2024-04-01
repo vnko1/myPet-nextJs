@@ -11,7 +11,7 @@ import {
 import { Button } from "./components";
 
 const createPaginationItem = (
-  { page, type, selected, ...item }: UsePaginationItem,
+  { page, type, ...item }: UsePaginationItem,
   currentPage: number,
   createPageUrl: CreatePageUrl
 ) => {
@@ -27,10 +27,9 @@ const createPaginationItem = (
       />
     );
 
-  if (type === "previous" && page) {
-    if (page > 1) return <Button href={createPageUrl(page - 1)} />;
-    if (page < 2) return <Button href={createPageUrl(1)} />;
-  }
+  if (type === "previous") return <Button {...item} icon />;
+
+  return <Button {...item} arrow="right" icon />;
 };
 
 const PaginationButtons: FC<PaginationButtonsProps> = ({
@@ -48,7 +47,9 @@ const PaginationButtons: FC<PaginationButtonsProps> = ({
   return (
     <ul className={`${styles["pagination"]} ${classNames}`}>
       {items.map((item, index) => (
-        <li key={index}></li>
+        <li key={index}>
+          {createPaginationItem(item, currentPage, createPageUrl)}
+        </li>
       ))}
     </ul>
   );
