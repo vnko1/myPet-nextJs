@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+const isAuth = true;
+
 export default function middleware(request: NextRequest) {
-  return NextResponse.rewrite(new URL("/register", request.url));
+  if (!isAuth) return NextResponse.rewrite(new URL("/register", request.url));
 }
 
 export const config = {
