@@ -1,4 +1,4 @@
-import { getSponsors } from "@/lib";
+import { getSponsors } from "@/app/lib";
 import { Sponsors } from "./_components";
 
 // export const dynamic = "force-dynamic";

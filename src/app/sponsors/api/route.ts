@@ -1,4 +1,4 @@
-import { Sponsors } from "@/lib";
+import { Sponsors } from "@/app/lib";
 // import { revalidatePath } from "next/cache";
 // import { NextRequest } from "next/server";
 

@@ -1,5 +1,5 @@
 import { QueryParams } from "@/types";
-import { News } from "@/lib/database/services";
+import { News } from "@/app/lib/database/services";
 import { IArticle } from "../../models/article/article.type";
 
 const news = new News("desc");
