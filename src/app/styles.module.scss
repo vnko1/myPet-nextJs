@@ -7,4 +7,12 @@
 }
 
 .not-found {
+  @apply h-[90vh];
+  &__wrapper {
+    @apply h-full flex flex-col justify-between pb-[275px];
+  }
+
+  & h1 {
+    @apply mx-auto text-center pt-[80px];
+  }
 }
