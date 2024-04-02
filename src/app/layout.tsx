@@ -21,7 +21,7 @@ export default function RootLayout({
         className={`${manrope.variable} ${inter.variable} ${poppins.variable}`}
       >
         <Header />
-        <main>{children}</main>
+        {children}
       </body>
     </html>
   );

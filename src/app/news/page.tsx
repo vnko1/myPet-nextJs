@@ -10,13 +10,15 @@ export default async function Page({
   const totalPages = await getArticlesPages({ query });
 
   return (
-    <section className={`${styles["news"]} section`}>
-      <div className={`${styles["news__wrapper"]} container`}>
-        <h1 className="title">News</h1>
-        <Search />
-        <Articles page={page} query={query} />
-        <Pagination totalPages={totalPages} />
-      </div>
-    </section>
+    <main>
+      <section className={`${styles["news"]} section`}>
+        <div className={`${styles["news__wrapper"]} container`}>
+          <h1 className="title">News</h1>
+          <Search />
+          <Articles page={page} query={query} />
+          <Pagination totalPages={totalPages} />
+        </div>
+      </section>
+    </main>
   );
 }
