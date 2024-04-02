@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const isAuth = true;
+const isAuth = false;
 
 export default function middleware(request: NextRequest) {
   if (!isAuth) return NextResponse.rewrite(new URL("/register", request.url));
