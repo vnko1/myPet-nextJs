@@ -1,7 +1,7 @@
 import { FC } from "react";
+import Image from "next/image";
 import { SponsorProps } from "./sponsor.type";
 import styles from "./sponsor.module.scss";
-import Image from "next/image";
 import { WorkDays } from "@/types";
 
 function getDefaultTime(workDays: WorkDays[] | null) {
