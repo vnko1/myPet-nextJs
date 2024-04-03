@@ -2,18 +2,22 @@
 import React, { FC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { RegisterSchema } from "./signUp.type";
+import { RegisterSchema, SignupProps } from "./signUp.type";
 import { registerSchema } from "./schema";
-import { Field } from "@/components";
+import styles from "./signUp.module.scss";
+import { Field, UIButton } from "@/components";
 
-const SignUp: FC = () => {
+const SignUp: FC<SignupProps> = ({ classNames }) => {
   const methods = useForm<RegisterSchema>({
     resolver: zodResolver(registerSchema),
   });
   return (
     <FormProvider {...methods}>
-      <form>
+      <form className={`${styles["form"]} ${classNames}`}>
         <Field name="name" />
+        <UIButton type="submit" fullWidth color="secondary">
+          Registration
+        </UIButton>
       </form>
     </FormProvider>
   );
