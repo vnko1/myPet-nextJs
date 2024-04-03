@@ -1,6 +1,7 @@
+"use client";
 import React, { ChangeEvent, FC } from "react";
 import { useRouter } from "next/navigation";
-import { Pagination } from "@mui/material";
+import { Pagination } from "@/lib/ui";
 
 import { NEWS_LIMIT } from "@/types";
 import styles from "./paginationButtons.module.scss";
