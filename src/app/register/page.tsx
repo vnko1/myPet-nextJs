@@ -1,7 +1,14 @@
+import { SignForm } from "@/components";
 import React from "react";
 
 function Register() {
-  return <div>Register</div>;
+  return (
+    <section>
+      <div className="container">
+        <SignForm />
+      </div>
+    </section>
+  );
 }
 
 export default Register;

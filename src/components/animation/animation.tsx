@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { CSSTransition } from "react-transition-group";
+import { CSSTransition } from "@/lib/ui";
 
 import { IAnimationProps } from "./animation.type";
 import styles from "./animation.module.scss";

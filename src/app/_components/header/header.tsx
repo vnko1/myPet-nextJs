@@ -47,10 +47,11 @@ const Header: FC = () => {
               size="small"
               icon={IconEnum.PET}
               alignIcon="right"
+              href="/login"
             >
               Log IN
             </UIButton>
-            <UIButton variant="outlined" size="small">
+            <UIButton variant="outlined" size="small" href="/register">
               Registration
             </UIButton>
           </div>
