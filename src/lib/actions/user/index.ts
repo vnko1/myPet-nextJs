@@ -3,6 +3,7 @@
 import { register } from "@/auth";
 import { loginSchema, registerSchema } from "@/schema";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function createUser(formData: FormData) {
   try {
@@ -14,14 +15,16 @@ export async function createUser(formData: FormData) {
     });
     if (validatedFields.success) {
       const res = await register(validatedFields.data);
-      console.log(res);
+      return res;
+      // return res;
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
-    if (error.message) return { error: error.message };
+    return { errors: { email: "Something wrong" } };
   }
   revalidatePath("/register");
+  redirect(`/login`);
 }
 
 export async function authenticate(formData: FormData) {
@@ -35,7 +38,7 @@ export async function authenticate(formData: FormData) {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
-    if (error.message) return { error: error.message };
+    if (error.message) throw new Error(error.message);
   }
   revalidatePath("/login");
 }
