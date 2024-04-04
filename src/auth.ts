@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import { UserTypes } from "@/types";
 import { Users } from "@/lib/database";
-// import { createToken } from "@/utils";
+import { createToken } from "@/utils";
 
 const hashPassword = async (password: string) =>
   await bcrypt.hash(password, 10);
@@ -22,22 +22,30 @@ export async function register(newUser: UserTypes) {
   return res;
 }
 
-export async function signIn(user: Pick<UserTypes, "email" | "password">) {
-  const userExist = await users.findUser({ email: user.email });
+export async function signIn(
+  currentUser: Pick<UserTypes, "email" | "password">
+) {
+  const user = await users.findUser({ email: currentUser.email });
 
-  if (!userExist) throw new Error("Wrong email or password");
+  if (!user) throw new Error("Wrong email or password");
 
-  // const [token, tokenLifeTime] = await createToken(
-  //   { email: user.email },
-  //   process.env.JWT_KEY || "",
-  //   process.env.TOKEN_LIFE
-  // );
+  const isPasswordValid = await bcrypt.compare(
+    currentUser.password,
+    user.password
+  );
+  if (!isPasswordValid) throw new Error("Wrong email or password");
 
-  // const [refreshToken] = await createToken(
-  //   {
-  //     email: newUser.email,
-  //   },
-  //   process.env.REFRESH_JWT_KEY || "",
-  //   process.env.REFRESH_TOKEN_LIFE
-  // );
+  const [token, tokenLifeTime] = await createToken(
+    { email: user.email },
+    process.env.JWT_KEY || "",
+    process.env.TOKEN_LIFE
+  );
+
+  const [refreshToken] = await createToken(
+    {
+      email: newUser.email,
+    },
+    process.env.REFRESH_JWT_KEY || "",
+    process.env.REFRESH_TOKEN_LIFE
+  );
 }
