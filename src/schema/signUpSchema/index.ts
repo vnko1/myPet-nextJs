@@ -1,5 +1,5 @@
-import { emailValid, passwordValid } from "@/utils";
 import * as z from "zod";
+import { emailValid, passwordValid } from "@/utils";
 
 export const registerSchema = z
   .object({

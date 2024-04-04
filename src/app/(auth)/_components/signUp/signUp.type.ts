@@ -4,7 +4,7 @@ import { registerSchema } from "@/schema";
 
 export type RegisterSchema = z.infer<typeof registerSchema>;
 
-export type SignupProps = {
+export type SignUpProps = {
   classNames?: string;
   path: "login" | "register";
   fields: {
