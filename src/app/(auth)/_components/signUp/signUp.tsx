@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,7 +15,6 @@ const SignUp: FC<SignUpProps> = ({
   path = "register",
 }) => {
   const isRegister = path === "register";
-  const [errors, setErrors] = useState<string | null>();
 
   const methods = useForm({
     resolver: zodResolver(isRegister ? registerSchema : loginSchema),
@@ -24,17 +23,17 @@ const SignUp: FC<SignUpProps> = ({
 
   const handleAction = async (formData: FormData) => {
     try {
-      setErrors(null);
-      const res = isRegister
+      const res: { errors: { [key: string]: string } } | undefined = isRegister
         ? await createUser(formData)
         : await authenticate(formData);
 
       if (res?.errors && typeof res.errors === "object") {
         const [key] = Object.keys(res.errors);
+
         return methods.setError(key, { message: res.errors[key] });
       }
 
-      methods.reset();
+      // methods.reset();
     } catch (error) {
       console.log(error);
     }
@@ -54,7 +53,6 @@ const SignUp: FC<SignUpProps> = ({
           <UIButton type="submit" fullWidth color="secondary">
             {isRegister ? "Registration" : "Login"}
           </UIButton>
-          {errors && <p className="text-sm text-red text-center">{errors}</p>}
         </span>
       </form>
     </FormProvider>

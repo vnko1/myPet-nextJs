@@ -1,6 +1,6 @@
 "use server";
 
-import { register } from "@/auth";
+import { register, signIn } from "@/auth";
 import { loginSchema, registerSchema } from "@/schema";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -16,9 +16,7 @@ export async function createUser(formData: FormData) {
     if (validatedFields.success) {
       await register(validatedFields.data);
     }
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: any) {
+  } catch (error: unknown) {
     return { errors: { email: "Something wrong" } };
   }
   revalidatePath("/register");
@@ -32,11 +30,11 @@ export async function authenticate(formData: FormData) {
       password: formData.get("password"),
     });
 
-    if (validatedFields.success) console.log(validatedFields.data);
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: any) {
-    if (error.message) throw new Error(error.message);
+    if (validatedFields.success) {
+      await signIn(validatedFields.data);
+    }
+  } catch (error: unknown) {
+    return { errors: { email: "Wrong email or password" } };
   }
   revalidatePath("/login");
 }
