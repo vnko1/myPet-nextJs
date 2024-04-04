@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterSchema, SignupProps } from "./signUp.type";
-import { registerSchema } from "./schema";
+import { registerSchema } from "@/schema";
 import styles from "./signUp.module.scss";
 import { Field, UIButton } from "@/components";
 
