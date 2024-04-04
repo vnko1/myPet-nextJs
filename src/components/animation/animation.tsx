@@ -1,6 +1,6 @@
 "use client";
 import { FC } from "react";
-import { CSSTransition } from "@/lib/ui";
+import { CSSTransition } from "react-transition-group";
 
 import { IAnimationProps } from "./animation.type";
 import styles from "./animation.module.scss";

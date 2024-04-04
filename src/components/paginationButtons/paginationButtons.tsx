@@ -1,7 +1,7 @@
 "use client";
 import React, { ChangeEvent, FC } from "react";
 import { useRouter } from "next/navigation";
-import { Pagination } from "@/lib/ui";
+import { Pagination } from "@mui/material";
 
 import { NEWS_LIMIT } from "@/types";
 import styles from "./paginationButtons.module.scss";
@@ -23,7 +23,6 @@ const PaginationButtons: FC<PaginationButtonsProps> = ({
 
   return (
     <Pagination
-      // size="large"
       count={count}
       variant="outlined"
       page={currentPage}
