@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import { UserTypes } from "@/types";
 import { Users } from "@/lib/database";
 import { createToken } from "@/utils";
+import { use } from "react";
 
 const hashPassword = async (password: string) =>
   await bcrypt.hash(password, 10);
@@ -43,7 +44,7 @@ export async function signIn(
 
   const [refreshToken] = await createToken(
     {
-      email: newUser.email,
+      email: user.email,
     },
     process.env.REFRESH_JWT_KEY || "",
     process.env.REFRESH_TOKEN_LIFE

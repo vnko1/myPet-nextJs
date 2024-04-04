@@ -34,7 +34,7 @@ export async function authenticate(formData: FormData) {
       await signIn(validatedFields.data);
     }
   } catch (error: unknown) {
-    return { errors: { email: "Wrong email or password" } };
+    return { errors: { password: "Wrong email or password" } };
   }
   revalidatePath("/login");
 }
