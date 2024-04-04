@@ -15,14 +15,20 @@ const SignUp: FC<SignUpProps> = ({
   path = "register",
 }) => {
   const isRegister = path === "register";
+
   const methods = useForm({
     resolver: zodResolver(isRegister ? registerSchema : loginSchema),
     mode: "all",
   });
 
   const handleAction = async (formData: FormData) => {
-    isRegister ? await createUser(formData) : await authenticate(formData);
-    methods.reset();
+    try {
+      isRegister ? await createUser(formData) : await authenticate(formData);
+
+      methods.reset();
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
