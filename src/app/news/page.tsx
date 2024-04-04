@@ -1,4 +1,4 @@
-import { getArticlesPages } from "@/lib";
+import { getArticlesPages } from "@/lib/database";
 import { Articles, Pagination, Search } from "./_components";
 import styles from "./styles.module.scss";
 

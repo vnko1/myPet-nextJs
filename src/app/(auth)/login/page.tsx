@@ -1,5 +1,5 @@
 import React from "react";
-import SignUp from "../_components/signUp/signUp";
+import { SignUp } from "../_components";
 
 const fields = [
   { name: "email", type: "email", placeholder: "Email" },
