@@ -14,9 +14,7 @@ export async function createUser(formData: FormData) {
       confirmPassword: formData.get("confirmPassword"),
     });
     if (validatedFields.success) {
-      const res = await register(validatedFields.data);
-      return res;
-      // return res;
+      await register(validatedFields.data);
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
