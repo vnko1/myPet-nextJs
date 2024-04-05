@@ -1,7 +1,19 @@
+"use client";
+
+import { useRouter } from "next/navigation";
 import React from "react";
 
 function ModalPage() {
-  return <div>ModalPage</div>;
+  const router = useRouter();
+  return (
+    <button
+      onClick={() => {
+        router.refresh();
+      }}
+    >
+      Close
+    </button>
+  );
 }
 
 export default ModalPage;
