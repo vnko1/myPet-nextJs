@@ -1,0 +1,45 @@
+.field {
+  @apply block;
+
+  // &__label {
+  // }
+
+  &__wrapper {
+    @apply relative block;
+  }
+  &__input {
+    @apply w-full px-1-lg py-1-sm bg-transparent rounded-[40px] border border-blue text-base text-grey outline-none;
+
+    &.error {
+      @apply border-red;
+    }
+
+    &.valid {
+      @apply border-green;
+    }
+  }
+
+  &__error {
+    @apply inline-block border-red text-red text-xs ml-1-lg;
+  }
+}
+
+.icons {
+  @apply absolute top-1/2 -translate-y-1/2 right-[16px] text-blue flex gap-1-sm;
+}
+
+.icon {
+  @apply bg-transparent;
+
+  &.cross {
+    @apply text-red;
+  }
+
+  &.eye {
+    @apply text-blue;
+  }
+
+  &.check {
+    @apply text-green;
+  }
+}

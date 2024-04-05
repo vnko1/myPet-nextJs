@@ -1,8 +1,8 @@
 import DBConstructor from "../dbConstructor/dbConstructor";
-import { NEWS_LIMIT, QueryParams } from "@/types";
 import { Sort } from "../dbConstructor/dbConstructor.type";
 import { Article } from "../../models";
 import { IArticle } from "../../models/article/article.type";
+import { NEWS_LIMIT, QueryParams } from "@/types";
 
 interface INews {
   getArticlesData(params: QueryParams): Promise<IArticle[]>;

@@ -1,3 +1,4 @@
+"use client";
 import { FC } from "react";
 import { CSSTransition } from "react-transition-group";
 

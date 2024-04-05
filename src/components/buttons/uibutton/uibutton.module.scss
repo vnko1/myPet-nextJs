@@ -42,9 +42,9 @@
       @apply text-yellow bg-transparent;
     }
 
-    &:disabled {
-      // @apply bg-grey-1010 text-white border-grey-1010;
-    }
+    // &:disabled {
+    //   // @apply bg-grey-1010 text-white border-grey-1010;
+    // }
   }
 
   &.btn--text {
@@ -95,7 +95,12 @@
   }
 
   &.btn--secondary.btn--text {
-    @apply bg-transparent;
+    @apply bg-transparent text-yellow;
+    &:hover,
+    &:focus,
+    &:active {
+      @apply text-blue;
+    }
   }
 
   &.btn--secondary.btn--outlined {
@@ -109,6 +114,20 @@
     &:disabled {
       // @apply bg-grey-1010 text-white border-transparent;
     }
+  }
+
+  &.btn--secondary.btn--contained {
+    @apply bg-blue text-accentWhite border-2 border-solid border-blue;
+
+    &:active,
+    &:hover,
+    &:focus {
+      @apply text-blue bg-transparent;
+    }
+
+    // &:disabled {
+    //   // @apply bg-grey-1010 text-white border-transparent;
+    // }
   }
 
   > svg,

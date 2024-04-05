@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { ArticlesParams } from "./articles.type";
-import { getArticles } from "@/lib";
+import { getArticles } from "@/lib/database";
 import styles from "./articles.module.scss";
 import { Article } from "..";
 

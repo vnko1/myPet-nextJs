@@ -3,4 +3,7 @@ export enum LinksEnum {
   NEWS = "/news",
   PETS = "/pets",
   FRIENDS = "/friends",
+  LOGIN = "/login",
+  REGISTER = "/register",
+  USER = "/user",
 }

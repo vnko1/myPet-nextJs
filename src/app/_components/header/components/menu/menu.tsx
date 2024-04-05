@@ -1,9 +1,9 @@
 import { FC } from "react";
 
-import { IconEnum } from "@/types";
 import { IMenu } from "./menu.type";
 import styles from "./menu.module.scss";
 import { UIButton, Modal } from "@/components";
+import Buttons from "../buttons/buttons";
 
 const transitionClassNames = {
   enter: styles["modal-enter"],
@@ -12,7 +12,7 @@ const transitionClassNames = {
   exitActive: styles["modal-exit-active"],
 };
 
-const Menu: FC<IMenu> = ({ isOpen, links, pathName, setIsOpen }) => {
+const Menu: FC<IMenu> = ({ isOpen, links, pathName, user, setIsOpen }) => {
   return (
     <Modal
       isOpen={isOpen}
@@ -24,17 +24,7 @@ const Menu: FC<IMenu> = ({ isOpen, links, pathName, setIsOpen }) => {
       enableSwipeUpToScreen={1279}
     >
       <div className={styles["menu__auth"]}>
-        <UIButton
-          variant="contained"
-          size="small"
-          icon={IconEnum.PET}
-          alignIcon="right"
-        >
-          Log IN
-        </UIButton>
-        <UIButton variant="outlined" size="small">
-          Registration
-        </UIButton>
+        <Buttons user={user} />
       </div>
       <nav className={styles["menu-nav"]}>
         <ul className={styles["menu-nav__links"]}>
