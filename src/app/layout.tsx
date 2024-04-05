@@ -17,13 +17,13 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const user = await currentUser();
-  console.log(user);
+
   return (
     <html lang="en">
       <body
         className={`${manrope.variable} ${inter.variable} ${poppins.variable}`}
       >
-        <Header />
+        <Header user={user} />
         {children}
       </body>
     </html>

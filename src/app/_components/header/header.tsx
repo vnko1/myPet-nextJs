@@ -6,6 +6,7 @@ import styles from "./header.module.scss";
 import { Icon, Logo, UIButton } from "@/components";
 import { IconEnum, LinksEnum } from "@/types";
 import { Menu } from "./components";
+import { HeaderProps } from "./header.type";
 
 const links = [
   { label: "News", href: LinksEnum.NEWS },
@@ -16,10 +17,10 @@ const links = [
   // { label: "Register", href: "/register" },
 ];
 
-const Header: FC = () => {
+const Header: FC<HeaderProps> = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);
   const pathName = usePathname();
-
+  console.log(user);
   return (
     <header className={styles["header"]}>
       <div className={`container ${styles["header__wrapper"]}`}>
