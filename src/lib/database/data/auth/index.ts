@@ -1,15 +1,30 @@
 import bcrypt from "bcrypt";
-import { UserTypes } from "@/types";
-import { Users } from "../database";
+import { cookies } from "next/headers";
+
+import { authenticate } from "@/auth";
 import { TOKEN_LIFE, createToken } from "@/utils";
-
-export const hashPassword = async (password: string) =>
-  await bcrypt.hash(password, 10);
-
-export const passCompare = async (data: string, encrypted: string) =>
-  await bcrypt.compare(data, encrypted);
+import { Users } from "../../services";
+import { IJWT, UserTypes } from "@/types";
 
 const users = new Users();
+
+const hashPassword = async (password: string) =>
+  await bcrypt.hash(password, 10);
+
+const passCompare = async (data: string, encrypted: string) =>
+  await bcrypt.compare(data, encrypted);
+
+async function getUser(payload?: IJWT | boolean): Promise<null | UserTypes> {
+  const options = { projection: "-token -refreshToken -password" };
+  let user = null;
+  if (payload && typeof payload === "object") {
+    if (payload.email)
+      user = await users.findUser({ email: payload.email }, options);
+    if (payload.id) user = await users.findUserById(payload.id, options);
+  }
+
+  return user;
+}
 
 export async function register(newUser: UserTypes) {
   const userExist = await users.findUser({ email: newUser.email });
@@ -63,3 +78,11 @@ export async function signIn(
     .populate("pets");
   return { token, tokenLifeTime };
 }
+
+export const currentUser = async () => {
+  const token = cookies().get("token");
+
+  const isValidToken = token && (await authenticate(token?.name, token?.value));
+
+  return await getUser(isValidToken);
+};

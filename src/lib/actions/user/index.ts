@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
 import { loginSchema, registerSchema } from "@/schema";
-import { register, signIn } from "@/lib/auth";
+import { register, signIn } from "@/lib/database";
 import { LinksEnum } from "@/types";
 
 export async function createUser(formData: FormData) {

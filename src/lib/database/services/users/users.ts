@@ -30,8 +30,8 @@ class Users extends DBConstructor implements IUsers {
     return User.create(newUser);
   }
 
-  findUser(query: QueryType) {
-    return User.findOne(query);
+  findUser(query: QueryType, { projection = "" }: Partial<Options> = {}) {
+    return User.findOne(query, projection);
   }
 
   findUserById(id: ID, { projection = "" }: Partial<Options> = {}) {
