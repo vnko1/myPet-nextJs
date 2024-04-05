@@ -10,6 +10,6 @@ export const authenticate = async (type: string, credential: string) => {
 
     return token;
   } catch (error) {
-    // console.log(error);
+    console.log(error);
   }
 };

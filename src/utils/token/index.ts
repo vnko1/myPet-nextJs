@@ -1,4 +1,5 @@
 import { SignJWT, jwtVerify } from "jose";
+import { IJWT } from "@/types";
 
 type Payload = { [name: string]: string };
 
@@ -20,7 +21,10 @@ export const createToken = async (
   return [token, new Date(exp * 1000)];
 };
 
-export const verifyToken = async (cred: string, secretKey: string) => {
+export const verifyToken = async (
+  cred: string,
+  secretKey: string
+): Promise<false | IJWT> => {
   const { payload } = await jwtVerify(
     cred,
     new TextEncoder().encode(secretKey)
