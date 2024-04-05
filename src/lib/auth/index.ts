@@ -1,10 +1,13 @@
 import bcrypt from "bcrypt";
 import { UserTypes } from "@/types";
-import { Users } from "@/lib/database";
+import { Users } from "../database";
 import { createToken } from "@/utils";
 
 const hashPassword = async (password: string) =>
   await bcrypt.hash(password, 10);
+
+const passCompare = async (data: string, encrypted: string) =>
+  await bcrypt.compare(data, encrypted);
 
 const users = new Users();
 
@@ -29,10 +32,11 @@ export async function signIn(
 
   if (!user) throw new Error("Wrong email or password");
 
-  const isPasswordValid = await bcrypt.compare(
+  const isPasswordValid = await passCompare(
     currentUser.password,
     user.password
   );
+
   if (!isPasswordValid) throw new Error("Wrong email or password");
 
   const [token, tokenLifeTime] = await createToken(

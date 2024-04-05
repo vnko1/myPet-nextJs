@@ -3,8 +3,9 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
-import { register, signIn } from "@/auth";
+
 import { loginSchema, registerSchema } from "@/schema";
+import { register, signIn } from "@/lib/auth";
 import { LinksEnum } from "@/types";
 
 export async function createUser(formData: FormData) {
