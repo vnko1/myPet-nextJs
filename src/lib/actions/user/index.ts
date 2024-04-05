@@ -63,4 +63,5 @@ export async function signOut() {
   } catch (error) {
     if (error) return { errors: { message: "Something wrong" } };
   }
+  revalidatePath("/");
 }

@@ -11,6 +11,8 @@ export const metadata: Metadata = {
   description: "My Pet app - applications about pets",
 };
 
+export const revalidate = 10;
+
 export default async function RootLayout({
   children,
 }: {
