@@ -3,9 +3,9 @@ import React, { FC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SignUpProps } from "./signUp.type";
+import { ResType, SignUpProps } from "./signUp.type";
 import { loginSchema, registerSchema } from "@/schema";
-import { authenticate, createUser } from "@/lib/actions";
+import { login, createUser } from "@/lib/actions";
 import styles from "./signUp.module.scss";
 import { Field, UIButton } from "@/components";
 
@@ -23,13 +23,12 @@ const SignUp: FC<SignUpProps> = ({
 
   const handleAction = async (formData: FormData) => {
     try {
-      const res: { errors: { [key: string]: string } } | undefined = isRegister
+      const res: ResType = isRegister
         ? await createUser(formData)
-        : await authenticate(formData);
+        : await login(formData);
 
       if (res?.errors && typeof res.errors === "object") {
         const [key] = Object.keys(res.errors);
-
         return methods.setError(key, { message: res.errors[key] });
       }
 

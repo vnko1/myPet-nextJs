@@ -1,9 +1,10 @@
 "use server";
 
-import { register, signIn } from "@/auth";
-import { loginSchema, registerSchema } from "@/schema";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
+import { register, signIn } from "@/auth";
+import { loginSchema, registerSchema } from "@/schema";
 
 export async function createUser(formData: FormData) {
   try {
@@ -23,7 +24,7 @@ export async function createUser(formData: FormData) {
   redirect(`/login`);
 }
 
-export async function authenticate(formData: FormData) {
+export async function login(formData: FormData) {
   try {
     const validatedFields = loginSchema.safeParse({
       email: formData.get("email"),
@@ -31,7 +32,18 @@ export async function authenticate(formData: FormData) {
     });
 
     if (validatedFields.success) {
-      await signIn(validatedFields.data);
+      const user = await signIn(validatedFields.data);
+      const token: string = user.token;
+      const tokenLifeTime: number = user.tokenLifeTime;
+
+      cookies().set("token", token, { expires: tokenLifeTime, secure: true });
+      const refreshToken: string = user.refreshToken;
+      const refreshTokenLifeTime: number = user.refreshTokenLifeTime;
+      cookies().set("refreshToken", refreshToken, {
+        expires: refreshTokenLifeTime,
+        secure: true,
+        httpOnly: true,
+      });
     }
   } catch (error: unknown) {
     return { errors: { password: "Wrong email or password" } };

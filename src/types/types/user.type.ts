@@ -13,6 +13,6 @@ export type UserTypes = {
   avatarId?: string;
   googleId?: string;
   token?: string;
-  tokenLifeTime?: Date;
   refreshToken?: string;
+  // tokenLifeTime?: Date;
 };

@@ -7,15 +7,15 @@ export const createToken = async (
   payloadData: Payload,
   secretKey: string,
   tokenExpirationValue = "2d"
-): Promise<[string, Date]> => {
+): Promise<[string, number]> => {
   const [key] = Object.keys(payloadData);
 
   const token = sign({ [key]: payloadData[key] }, secretKey, {
     expiresIn: tokenExpirationValue,
   });
-  const { exp } = jwtDecode(token);
+  const { exp }: { exp: number } = jwtDecode(token);
 
-  const tokenLifeTime = new Date(exp || 1 * 1000);
+  const tokenLifeTime = exp * 1000;
 
   return [token, tokenLifeTime];
 };

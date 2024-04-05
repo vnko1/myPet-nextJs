@@ -41,23 +41,22 @@ export async function signIn(
     process.env.TOKEN_LIFE
   );
 
-  const [refreshToken] = await createToken(
+  const [refreshToken, refreshTokenLifeTime] = await createToken(
     {
       email: user.email,
     },
     process.env.REFRESH_JWT_KEY || "",
     process.env.REFRESH_TOKEN_LIFE
   );
-
-  await users
+  const res = await users
     .updateUser(
       user.id,
       {
         token,
-        tokenLifeTime,
         refreshToken,
       },
       { projection: "-password -avatarId" }
     )
     .populate("pets");
+  return { ...res, tokenLifeTime, refreshTokenLifeTime };
 }
