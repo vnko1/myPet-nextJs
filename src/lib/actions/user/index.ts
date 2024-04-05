@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { register, signIn } from "@/auth";
 import { loginSchema, registerSchema } from "@/schema";
+import { LinksEnum } from "@/types";
 
 export async function createUser(formData: FormData) {
   try {
@@ -20,8 +21,8 @@ export async function createUser(formData: FormData) {
   } catch (error: unknown) {
     return { errors: { email: "Something wrong" } };
   }
-  revalidatePath("/register");
-  redirect(`/login`);
+  revalidatePath(LinksEnum.REGISTER);
+  redirect(LinksEnum.LOGIN);
 }
 
 export async function login(formData: FormData) {
@@ -48,5 +49,6 @@ export async function login(formData: FormData) {
   } catch (error: unknown) {
     return { errors: { password: "Wrong email or password" } };
   }
-  revalidatePath("/login");
+  revalidatePath(LinksEnum.LOGIN);
+  redirect(LinksEnum.USER);
 }

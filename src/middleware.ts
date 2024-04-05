@@ -1,10 +1,12 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { LinksEnum } from "./types";
 
 const isAuth = false;
 
 export default function middleware(request: NextRequest) {
-  if (!isAuth) return NextResponse.redirect(new URL("/login", request.url));
+  if (!isAuth)
+    return NextResponse.redirect(new URL(LinksEnum.LOGIN, request.url));
 
   return NextResponse.next();
 }
