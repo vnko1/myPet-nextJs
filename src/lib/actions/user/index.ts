@@ -41,6 +41,7 @@ export async function login(formData: FormData) {
       cookies().set("token", token, {
         secure: true,
         expires: tokenLifeTime,
+        httpOnly: true,
       });
       // const refreshToken: string = user.refreshToken;
       // const refreshTokenLifeTime: number = user.refreshTokenLifeTime;
