@@ -56,3 +56,10 @@ export async function login(formData: FormData) {
   revalidatePath(LinksEnum.LOGIN);
   redirect(LinksEnum.USER);
 }
+
+export async function signOut() {
+  try {
+  } catch (error) {
+    console.log(error);
+  }
+}

@@ -7,16 +7,17 @@ export default async function middleware(request: NextRequest) {
   const isToken = request.cookies.has("token");
   const token = request.cookies.get("token");
   const isVerified = token && (await authenticate(token.name, token.value));
-  const isAuth = isToken && isVerified;
+
+  const isAuthenticated = isToken && isVerified;
   const currentPath = request.nextUrl.pathname;
 
-  if (currentPath.startsWith(LinksEnum.USER) && !isAuth)
+  if (currentPath.startsWith(LinksEnum.USER) && !isAuthenticated)
     return NextResponse.redirect(new URL(LinksEnum.LOGIN, request.url));
 
-  if (currentPath.startsWith(LinksEnum.LOGIN) && isAuth)
+  if (currentPath.startsWith(LinksEnum.LOGIN) && isAuthenticated)
     return NextResponse.redirect(new URL(LinksEnum.USER, request.url));
 
-  if (currentPath.startsWith(LinksEnum.REGISTER) && isAuth)
+  if (currentPath.startsWith(LinksEnum.REGISTER) && isAuthenticated)
     return NextResponse.redirect(new URL(LinksEnum.USER, request.url));
 
   return NextResponse.next();

@@ -5,6 +5,7 @@ import { UIButton } from "@/components";
 import { IconEnum, LinksEnum } from "@/types";
 
 const Buttons: FC<ButtonsProps> = ({ user }) => {
+  const onHandleClick = async () => {};
   if (user)
     return (
       <>
@@ -14,6 +15,7 @@ const Buttons: FC<ButtonsProps> = ({ user }) => {
           color="secondary"
           icon={IconEnum.LOGOUT}
           alignIcon="right"
+          onClick={onHandleClick}
         >
           Log out
         </UIButton>

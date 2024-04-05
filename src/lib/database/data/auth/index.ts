@@ -26,6 +26,14 @@ async function getUser(payload?: IJWT | boolean): Promise<null | UserTypes> {
   return user;
 }
 
+export async function isAuth(type: "token" | "refreshToken" = "token") {
+  const token = cookies().get(type);
+
+  const isValidToken = token && (await authenticate(token?.name, token?.value));
+
+  return await getUser(isValidToken);
+}
+
 export async function register(newUser: UserTypes) {
   const userExist = await users.findUser({ email: newUser.email });
   if (userExist) throw new Error("This user is registered");
@@ -79,10 +87,8 @@ export async function signIn(
   return { token, tokenLifeTime };
 }
 
-export const currentUser = async () => {
-  const token = cookies().get("token");
-
-  const isValidToken = token && (await authenticate(token?.name, token?.value));
-
-  return await getUser(isValidToken);
+export const logOut = async () => {
+  const user = await isAuth();
 };
+
+export const currentUser = async () => await isAuth();
