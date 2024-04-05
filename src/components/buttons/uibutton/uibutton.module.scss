@@ -95,7 +95,12 @@
   }
 
   &.btn--secondary.btn--text {
-    @apply bg-transparent;
+    @apply bg-transparent text-yellow;
+    &:hover,
+    &:focus,
+    &:active {
+      @apply text-blue;
+    }
   }
 
   &.btn--secondary.btn--outlined {

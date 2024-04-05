@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import styles from "./header.module.scss";
 import { Icon, Logo, UIButton } from "@/components";
 import { IconEnum, LinksEnum } from "@/types";
-import { Menu } from "./components";
+import { Buttons, Menu } from "./components";
 import { HeaderProps } from "./header.type";
 
 const links = [
@@ -20,7 +20,7 @@ const links = [
 const Header: FC<HeaderProps> = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);
   const pathName = usePathname();
-  console.log(user);
+
   return (
     <header className={styles["header"]}>
       <div className={`container ${styles["header__wrapper"]}`}>
@@ -43,18 +43,7 @@ const Header: FC<HeaderProps> = ({ user }) => {
         </nav>
         <div className={styles["btn-wrapper"]}>
           <div className={styles["auth"]}>
-            <UIButton
-              variant="contained"
-              size="small"
-              icon={IconEnum.PET}
-              alignIcon="right"
-              href="/login"
-            >
-              Log IN
-            </UIButton>
-            <UIButton variant="outlined" size="small" href="/register">
-              Registration
-            </UIButton>
+            <Buttons user={user} />
           </div>
           <div className={styles["menu"]}>
             <UIButton variant="text" onClick={() => setIsOpen(!isOpen)}>
@@ -72,6 +61,7 @@ const Header: FC<HeaderProps> = ({ user }) => {
         setIsOpen={setIsOpen}
         links={links}
         pathName={pathName}
+        user={user}
       />
     </header>
   );
