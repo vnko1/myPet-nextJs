@@ -5,6 +5,8 @@ import { LinksEnum } from "./types";
 const isAuth = false;
 
 export default function middleware(request: NextRequest) {
+  // console.log(request.cookies.getAll());
+
   if (!isAuth)
     return NextResponse.redirect(new URL(LinksEnum.LOGIN, request.url));
 
