@@ -34,7 +34,7 @@ export async function isAuth(type: "token" | "refreshToken" = "token") {
   return await getUser(isValidToken);
 }
 
-export async function register(newUser: UserTypes) {
+export async function register(newUser: Omit<UserTypes, "id">) {
   const userExist = await users.findUser({ email: newUser.email });
   if (userExist) throw new Error("This user is registered");
 
@@ -89,6 +89,11 @@ export async function signIn(
 
 export const logOut = async () => {
   const user = await isAuth();
+  if (!user) throw new Error("Something wrong");
+
+  await users.updateUser(user.id, { token: "" });
+
+  cookies().delete("token");
 };
 
 export const currentUser = async () => await isAuth();

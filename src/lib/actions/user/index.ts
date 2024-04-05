@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
 import { loginSchema, registerSchema } from "@/schema";
-import { register, signIn } from "@/lib/database";
+import { logOut, register, signIn } from "@/lib/database";
 import { LinksEnum } from "@/types";
 
 export async function createUser(formData: FormData) {
@@ -59,7 +59,8 @@ export async function login(formData: FormData) {
 
 export async function signOut() {
   try {
+    await logOut();
   } catch (error) {
-    console.log(error);
+    if (error) return { errors: { message: "Something wrong" } };
   }
 }

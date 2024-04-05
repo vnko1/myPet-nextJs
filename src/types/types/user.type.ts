@@ -1,6 +1,7 @@
 import { NoticesTypes, PetsTypes } from ".";
 
 export type UserTypes = {
+  id: string;
   email: string;
   password: string;
   name: string;

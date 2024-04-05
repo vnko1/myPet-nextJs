@@ -3,9 +3,16 @@ import React, { FC } from "react";
 import { ButtonsProps } from "./buttons.type";
 import { UIButton } from "@/components";
 import { IconEnum, LinksEnum } from "@/types";
+import { signOut } from "@/lib/actions";
+import { useRouter } from "next/navigation";
 
 const Buttons: FC<ButtonsProps> = ({ user }) => {
-  const onHandleClick = async () => {};
+  const router = useRouter();
+  const onHandleClick = async () => {
+    const res = await signOut();
+
+    if (res?.errors) router.refresh();
+  };
   if (user)
     return (
       <>

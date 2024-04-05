@@ -26,7 +26,7 @@ class Users extends DBConstructor implements IUsers {
     super();
   }
 
-  createUser(newUser: UserTypes) {
+  createUser(newUser: Omit<UserTypes, "id">) {
     return User.create(newUser);
   }
 

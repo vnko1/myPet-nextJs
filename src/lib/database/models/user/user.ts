@@ -43,7 +43,7 @@ const userSchema: Schema = new Schema(
       type: String,
       default: "",
     },
-    refreshToken: { type: String, default: "" },
+    // refreshToken: { type: String, default: "" },
     // tokenLifeTime: { type: Date },
   },
   { versionKey: false, timestamps: false }
