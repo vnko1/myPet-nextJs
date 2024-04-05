@@ -36,16 +36,18 @@ export async function login(formData: FormData) {
     if (validatedFields.success) {
       const user = await signIn(validatedFields.data);
       const token: string = user.token;
-      const tokenLifeTime: number = user.tokenLifeTime;
+      const tokenLifeTime = user.tokenLifeTime;
 
-      cookies().set("token", token, { expires: tokenLifeTime, secure: true });
-      const refreshToken: string = user.refreshToken;
-      const refreshTokenLifeTime: number = user.refreshTokenLifeTime;
-      cookies().set("refreshToken", refreshToken, {
-        expires: refreshTokenLifeTime,
+      cookies().set("token", token, {
         secure: true,
-        httpOnly: true,
+        expires: tokenLifeTime,
       });
+      // const refreshToken: string = user.refreshToken;
+      // const refreshTokenLifeTime: number = user.refreshTokenLifeTime;
+      // cookies().set("refreshToken", refreshToken, {
+      //   secure: true,
+      //   httpOnly: true,
+      // });
     }
   } catch (error: unknown) {
     return { errors: { password: "Wrong email or password" } };

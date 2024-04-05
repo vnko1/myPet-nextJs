@@ -1,21 +1,31 @@
-import { sign } from "jsonwebtoken";
-import { jwtDecode } from "jwt-decode";
+import { SignJWT, jwtVerify } from "jose";
 
 type Payload = { [name: string]: string };
 
 export const createToken = async (
   payloadData: Payload,
   secretKey: string,
-  tokenExpirationValue = "2d"
-): Promise<[string, number]> => {
-  const [key] = Object.keys(payloadData);
+  tokenExpirationValue: number
+): Promise<[string, Date]> => {
+  const iat = Math.floor(Date.now() / 1000);
+  const exp = iat + tokenExpirationValue;
 
-  const token = sign({ [key]: payloadData[key] }, secretKey, {
-    expiresIn: tokenExpirationValue,
-  });
-  const { exp }: { exp: number } = jwtDecode(token);
+  const token = await new SignJWT({ ...payloadData })
+    .setProtectedHeader({ alg: "HS256", typ: "JWT" })
+    .setExpirationTime(exp)
+    .setIssuedAt(iat)
+    .setNotBefore(iat)
+    .sign(new TextEncoder().encode(secretKey));
 
-  const tokenLifeTime = exp * 1000;
+  return [token, new Date(exp * 1000)];
+};
 
-  return [token, tokenLifeTime];
+export const verifyToken = async (cred: string, secretKey: string) => {
+  const { payload } = await jwtVerify(
+    cred,
+    new TextEncoder().encode(secretKey)
+  );
+  if (!payload) return false;
+
+  return payload;
 };
