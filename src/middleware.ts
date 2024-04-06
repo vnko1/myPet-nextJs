@@ -8,7 +8,6 @@ export default async function middleware(request: NextRequest) {
   const token = request.cookies.get("token");
 
   const isValidToken = token && (await authenticate(token.name, token.value));
-  console.log("🚀 ~ middleware ~ isValidToken:", isValidToken);
 
   const isAuthenticated = isToken && isValidToken;
   const currentPath = request.nextUrl.pathname;
