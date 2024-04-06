@@ -34,7 +34,7 @@ const SignUp: FC<SignUpProps> = ({
 
       // methods.reset();
     } catch (error) {
-      console.log(error);
+      console.log("🚀 ~ handleAction ~ error:", error);
     }
   };
 

@@ -4,7 +4,7 @@ import styles from "./styles.module.scss";
 
 type PageProps = { searchParams: { query?: string; page?: string } };
 
-export default async function Page({
+export default async function News({
   searchParams: { page = "1", query = "" },
 }: PageProps) {
   const totalPages = await getArticlesPages({ query });

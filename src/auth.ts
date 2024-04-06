@@ -3,13 +3,10 @@ import { verifyToken } from "./utils/token";
 export const authenticate = async (type: string, credential: string) => {
   try {
     const securityKey =
-      type === "refreshToken"
-        ? process.env.REFRESH_JWT_KEY || ""
-        : process.env.JWT_KEY || "";
-    const token = await verifyToken(credential, securityKey);
+      type === "token" ? process.env.JWT_KEY : process.env.REFRESH_JWT_KEY;
 
-    return token;
+    return await verifyToken(credential, securityKey);
   } catch (error) {
-    console.log(error);
+    console.log("🚀 ~ authenticate ~ error:", error);
   }
 };

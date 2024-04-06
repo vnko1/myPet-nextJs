@@ -19,7 +19,7 @@ export default abstract class DBConstructor {
 
       connection.isConnected = db.connections[0].readyState;
     } catch (error) {
-      console.log(error);
+      console.log("🚀 ~ DBConstructor ~ connect ~ error:", error);
     }
   }
 
@@ -47,7 +47,7 @@ export default abstract class DBConstructor {
       try {
         return await cb(data);
       } catch (error) {
-        console.log(error);
+        console.log("🚀 ~ DBConstructor ~ error:", error);
         throw new Error("Something went wrong");
       }
     };

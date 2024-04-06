@@ -6,9 +6,11 @@ import { authenticate } from "./auth";
 export default async function middleware(request: NextRequest) {
   const isToken = request.cookies.has("token");
   const token = request.cookies.get("token");
-  const isVerified = token && (await authenticate(token.name, token.value));
 
-  const isAuthenticated = isToken && isVerified;
+  const isValidToken = token && (await authenticate(token.name, token.value));
+  console.log("🚀 ~ middleware ~ isValidToken:", isValidToken);
+
+  const isAuthenticated = isToken && isValidToken;
   const currentPath = request.nextUrl.pathname;
 
   if (currentPath.startsWith(LinksEnum.USER) && !isAuthenticated)
