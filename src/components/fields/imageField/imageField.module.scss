@@ -1,0 +1,34 @@
+.field {
+  @apply cursor-pointer text-center w-full;
+
+  &__input {
+    @apply w-[0.1px] h-[0.1px] opacity-0 hidden absolute z-[-1] leading-[1.75];
+
+    &:hover + .button {
+      @apply text-yellow;
+    }
+  }
+}
+
+.buttons {
+  @apply flex justify-center items-center gap-0-md;
+}
+
+.button {
+  @apply flex items-center justify-center text-blue font-normal text-xs leading-[22px] tracking-[0.48px] bg-transparent;
+  &-text {
+    @apply gap-0-md hover:text-yellow;
+
+    & > span {
+      @apply text-black;
+    }
+  }
+
+  &-icon {
+    @apply text-red hover:text-blue;
+  }
+}
+
+.error {
+  @apply text-red text-xxs;
+}
