@@ -21,13 +21,13 @@ const petSchema: Schema = new Schema(
       maxlength: 16,
       required: true,
     },
-    fileUrl: { type: String, required: true },
-    fileId: { type: String, required: true },
+    imageUrl: { type: String, required: true },
     comments: { type: String, maxlength: 120, default: "" },
     owner: {
       type: Schema.Types.ObjectId,
       ref: "user",
     },
+    // fileId: { type: String, required: true },
   },
   { versionKey: false, timestamps: false }
 );

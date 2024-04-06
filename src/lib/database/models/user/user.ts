@@ -22,13 +22,6 @@ const userSchema: Schema = new Schema(
       maxlength: 15,
       required: [true, "Set name for user"],
     },
-    pets: [{ type: Schema.Types.ObjectId, ref: "pet" }],
-    favorites: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "notice",
-      },
-    ],
     birthday: {
       type: Date,
       min: "1940-01-01",
@@ -41,6 +34,13 @@ const userSchema: Schema = new Schema(
       type: String,
       default: "",
     },
+    // pets: [{ type: Schema.Types.ObjectId, ref: "pet" }],
+    // favorites: [
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "notice",
+    //   },
+    // ],
     // avatarId: { type: String, default: "" },
     // googleId: { type: String, default: "" },
     // refreshToken: { type: String, default: "" },

@@ -26,8 +26,7 @@ const noticeSchema: Schema = new Schema(
       minlength: 2,
       maxlength: 16,
     },
-    fileUrl: { type: String, required: true },
-    fileId: { type: String, required: true },
+    imageUrl: { type: String, required: true },
     comments: {
       type: String,
       maxlength: 120,
@@ -62,6 +61,7 @@ const noticeSchema: Schema = new Schema(
       ref: "user",
       required: true,
     },
+    // fileId: { type: String, required: true },
   },
   { versionKey: false, timestamps: false }
 );
