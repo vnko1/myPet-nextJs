@@ -2,6 +2,6 @@
   @apply base:max-w-[394px];
 
   &__wrapper {
-    @apply w-full;
+    @apply relative w-full py-2-xs px-0-md;
   }
 }
