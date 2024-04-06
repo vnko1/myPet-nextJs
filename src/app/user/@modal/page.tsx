@@ -1,10 +1,14 @@
-// "use client";
+"use client";
 
 import React from "react";
+import { CustomModal } from "@/components";
 
 function ModalPage() {
-  //   const [isOpen, setIsOpen] = useState(true);
-  return <div>MODAL</div>;
+  return (
+    <CustomModal portal>
+      <div>MODAL</div>
+    </CustomModal>
+  );
 }
 
 export default ModalPage;

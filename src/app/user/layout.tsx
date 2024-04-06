@@ -7,8 +7,12 @@ const UserLayout = ({
   children: React.ReactNode;
   modal: React.ReactNode;
 }) => {
-  modal;
-  return <main>{children}</main>;
+  return (
+    <main>
+      {children}
+      {modal}
+    </main>
+  );
 };
 
 export default UserLayout;
