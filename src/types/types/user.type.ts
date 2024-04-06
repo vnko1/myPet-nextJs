@@ -11,9 +11,9 @@ export type UserTypes = {
   phone?: string;
   city?: string;
   avatarUrl?: string;
-  avatarId?: string;
-  googleId?: string;
   token?: string;
-  refreshToken?: string;
+  // avatarId?: string;
+  // refreshToken?: string;
+  // googleId?: string;
   // tokenLifeTime?: Date;
 };
