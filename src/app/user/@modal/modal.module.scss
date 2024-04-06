@@ -1,0 +1,18 @@
+.modal {
+  @apply pt-[68px] pb-[60px];
+  &__content {
+    @apply flex flex-col justify-between items-center;
+  }
+}
+
+.title {
+  @apply mb-2-md md:mb-[52px];
+}
+
+.text {
+  @apply text-xl font-medium text-black leading-normal tracking-[0.96px] mb-4-xs md:mb-[60px];
+}
+
+.button {
+  @apply w-full md:max-w-[248px];
+}

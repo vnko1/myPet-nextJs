@@ -12,6 +12,7 @@ const CustomModal: FC<ModalProps> = ({
   children,
   classNames,
   portal = false,
+  onHandleClick,
   onCrossClick,
   onBackdropClick,
   setIsActive,
@@ -22,6 +23,7 @@ const CustomModal: FC<ModalProps> = ({
     const handlePressESC = (event: { code: string }) => {
       if (event.code === "Escape") {
         setIsActive && setIsActive(false);
+        onHandleClick && onHandleClick();
       }
     };
     window.addEventListener("keydown", handlePressESC);
@@ -47,12 +49,14 @@ const CustomModal: FC<ModalProps> = ({
     if (event.target === event.currentTarget) {
       onBackdropClick && onBackdropClick();
       setIsActive && setIsActive(false);
+      onHandleClick && onHandleClick();
     }
   };
 
   const onHandleCrossButtonClick = () => {
     onCrossClick && onCrossClick();
     setIsActive && setIsActive(false);
+    onHandleClick && onHandleClick();
   };
 
   const backDropClassNames = cn(styles["backdrop"], {

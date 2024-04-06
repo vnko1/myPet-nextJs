@@ -6,5 +6,6 @@ export type ModalProps = {
   portal?: boolean;
   onCrossClick?: () => void;
   onBackdropClick?: () => void;
+  onHandleClick?: () => void;
   setIsActive?: Dispatch<SetStateAction<boolean>>;
 };
