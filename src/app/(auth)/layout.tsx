@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import styles from "./styles.module.scss";
 
-function Layout({ children }: { children: React.ReactNode }) {
+function AuthLayout({ children }: { children: React.ReactNode }) {
   const pathName = usePathname();
 
   const isRegister = pathName === "/register";
@@ -35,4 +35,4 @@ function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default Layout;
+export default AuthLayout;
