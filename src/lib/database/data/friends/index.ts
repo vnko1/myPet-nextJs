@@ -1,9 +1,9 @@
 // import { unstable_noStore as noStore } from "next/cache";
-import { ISponsor } from "@/types";
+import { SponsorType } from "@/types";
 import { Sponsors } from "@/lib/database/services";
 
 const sponsors = new Sponsors();
-export const getSponsors = sponsors.tryCatchWrapper<ISponsor[], undefined>(
+export const getSponsors = sponsors.tryCatchWrapper<SponsorType[], undefined>(
   async function () {
     // noStore();
     const res = await sponsors.getSponsorsData();

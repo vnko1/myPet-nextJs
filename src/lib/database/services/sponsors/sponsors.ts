@@ -1,9 +1,9 @@
 import DBConstructor from "../dbConstructor/dbConstructor";
 import { Sponsor } from "../../models";
-import { ISponsor } from "@/types";
+import { SponsorType } from "@/types";
 
 interface ISponsors {
-  getSponsorsData(): Promise<ISponsor[]>;
+  getSponsorsData(): Promise<SponsorType[]>;
 }
 
 class Sponsors extends DBConstructor implements ISponsors {

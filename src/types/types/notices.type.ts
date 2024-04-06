@@ -1,6 +1,8 @@
+import { Types } from "mongoose";
 import { UserTypes } from ".";
 
 export type NoticesTypes = {
+  _id: Types.ObjectId;
   name: string;
   category: "sell" | "lost-found" | "for-free";
   date: Date;

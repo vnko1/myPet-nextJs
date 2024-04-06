@@ -1,3 +1,3 @@
-import { ISponsor } from "@/types";
+import { SponsorType } from "@/types";
 
-export type SponsorsProps = { classNames?: string; sponsors: ISponsor[] };
+export type SponsorsProps = { classNames?: string; sponsors: SponsorType[] };

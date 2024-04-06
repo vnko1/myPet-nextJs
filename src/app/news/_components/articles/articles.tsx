@@ -12,7 +12,7 @@ const Articles: FC<ArticlesParams> = async ({ query, page }) => {
   return (
     <ul className={styles["articles"]}>
       {articles.map((article) => (
-        <li key={article?.id} className={styles["article"]}>
+        <li key={article._id.toString()} className={styles["article"]}>
           <Article article={article} />
         </li>
       ))}

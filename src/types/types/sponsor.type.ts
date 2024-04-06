@@ -1,11 +1,14 @@
+import { Types } from "mongoose";
+
 export type WorkDays = {
   isOpen: boolean;
   from: string;
   to: string;
-  _id: string | number;
+  _id: Types.ObjectId;
 };
 
 export type SponsorType = {
+  _id: Types.ObjectId;
   title: string;
   url: string;
   addressUrl: string;
@@ -15,7 +18,3 @@ export type SponsorType = {
   email: string | null;
   workDays: WorkDays[] | null;
 };
-
-export interface ISponsor extends SponsorType {
-  _id: string | number;
-}
