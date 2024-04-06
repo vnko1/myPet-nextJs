@@ -95,5 +95,3 @@ export const logOut = async () => {
 
   cookies().delete("token");
 };
-
-export const currentUser = async () => await isAuth();

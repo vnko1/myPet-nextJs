@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { manrope, inter, poppins } from "@/fonts";
 import { Header } from "@/app/_components";
 import "../styles/globals.scss";
-import { currentUser } from "@/lib/database";
+import { isAuth } from "@/lib/database";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const metadata: Metadata = {
@@ -18,7 +18,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const user = await currentUser();
+  const user = await isAuth();
 
   return (
     <html lang="en">
