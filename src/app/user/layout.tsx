@@ -14,7 +14,7 @@ const UserLayout = ({
   return (
     <main>
       <section className="section">
-        <div className={`container ${styles["user__profile"]}`}>
+        <div className={`container ${styles["user"]}`}>
           {profile}
           {pets}
         </div>
