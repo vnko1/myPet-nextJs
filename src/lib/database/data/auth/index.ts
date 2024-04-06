@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import { authenticate } from "@/auth";
 import { TOKEN_LIFE, createToken } from "@/utils";
 import { Users } from "../../services";
-import { IJWT, UserTypes } from "@/types";
+import { JWTPayloadType, UserTypes } from "@/types";
 
 const users = new Users();
 
@@ -14,7 +14,9 @@ const hashPassword = async (password: string) =>
 const passCompare = async (data: string, encrypted: string) =>
   await bcrypt.compare(data, encrypted);
 
-async function getUser(payload?: IJWT | boolean): Promise<null | UserTypes> {
+async function getUser(
+  payload?: JWTPayloadType | boolean
+): Promise<null | UserTypes> {
   const options = { projection: "-token -refreshToken -password" };
   let user = null;
   if (payload && typeof payload === "object") {
