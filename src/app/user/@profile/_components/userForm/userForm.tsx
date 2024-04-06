@@ -24,7 +24,7 @@ function UserForm({ user }: UserFormProps) {
           icon={!isEditing ? IconEnum.EDIT : IconEnum.CROSS}
         />
       </div>
-      <div>
+      <div className={styles["image=thumb"]}>
         <Image
           width={182}
           height={182}

@@ -8,4 +8,8 @@
 
 .image {
   @apply rounded-[40px] overflow-hidden;
+
+  &-thumb {
+    @apply relative mb-[60px];
+  }
 }
