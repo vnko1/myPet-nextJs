@@ -1,5 +1,5 @@
 .user {
-  @apply flex flex-col gap-4-xs base:flex-row;
+  @apply flex flex-col gap-4-xs base:flex-row  base:justify-between;
 }
 
 .title {

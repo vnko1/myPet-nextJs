@@ -1,2 +1,11 @@
 .form {
+  @apply py-2-xs px-0-md relative flex flex-col items-center;
+}
+
+.cross-btn-wrapper {
+  @apply absolute top-[14px] right-[14px];
+}
+
+.image {
+  @apply rounded-[40px] overflow-hidden;
 }
