@@ -10,6 +10,10 @@ main {
   @apply min-h-[91vh] pt-4-xs md:pt-[80px];
 }
 
+.wrapper {
+  @apply relative w-full rounded-[20px] bg-originWhite flex flex-col justify-center shadow-sm;
+}
+
 .title {
   @apply mb-2-md md:mb-4-xs text-center;
 }
