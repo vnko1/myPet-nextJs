@@ -1,5 +1,6 @@
 .modal {
-  @apply pt-[68px] pb-[60px];
+  @apply pt-[68px] pb-[60px] px-1-lg;
+
   &__content {
     @apply flex flex-col justify-between items-center;
   }

@@ -5,7 +5,7 @@
   @apply visible opacity-100;
 }
 .modal {
-  @apply relative flex flex-col justify-center transition-all duration-300 text-center bg-originWhite rounded-[20px] w-full px-1-lg py-3-xs max-w-[280px]  md:max-w-[608px];
+  @apply relative flex flex-col justify-center transition-all duration-300 text-center bg-originWhite rounded-[20px] w-full  max-w-[280px]  md:max-w-[608px];
 }
 
 .button {

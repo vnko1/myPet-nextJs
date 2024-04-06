@@ -2,19 +2,21 @@
 
 import React, { useEffect, useState } from "react";
 
+import { ConstantsEnum, IconEnum } from "@/types";
 import styles from "./modal.module.scss";
 import { CustomModal, UIButton } from "@/components";
-import { IconEnum } from "@/types";
 
 function ModalPage() {
   const [isNewUser, setIsNewUser] = useState(true);
 
   useEffect(() => {
-    setIsNewUser(JSON.parse(localStorage.getItem("isNewUser") || "true"));
+    setIsNewUser(
+      JSON.parse(localStorage.getItem(ConstantsEnum.IS_NEW_USER) || "true")
+    );
   }, []);
 
   const onClick = () => {
-    localStorage.setItem("isNewUser", JSON.stringify(false));
+    localStorage.setItem(ConstantsEnum.IS_NEW_USER, JSON.stringify(false));
     setIsNewUser(false);
   };
 

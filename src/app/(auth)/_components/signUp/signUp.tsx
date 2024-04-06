@@ -1,13 +1,14 @@
 "use client";
 import React, { FC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ResType, SignUpProps } from "./signUp.type";
+
 import { loginSchema, registerSchema } from "@/schema";
+import { ConstantsEnum } from "@/types";
 import { login, createUser } from "@/lib/actions";
-import styles from "./signUp.module.scss";
 import { Field, UIButton } from "@/components";
+import { ResType, SignUpProps } from "./signUp.type";
+import styles from "./signUp.module.scss";
 
 const SignUp: FC<SignUpProps> = ({
   classNames,
@@ -31,8 +32,8 @@ const SignUp: FC<SignUpProps> = ({
         const [key] = Object.keys(res.errors);
         return methods.setError(key, { message: res.errors[key] });
       }
-
-      // methods.reset();
+      isRegister && localStorage.removeItem(ConstantsEnum.IS_NEW_USER);
+      methods.reset();
     } catch (error) {
       console.log("🚀 ~ handleAction ~ error:", error);
     }

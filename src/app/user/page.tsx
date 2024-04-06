@@ -1,5 +1,7 @@
 import React from "react";
+import { redirect } from "next/navigation";
 import { isAuth } from "@/lib/database";
+import { LinksEnum } from "@/types";
 
 async function User() {
   const user = await isAuth();
@@ -11,7 +13,7 @@ async function User() {
       </section>
     );
 
-  return null;
+  return redirect(LinksEnum.HOME);
 }
 
 export default User;
