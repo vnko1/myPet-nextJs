@@ -1,6 +1,13 @@
 import React from "react";
 
-const UserLayout = ({ children }: { children: React.ReactNode }) => {
+const UserLayout = ({
+  children,
+  modal,
+}: {
+  children: React.ReactNode;
+  modal: React.ReactNode;
+}) => {
+  modal;
   return <main>{children}</main>;
 };
 

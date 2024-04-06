@@ -3,9 +3,9 @@ import { createPortal } from "react-dom";
 import { FC, MouseEvent, useEffect, useRef } from "react";
 import cn from "classnames";
 
-import { ModalProps } from "./modal.type";
+import { ModalProps } from "./animatedModal.type";
 import { useSwipe } from "@/hooks";
-import styles from "./modal.module.scss";
+import styles from "./animatedModal.module.scss";
 
 import { Animation } from "@/components";
 
