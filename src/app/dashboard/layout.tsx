@@ -1,6 +1,6 @@
 import React from "react";
 
-function Layout({
+function DashboardLayout({
   children,
   notifications,
   revenue,
@@ -22,4 +22,4 @@ function Layout({
   );
 }
 
-export default Layout;
+export default DashboardLayout;

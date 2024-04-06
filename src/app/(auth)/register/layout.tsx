@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-function Layout({
+function RegisterLayout({
   children,
   modal,
 }: {
@@ -17,4 +17,4 @@ function Layout({
   );
 }
 
-export default Layout;
+export default RegisterLayout;
