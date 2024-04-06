@@ -21,7 +21,6 @@ function UserForm({ user }: UserFormProps) {
     setIsEditing(!isEditing);
   };
 
-  // console.log(user);
   return (
     <form className={styles["form"]}>
       <div className={styles["cross-btn-wrapper"]}>
