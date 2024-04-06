@@ -11,10 +11,13 @@ async function User() {
   if (user)
     return (
       <section className="section">
-        <div className="container">
-          <div>
+        <div className={`container ${styles["user"]}`}>
+          <div className={styles["user__profile"]}>
             <h2 className={styles["title"]}>My information:</h2>
             <Profile user={user} />
+          </div>
+          <div className={styles["user__pets"]}>
+            <h2>My pets:</h2>
           </div>
         </div>
       </section>
