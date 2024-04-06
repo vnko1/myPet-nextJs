@@ -10,7 +10,7 @@ export const createToken = async (
 ): Promise<[string, Date]> => {
   const iat = Math.floor(Date.now() / 1000);
   const exp = iat + tokenExpirationValue;
-  // console.log(secretKey);
+
   const token = await new SignJWT({ ...payloadData })
     .setProtectedHeader({ alg: "HS256", typ: "JWT" })
     .setExpirationTime(exp)
