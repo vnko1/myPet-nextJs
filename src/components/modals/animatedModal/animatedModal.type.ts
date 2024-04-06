@@ -1,5 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
-import { IAnimationProps, ITransitionArgs } from "../animation/animation.type";
+import {
+  IAnimationProps,
+  ITransitionArgs,
+} from "../../animation/animation.type";
 
 export type ModalProps = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;

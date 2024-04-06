@@ -1,6 +1,6 @@
 export { default as Logo } from "./logo/logo";
 export { default as Animation } from "./animation/animation";
-export { default as Modal } from "./modal/modal";
+export { AnimatedModal, CustomModal } from "./modals";
 export { UIButton } from "./buttons";
 export { SearchField, Field } from "./fields";
 export { default as Loader } from "./loader/loader";

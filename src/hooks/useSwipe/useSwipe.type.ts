@@ -1,4 +1,4 @@
-import { ModalProps } from "@/components/modal/modal.type";
+import { ModalProps } from "@/components/modals/animatedModal/animatedModal.type";
 
 export type UseSwipeProps = {
   left?: () => void;

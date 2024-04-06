@@ -103,6 +103,15 @@
     }
   }
 
+  &.btn--accent.btn--text {
+    @apply bg-transparent text-blue;
+    &:hover,
+    &:focus,
+    &:active {
+      @apply text-yellow;
+    }
+  }
+
   &.btn--secondary.btn--outlined {
     // @apply border-2 border-solid border-grey-1000 text-black;
 
@@ -125,9 +134,9 @@
       @apply text-blue bg-transparent;
     }
 
-    // &:disabled {
-    //   // @apply bg-grey-1010 text-white border-transparent;
-    // }
+    &:disabled {
+      @apply bg-grey text-white border-transparent;
+    }
   }
 
   > svg,

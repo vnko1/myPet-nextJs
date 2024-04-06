@@ -1,13 +1,15 @@
 "use client";
 import React, { FC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-
+import { useFormStatus } from "react-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ResType, SignUpProps } from "./signUp.type";
+
 import { loginSchema, registerSchema } from "@/schema";
+import { ConstantsEnum } from "@/types";
 import { login, createUser } from "@/lib/actions";
-import styles from "./signUp.module.scss";
 import { Field, UIButton } from "@/components";
+import { ResType, SignUpProps } from "./signUp.type";
+import styles from "./signUp.module.scss";
 
 const SignUp: FC<SignUpProps> = ({
   classNames,
@@ -15,6 +17,7 @@ const SignUp: FC<SignUpProps> = ({
   path = "register",
 }) => {
   const isRegister = path === "register";
+  const { pending } = useFormStatus();
 
   const methods = useForm({
     resolver: zodResolver(isRegister ? registerSchema : loginSchema),
@@ -31,8 +34,8 @@ const SignUp: FC<SignUpProps> = ({
         const [key] = Object.keys(res.errors);
         return methods.setError(key, { message: res.errors[key] });
       }
-
-      // methods.reset();
+      isRegister && localStorage.removeItem(ConstantsEnum.IS_NEW_USER);
+      methods.reset();
     } catch (error) {
       console.log("🚀 ~ handleAction ~ error:", error);
     }
@@ -49,7 +52,13 @@ const SignUp: FC<SignUpProps> = ({
           <Field key={index} {...field} />
         ))}
         <span>
-          <UIButton type="submit" fullWidth color="secondary">
+          <UIButton
+            type="submit"
+            fullWidth
+            color="secondary"
+            disabled={pending}
+            isLoading={pending}
+          >
             {isRegister ? "Registration" : "Login"}
           </UIButton>
         </span>
