@@ -17,3 +17,9 @@ main {
 .title {
   @apply mb-2-md md:mb-4-xs text-center;
 }
+
+.modal {
+  &__text {
+    @apply text-xl font-medium text-black leading-normal tracking-[0.96px];
+  }
+}

@@ -18,6 +18,7 @@ const UIButton: FC<IUIButton> = ({
   size = "small",
   type = "button",
   icon,
+  iconSize = 24,
   isCustomIcon,
   alignIcon,
   href,
@@ -73,7 +74,9 @@ const UIButton: FC<IUIButton> = ({
         onClick={onClick}
         aria-label="navigation link"
       >
-        {icon ? <Icon className="btn__icon" icon={icon} /> : null}
+        {icon ? (
+          <Icon className="btn__icon" icon={icon} size={iconSize} />
+        ) : null}
         {children}
       </Link>
     );
@@ -86,7 +89,7 @@ const UIButton: FC<IUIButton> = ({
       onClick={onClick}
       disabled={pending || isLoading}
     >
-      {icon ? <Icon icon={icon} /> : null}
+      {icon ? <Icon icon={icon} size={iconSize} /> : null}
       {children}
     </button>
   );

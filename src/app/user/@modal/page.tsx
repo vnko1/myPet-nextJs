@@ -25,7 +25,9 @@ function ModalPage() {
       <CustomModal classNames={styles["modal"]} onHandleClick={onClick}>
         <div className={styles["modal__content"]}>
           <h2 className={styles["title"]}>Congrats!</h2>
-          <p className={styles["text"]}>Your registration is success</p>
+          <p className={`modal__text ${styles["text"]}`}>
+            Your registration is success
+          </p>
           <div className={styles["button"]}>
             <UIButton
               icon={IconEnum.PET}
