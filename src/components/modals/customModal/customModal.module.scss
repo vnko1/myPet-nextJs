@@ -5,11 +5,11 @@
   @apply visible opacity-100;
 }
 .modal {
-  @apply relative flex flex-col justify-center transition-all duration-300 text-center bg-originWhite rounded-[20px] w-full max-w-[280px] px-1-lg py-[60px];
+  @apply relative flex flex-col justify-center transition-all duration-300 text-center bg-originWhite rounded-[20px] w-full px-1-lg py-3-xs max-w-[280px]  md:max-w-[608px];
 }
 
 .button {
-  @apply absolute top-[16px] right-[16px];
+  @apply absolute top-[16px] right-[16px] md:top-[24px] md:right-[24px];
 }
 
 .no-scroll {
