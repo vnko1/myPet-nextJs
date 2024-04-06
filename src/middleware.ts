@@ -7,7 +7,7 @@ export default async function middleware(request: NextRequest) {
   const isToken = request.cookies.has("token");
   const token = request.cookies.get("token");
   const isVerified = token && (await authenticate(token.name, token.value));
-
+  console.log(isVerified);
   const isAuthenticated = isToken && isVerified;
   const currentPath = request.nextUrl.pathname;
 
