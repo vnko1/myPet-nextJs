@@ -1,4 +1,6 @@
 .pets {
+  @apply base:flex-grow;
   &__wrapper {
+    @apply w-full;
   }
 }

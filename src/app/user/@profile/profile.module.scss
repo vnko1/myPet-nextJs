@@ -1,5 +1,7 @@
 .profile {
+  @apply base:max-w-[394px];
+
   &__wrapper {
-    @apply max-w-[394px];
+    @apply w-full;
   }
 }
