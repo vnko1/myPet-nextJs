@@ -5,4 +5,4 @@ interface TokenPayload {
   id: string;
 }
 
-export interface IJWT extends JWTPayload, Partial<TokenPayload> {}
+export interface JWTPayloadType extends JWTPayload, Partial<TokenPayload> {}

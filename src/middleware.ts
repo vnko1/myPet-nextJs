@@ -7,9 +7,10 @@ export default async function middleware(request: NextRequest) {
   request;
   // const isToken = request.cookies.has("token");
   // const token = request.cookies.get("token");
-  // const isVerified = token && (await authenticate(token.name, token.value));
 
-  // const isAuthenticated = isToken && isVerified;
+  // const isValidToken = token && (await authenticate(token.name, token.value));
+
+  // const isAuthenticated = isToken && isValidToken;
   // const currentPath = request.nextUrl.pathname;
 
   // if (currentPath.startsWith(LinksEnum.USER) && !isAuthenticated)
