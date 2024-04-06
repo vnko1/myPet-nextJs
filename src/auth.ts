@@ -6,9 +6,8 @@ export const authenticate = async (type: string, credential: string) => {
       type === "refreshToken"
         ? process.env.REFRESH_JWT_KEY || ""
         : process.env.JWT_KEY || "";
-    const token = await verifyToken(credential, securityKey);
 
-    return token;
+    return await verifyToken(credential, securityKey);
   } catch (error) {
     console.log("🚀 ~ authenticate ~ error:", error);
   }
