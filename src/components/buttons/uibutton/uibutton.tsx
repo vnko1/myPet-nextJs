@@ -38,6 +38,7 @@ const UIButton: FC<IUIButton> = ({
   const colorClassName = cn({
     [styles["btn--primary"]]: color === "primary",
     [styles["btn--secondary"]]: color === "secondary",
+    [styles["btn--accent"]]: color === "accent",
   });
 
   const alignIconClassName = cn({

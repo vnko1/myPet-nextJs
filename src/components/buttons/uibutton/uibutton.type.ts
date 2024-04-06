@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes } from "react";
 
 import { IconEnum } from "@/types";
 
-export type ButtonColorType = "primary" | "secondary";
+export type ButtonColorType = "primary" | "secondary" | "accent";
 export type ButtonVariantType = "outlined" | "contained" | "text";
 export type ButtonSizeType = "small" | "medium" | "large";
 export type AlignIconType = "left" | "right";

@@ -1,7 +1,10 @@
-import { ReactNode } from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 
 export type ModalProps = {
   classNames?: string;
   children: ReactNode;
   portal?: boolean;
+  onCrossClick?: () => void;
+  onBackdropClick?: () => void;
+  setIsActive?: Dispatch<SetStateAction<boolean>>;
 };

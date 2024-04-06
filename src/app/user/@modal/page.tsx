@@ -5,7 +5,7 @@ import { CustomModal } from "@/components";
 
 function ModalPage() {
   return (
-    <CustomModal portal>
+    <CustomModal>
       <div>MODAL</div>
     </CustomModal>
   );
