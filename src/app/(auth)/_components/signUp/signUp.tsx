@@ -1,6 +1,7 @@
 "use client";
 import React, { FC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { useFormStatus } from "react-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { loginSchema, registerSchema } from "@/schema";
@@ -16,6 +17,7 @@ const SignUp: FC<SignUpProps> = ({
   path = "register",
 }) => {
   const isRegister = path === "register";
+  const { pending } = useFormStatus();
 
   const methods = useForm({
     resolver: zodResolver(isRegister ? registerSchema : loginSchema),
@@ -50,7 +52,13 @@ const SignUp: FC<SignUpProps> = ({
           <Field key={index} {...field} />
         ))}
         <span>
-          <UIButton type="submit" fullWidth color="secondary">
+          <UIButton
+            type="submit"
+            fullWidth
+            color="secondary"
+            disabled={pending}
+            isLoading={pending}
+          >
             {isRegister ? "Registration" : "Login"}
           </UIButton>
         </span>

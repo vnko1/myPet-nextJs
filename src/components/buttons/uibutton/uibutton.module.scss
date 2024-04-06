@@ -134,9 +134,9 @@
       @apply text-blue bg-transparent;
     }
 
-    // &:disabled {
-    //   // @apply bg-grey-1010 text-white border-transparent;
-    // }
+    &:disabled {
+      @apply bg-grey text-white border-transparent;
+    }
   }
 
   > svg,
