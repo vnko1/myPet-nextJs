@@ -17,7 +17,7 @@ async function User() {
             <Profile user={user} />
           </div>
           <div className={styles["user__pets"]}>
-            <h2>My pets:</h2>
+            <h2 className={styles["title"]}>My pets:</h2>
           </div>
         </div>
       </section>
