@@ -11,6 +11,7 @@ import { IconEnum } from "@/types";
 import { Field, ImageField } from "@/components/fields";
 import { userSchema } from "@/schema";
 import styles from "./userForm.module.scss";
+import { updateUserProfile } from "@/lib/actions";
 
 function UserForm({ user }: UserFormProps) {
   const methods = useForm({
@@ -44,6 +45,8 @@ function UserForm({ user }: UserFormProps) {
       const formattedBirthday = new Date();
       formData.set("birthday", formattedBirthday + "");
     }
+
+    await updateUserProfile(formData);
   };
 
   const buttonsClassName = cn(styles["form__buttons"], {
