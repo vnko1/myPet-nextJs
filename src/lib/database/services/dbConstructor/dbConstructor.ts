@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { Sort } from "./dbConstructor.type";
 import { CallBackType, QueryParams } from "@/types";
-import { errorResponse } from "@/utils";
+import { customError } from "@/utils";
 
 export default abstract class DBConstructor {
   private mongoUri = process.env.MONGODB_URI!;
@@ -48,9 +48,9 @@ export default abstract class DBConstructor {
       try {
         return await cb(data);
       } catch (error) {
-        if (error instanceof Error) errorResponse(error.message, error.name);
-
-        console.log("🚀 ~ DBConstructor ~ error:", error);
+        throw customError({
+          message: '"Something went wrong! Try again later."',
+        });
       }
     };
   }

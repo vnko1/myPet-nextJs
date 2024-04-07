@@ -2,10 +2,9 @@ import bcrypt from "bcrypt";
 import { cookies } from "next/headers";
 
 import { authenticate } from "@/auth";
-import { TOKEN_LIFE, createToken } from "@/utils";
+import { TOKEN_LIFE, createToken, customError } from "@/utils";
 import { Users } from "../../services";
 import { JWTPayloadType, UserTypes } from "@/types";
-import { customError } from "@/utils/helpers";
 
 const users = new Users();
 
