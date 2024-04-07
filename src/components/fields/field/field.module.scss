@@ -11,7 +11,11 @@
   }
 
   &__wrapper {
-    @apply w-full max-w-[70%];
+    @apply w-full;
+
+    &.small {
+      @apply max-w-[70%];
+    }
   }
   &__input {
     @apply w-full outline-none border border-blue bg-transparent;

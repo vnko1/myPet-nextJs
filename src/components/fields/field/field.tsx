@@ -39,7 +39,11 @@ const Field: FC<FiledProps> = ({
   return (
     <label className={`${styles["field"]} ${styles["small"]} ${classNames}`}>
       {label ? <span className={labelClassNames}>{label}</span> : null}
-      <span className={styles["field__wrapper"]}>
+      <span
+        className={`${styles["field__wrapper"]} ${
+          variant === "small" ? styles["small"] : ""
+        }`}
+      >
         <span className={styles["wrapper"]}>
           <input
             {...props}

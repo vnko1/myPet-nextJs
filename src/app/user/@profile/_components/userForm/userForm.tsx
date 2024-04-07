@@ -4,7 +4,7 @@ import Image from "next/image";
 import cn from "classnames";
 
 import { UserFormProps } from "./userForm.type";
-import { Icon, UIButton } from "@/components";
+import { Icon, LogOutModal, UIButton } from "@/components";
 import { IconEnum } from "@/types";
 import { Field, ImageField } from "@/components/fields";
 import styles from "./userForm.module.scss";
@@ -23,6 +23,7 @@ function UserForm({ user }: UserFormProps) {
     },
   });
   const [isEditing, setIsEditing] = useState(false);
+  const [isActive, setIsActive] = useState(false);
   const [imageUrl, setImageUrl] = useState(user.avatarUrl);
   const [, setImage] = useState<File | null>(null);
 
@@ -38,59 +39,72 @@ function UserForm({ user }: UserFormProps) {
   });
 
   return (
-    <FormProvider {...methods}>
-      <form className={styles["form"]} noValidate>
-        <div className={styles["cross-btn-wrapper"]}>
-          <UIButton
-            variant="text"
-            color="accent"
-            iconSize={24}
-            onClick={onHandleCrossClick}
-            icon={!isEditing ? IconEnum.EDIT : IconEnum.CROSS}
-          />
-        </div>
-        <div className={styles["image-thumb"]}>
-          <Image
-            width={182}
-            height={182}
-            src={imageUrl}
-            alt="user avatar"
-            className={styles["image"]}
-          />
-          {isEditing && (
-            <ImageField
-              variant="user"
-              classNames={styles["image-field"]}
-              setImageUrl={setImageUrl}
-              setImage={setImage}
-              imageUrl={user.avatarUrl}
+    <>
+      {" "}
+      <FormProvider {...methods}>
+        <form className={styles["form"]} noValidate>
+          <div className={styles["cross-btn-wrapper"]}>
+            <UIButton
+              variant="text"
+              color="accent"
+              iconSize={24}
+              onClick={onHandleCrossClick}
+              icon={!isEditing ? IconEnum.EDIT : IconEnum.CROSS}
             />
-          )}
-        </div>
-        <div className={styles["form__content"]}>
-          <Field name="name" variant="small" label="Name:" type="text" />
-          <Field name="email" variant="small" label="Email:" type="email" />
-          <Field
-            name="birthday"
-            variant="small"
-            label="Birthday:"
-            type="text"
-          />
-          <Field name="city" variant="small" label="City:" type="text" />
-          <div className={buttonsClassName}>
-            {isEditing ? (
-              <UIButton color="secondary" variant="contained" fullWidth>
-                Save
-              </UIButton>
-            ) : (
-              <button className={styles["custom-btn"]}>
-                <Icon size={24} icon={IconEnum.LOGOUT} /> <span>Log Out</span>
-              </button>
+          </div>
+          <div className={styles["image-thumb"]}>
+            <Image
+              width={182}
+              height={182}
+              src={imageUrl}
+              alt="user avatar"
+              className={styles["image"]}
+            />
+            {isEditing && (
+              <ImageField
+                variant="user"
+                classNames={styles["image-field"]}
+                setImageUrl={setImageUrl}
+                setImage={setImage}
+                imageUrl={user.avatarUrl}
+              />
             )}
           </div>
-        </div>
-      </form>
-    </FormProvider>
+          <div className={styles["form__content"]}>
+            <Field name="name" variant="small" label="Name:" type="text" />
+            <Field name="email" variant="small" label="Email:" type="email" />
+            <Field
+              name="birthday"
+              variant="small"
+              label="Birthday:"
+              type="text"
+            />
+            <Field name="city" variant="small" label="City:" type="text" />
+            <div className={buttonsClassName}>
+              {isEditing ? (
+                <UIButton
+                  color="secondary"
+                  variant="contained"
+                  fullWidth
+                  type="submit"
+                >
+                  Save
+                </UIButton>
+              ) : (
+                <button
+                  className={styles["custom-btn"]}
+                  type="button"
+                  onClick={() => setIsActive(true)}
+                >
+                  <Icon size={24} icon={IconEnum.LOGOUT} /> <span>Log Out</span>
+                </button>
+              )}
+            </div>
+          </div>
+        </form>
+      </FormProvider>
+      {isActive && <LogOutModal setIsActive={setIsActive} />}
+    </>
   );
 }
 
