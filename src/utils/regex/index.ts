@@ -6,3 +6,4 @@ export const phoneRegex =
   /(\+\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9})/;
 
 export const cityRegex = /^[A-Z][a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/;
+export const birthdayRegex = /^\d{2}\.\d{2}\.\d{4}$/;
