@@ -5,7 +5,7 @@ import { Sponsors } from "./_components";
 // export const revalidate = 5;
 // export const fetchCache = "force-no-store";
 
-export const dynamic = "force-static";
+// export const dynamic = "force-static";
 export default async function Friends() {
   const res = await getSponsors(undefined);
   return (
