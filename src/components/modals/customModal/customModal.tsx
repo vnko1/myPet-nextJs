@@ -74,7 +74,7 @@ const CustomModal: FC<ModalProps> = ({
         <UIButton
           onClick={onHandleCrossButtonClick}
           variant="text"
-          icon={IconEnum.CROSS_SMALL}
+          icon={IconEnum.CROSS}
           color="accent"
           className={styles["button"]}
         />

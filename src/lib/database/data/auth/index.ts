@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import { cookies } from "next/headers";
 
 import { authenticate } from "@/auth";
-import { TOKEN_LIFE, createToken } from "@/utils";
+import { TOKEN_LIFE, createToken, customError } from "@/utils";
 import { Users } from "../../services";
 import { JWTPayloadType, UserTypes } from "@/types";
 
@@ -17,12 +17,12 @@ const passCompare = async (data: string, encrypted: string) =>
 async function getUser(
   payload?: JWTPayloadType | boolean
 ): Promise<null | UserTypes> {
-  const options = { projection: "-token -refreshToken -password" };
+  const options = { projection: "-token -password" };
   let user = null;
   if (payload && typeof payload === "object") {
     if (payload.email)
       user = await users.findUser({ email: payload.email }, options);
-    if (payload.id) user = await users.findUserById(payload.id, options);
+    if (payload._id) user = await users.findUserById(payload._id, options);
   }
 
   return user;
@@ -36,9 +36,13 @@ export async function isAuth(type: "token" | "refreshToken" = "token") {
   return await getUser(isValidToken);
 }
 
-export async function register(newUser: Omit<UserTypes, "id">) {
+export async function createUser(newUser: Omit<UserTypes, "_id">) {
   const userExist = await users.findUser({ email: newUser.email });
-  if (userExist) throw new Error("This user is registered");
+  if (userExist)
+    throw customError({
+      name: "email",
+      message: "User with this email is registered",
+    });
 
   const hashPass = await hashPassword(newUser.password);
 
@@ -53,16 +57,16 @@ export async function register(newUser: Omit<UserTypes, "id">) {
 export async function signIn(
   currentUser: Pick<UserTypes, "email" | "password">
 ) {
+  const error = { message: "Wrong email or password", name: "password" };
   const user = await users.findUser({ email: currentUser.email });
-
-  if (!user) throw new Error("Wrong email or password");
+  if (!user) throw customError(error);
 
   const isPasswordValid = await passCompare(
     currentUser.password,
     user.password
   );
 
-  if (!isPasswordValid) throw new Error("Wrong email or password");
+  if (!isPasswordValid) throw customError(error);
 
   const [token, tokenLifeTime] = await createToken(
     { email: user.email },
@@ -70,22 +74,14 @@ export async function signIn(
     TOKEN_LIFE
   );
 
-  // const [refreshToken, refreshTokenLifeTime] = await createToken(
-  //   {
-  //     email: user.email,
-  //   },
-  //   process.env.REFRESH_JWT_KEY || "",
-  //   REFRESH_TOKEN_LIFE
-  // );
-  await users
-    .updateUser(
-      user.id,
-      {
-        token,
-      },
-      { projection: "-password -avatarId" }
-    )
-    .populate("pets");
+  await users.updateUser(
+    user.id,
+    {
+      token,
+    },
+    { projection: "-password -avatarId" }
+  );
+
   return { token, tokenLifeTime };
 }
 
@@ -93,7 +89,16 @@ export const logOut = async () => {
   const user = await isAuth();
   if (!user) throw new Error("Something wrong");
 
-  await users.updateUser(user.id, { token: "" });
+  await users.updateUser(user._id, { token: "" });
 
   cookies().delete("token");
 };
+// **************************************************************************
+// const [refreshToken, refreshTokenLifeTime] = await createToken(
+//   {
+//     email: user.email,
+//   },
+//   process.env.REFRESH_JWT_KEY || "",
+//   REFRESH_TOKEN_LIFE
+// );
+// **************************************************************************

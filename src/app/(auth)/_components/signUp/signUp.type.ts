@@ -6,7 +6,8 @@ export type RegisterSchema = z.infer<typeof registerSchema>;
 
 export type ResType =
   | { errors?: { [key: string]: string }; token?: string }
-  | undefined;
+  | undefined
+  | void;
 
 export type SignUpProps = {
   classNames?: string;

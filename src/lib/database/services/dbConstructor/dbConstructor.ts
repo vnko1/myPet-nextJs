@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
-import { CB, Sort } from "./dbConstructor.type";
-import { QueryParams } from "@/types";
+import { Sort } from "./dbConstructor.type";
+import { CallBackType, QueryParams } from "@/types";
+import { customError } from "@/utils";
 
 export default abstract class DBConstructor {
   private mongoUri = process.env.MONGODB_URI!;
@@ -42,13 +43,14 @@ export default abstract class DBConstructor {
     return page > 0 ? (page - 1) * limit : 0;
   }
 
-  tryCatchWrapper<T, K>(cb: CB<T, K>) {
+  tryCatchWrapper<T, K>(cb: CallBackType<T, K>) {
     return async function (data: K) {
       try {
         return await cb(data);
       } catch (error) {
-        console.log("🚀 ~ DBConstructor ~ error:", error);
-        throw new Error("Something went wrong");
+        throw customError({
+          message: '"Something went wrong! Try again later."',
+        });
       }
     };
   }

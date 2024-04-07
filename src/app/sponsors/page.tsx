@@ -4,6 +4,7 @@ import { Sponsors } from "./_components";
 
 // export const dynamic = "force-dynamic";
 // export const revalidate = 1;
+export const dynamic = "force-static";
 
 export default async function Friends() {
   return (

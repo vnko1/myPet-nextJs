@@ -1,15 +1,24 @@
 import React from "react";
 
+import styles from "./user.module.scss";
+
 const UserLayout = ({
-  children,
+  pets,
+  profile,
   modal,
 }: {
-  children: React.ReactNode;
+  pets: React.ReactNode;
+  profile: React.ReactNode;
   modal: React.ReactNode;
 }) => {
   return (
     <main>
-      {children}
+      <section className="section">
+        <div className={`container ${styles["user"]}`}>
+          {profile}
+          {pets}
+        </div>
+      </section>
       {modal}
     </main>
   );

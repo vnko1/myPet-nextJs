@@ -1,0 +1,19 @@
+.form {
+  @apply py-2-xs px-0-md relative flex flex-col items-center;
+}
+
+.cross-btn-wrapper {
+  @apply absolute top-[14px] right-[14px];
+}
+
+.image {
+  @apply rounded-[40px] overflow-hidden w-[182px] h-[182px];
+
+  &-thumb {
+    @apply relative mb-[60px];
+  }
+
+  &-field {
+    @apply absolute -bottom-[16px] left-1/2 -translate-x-1/2 translate-y-1/2;
+  }
+}

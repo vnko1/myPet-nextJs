@@ -1,6 +1,8 @@
-import Link from "next/link";
 import { FC } from "react";
+import Link from "next/link";
+import { useFormStatus } from "react-dom";
 import cn from "classnames";
+
 import { IUIButton } from "./uibutton.type";
 import styles from "./uibutton.module.scss";
 
@@ -16,6 +18,7 @@ const UIButton: FC<IUIButton> = ({
   size = "small",
   type = "button",
   icon,
+  iconSize = 24,
   isCustomIcon,
   alignIcon,
   href,
@@ -23,6 +26,7 @@ const UIButton: FC<IUIButton> = ({
   onClick,
   ...props
 }) => {
+  const { pending } = useFormStatus();
   const variantClassName = cn({
     [styles["btn--contained"]]: variant === "contained",
     [styles["btn--outlined"]]: variant === "outlined",
@@ -53,7 +57,7 @@ const UIButton: FC<IUIButton> = ({
     colorClassName,
     alignIconClassName,
     {
-      [styles["btn--loading"]]: isLoading,
+      [styles["btn--loading"]]: isLoading || pending,
     },
     {
       [styles["btn--fullwidth"]]: fullWidth,
@@ -70,19 +74,22 @@ const UIButton: FC<IUIButton> = ({
         onClick={onClick}
         aria-label="navigation link"
       >
-        {icon ? <Icon className="btn__icon" icon={icon} /> : null}
+        {icon ? (
+          <Icon className="btn__icon" icon={icon} size={iconSize} />
+        ) : null}
         {children}
       </Link>
     );
   return (
     <button
+      {...props}
       type={type}
       className={baseClassNames}
       aria-label="button"
-      {...props}
       onClick={onClick}
+      disabled={pending || isLoading}
     >
-      {icon ? <Icon icon={icon} /> : null}
+      {icon ? <Icon icon={icon} size={iconSize} /> : null}
       {children}
     </button>
   );

@@ -7,12 +7,11 @@ import { Article } from "..";
 const Articles: FC<ArticlesParams> = async ({ query, page }) => {
   const currentPage = +page;
   const articles = await getArticles({ query, page: currentPage });
-  articles;
 
   return (
     <ul className={styles["articles"]}>
       {articles.map((article) => (
-        <li key={article?.id} className={styles["article"]}>
+        <li key={article._id.toString()} className={styles["article"]}>
           <Article article={article} />
         </li>
       ))}

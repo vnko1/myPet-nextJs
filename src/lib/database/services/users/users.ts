@@ -1,8 +1,9 @@
+import { Types } from "mongoose";
 import { UserTypes } from "@/types";
 import DBConstructor from "../dbConstructor/dbConstructor";
 import { User } from "../../models";
 
-type ID = string | number;
+type ID = Types.ObjectId;
 type QueryType = { [key: string]: string };
 type Options = {
   fieldName: keyof UserTypes | null;
@@ -13,9 +14,9 @@ type Options = {
 interface IUsers {
   createUser(newUser: UserTypes): Promise<UserTypes>;
   findUser(query: QueryType): Promise<UserTypes>;
-  findUserById(id: ID, options?: Partial<Options>): Promise<UserTypes>;
+  findUserById(_id: ID, options?: Partial<Options>): Promise<UserTypes>;
   updateUser(
-    id: string | number,
+    _id: ID,
     user: UserTypes,
     options?: Partial<Options>
   ): Promise<UserTypes>;
@@ -26,7 +27,7 @@ class Users extends DBConstructor implements IUsers {
     super();
   }
 
-  createUser(newUser: Omit<UserTypes, "id">) {
+  createUser(newUser: Omit<UserTypes, "_id">) {
     return User.create(newUser);
   }
 
@@ -38,14 +39,14 @@ class Users extends DBConstructor implements IUsers {
     return User.findById(id, projection);
   }
   updateUser(
-    id: ID,
+    _id: ID,
     user: Partial<UserTypes>,
     { fieldName = null, projection = "", newDoc = true }: Partial<Options> = {}
   ) {
     if (fieldName) {
       const [key] = Object.keys(user);
       return User.findByIdAndUpdate(
-        id,
+        _id,
         {
           [key]: { fieldName: user[key as keyof UserTypes] },
         },
@@ -53,7 +54,7 @@ class Users extends DBConstructor implements IUsers {
       );
     }
 
-    return User.findByIdAndUpdate(id, user, {
+    return User.findByIdAndUpdate(_id, user, {
       new: newDoc,
       projection,
     });

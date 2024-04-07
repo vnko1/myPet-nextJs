@@ -12,6 +12,8 @@ const fields = [
   },
 ];
 
+export const dynamic = "force-static";
+
 function Register() {
   return <SignUp fields={fields} path="register" />;
 }

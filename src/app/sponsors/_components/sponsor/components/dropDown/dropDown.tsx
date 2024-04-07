@@ -40,7 +40,10 @@ const DropDown: FC<DropDownProps> = ({ workDays }) => {
             <div onClick={handleScheduleClick}>
               <ul className={styles["time__list"]}>
                 {workDays.map((day, index) => (
-                  <li className={sponsorStyles["time__item"]} key={day._id}>
+                  <li
+                    className={sponsorStyles["time__item"]}
+                    key={day._id.toString()}
+                  >
                     <strong>{daysOfWeek[index]}</strong> {day.from}-{day.to}
                   </li>
                 ))}
