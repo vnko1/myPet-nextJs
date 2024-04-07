@@ -94,7 +94,7 @@ export const logOut = async () => {
 
   cookies().delete("token");
 };
-
+// **************************************************************************
 // const [refreshToken, refreshTokenLifeTime] = await createToken(
 //   {
 //     email: user.email,
@@ -102,3 +102,4 @@ export const logOut = async () => {
 //   process.env.REFRESH_JWT_KEY || "",
 //   REFRESH_TOKEN_LIFE
 // );
+// **************************************************************************
