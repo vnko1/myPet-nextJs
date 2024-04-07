@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { loginSchema, registerSchema } from "@/schema";
 import { ConstantsEnum } from "@/types";
-import { login, createUser } from "@/lib/actions";
+import { login, register } from "@/lib/actions";
 import { Field, UIButton } from "@/components";
 import { ResType, SignUpProps } from "./signUp.type";
 import styles from "./signUp.module.scss";
@@ -24,19 +24,24 @@ const SignUp: FC<SignUpProps> = ({
   });
 
   const handleAction = async (formData: FormData) => {
+    const formValues = methods.getValues();
+
     try {
       const res: ResType = isRegister
-        ? await createUser(formData)
+        ? await register(formData)
         : await login(formData);
 
       if (res?.errors && typeof res.errors === "object") {
         const [key] = Object.keys(res.errors);
-        return methods.setError(key, { message: res.errors[key] });
+
+        if (key in formValues)
+          return methods.setError(key, { message: res.errors[key] });
+        else throw new Error(res.errors[key]);
       }
       isRegister && localStorage.removeItem(ConstantsEnum.IS_NEW_USER);
       methods.reset();
     } catch (error) {
-      console.log("🚀 ~ handleAction ~ error:", error);
+      if (error instanceof Error) throw new Error(error.message);
     }
   };
 
