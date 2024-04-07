@@ -4,6 +4,8 @@ import styles from "./styles.module.scss";
 
 type PageProps = { searchParams: { query?: string; page?: string } };
 
+// export const fetchCache = "force-no-store";
+
 export default async function News({
   searchParams: { page = "1", query = "" },
 }: PageProps) {

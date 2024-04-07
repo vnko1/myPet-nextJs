@@ -15,7 +15,6 @@ const userSchema: Schema = new Schema(
       required: true,
       default: "",
     },
-
     name: {
       type: String,
       minlength: 2,
@@ -30,10 +29,10 @@ const userSchema: Schema = new Schema(
     phone: { type: String, match: phoneRegex, minlength: 13 },
     city: { type: String, match: cityRegex, minlength: 2, maxlength: 30 },
     avatarUrl: { type: String, default: defaultAvatarUrl },
-    token: {
-      type: String,
-      default: "",
-    },
+    // token: {
+    //   type: String,
+    //   default: "",
+    // },
     // pets: [{ type: Schema.Types.ObjectId, ref: "pet" }],
     // favorites: [
     //   {

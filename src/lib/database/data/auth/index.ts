@@ -74,14 +74,6 @@ export async function signIn(
     TOKEN_LIFE
   );
 
-  await users.updateUser(
-    user.id,
-    {
-      token,
-    },
-    { projection: "-password -avatarId" }
-  );
-
   return { token, tokenLifeTime };
 }
 
@@ -89,11 +81,19 @@ export const logOut = async () => {
   const user = await isAuth();
   if (!user) throw new Error("Something wrong");
 
-  await users.updateUser(user._id, { token: "" });
-
   cookies().delete("token");
 };
 // **************************************************************************
+// await users.updateUser(
+//   user.id,
+//   {
+//     token,
+//   },
+//   { projection: "-password" }
+// );
+
+// await users.updateUser(user._id, { token: "" });
+
 // const [refreshToken, refreshTokenLifeTime] = await createToken(
 //   {
 //     email: user.email,

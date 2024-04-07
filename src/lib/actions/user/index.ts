@@ -57,7 +57,7 @@ export async function signOut() {
   } catch (error) {
     if (error instanceof Error) return errorResponse(error.message, error.name);
   }
-  revalidatePath("/");
+  revalidatePath(LinksEnum.HOME);
 }
 
 // **************************************************************************
