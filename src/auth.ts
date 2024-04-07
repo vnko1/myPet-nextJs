@@ -1,3 +1,4 @@
+import { errorResponse } from "./utils";
 import { verifyToken } from "./utils/token";
 
 export const authenticate = async (type: string, credential: string) => {
@@ -7,6 +8,6 @@ export const authenticate = async (type: string, credential: string) => {
 
     return await verifyToken(credential, securityKey);
   } catch (error) {
-    console.log("🚀 ~ authenticate ~ error:", error);
+    if (error instanceof Error) return errorResponse(error.message);
   }
 };
