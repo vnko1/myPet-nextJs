@@ -1,0 +1,48 @@
+import { UploadApiOptions, v2 as cloudinary } from "cloudinary";
+
+import { customError } from "@/utils";
+import { DeleteOptions } from "./file.type";
+
+const { CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET } =
+  process.env;
+
+cloudinary.config({
+  cloud_name: CLOUDINARY_CLOUD_NAME,
+  api_key: CLOUDINARY_API_KEY,
+  api_secret: CLOUDINARY_API_SECRET,
+  secure: true,
+});
+
+class Files {
+  private static instance: Files;
+  private cloudinary = cloudinary;
+
+  constructor() {
+    if (!Files.instance) Files.instance = this;
+
+    return Files.instance;
+  }
+
+  private getPublicIdFromUrl(url: string, sliceValue: number = -4) {
+    return url.split("/").slice(sliceValue).join("/").split(".")[0];
+  }
+
+  async upload(file: string, options?: Partial<UploadApiOptions>) {
+    try {
+      const result = await this.cloudinary.uploader.upload(file, options);
+      return result;
+    } catch (error) {
+      throw customError({
+        message: '"Something went wrong! Try again later."',
+      });
+    }
+  }
+
+  async delete(url: string, options?: Partial<DeleteOptions>) {
+    const publicId = this.getPublicIdFromUrl(url, options?.sliceValue);
+
+    await this.cloudinary.uploader.destroy(publicId, options);
+  }
+}
+
+export default Files;

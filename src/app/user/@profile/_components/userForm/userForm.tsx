@@ -38,7 +38,7 @@ function UserForm({ user }: UserFormProps) {
   };
 
   const onHandleAction = async (formData: FormData) => {
-    image && formData.set("imageUrl", image);
+    image && formData.set("avatarUrl", image);
     const birthday = formData.get("birthday");
     if (birthday && typeof birthday === "string") {
       const formattedBirthday = new Date();

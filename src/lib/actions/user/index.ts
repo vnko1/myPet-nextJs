@@ -4,9 +4,12 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
 import { loginSchema, registerSchema } from "@/schema";
-import { logOut, createUser, signIn } from "@/lib/database";
+import { logOut, createUser, signIn, isAuth } from "@/lib/database";
 import { LinksEnum } from "@/types";
-import { errorResponse } from "@/utils";
+// import { Files } from "@/services";
+import { customError, errorResponse } from "@/utils";
+
+// const files = new Files();
 
 export async function register(formData: FormData) {
   try {
@@ -58,6 +61,24 @@ export async function signOut() {
     if (error instanceof Error) return errorResponse(error.message, error.name);
   }
   revalidatePath(LinksEnum.HOME);
+}
+
+export async function updateUserProfile(formData: FormData) {
+  try {
+    const user = await isAuth();
+
+    if (!user) throw customError({ message: "Unauthorized" });
+    // let avatarUrl = "";
+
+    const avatar = formData.get("avatarUrl");
+    if (avatar) {
+      console.log(avatar);
+      // const res = await files.upload(avatar);
+    }
+  } catch (error) {
+    if (error instanceof Error) return errorResponse(error.message, error.name);
+  }
+  revalidatePath(LinksEnum.USER);
 }
 
 // **************************************************************************
