@@ -22,7 +22,7 @@ export async function register(formData: FormData) {
   } catch (error) {
     if (error instanceof Error) return errorResponse(error.message, error.name);
   }
-
+  revalidatePath(LinksEnum.HOME);
   redirect(LinksEnum.LOGIN);
 }
 
@@ -47,7 +47,7 @@ export async function login(formData: FormData) {
   } catch (error) {
     if (error instanceof Error) return errorResponse(error.message, error.name);
   }
-
+  revalidatePath(LinksEnum.HOME);
   redirect(LinksEnum.USER);
 }
 
@@ -57,7 +57,7 @@ export async function signOut() {
   } catch (error) {
     if (error instanceof Error) return errorResponse(error.message, error.name);
   }
-  revalidatePath("/");
+  revalidatePath(LinksEnum.HOME);
 }
 
 // **************************************************************************
