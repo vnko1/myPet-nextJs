@@ -52,7 +52,7 @@ const SignUp: FC<SignUpProps> = ({
         noValidate
       >
         {fields.map((field, index) => (
-          <Field key={index} {...field} />
+          <Field key={index} {...field} fieldIcons />
         ))}
         <span>
           <UIButton type="submit" fullWidth color="secondary">

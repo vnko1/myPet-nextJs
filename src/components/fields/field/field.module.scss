@@ -1,14 +1,28 @@
 .field {
-  @apply block;
+  @apply w-full block;
+  &.small {
+    @apply flex items-center gap-2-xs;
+  }
 
-  // &__label {
-  // }
+  &__label {
+    &.small {
+      @apply text-sm font-semibold tracking-[0.56px] md:text-[18px] md:tracking-[0.72px];
+    }
+  }
 
   &__wrapper {
-    @apply relative block;
+    @apply w-full;
   }
   &__input {
-    @apply w-full px-1-lg py-1-sm bg-transparent rounded-[40px] border border-blue text-base text-grey outline-none;
+    @apply w-full outline-none border border-blue bg-transparent;
+
+    &.normal {
+      @apply px-1-lg py-1-sm  rounded-[40px] text-base text-grey;
+    }
+
+    &.small {
+      @apply rounded-[20px] px-1-sm py-0-sm text-black tracking-[0.64px] text-xs md:text-base;
+    }
 
     &.error {
       @apply border-red;
@@ -22,6 +36,9 @@
   &__error {
     @apply inline-block border-red text-red text-xs ml-1-lg;
   }
+}
+.wrapper {
+  @apply relative block;
 }
 
 .icons {
