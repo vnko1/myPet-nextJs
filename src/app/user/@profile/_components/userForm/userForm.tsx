@@ -40,7 +40,6 @@ function UserForm({ user }: UserFormProps) {
 
   return (
     <>
-      {" "}
       <FormProvider {...methods}>
         <form className={styles["form"]} noValidate>
           <div className={styles["cross-btn-wrapper"]}>
