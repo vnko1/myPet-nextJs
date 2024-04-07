@@ -1,7 +1,7 @@
 .field {
   @apply w-full block;
   &.small {
-    @apply flex items-center gap-2-xs;
+    @apply flex items-center justify-between;
   }
 
   &__label {
@@ -11,7 +11,7 @@
   }
 
   &__wrapper {
-    @apply w-full;
+    @apply w-full max-w-[70%];
   }
   &__input {
     @apply w-full outline-none border border-blue bg-transparent;

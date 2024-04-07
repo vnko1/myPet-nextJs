@@ -11,8 +11,16 @@ import styles from "./userForm.module.scss";
 import { FormProvider, useForm } from "react-hook-form";
 
 function UserForm({ user }: UserFormProps) {
+  console.log(user);
   const methods = useForm({
     mode: "all",
+    defaultValues: {
+      name: user.name,
+      email: user.email,
+      birthday: user.birthday,
+      phone: user.phone,
+      city: user.city,
+    },
   });
   const [isEditing, setIsEditing] = useState(false);
   const [imageUrl, setImageUrl] = useState(user.avatarUrl);
@@ -31,7 +39,7 @@ function UserForm({ user }: UserFormProps) {
 
   return (
     <FormProvider {...methods}>
-      <form className={styles["form"]}>
+      <form className={styles["form"]} noValidate>
         <div className={styles["cross-btn-wrapper"]}>
           <UIButton
             variant="text"
@@ -60,8 +68,15 @@ function UserForm({ user }: UserFormProps) {
           )}
         </div>
         <div className={styles["form__content"]}>
-          <Field name="name" variant="small" label="Name:" />
-
+          <Field name="name" variant="small" label="Name:" type="text" />
+          <Field name="email" variant="small" label="Email:" type="email" />
+          <Field
+            name="birthday"
+            variant="small"
+            label="Birthday:"
+            type="text"
+          />
+          <Field name="city" variant="small" label="City:" type="text" />
           <div className={buttonsClassName}>
             {isEditing ? (
               <UIButton color="secondary" variant="contained" fullWidth>
