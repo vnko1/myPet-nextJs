@@ -79,7 +79,7 @@ export async function signIn(
     {
       token,
     },
-    { projection: "-password -avatarId" }
+    { projection: "-password" }
   );
 
   return { token, tokenLifeTime };
