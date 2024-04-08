@@ -3,3 +3,7 @@
   // &__wrapper {
   // }
 }
+
+.head-wrapper {
+  @apply flex justify-between items-baseline;
+}

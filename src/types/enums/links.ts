@@ -6,4 +6,5 @@ export enum LinksEnum {
   LOGIN = "/login",
   REGISTER = "/register",
   USER = "/user",
+  ADD_PET = LinksEnum.USER + "/add-pet",
 }
