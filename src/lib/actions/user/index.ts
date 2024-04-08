@@ -86,7 +86,8 @@ export async function updateUserProfile(formData: FormData) {
 
     formData.forEach((value, key) => {
       if (key === "image" || key === "avatarUrl") return;
-      body[key] = value;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (body as any)[key] = value;
     });
 
     await updateUser(user._id, body);
