@@ -42,7 +42,7 @@ function UserForm({ user }: UserFormProps) {
     avatar && formData.set("avatarUrl", avatar);
     const birthday = formData.get("birthday");
     if (birthday && typeof birthday === "string") {
-      const formattedBirthday = new Date();
+      const formattedBirthday = new Date(birthday);
       formData.set("birthday", formattedBirthday + "");
     }
 
