@@ -21,7 +21,9 @@ function UserForm({ user }: UserFormProps) {
     defaultValues: {
       name: user.name,
       email: user.email,
-      birthday: new Date(user.birthday).toLocaleDateString(),
+      birthday: user.birthday
+        ? new Date(user.birthday).toLocaleDateString()
+        : "",
       phone: user.phone,
       city: user.city,
     },
@@ -41,6 +43,7 @@ function UserForm({ user }: UserFormProps) {
 
   const onHandleAction = async (formData: FormData) => {
     avatar && formData.set("avatarUrl", avatar);
+    formData.delete("image");
 
     await updateUserProfile(formData);
     setIsEditing(false);

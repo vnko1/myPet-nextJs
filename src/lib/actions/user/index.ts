@@ -81,15 +81,16 @@ export async function updateUserProfile(formData: FormData) {
         eager: "f_auto",
         overwrite: true,
       });
+
       body.avatarUrl = res.eager[0].secure_url;
     }
 
     formData.forEach((value, key) => {
-      if (key === "image" || key === "avatarUrl") return;
+      if (key === "avatarUrl") return;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (body as any)[key] = value;
     });
-    console.log(body);
+    // console.log(body);
     await updateUser(user._id, body);
   } catch (error) {
     if (error instanceof Error) return errorResponse(error.message, error.name);
