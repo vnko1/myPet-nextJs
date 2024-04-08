@@ -14,7 +14,7 @@ const Pagination: FC<PaginationProps> = ({ classNames, totalPages }) => {
 
   const createPageUrl = (pageNumber: string | number) => {
     const params = new URLSearchParams(searchParams);
-    params.set("page", pageNumber.toString());
+    params.set(ConstantsEnum.PAGE_PARAM, pageNumber.toString());
     return `${pathname}?${params.toString()}`;
   };
 
