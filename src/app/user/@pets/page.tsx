@@ -1,12 +1,14 @@
 "use client";
 import React from "react";
+import { useRouter } from "next/navigation";
 
+import { IconEnum, LinksEnum } from "@/types";
+import { UIButton } from "@/components";
 import userStyles from "../user.module.scss";
 import petsStyles from "./pets.module.scss";
-import { UIButton } from "@/components";
-import { IconEnum, LinksEnum } from "@/types";
 
 function Pets() {
+  const router = useRouter();
   return (
     <div className={petsStyles["pets"]}>
       <div className={petsStyles["head-wrapper"]}>
@@ -14,7 +16,10 @@ function Pets() {
         <UIButton
           color="secondary"
           variant="contained"
-          href={LinksEnum.ADD_PET}
+          onClick={() => {
+            router.push(LinksEnum.ADD_PET);
+            router.refresh();
+          }}
           icon={IconEnum.PLUS}
           alignIcon="right"
           size="small"
