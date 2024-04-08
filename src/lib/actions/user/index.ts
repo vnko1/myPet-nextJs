@@ -68,7 +68,7 @@ export async function updateUserProfile(formData: FormData) {
     const user = await isAuth();
 
     if (!user) throw customError({ message: "Unauthorized" });
-    // let avatarUrl = "";
+    let avatarUrl = "";
 
     const avatar = formData.get("avatarUrl")?.toString();
     if (avatar) {
@@ -79,7 +79,7 @@ export async function updateUserProfile(formData: FormData) {
         eager: "f_auto",
         overwrite: true,
       });
-      console.log(res);
+      console.log(res.eager[0].secure_url);
     }
   } catch (error) {
     if (error instanceof Error) return errorResponse(error.message, error.name);

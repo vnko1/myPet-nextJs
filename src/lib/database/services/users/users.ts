@@ -1,9 +1,7 @@
-import { Types } from "mongoose";
-import { UserTypes } from "@/types";
+import { UserTypes, ID } from "@/types";
 import DBConstructor from "../dbConstructor/dbConstructor";
 import { User } from "../../models";
 
-type ID = Types.ObjectId;
 type QueryType = { [key: string]: string };
 type Options = {
   fieldName: keyof UserTypes | null;

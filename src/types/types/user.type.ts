@@ -1,8 +1,10 @@
 import { Types } from "mongoose";
 // import { NoticesTypes, PetsTypes } from ".";
 
+export type ID = Types.ObjectId;
+
 export type UserTypes = {
-  _id: Types.ObjectId;
+  _id: ID;
   email: string;
   password: string;
   name: string;
