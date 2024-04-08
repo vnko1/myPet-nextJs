@@ -2,18 +2,21 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import cn from "classnames";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FormProvider, useForm } from "react-hook-form";
 
 import { UserFormProps } from "./userForm.type";
 import { Icon, LogOutModal, UIButton } from "@/components";
 import { IconEnum } from "@/types";
 import { Field, ImageField } from "@/components/fields";
+import { userSchema } from "@/schema";
 import styles from "./userForm.module.scss";
-import { FormProvider, useForm } from "react-hook-form";
+import { updateUserProfile } from "@/lib/actions";
 
 function UserForm({ user }: UserFormProps) {
-  console.log(user);
   const methods = useForm({
     mode: "all",
+    resolver: zodResolver(userSchema),
     defaultValues: {
       name: user.name,
       email: user.email,
@@ -25,24 +28,36 @@ function UserForm({ user }: UserFormProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [imageUrl, setImageUrl] = useState(user.avatarUrl);
-  const [, setImage] = useState<File | null>(null);
+  const [avatar, setAvatar] = useState<string | null>(null);
 
   const onHandleCrossClick = () => {
     if (isEditing) {
-      setImage(null);
+      setAvatar(null);
       setImageUrl(user.avatarUrl);
     }
     setIsEditing(!isEditing);
   };
+
+  const onHandleAction = async (formData: FormData) => {
+    avatar && formData.set("avatarUrl", avatar);
+    const birthday = formData.get("birthday");
+    if (birthday && typeof birthday === "string") {
+      const formattedBirthday = new Date();
+      formData.set("birthday", formattedBirthday + "");
+    }
+
+    await updateUserProfile(formData);
+    setIsEditing(false);
+  };
+
   const buttonsClassName = cn(styles["form__buttons"], {
     [styles["edit"]]: isEditing,
   });
 
   return (
     <>
-      {" "}
       <FormProvider {...methods}>
-        <form className={styles["form"]} noValidate>
+        <form className={styles["form"]} action={onHandleAction} noValidate>
           <div className={styles["cross-btn-wrapper"]}>
             <UIButton
               variant="text"
@@ -65,21 +80,50 @@ function UserForm({ user }: UserFormProps) {
                 variant="user"
                 classNames={styles["image-field"]}
                 setImageUrl={setImageUrl}
-                setImage={setImage}
+                setImage={setAvatar}
                 imageUrl={user.avatarUrl}
               />
             )}
           </div>
           <div className={styles["form__content"]}>
-            <Field name="name" variant="small" label="Name:" type="text" />
-            <Field name="email" variant="small" label="Email:" type="email" />
+            <Field
+              name="name"
+              variant="small"
+              label="Name:"
+              type="text"
+              disabled={!isEditing}
+            />
+            <Field
+              name="email"
+              variant="small"
+              label="Email:"
+              type="email"
+              disabled={!isEditing}
+            />
             <Field
               name="birthday"
               variant="small"
               label="Birthday:"
               type="text"
+              disabled={!isEditing}
+              placeholder="00.00.0000"
             />
-            <Field name="city" variant="small" label="City:" type="text" />
+            <Field
+              name="phone"
+              variant="small"
+              label="Phone:"
+              type="text"
+              disabled={!isEditing}
+              placeholder="+380000000000"
+            />
+            <Field
+              name="city"
+              variant="small"
+              label="City:"
+              type="text"
+              placeholder="Kyiv"
+              disabled={!isEditing}
+            />
             <div className={buttonsClassName}>
               {isEditing ? (
                 <UIButton

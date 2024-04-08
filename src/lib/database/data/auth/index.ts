@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import { authenticate } from "@/auth";
 import { TOKEN_LIFE, createToken, customError } from "@/utils";
 import { Users } from "../../services";
-import { JWTPayloadType, UserTypes } from "@/types";
+import { ID, JWTPayloadType, UserTypes } from "@/types";
 
 const users = new Users();
 
@@ -82,6 +82,10 @@ export const logOut = async () => {
   if (!user) throw new Error("Something wrong");
 
   cookies().delete("token");
+};
+
+export const updateUser = async (id: ID, userData: Partial<UserTypes>) => {
+  return await users.updateUser(id, userData, { projection: "-password" });
 };
 // **************************************************************************
 // await users.updateUser(

@@ -4,9 +4,12 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
 import { loginSchema, registerSchema } from "@/schema";
-import { logOut, createUser, signIn } from "@/lib/database";
-import { LinksEnum } from "@/types";
-import { errorResponse } from "@/utils";
+import { logOut, createUser, signIn, isAuth, updateUser } from "@/lib/database";
+import { LinksEnum, UserTypes } from "@/types";
+import { Files } from "@/services";
+import { customError, errorResponse } from "@/utils";
+
+const files = new Files();
 
 export async function register(formData: FormData) {
   try {
@@ -58,6 +61,40 @@ export async function signOut() {
     if (error instanceof Error) return errorResponse(error.message, error.name);
   }
   revalidatePath(LinksEnum.HOME);
+}
+
+export async function updateUserProfile(formData: FormData) {
+  try {
+    const user = await isAuth();
+
+    if (!user) throw customError({ message: "Unauthorized" });
+
+    const body: Partial<UserTypes> = {};
+
+    const avatar = formData.get("avatarUrl")?.toString();
+
+    if (avatar) {
+      const res = await files.upload(avatar, {
+        resource_type: "image",
+        folder: "pets/avatar",
+        public_id: user._id.toString(),
+        eager: "f_auto",
+        overwrite: true,
+      });
+      body.avatarUrl = res.eager[0].secure_url;
+    }
+
+    formData.forEach((value, key) => {
+      if (key === "image" || key === "avatarUrl") return;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (body as any)[key] = value;
+    });
+
+    await updateUser(user._id, body);
+  } catch (error) {
+    if (error instanceof Error) return errorResponse(error.message, error.name);
+  }
+  revalidatePath(LinksEnum.USER);
 }
 
 // **************************************************************************

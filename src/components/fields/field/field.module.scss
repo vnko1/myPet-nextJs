@@ -25,7 +25,7 @@
     }
 
     &.small {
-      @apply rounded-[20px] px-1-sm py-0-sm text-black tracking-[0.64px] text-xs md:text-base;
+      @apply rounded-[20px] px-1-sm py-0-sm text-black tracking-[0.64px] text-xs md:text-base disabled:placeholder:opacity-100 disabled:placeholder:text-black placeholder:opacity-100 placeholder:text-black;
     }
 
     &.error {
