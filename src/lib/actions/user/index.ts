@@ -90,7 +90,7 @@ export async function updateUserProfile(formData: FormData) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (body as any)[key] = value;
     });
-    // console.log(body);
+
     await updateUser(user._id, body);
   } catch (error) {
     if (error instanceof Error) return errorResponse(error.message, error.name);
