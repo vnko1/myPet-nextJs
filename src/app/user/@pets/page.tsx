@@ -17,7 +17,7 @@ function Pets() {
           color="secondary"
           variant="contained"
           onClick={() => {
-            router.push(LinksEnum.ADD_PET);
+            router.push(LinksEnum.ADD_PET_OPTION);
             router.refresh();
           }}
           icon={IconEnum.PLUS}
