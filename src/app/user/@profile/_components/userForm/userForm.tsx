@@ -47,7 +47,7 @@ function UserForm({ user }: UserFormProps) {
     }
 
     await updateUserProfile(formData);
-    setIsActive(false);
+    setIsEditing(false);
   };
 
   const buttonsClassName = cn(styles["form__buttons"], {
