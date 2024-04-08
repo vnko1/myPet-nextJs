@@ -95,7 +95,7 @@ export async function updateUserProfile(formData: FormData) {
   } catch (error) {
     if (error instanceof Error) return errorResponse(error.message, error.name);
   }
-  revalidatePath(LinksEnum.USER, "layout");
+  revalidatePath(LinksEnum.USER);
 }
 
 // **************************************************************************
