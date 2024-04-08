@@ -22,9 +22,7 @@ const userSchema: Schema = new Schema(
       required: [true, "Set name for user"],
     },
     birthday: {
-      type: Date,
-      min: "1940-01-01",
-      max: new Date(),
+      type: String,
     },
     phone: { type: String, match: phoneRegex, minlength: 13 },
     city: { type: String, match: cityRegex, minlength: 2, maxlength: 30 },

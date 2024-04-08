@@ -8,7 +8,7 @@ export type UserTypes = {
   email: string;
   password: string;
   name: string;
-  birthday?: Date;
+  birthday?: string;
   phone?: string;
   city?: string;
   avatarUrl?: string;

@@ -4,8 +4,8 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
 import { loginSchema, registerSchema } from "@/schema";
-import { logOut, createUser, signIn, isAuth } from "@/lib/database";
-import { LinksEnum } from "@/types";
+import { logOut, createUser, signIn, isAuth, updateUser } from "@/lib/database";
+import { LinksEnum, UserTypes } from "@/types";
 import { Files } from "@/services";
 import { customError, errorResponse } from "@/utils";
 
@@ -68,9 +68,11 @@ export async function updateUserProfile(formData: FormData) {
     const user = await isAuth();
 
     if (!user) throw customError({ message: "Unauthorized" });
-    let avatarUrl = "";
+
+    const body: Partial<UserTypes> = {};
 
     const avatar = formData.get("avatarUrl")?.toString();
+
     if (avatar) {
       const res = await files.upload(avatar, {
         resource_type: "image",
@@ -79,8 +81,15 @@ export async function updateUserProfile(formData: FormData) {
         eager: "f_auto",
         overwrite: true,
       });
-      console.log(res.eager[0].secure_url);
+      body.avatarUrl = res.eager[0].secure_url;
     }
+
+    formData.forEach((value, key) => {
+      if (key === "image" || key === "avatarUrl") return;
+      body[key] = value;
+    });
+
+    await updateUser(user._id, body);
   } catch (error) {
     if (error instanceof Error) return errorResponse(error.message, error.name);
   }

@@ -20,7 +20,7 @@ function UserForm({ user }: UserFormProps) {
     defaultValues: {
       name: user.name,
       email: user.email,
-      birthday: user.birthday?.toLocaleDateString(),
+      birthday: user.birthday,
       phone: user.phone,
       city: user.city,
     },
