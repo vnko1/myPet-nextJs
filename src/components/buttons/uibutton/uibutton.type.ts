@@ -20,6 +20,7 @@ export interface IUIButton
   alignIcon?: AlignIconType;
   href?: string;
   isCurrent?: boolean;
+  replace?: boolean;
   iconSize?: number;
   onClick?: () => void;
 }

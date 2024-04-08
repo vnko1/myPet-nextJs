@@ -23,6 +23,7 @@ const UIButton: FC<IUIButton> = ({
   alignIcon,
   href,
   isCurrent,
+  replace = false,
   onClick,
   ...props
 }) => {
@@ -70,6 +71,7 @@ const UIButton: FC<IUIButton> = ({
     return (
       <Link
         href={href}
+        replace={replace}
         className={baseClassNames}
         onClick={onClick}
         aria-label="navigation link"
