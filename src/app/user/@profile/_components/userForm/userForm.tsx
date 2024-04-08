@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import cn from "classnames";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 
@@ -20,7 +21,7 @@ function UserForm({ user }: UserFormProps) {
     defaultValues: {
       name: user.name,
       email: user.email,
-      birthday: user.birthday,
+      birthday: new Date(user.birthday).toLocaleDateString(),
       phone: user.phone,
       city: user.city,
     },
@@ -40,11 +41,6 @@ function UserForm({ user }: UserFormProps) {
 
   const onHandleAction = async (formData: FormData) => {
     avatar && formData.set("avatarUrl", avatar);
-    const birthday = formData.get("birthday");
-    if (birthday && typeof birthday === "string") {
-      const formattedBirthday = new Date(birthday);
-      formData.set("birthday", formattedBirthday + "");
-    }
 
     await updateUserProfile(formData);
     setIsEditing(false);

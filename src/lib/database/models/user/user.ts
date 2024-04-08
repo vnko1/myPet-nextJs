@@ -22,7 +22,7 @@ const userSchema: Schema = new Schema(
       required: [true, "Set name for user"],
     },
     birthday: {
-      type: Date,
+      type: String,
       min: "1940-01-01",
       max: new Date(),
     },
