@@ -77,6 +77,7 @@ export async function updateUserProfile(formData: FormData) {
         folder: "pets/avatar",
         public_id: user._id.toString(),
         eager: "f_auto",
+        overwrite: true,
       });
       console.log(res);
     }
