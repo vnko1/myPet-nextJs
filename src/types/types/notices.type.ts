@@ -5,7 +5,7 @@ export type NoticesTypes = {
   _id: Types.ObjectId;
   name: string;
   category: "sell" | "lost-found" | "for-free";
-  date: Date;
+  date: string;
   type: string;
   imageUrl: string;
   comment: string;
