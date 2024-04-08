@@ -28,18 +28,18 @@ function UserForm({ user }: UserFormProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [imageUrl, setImageUrl] = useState(user.avatarUrl);
-  const [image, setImage] = useState<File | null>(null);
+  const [avatar, setAvatar] = useState<string | null>(null);
 
   const onHandleCrossClick = () => {
     if (isEditing) {
-      setImage(null);
+      setAvatar(null);
       setImageUrl(user.avatarUrl);
     }
     setIsEditing(!isEditing);
   };
 
   const onHandleAction = async (formData: FormData) => {
-    image && formData.set("avatarUrl", image);
+    avatar && formData.set("avatarUrl", avatar);
     const birthday = formData.get("birthday");
     if (birthday && typeof birthday === "string") {
       const formattedBirthday = new Date();
@@ -47,6 +47,7 @@ function UserForm({ user }: UserFormProps) {
     }
 
     await updateUserProfile(formData);
+    setIsActive(false);
   };
 
   const buttonsClassName = cn(styles["form__buttons"], {
@@ -79,7 +80,7 @@ function UserForm({ user }: UserFormProps) {
                 variant="user"
                 classNames={styles["image-field"]}
                 setImageUrl={setImageUrl}
-                setImage={setImage}
+                setImage={setAvatar}
                 imageUrl={user.avatarUrl}
               />
             )}

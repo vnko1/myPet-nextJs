@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 
 export type ImageFieldProps = {
   variant: "pet" | "user";
-  setImage: Dispatch<SetStateAction<File | null>>;
+  setImage: Dispatch<SetStateAction<string | null>>;
   setImageUrl: Dispatch<SetStateAction<string>>;
   imageUrl: string;
   iconSize?: number;

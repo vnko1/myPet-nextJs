@@ -6,10 +6,10 @@ import { cookies } from "next/headers";
 import { loginSchema, registerSchema } from "@/schema";
 import { logOut, createUser, signIn, isAuth } from "@/lib/database";
 import { LinksEnum } from "@/types";
-// import { Files } from "@/services";
+import { Files } from "@/services";
 import { customError, errorResponse } from "@/utils";
 
-// const files = new Files();
+const files = new Files();
 
 export async function register(formData: FormData) {
   try {
@@ -70,10 +70,15 @@ export async function updateUserProfile(formData: FormData) {
     if (!user) throw customError({ message: "Unauthorized" });
     // let avatarUrl = "";
 
-    const avatar = formData.get("avatarUrl");
+    const avatar = formData.get("avatarUrl")?.toString();
     if (avatar) {
-      console.log(avatar);
-      // const res = await files.upload(avatar);
+      const res = await files.upload(avatar, {
+        resource_type: "image",
+        folder: "pets/avatar",
+        public_id: user._id.toString(),
+        eager: "f_auto",
+      });
+      console.log(res);
     }
   } catch (error) {
     if (error instanceof Error) return errorResponse(error.message, error.name);

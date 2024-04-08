@@ -29,8 +29,7 @@ class Files {
 
   async upload(file: string, options?: Partial<UploadApiOptions>) {
     try {
-      const result = await this.cloudinary.uploader.upload(file, options);
-      return result;
+      return await this.cloudinary.uploader.upload(file, options);
     } catch (error) {
       throw customError({
         message: '"Something went wrong! Try again later."',
@@ -39,9 +38,15 @@ class Files {
   }
 
   async delete(url: string, options?: Partial<DeleteOptions>) {
-    const publicId = this.getPublicIdFromUrl(url, options?.sliceValue);
+    try {
+      const publicId = this.getPublicIdFromUrl(url, options?.sliceValue);
 
-    await this.cloudinary.uploader.destroy(publicId, options);
+      await this.cloudinary.uploader.destroy(publicId, options);
+    } catch (error) {
+      throw customError({
+        message: '"Something went wrong! Try again later."',
+      });
+    }
   }
 }
 

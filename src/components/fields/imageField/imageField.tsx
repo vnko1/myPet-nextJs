@@ -4,6 +4,7 @@ import { ImageFieldProps } from "./imageField.type";
 import styles from "./imageField.module.scss";
 import { Icon } from "@/components";
 import { IconEnum } from "@/types";
+import { blobToBase64 } from "@/utils";
 
 const ImageField: FC<ImageFieldProps> = ({
   setImage,
@@ -16,13 +17,15 @@ const ImageField: FC<ImageFieldProps> = ({
   error,
 }) => {
   const [isActive, setIsActive] = useState(false);
-  const [file, setFile] = useState<File | null>(null);
+  const [file, setFile] = useState<string | null>(null);
 
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.currentTarget.files?.length) return;
     const file = e.currentTarget.files;
-    setImageUrl(URL.createObjectURL(file[0]));
-    setFile(file[0]);
+    blobToBase64(file[0]).then((res: string) => {
+      setFile(res);
+      setImageUrl(res);
+    });
 
     e.currentTarget.value = "";
     setIsActive(true);
