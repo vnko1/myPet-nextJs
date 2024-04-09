@@ -6,6 +6,7 @@ export type NavLinkProps = {
 };
 
 export type NavBarProps = {
+  path: string;
   options: boolean;
   details: boolean;
   info: boolean;
