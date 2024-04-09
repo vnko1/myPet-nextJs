@@ -33,5 +33,5 @@ export const isDisabled = (
   if (currentPath === LinksEnum.ADD_PET_OPTION) return options;
   if (currentPath === LinksEnum.ADD_PET_DETAILS) return details;
   if (currentPath === LinksEnum.ADD_PET_INFO) return info;
-  //   return false;
+  return false;
 };
