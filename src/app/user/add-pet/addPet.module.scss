@@ -1,0 +1,9 @@
+.add-pet{
+    @apply md:max-w-[458px] mx-auto px-0-md py-2-xs md:px-3-sm;
+
+
+}
+
+.title{
+    @apply font-medium text-lg leading-normal tracking-[0.8px] text-black mb-1-xl md:text-[28px] md:mb-2-md;
+}
