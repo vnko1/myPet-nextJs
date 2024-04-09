@@ -1,7 +1,15 @@
 .radio {
-  &__field {
-  }
+  @apply cursor-pointer text-center;
 }
 
 .field {
+  @apply w-[0.1px] h-[0.1px] opacity-0 hidden absolute z-[-1];
+
+  &:checked + .button {
+    @apply text-accentWhite bg-blue;
+  }
+}
+
+.button {
+  @apply py-0-md px-1-lg text-sm tracking-[0.56px] rounded-[40px] bg-blueLight text-blue duration-150 transition-all;
 }

@@ -10,7 +10,7 @@ const RadioButtonField: FC<RadioButtonProps> = ({
 }) => {
   return (
     <label className={`${styles["radio"]} ${classNames}`}>
-      <input {...props} type="radio" className={styles["radio__field"]} />
+      <input {...props} type="radio" className={styles["field"]} />
       <span className={styles["button"]}>{label}</span>
     </label>
   );
