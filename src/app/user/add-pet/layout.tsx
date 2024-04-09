@@ -6,30 +6,7 @@ import { AddPetContext, Details, Info, Options } from "./_context";
 import { NavBar } from "./_components";
 import styles from "./addPet.module.scss";
 import { IconEnum, LinksEnum } from "@/types";
-
-const getUrl = (currentPath: string) => {
-  let next: string | null;
-  let prev: string | null;
-  switch (currentPath) {
-    case LinksEnum.ADD_PET_OPTION:
-      next = LinksEnum.ADD_PET_DETAILS;
-      prev = null;
-      break;
-    case LinksEnum.ADD_PET_DETAILS:
-      next = LinksEnum.ADD_PET_INFO;
-      prev = LinksEnum.ADD_PET_OPTION;
-      break;
-    case LinksEnum.ADD_PET_INFO:
-      prev = LinksEnum.ADD_PET_DETAILS;
-      next = null;
-      break;
-    default:
-      next = "/";
-      prev = "/";
-  }
-
-  return { next, prev };
-};
+import { getUrl, isDisabled } from "./_utils";
 
 function AddPetLayout({ children }: { children: React.ReactNode }) {
   const pathName = usePathname();
@@ -78,6 +55,7 @@ function AddPetLayout({ children }: { children: React.ReactNode }) {
           icon={IconEnum.PET}
           alignIcon="right"
           onClick={onHandleNextClick}
+          disabled={isDisabled(pathName, !options, !details, !info)}
         >
           {pathName === LinksEnum.ADD_PET_INFO ? "Done" : " Next"}
         </UIButton>
