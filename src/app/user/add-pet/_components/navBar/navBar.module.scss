@@ -1,5 +1,5 @@
 .nav {
-  @apply w-full mb-2-xs  flex justify-between  md:mb-4-xs;
+  @apply w-full flex justify-between;
 
   & > li {
     @apply w-1/3;

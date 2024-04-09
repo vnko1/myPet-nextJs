@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 
-export type Options = "your pet" | "sell" | "lost/found" | "in good hands";
+export type Options = string;
 
 export type Details = {
   name: string;

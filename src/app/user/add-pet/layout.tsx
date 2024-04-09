@@ -36,19 +36,17 @@ function AddPetLayout({ children }: { children: React.ReactNode }) {
       <div className={styles["head"]}>
         <h1 className={styles["title"]}>Add pet</h1>
         <NavBar
-          options={!!options}
-          details={!!details}
-          info={!!info}
+          options={!!options && pathName !== LinksEnum.ADD_PET_OPTION}
+          details={!!details && pathName !== LinksEnum.ADD_PET_DETAILS}
+          info={!!info && pathName !== LinksEnum.ADD_PET_INFO}
           path={pathName}
         />
       </div>
-      <div className={styles["fields"]}>
-        <AddPetContext.Provider
-          value={{ options, details, info, setOptions, setDetails, setInfo }}
-        >
-          {children}
-        </AddPetContext.Provider>
-      </div>
+      <AddPetContext.Provider
+        value={{ options, details, info, setOptions, setDetails, setInfo }}
+      >
+        {children}
+      </AddPetContext.Provider>
       <div className={styles["buttons"]}>
         <UIButton
           color="secondary"
