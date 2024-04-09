@@ -1,35 +1,19 @@
 "use client";
 import React, { useState } from "react";
 import { usePathname } from "next/navigation";
-// import { UIButton } from "@/components";
+
 import { LinksEnum } from "@/types";
 import { AddPetContext, Details, Info, Options } from "./_context";
 import { NavBar } from "./_components";
-// import { getUrl, isDisabled } from "./_utils";
+
 import styles from "./addPet.module.scss";
 
 function AddPetLayout({ children }: { children: React.ReactNode }) {
   const pathName = usePathname();
-  // const router = useRouter();
 
   const [options, setOptions] = useState<Options | null>(null);
   const [details, setDetails] = useState<Details | null>(null);
   const [info, setInfo] = useState<Info | null>(null);
-
-  // const onHandlePrevClick = () => {
-  //   const prev = getUrl(pathName).prev;
-  //   if (prev) return router.push(prev);
-
-  //   router.push(LinksEnum.USER);
-  //   router.refresh();
-  // };
-
-  // const onHandleNextClick = () => {
-  //   const next = getUrl(pathName).next;
-  //   if (next) return router.push(next);
-
-  //   console.log("submit");
-  // };
 
   return (
     <div className={`wrapper ${styles["add-pet"]}`}>

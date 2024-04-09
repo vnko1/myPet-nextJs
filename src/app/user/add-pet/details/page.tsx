@@ -18,7 +18,6 @@ function Details() {
 
   const onHandleSubmit = () => {};
 
-  return <div>Details</div>;
   return (
     <FormProvider {...methods}>
       <form
