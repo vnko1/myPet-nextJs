@@ -21,6 +21,7 @@ const UIButton: FC<IUIButton> = ({
   iconSize = 24,
   isCustomIcon,
   alignIcon,
+  disabled,
   href,
   isCurrent,
   replace = false,
@@ -89,7 +90,7 @@ const UIButton: FC<IUIButton> = ({
       className={baseClassNames}
       aria-label="button"
       onClick={onClick}
-      disabled={pending || isLoading}
+      disabled={pending || isLoading || disabled}
     >
       {icon ? <Icon icon={icon} size={iconSize} /> : null}
       {children}
