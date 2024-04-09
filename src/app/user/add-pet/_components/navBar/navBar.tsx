@@ -5,7 +5,7 @@ import Link from "next/link";
 import cn from "classnames";
 
 import { LinksEnum } from "@/types";
-import { NavLinkProps } from "./navBar.type";
+import { NavBarProps, NavLinkProps } from "./navBar.type";
 import styles from "./navBar.module.scss";
 
 const NavItem: FC<NavLinkProps> = ({ label, href, isActive, isChecked }) => {
@@ -20,7 +20,7 @@ const NavItem: FC<NavLinkProps> = ({ label, href, isActive, isChecked }) => {
   );
 };
 
-const NavBar: FC = () => {
+const NavBar: FC<NavBarProps> = ({ options, details, info }) => {
   const pathName = usePathname();
 
   const path = pathName.split("/");
@@ -29,6 +29,7 @@ const NavBar: FC = () => {
     {
       label: "Choose option",
       href: LinksEnum.ADD_PET_OPTION,
+      isChecked: options,
       isActive:
         path[path.length - 1] === "option" ||
         path[path.length - 1] === "details" ||
@@ -37,12 +38,14 @@ const NavBar: FC = () => {
     {
       label: "Personal details",
       href: LinksEnum.ADD_PET_DETAILS,
+      isChecked: details,
       isActive:
         path[path.length - 1] === "details" || path[path.length - 1] === "info",
     },
     {
       label: "More info",
       href: LinksEnum.ADD_PET_INFO,
+      isChecked: info,
       isActive: path[path.length - 1] === "info",
     },
   ];
@@ -51,7 +54,7 @@ const NavBar: FC = () => {
     <ul className={styles["nav"]}>
       {links.map((link) => (
         <li key={link.href}>
-          <NavItem {...link} isChecked={false} />
+          <NavItem {...link} />
         </li>
       ))}
     </ul>
