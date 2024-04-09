@@ -1,36 +1,70 @@
 "use client";
-import React, { useState } from "react";
-import { usePathname } from "next/navigation";
+import React from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { FormProvider, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-import { LinksEnum } from "@/types";
-import { AddPetContext, Details, Info, Options } from "./_context";
+import { IconEnum, LinksEnum } from "@/types";
+import { UIButton } from "@/components";
+import { petsSchema } from "@/schema";
+
 import { NavBar } from "./_components";
-
-import styles from "./addPet.module.scss";
+import { getUrl } from "./_utils/helpers";
+import { FormValues } from "./_utils/types";
+import styles from "./styles.module.scss";
 
 function AddPetLayout({ children }: { children: React.ReactNode }) {
   const pathName = usePathname();
+  const router = useRouter();
 
-  const [options, setOptions] = useState<Options | null>(null);
-  const [details, setDetails] = useState<Details | null>(null);
-  const [info, setInfo] = useState<Info | null>(null);
+  const methods = useForm<FormValues>({
+    resolver: zodResolver(petsSchema),
+    defaultValues: { category: "your pet" },
+  });
+
+  const onHandleNextClick = () => {
+    const next = getUrl(pathName).next;
+    if (next) return router.push(next);
+  };
+
+  const onHandleBackClick = () => {
+    const prev = getUrl(pathName).prev;
+    if (prev) return router.push(prev);
+
+    router.push(LinksEnum.USER);
+    router.refresh();
+  };
 
   return (
     <div className={`wrapper ${styles["add-pet"]}`}>
       <div className={styles["head"]}>
         <h1 className={styles["title"]}>Add pet</h1>
-        <NavBar
-          options={!!options && pathName !== LinksEnum.ADD_PET_OPTION}
-          details={!!details && pathName !== LinksEnum.ADD_PET_DETAILS}
-          info={!!info && pathName !== LinksEnum.ADD_PET_INFO}
-          path={pathName}
-        />
+        <NavBar options details info path={pathName} />
       </div>
-      <AddPetContext.Provider
-        value={{ options, details, info, setOptions, setDetails, setInfo }}
-      >
-        {children}
-      </AddPetContext.Provider>
+      <FormProvider {...methods}>
+        <form className={styles["form"]}>
+          <div className={styles["fields"]}>{children}</div>
+          <div className={styles["buttons"]}>
+            <UIButton
+              type={pathName === LinksEnum.ADD_PET_INFO ? "submit" : "button"}
+              color="secondary"
+              icon={IconEnum.PET}
+              alignIcon="right"
+              onClick={onHandleNextClick}
+            >
+              {pathName === LinksEnum.ADD_PET_INFO ? "Done" : "Next"}
+            </UIButton>
+            <UIButton
+              variant="text"
+              color="accent"
+              icon={IconEnum.ARROW}
+              onClick={onHandleBackClick}
+            >
+              {pathName === LinksEnum.ADD_PET_CATEGORY ? "Cancel" : "Back"}
+            </UIButton>
+          </div>
+        </form>
+      </FormProvider>
     </div>
   );
 }

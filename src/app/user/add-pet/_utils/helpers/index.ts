@@ -4,13 +4,13 @@ export const getUrl = (currentPath: string) => {
   let next: string | null;
   let prev: string | null;
   switch (currentPath) {
-    case LinksEnum.ADD_PET_OPTION:
+    case LinksEnum.ADD_PET_CATEGORY:
       next = LinksEnum.ADD_PET_DETAILS;
       prev = null;
       break;
     case LinksEnum.ADD_PET_DETAILS:
       next = LinksEnum.ADD_PET_INFO;
-      prev = LinksEnum.ADD_PET_OPTION;
+      prev = LinksEnum.ADD_PET_CATEGORY;
       break;
     case LinksEnum.ADD_PET_INFO:
       prev = LinksEnum.ADD_PET_DETAILS;
@@ -30,7 +30,7 @@ export const isDisabled = (
   details: boolean,
   info: boolean
 ) => {
-  if (currentPath === LinksEnum.ADD_PET_OPTION) return options;
+  if (currentPath === LinksEnum.ADD_PET_CATEGORY) return options;
   if (currentPath === LinksEnum.ADD_PET_DETAILS) return details;
   if (currentPath === LinksEnum.ADD_PET_INFO) return info;
   return false;

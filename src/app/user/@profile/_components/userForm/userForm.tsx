@@ -7,9 +7,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { UserFormProps } from "./userForm.type";
-import { Icon, LogOutModal, UIButton } from "@/components";
+import { Icon, LogOutModal, UIButton, Field, ImageField } from "@/components";
 import { IconEnum } from "@/types";
-import { Field, ImageField } from "@/components/fields";
 import { userSchema } from "@/schema";
 import styles from "./userForm.module.scss";
 import { updateUserProfile } from "@/lib/actions";
