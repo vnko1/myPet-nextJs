@@ -1,46 +1,46 @@
 "use client";
-import React, { ChangeEvent } from "react";
+import React from "react";
 import { useRouter } from "next/navigation";
+import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
+
 import { RadioButtonField } from "@/components/fields";
-import { useAddPetContext } from "../_context";
+import { Options, useAddPetContext } from "../_context";
 import { UIButton } from "@/components";
 import { IconEnum, LinksEnum } from "@/types";
 import addPet from "../addPet.module.scss";
 import styles from "./option.module.scss";
 
+type FormValues = { options: Options };
+
 function Option() {
   const { setOptions, options } = useAddPetContext();
+  const methods = useForm<FormValues>({
+    mode: "onChange",
+    values: { options: options || "your pet" },
+  });
 
   const router = useRouter();
-
-  const onHandleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setOptions(event.target.value);
-  };
 
   const inputs = [
     {
       label: "your pet",
       name: "options",
       value: "your pet",
-      checked: options === "your pet",
     },
     {
       label: "sell",
       name: "options",
       value: "sell",
-      checked: options === "sell",
     },
     {
       label: "lost/found",
       name: "options",
       value: "lost/found",
-      checked: options === "lost/found",
     },
     {
       label: "in good hands",
       name: "options",
       value: "in good hands",
-      checked: options === "in good hands",
     },
   ];
 
@@ -49,31 +49,41 @@ function Option() {
     router.refresh();
   };
 
-  return (
-    <form className={styles["options"]}>
-      {inputs.map((input, index) => (
-        <RadioButtonField key={index} {...input} onChange={onHandleChange} />
-      ))}
+  const onHandleSubmit: SubmitHandler<FormValues> = (data) => {
+    setOptions(data.options);
+    router.push(LinksEnum.ADD_PET_DETAILS);
+  };
 
-      <div className={addPet["buttons"]}>
-        <UIButton
-          type="submit"
-          color="secondary"
-          icon={IconEnum.PET}
-          alignIcon="right"
-        >
-          Next
-        </UIButton>
-        <UIButton
-          variant="text"
-          color="accent"
-          icon={IconEnum.ARROW}
-          onClick={onHandleBackClick}
-        >
-          Back
-        </UIButton>
-      </div>
-    </form>
+  return (
+    <FormProvider {...methods}>
+      <form
+        className={styles["options"]}
+        onSubmit={methods.handleSubmit(onHandleSubmit)}
+      >
+        {inputs.map((input, index) => (
+          <RadioButtonField key={index} {...input} />
+        ))}
+
+        <div className={addPet["buttons"]}>
+          <UIButton
+            type="submit"
+            color="secondary"
+            icon={IconEnum.PET}
+            alignIcon="right"
+          >
+            Next
+          </UIButton>
+          <UIButton
+            variant="text"
+            color="accent"
+            icon={IconEnum.ARROW}
+            onClick={onHandleBackClick}
+          >
+            Back
+          </UIButton>
+        </div>
+      </form>
+    </FormProvider>
   );
 }
 

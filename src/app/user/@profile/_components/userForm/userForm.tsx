@@ -18,7 +18,7 @@ function UserForm({ user }: UserFormProps) {
   const methods = useForm({
     mode: "all",
     resolver: zodResolver(userSchema),
-    defaultValues: {
+    values: {
       name: user.name,
       email: user.email,
       birthday: user.birthday,
