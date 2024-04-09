@@ -3,12 +3,15 @@ import React, { FC } from "react";
 import { RadioButtonProps } from "./radioButton.type";
 import styles from "./radioButton.module.scss";
 
-const RadioButtonField: FC<RadioButtonProps> = ({ classNames, ...props }) => {
+const RadioButtonField: FC<RadioButtonProps> = ({
+  classNames,
+  label,
+  ...props
+}) => {
   return (
     <label className={`${styles["radio"]} ${classNames}`}>
-      <span className={styles["radio__field"]}>
-        <input {...props} type="radio" className={styles["field"]} />
-      </span>
+      <input {...props} type="radio" className={styles["radio__field"]} />
+      <span className={styles["button"]}>{label}</span>
     </label>
   );
 };
