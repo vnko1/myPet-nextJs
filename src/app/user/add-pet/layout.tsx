@@ -2,11 +2,11 @@
 import React, { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { UIButton } from "@/components";
+import { IconEnum, LinksEnum } from "@/types";
 import { AddPetContext, Details, Info, Options } from "./_context";
 import { NavBar } from "./_components";
-import styles from "./addPet.module.scss";
-import { IconEnum, LinksEnum } from "@/types";
 import { getUrl, isDisabled } from "./_utils";
+import styles from "./addPet.module.scss";
 
 function AddPetLayout({ children }: { children: React.ReactNode }) {
   const pathName = usePathname();
