@@ -79,7 +79,7 @@ function Option() {
             icon={IconEnum.ARROW}
             onClick={onHandleBackClick}
           >
-            Back
+            Cancel
           </UIButton>
         </div>
       </form>
