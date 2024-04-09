@@ -1,3 +1,4 @@
+"use client";
 import React, { FC } from "react";
 import { RadioButtonProps } from "./radioButton.type";
 import styles from "./radioButton.module.scss";
