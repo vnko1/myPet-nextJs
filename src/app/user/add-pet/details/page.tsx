@@ -3,7 +3,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { UIButton } from "@/components";
+import { Field, UIButton } from "@/components";
 import { IconEnum, LinksEnum } from "@/types";
 import styles from "./details.module.scss";
 import addPet from "../addPet.module.scss";
@@ -24,6 +24,7 @@ function Details() {
         className={styles["details"]}
         onSubmit={methods.handleSubmit(onHandleSubmit)}
       >
+        <Field name="name" label="Pet’s name" placeholder="Type name pet" />
         <div className={addPet["buttons"]}>
           <UIButton
             type="submit"
