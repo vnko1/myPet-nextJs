@@ -1,14 +1,17 @@
-// "use client";
+"use client";
 import React from "react";
 import styles from "./addPet.module.scss";
 import { NavBar } from "./_components";
+import { AddPetContext } from "./_context";
 
 function AddPetLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className={`wrapper ${styles["add-pet"]}`}>
       <h1 className={styles["title"]}>Add pet</h1>
       <NavBar />
-      {children}
+      <AddPetContext.Provider value={{ optionIsChecked: false }}>
+        {children}
+      </AddPetContext.Provider>
     </div>
   );
 }
