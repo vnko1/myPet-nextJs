@@ -7,5 +7,5 @@
 }
 
 .buttons {
-  @apply flex flex-col gap-2-xs;
+  @apply flex flex-col gap-2-xs self-stretch;
 }

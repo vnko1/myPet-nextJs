@@ -1,5 +1,7 @@
 import { InputHTMLAttributes } from "react";
 
-export type RadioButtonProps = { classNames?: string; label: string } & Partial<
-  InputHTMLAttributes<HTMLInputElement>
->;
+export type RadioButtonProps = {
+  classNames?: string;
+  label: string;
+  name: string;
+} & Partial<InputHTMLAttributes<HTMLInputElement>>;
