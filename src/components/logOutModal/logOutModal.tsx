@@ -13,9 +13,8 @@ const LogOutModal: FC<LogOutModalProps> = ({ classNames, ...props }) => {
 
   const onHandleClick = async () => {
     props.setIsActive(false);
-    const res = await signOut();
-
-    if (res?.errors) router.refresh();
+    await signOut();
+    router.refresh();
   };
   return (
     <CustomModal
