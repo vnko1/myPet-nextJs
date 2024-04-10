@@ -18,7 +18,7 @@ const ImageField: FC<ImageFieldProps> = ({
   isLoading,
   error,
 }) => {
-  const { register } = useFormContext();
+  const { register, setValue, trigger } = useFormContext();
   const [isActive, setIsActive] = useState(false);
   const [file, setFile] = useState<string | null>(null);
 
@@ -28,10 +28,16 @@ const ImageField: FC<ImageFieldProps> = ({
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.currentTarget.files?.length) return;
     const file = e.currentTarget.files;
-    blobToBase64(file[0]).then((res: string) => {
-      setFile(res);
-      setImageUrl && setImageUrl(res);
-    });
+
+    blobToBase64(file[0])
+      .then((res: string) => {
+        setFile(res);
+        setValue(name, res);
+        setImageUrl && setImageUrl(res);
+      })
+      .finally(() => {
+        trigger();
+      });
 
     e.currentTarget.value = "";
     setIsActive(true);

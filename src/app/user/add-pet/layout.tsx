@@ -21,7 +21,7 @@ function AddPetLayout({ children }: { children: React.ReactNode }) {
   const methods = useForm<FormValues>({
     resolver: zodResolver(petsSchema),
     defaultValues: { category: "your pet" },
-    mode: "onTouched",
+    mode: "all",
   });
 
   const onHandleNextClick = () => {
@@ -37,7 +37,7 @@ function AddPetLayout({ children }: { children: React.ReactNode }) {
     router.push(LinksEnum.USER);
     router.refresh();
   };
-  console.log(methods.formState.isValid);
+
   const onHandleSubmit: SubmitHandler<FormValues> = (data) => {
     console.log(data);
   };
@@ -64,11 +64,11 @@ function AddPetLayout({ children }: { children: React.ReactNode }) {
               alignIcon="right"
               onClick={onHandleNextClick}
               fullWidth
-              // disabled={
-              //   pathName === LinksEnum.ADD_PET_INFO
-              //     ? !methods.formState.isValid
-              //     : false
-              // }
+              disabled={
+                pathName === LinksEnum.ADD_PET_INFO
+                  ? !methods.formState.isValid
+                  : false
+              }
             >
               {pathName === LinksEnum.ADD_PET_INFO ? "Done" : "Next"}
             </UIButton>
