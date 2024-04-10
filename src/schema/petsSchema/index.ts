@@ -11,15 +11,19 @@ export const petsSchema = z
       .string({ required_error: "Name field is required" })
       .max(16, { message: "Maximum 16 characters" })
       .min(2, { message: "Minimum 2 characters" }),
-    date: z.string().regex(birthdayRegex),
+    date: z
+      .string({
+        required_error: "Field is required",
+      })
+      .regex(birthdayRegex, { message: "Invalid date" }),
     type: z
       .string({ required_error: "Type field is required" })
       .max(16, { message: "Maximum 16 characters" })
       .min(2, { message: "Minimum 2 characters" }),
     sex: z.enum(["male", "female"]).optional(),
     file: z.string(),
-    location: z.string().optional(),
-    price: z.coerce.number().optional(),
+    location: z.string().min(2).optional(),
+    price: z.coerce.number().positive("Invalid price").optional(),
     comments: z.string().max(120).optional(),
   })
   .refine(
@@ -69,11 +73,7 @@ export const petsSchema = z
   )
   .refine(
     (data) => {
-      if (
-        ["sell", "lost/found", "in good hands"].includes(data.category) &&
-        !data.price
-      )
-        return false;
+      if ("sell" === data.category && !data.price) return false;
 
       return true;
     },
