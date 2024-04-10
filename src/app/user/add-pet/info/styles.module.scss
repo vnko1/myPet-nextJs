@@ -14,5 +14,6 @@
   }
 
   &__wrapper {
+    @apply flex gap-1-lg md:gap-2-xs;
   }
 }

@@ -5,19 +5,25 @@ import styles from "./imageField.module.scss";
 import { Icon } from "@/components";
 import { IconEnum } from "@/types";
 import { blobToBase64 } from "@/utils";
+import { useFormContext } from "react-hook-form";
 
 const ImageField: FC<ImageFieldProps> = ({
   setImage,
   setImageUrl,
   imageUrl,
   variant,
+  name = "file",
   iconSize = 24,
   classNames,
   isLoading,
   error,
 }) => {
+  const { register } = useFormContext();
   const [isActive, setIsActive] = useState(false);
   const [file, setFile] = useState<string | null>(null);
+
+  const disabledPattern =
+    variant === "user" ? isLoading || isActive : isLoading;
 
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.currentTarget.files?.length) return;
@@ -45,9 +51,9 @@ const ImageField: FC<ImageFieldProps> = ({
   return (
     <label className={`${styles["field"]} ${classNames}`}>
       <input
-        disabled={isLoading || isActive}
+        {...register(name)}
+        disabled={disabledPattern}
         type="file"
-        name="image"
         className={styles["field__input"]}
         onChange={handleChange}
         accept="image/*"
@@ -79,6 +85,7 @@ const ImageField: FC<ImageFieldProps> = ({
           </span>
         )
       ) : null}
+      {variant === "pet" ? null : null}
       {error ? <span className={styles["error"]}>{error}</span> : null}
     </label>
   );

@@ -9,4 +9,5 @@ export type ImageFieldProps = {
   classNames?: string;
   isLoading?: boolean;
   error?: string | null;
+  name?: string;
 };

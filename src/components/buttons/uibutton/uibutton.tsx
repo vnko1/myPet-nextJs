@@ -20,7 +20,7 @@ const UIButton: FC<IUIButton> = ({
   icon,
   iconSize = 24,
   isCustomIcon,
-  alignIcon,
+  alignIcon = "left",
   disabled,
   href,
   isCurrent,
