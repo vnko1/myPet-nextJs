@@ -4,7 +4,13 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
 import { loginSchema, registerSchema } from "@/schema";
-import { logOut, createUser, signIn, isAuth, updateUser } from "@/lib/database";
+import {
+  logOut,
+  createUser,
+  signIn,
+  currentUser,
+  updateUser,
+} from "@/lib/database";
 import { LinksEnum, UserTypes } from "@/types";
 import { Files } from "@/services";
 import { customError, errorResponse } from "@/utils";
