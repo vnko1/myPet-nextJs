@@ -11,12 +11,10 @@ const TextAreaField: FC<TextareaFieldProps> = ({
   ...props
 }) => {
   const { errors } = useFormState();
-  const { register, getFieldState } = useFormContext();
-  const { isDirty, invalid } = getFieldState(name);
+  const { register } = useFormContext();
 
   const textareaClassName = cn(styles["field__input"], {
     [styles["error"]]: errors[name],
-    [styles["valid"]]: isDirty && !invalid,
   });
   return (
     <label className={`${styles["field"]} ${classNames}`}>

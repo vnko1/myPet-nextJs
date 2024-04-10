@@ -19,7 +19,7 @@ export const petsSchema = z
     sex: z.enum(["male", "female"]).optional(),
     file: z.instanceof(File),
     location: z.string().optional(),
-    price: z.number().positive().optional(),
+    price: z.string().optional(),
     comments: z.string().max(120).optional(),
   })
   .refine(
@@ -29,6 +29,8 @@ export const petsSchema = z
         !data.title
       )
         return false;
+
+      return true;
     },
     {
       message: "Field is required",
@@ -42,6 +44,8 @@ export const petsSchema = z
         !data.sex
       )
         return false;
+
+      return true;
     },
     {
       message: "Field is required",
@@ -55,6 +59,8 @@ export const petsSchema = z
         !data.location
       )
         return false;
+
+      return true;
     },
     {
       message: "Field is required",
@@ -68,6 +74,8 @@ export const petsSchema = z
         !data.price
       )
         return false;
+
+      return true;
     },
     {
       message: "Field is required",

@@ -37,17 +37,13 @@ function AddPetLayout({ children }: { children: React.ReactNode }) {
     router.push(LinksEnum.USER);
     router.refresh();
   };
-
+  console.log(methods.formState.isValid);
   const onHandleSubmit: SubmitHandler<FormValues> = (data) => {
     console.log(data);
   };
 
   const baseClassNames = cn("wrapper", styles["add-pet"]);
 
-  console.log(
-    methods.watch("category") === "your pet" &&
-      pathName === LinksEnum.ADD_PET_INFO
-  );
   return (
     <div className={baseClassNames}>
       <div className={styles["head"]}>
@@ -68,11 +64,11 @@ function AddPetLayout({ children }: { children: React.ReactNode }) {
               alignIcon="right"
               onClick={onHandleNextClick}
               fullWidth
-              disabled={
-                pathName === LinksEnum.ADD_PET_INFO
-                  ? !methods.formState.isValid
-                  : false
-              }
+              // disabled={
+              //   pathName === LinksEnum.ADD_PET_INFO
+              //     ? !methods.formState.isValid
+              //     : false
+              // }
             >
               {pathName === LinksEnum.ADD_PET_INFO ? "Done" : "Next"}
             </UIButton>

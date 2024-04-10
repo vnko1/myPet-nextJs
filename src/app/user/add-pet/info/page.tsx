@@ -62,11 +62,27 @@ function Info() {
         <p className={styles["image__title"]}>Add photo</p>
         <ImageField variant="pet" name="file" />
       </div>
-      {fields.slice(isYourPet ? 2 : 0).map((field) => {
-        if (field.isTextArea)
-          return <TextAreaField key={field.name} {...field} />;
-        return <Field key={field.name} {...field} />;
-      })}
+      {fields
+        .slice(isYourPet ? 2 : 0)
+        .map(({ name, label, placeholder, isTextArea }) => {
+          if (isTextArea)
+            return (
+              <TextAreaField
+                key={name}
+                name={name}
+                label={label}
+                placeholder={placeholder}
+              />
+            );
+          return (
+            <Field
+              key={name}
+              name={name}
+              label={label}
+              placeholder={placeholder}
+            />
+          );
+        })}
     </div>
   );
 }
