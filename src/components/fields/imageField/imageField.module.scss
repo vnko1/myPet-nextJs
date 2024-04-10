@@ -15,7 +15,7 @@
 }
 
 .button {
-  @apply flex items-center justify-center;
+  @apply flex items-center justify-center bg-transparent;
   &-text {
     @apply gap-0-md hover:text-yellow text-blue font-normal text-xs leading-[22px] tracking-[0.48px] bg-transparent;
 
