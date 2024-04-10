@@ -31,7 +31,7 @@ function Info() {
             />
           </div>
         </div>
-        <ImageField />
+        <ImageField variant="pet" />
       </div>
       <div className={styles["info__bottom-wrapper"]}></div>
     </div>

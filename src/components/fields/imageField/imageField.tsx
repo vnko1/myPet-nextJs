@@ -30,7 +30,7 @@ const ImageField: FC<ImageFieldProps> = ({
     const file = e.currentTarget.files;
     blobToBase64(file[0]).then((res: string) => {
       setFile(res);
-      setImageUrl(res);
+      setImageUrl && setImageUrl(res);
     });
 
     e.currentTarget.value = "";
@@ -38,13 +38,13 @@ const ImageField: FC<ImageFieldProps> = ({
   };
 
   const onHandleConfirm = () => {
-    setImage(file);
+    setImage && setImage(file);
     setTimeout(() => setIsActive(false), 0);
   };
 
   const onHandleReset = () => {
     setFile(null);
-    setImageUrl(imageUrl);
+    setImageUrl && setImageUrl(imageUrl || "");
     setTimeout(() => setIsActive(false), 0);
   };
 
