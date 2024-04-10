@@ -1,0 +1,18 @@
+.info {
+  @apply flex flex-col gap-2-xs md:gap-2-md;
+
+  &__top-wrapper {
+  }
+
+  &__bottom-wrapper {
+  }
+}
+
+.gender {
+  &__title {
+    @apply text-sm mb-0-md;
+  }
+
+  &__wrapper {
+  }
+}

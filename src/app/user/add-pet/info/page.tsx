@@ -1,7 +1,28 @@
+"use client";
 import React from "react";
+import { useWatch } from "react-hook-form";
+
+import styles from "./styles.module.scss";
+import { RadioButtonField } from "@/components";
 
 function Info() {
-  return <div>Info</div>;
+  const watch = useWatch();
+
+  const isYourPet = watch.category === "your pet";
+
+  return (
+    <div className={styles["info"]}>
+      <div className={styles["info__top-wrapper"]}>
+        <div className={styles["gender"]}>
+          <p className={styles["gender__title"]}>The sex</p>
+          <div className={styles["gender__wrapper"]}>
+            <RadioButtonField name="sex" label="Female" value="female" />
+          </div>
+        </div>
+      </div>
+      <div className={styles["info__bottom-wrapper"]}></div>
+    </div>
+  );
 }
 
 export default Info;
