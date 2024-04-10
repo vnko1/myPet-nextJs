@@ -1,5 +1,9 @@
 .add-pet {
-  @apply min-h-[496px] flex flex-col justify-between md:max-w-[458px] mx-auto px-0-md py-2-xs md:px-3-sm;
+  @apply min-h-[496px] flex flex-col justify-between md:max-w-[458px]  mx-auto px-0-md py-2-xs md:px-3-sm;
+
+  &.large {
+    @apply md:max-w-[704px];
+  }
 }
 
 .head {

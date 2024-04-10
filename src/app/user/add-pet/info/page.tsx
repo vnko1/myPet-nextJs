@@ -3,7 +3,7 @@ import React from "react";
 import { useWatch } from "react-hook-form";
 
 import styles from "./styles.module.scss";
-import { ImageField, RadioButtonField } from "@/components";
+import { Field, ImageField, RadioButtonField } from "@/components";
 import { IconEnum } from "@/types";
 
 function Info() {
@@ -13,7 +13,7 @@ function Info() {
 
   return (
     <div className={styles["info"]}>
-      <div className={styles["info__top-wrapper"]}>
+      {!isYourPet ? (
         <div className={styles["gender"]}>
           <p className={styles["gender__title"]}>The sex</p>
           <div className={styles["gender__wrapper"]}>
@@ -31,9 +31,12 @@ function Info() {
             />
           </div>
         </div>
-        <ImageField variant="pet" />
+      ) : null}
+      <div className={styles["image"]}>
+        <p className={styles["image__title"]}>Load the pet’s image:</p>
+        <ImageField variant="pet" name="file" />
       </div>
-      <div className={styles["info__bottom-wrapper"]}></div>
+      <Field name="comments" label="Comments" placeholder="Type of pet" />
     </div>
   );
 }

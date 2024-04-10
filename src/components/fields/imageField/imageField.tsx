@@ -85,7 +85,11 @@ const ImageField: FC<ImageFieldProps> = ({
           </span>
         )
       ) : null}
-      {variant === "pet" ? null : null}
+      {variant === "pet" ? (
+        <span className={`${styles["button"]} ${styles["button-plus"]}`}>
+          <Icon icon={IconEnum.PLUS} size={72} />
+        </span>
+      ) : null}
       {error ? <span className={styles["error"]}>{error}</span> : null}
     </label>
   );

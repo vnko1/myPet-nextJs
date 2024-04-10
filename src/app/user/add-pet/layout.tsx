@@ -3,6 +3,7 @@ import React from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import cn from "classnames";
 
 import { IconEnum, LinksEnum } from "@/types";
 import { UIButton } from "@/components";
@@ -40,8 +41,15 @@ function AddPetLayout({ children }: { children: React.ReactNode }) {
   const onHandleSubmit: SubmitHandler<FormValues> = (data) => {
     console.log(data);
   };
+
+  const baseClassNames = cn("wrapper", styles["add-pet"]);
+
+  console.log(
+    methods.watch("category") === "your pet" &&
+      pathName === LinksEnum.ADD_PET_INFO
+  );
   return (
-    <div className={`wrapper ${styles["add-pet"]}`}>
+    <div className={baseClassNames}>
       <div className={styles["head"]}>
         <h1 className={styles["title"]}>Add pet</h1>
         <NavBar path={pathName} />

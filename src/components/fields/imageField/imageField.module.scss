@@ -15,9 +15,9 @@
 }
 
 .button {
-  @apply flex items-center justify-center text-blue font-normal text-xs leading-[22px] tracking-[0.48px] bg-transparent;
+  @apply flex items-center justify-center;
   &-text {
-    @apply gap-0-md hover:text-yellow;
+    @apply gap-0-md hover:text-yellow text-blue font-normal text-xs leading-[22px] tracking-[0.48px] bg-transparent;
 
     & > span {
       @apply text-black;
@@ -26,6 +26,10 @@
 
   &-icon {
     @apply text-red hover:text-blue;
+  }
+
+  &-plus {
+    @apply w-[112px] h-[112px] md:w-[182px] md:h-[182px] bg-blueLight rounded-[20px] md:rounded-[40px] text-blue;
   }
 }
 
