@@ -3,13 +3,39 @@ import React from "react";
 import { useWatch } from "react-hook-form";
 
 import styles from "./styles.module.scss";
-import { Field, ImageField, RadioButtonField } from "@/components";
+import {
+  Field,
+  ImageField,
+  RadioButtonField,
+  TextAreaField,
+} from "@/components";
 import { IconEnum } from "@/types";
 
 function Info() {
   const watch = useWatch();
 
   const isYourPet = watch.category === "your pet";
+
+  const fields = [
+    {
+      name: "location",
+      label: "Location",
+      placeholder: "Type location of pet",
+      isTextArea: false,
+    },
+    {
+      name: "price",
+      label: "Price",
+      placeholder: "Type price of pet",
+      isTextArea: false,
+    },
+    {
+      name: "comments",
+      label: "Comments",
+      placeholder: "Type comments",
+      isTextArea: true,
+    },
+  ];
 
   return (
     <div className={styles["info"]}>
@@ -33,10 +59,14 @@ function Info() {
         </div>
       ) : null}
       <div className={styles["image"]}>
-        <p className={styles["image__title"]}>Load the pet’s image:</p>
+        <p className={styles["image__title"]}>Add photo</p>
         <ImageField variant="pet" name="file" />
       </div>
-      <Field name="comments" label="Comments" placeholder="Type of pet" />
+      <TextAreaField
+        name="comments"
+        label="Comments"
+        placeholder="Type of pet"
+      />
     </div>
   );
 }

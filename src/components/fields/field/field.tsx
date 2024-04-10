@@ -31,7 +31,6 @@ const Field: FC<FiledProps> = ({
       [styles["small"]]: variant === "small",
       [styles["normal"]]: variant === "normal",
     },
-
     classNames
   );
 

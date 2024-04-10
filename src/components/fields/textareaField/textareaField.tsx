@@ -1,0 +1,41 @@
+import React, { FC } from "react";
+import { useFormContext, useFormState } from "react-hook-form";
+import cn from "classnames";
+import { TextareaFieldProps } from "./textareaField.type";
+import styles from "./textareaField.module.scss";
+
+const TextAreaField: FC<TextareaFieldProps> = ({
+  classNames,
+  name,
+  label,
+  ...props
+}) => {
+  const { errors } = useFormState();
+  const { register, getFieldState } = useFormContext();
+  const { isDirty, invalid } = getFieldState(name);
+
+  const textareaClassName = cn(styles["field__input"], {
+    [styles["error"]]: errors[name],
+    [styles["valid"]]: isDirty && !invalid,
+  });
+  return (
+    <label className={`${styles["field"]} ${classNames}`}>
+      {label ? <span className={styles["field__label"]}>{label}</span> : null}
+      <span className={styles["field__wrapper"]}>
+        <textarea
+          {...props}
+          {...register(name)}
+          name={name}
+          className={textareaClassName}
+        />
+        {errors[name] && (
+          <span className={styles["field__error"]}>
+            {errors[name]?.message as string}
+          </span>
+        )}
+      </span>
+    </label>
+  );
+};
+
+export default TextAreaField;

@@ -17,8 +17,8 @@ export const petsSchema = z
       .max(16, { message: "Maximum 16 characters" })
       .min(2, { message: "Minimum 2 characters" }),
     sex: z.enum(["male", "female"]).optional(),
-    location: z.string().optional(),
     file: z.instanceof(File),
+    location: z.string().optional(),
     price: z.number().positive().optional(),
     comments: z.string().max(120).optional(),
   })
