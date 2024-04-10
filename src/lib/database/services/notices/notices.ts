@@ -7,7 +7,7 @@ class Notices extends DBConstructor {
     super();
   }
 
-  async addNotice(newNotice: Omit<NoticesTypes, "_id" | "favorites">) {
+  async addNotice(newNotice: Partial<NoticesTypes>) {
     return Notice.create(newNotice);
   }
 }

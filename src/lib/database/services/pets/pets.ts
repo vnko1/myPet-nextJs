@@ -7,14 +7,14 @@ class Pets extends DBConstructor {
     super();
   }
 
-  async addPet(newPet: Omit<PetsTypes, "_id">) {
+  async addPet(newPet: Partial<PetsTypes>) {
     return Pet.create(newPet);
   }
 
-  async findPet(id: Pick<PetsTypes, "_id">) {
+  async findPet(id: Partial<PetsTypes>) {
     return Pet.findById(id);
   }
-  async deletePet(id: Pick<PetsTypes, "_id">) {
+  async deletePet(id: Partial<PetsTypes>) {
     return Pet.findByIdAndDelete(id);
   }
 }

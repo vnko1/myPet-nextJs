@@ -1,5 +1,4 @@
 import { Types } from "mongoose";
-import { UserTypes } from ".";
 
 export type NoticesTypes = {
   _id: Types.ObjectId;
@@ -13,7 +12,7 @@ export type NoticesTypes = {
   sex: "male" | "female";
   location: string;
   price: number;
-  favorites: Array<UserTypes>;
-  owner: Array<UserTypes>;
+  owner: string;
+  // favorites: Array<UserTypes>;
   // fileId: string;
 };
