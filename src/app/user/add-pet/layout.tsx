@@ -20,11 +20,12 @@ function AddPetLayout({ children }: { children: React.ReactNode }) {
   const methods = useForm<FormValues>({
     resolver: zodResolver(petsSchema),
     defaultValues: { category: "your pet" },
-    mode: "all",
+    mode: "onTouched",
   });
 
   const onHandleNextClick = () => {
     const next = getUrl(pathName).next;
+
     if (next) return router.push(next);
   };
 
@@ -36,14 +37,20 @@ function AddPetLayout({ children }: { children: React.ReactNode }) {
     router.refresh();
   };
 
+  const onHandleSubmit = (data) => {
+    console.log(data);
+  };
   return (
     <div className={`wrapper ${styles["add-pet"]}`}>
       <div className={styles["head"]}>
         <h1 className={styles["title"]}>Add pet</h1>
-        <NavBar options details info path={pathName} />
+        <NavBar path={pathName} />
       </div>
       <FormProvider {...methods}>
-        <form className={styles["form"]}>
+        <form
+          className={styles["form"]}
+          onSubmit={methods.handleSubmit(onHandleSubmit)}
+        >
           <div className={styles["fields"]}>{children}</div>
           <div className={styles["buttons"]}>
             <UIButton
@@ -52,6 +59,7 @@ function AddPetLayout({ children }: { children: React.ReactNode }) {
               icon={IconEnum.PET}
               alignIcon="right"
               onClick={onHandleNextClick}
+              fullWidth
             >
               {pathName === LinksEnum.ADD_PET_INFO ? "Done" : "Next"}
             </UIButton>
@@ -60,6 +68,7 @@ function AddPetLayout({ children }: { children: React.ReactNode }) {
               color="accent"
               icon={IconEnum.ARROW}
               onClick={onHandleBackClick}
+              fullWidth
             >
               {pathName === LinksEnum.ADD_PET_CATEGORY ? "Cancel" : "Back"}
             </UIButton>

@@ -19,12 +19,17 @@ const NavItem: FC<NavLinkProps> = ({ label, href, isActive, isChecked }) => {
   );
 };
 
-const NavBar: FC<NavBarProps> = ({ options, details, info, path }) => {
+const NavBar: FC<NavBarProps> = ({
+  category = false,
+  details = false,
+  info = false,
+  path,
+}) => {
   const links = [
     {
       label: "Choose option",
       href: LinksEnum.ADD_PET_CATEGORY,
-      isChecked: options,
+      isChecked: category,
       isActive:
         path === LinksEnum.ADD_PET_CATEGORY ||
         path === LinksEnum.ADD_PET_DETAILS ||
