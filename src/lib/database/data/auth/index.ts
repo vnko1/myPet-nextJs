@@ -28,7 +28,7 @@ async function getUser(
   return user;
 }
 
-export async function isAuth(type: "token" | "refreshToken" = "token") {
+export async function currentUser(type: "token" | "refreshToken" = "token") {
   const token = cookies().get(type);
 
   const isValidToken = token && (await authenticate(token?.name, token?.value));
@@ -78,7 +78,7 @@ export async function signIn(
 }
 
 export const logOut = async () => {
-  const user = await isAuth();
+  const user = await currentUser();
   if (!user) throw new Error("Something wrong");
 
   cookies().delete("token");

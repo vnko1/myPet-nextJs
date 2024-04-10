@@ -5,7 +5,7 @@ import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import cn from "classnames";
 
-import { IconEnum, LinksEnum } from "@/types";
+import { EndpointsEnum, IconEnum, LinksEnum } from "@/types";
 import { UIButton } from "@/components";
 import { petsSchema } from "@/schema";
 
@@ -38,7 +38,14 @@ function AddPetLayout({ children }: { children: React.ReactNode }) {
     router.refresh();
   };
 
-  const onHandleSubmit: SubmitHandler<FormValues> = (data) => {
+  const onHandleSubmit: SubmitHandler<FormValues> = async (data) => {
+    const res = await fetch(EndpointsEnum.ADD_PET, {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+
+    if (res.redirected) router.replace(res.url);
+
     console.log(data);
   };
 

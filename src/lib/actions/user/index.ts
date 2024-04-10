@@ -65,7 +65,7 @@ export async function signOut() {
 
 export async function updateUserProfile(formData: FormData) {
   try {
-    const user = await isAuth();
+    const user = await currentUser();
 
     if (!user) throw customError({ message: "Unauthorized" });
 

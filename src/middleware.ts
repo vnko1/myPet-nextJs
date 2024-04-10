@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { LinksEnum } from "./types";
+import { EndpointsEnum, LinksEnum } from "./types";
 import { authenticate } from "./auth";
 
 export default async function middleware(request: NextRequest) {
@@ -11,6 +11,9 @@ export default async function middleware(request: NextRequest) {
 
   const isAuthenticated = isToken && isValidToken;
   const currentPath = request.nextUrl.pathname;
+
+  if (currentPath.startsWith(EndpointsEnum.ADD_PET))
+    return NextResponse.rewrite(new URL(LinksEnum.HOME, request.url));
 
   if (currentPath.startsWith(LinksEnum.USER) && !isAuthenticated)
     return NextResponse.redirect(new URL(LinksEnum.LOGIN, request.url));
@@ -26,6 +29,6 @@ export default async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!sponsors|friends|api|_next/static|_next/image|news|.webp|favicon.ico|.*\\.webp$|$).*)",
+    "/((?!sponsors|friends|_next/static|_next/image|news|.webp|favicon.ico|.*\\.webp$|$).*)",
   ],
 };

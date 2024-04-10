@@ -1,14 +1,14 @@
 import React from "react";
 import { redirect } from "next/navigation";
 
-import { isAuth } from "@/lib/database";
+import { currentUser } from "@/lib/database";
 import { LinksEnum } from "@/types";
 import userStyles from "../user.module.scss";
 import profileStyles from "./profile.module.scss";
 import { UserForm } from "./_components";
 
 async function Profile() {
-  const user = await isAuth();
+  const user = await currentUser();
 
   if (user)
     return (
