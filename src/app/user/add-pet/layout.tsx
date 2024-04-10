@@ -11,7 +11,7 @@ import { petsSchema } from "@/schema";
 
 import { NavBar } from "./_components";
 import { getUrl } from "./_utils/helpers";
-import { FormValues } from "./_utils/types";
+import { FormValues } from "@/types";
 import styles from "./styles.module.scss";
 
 function AddPetLayout({ children }: { children: React.ReactNode }) {

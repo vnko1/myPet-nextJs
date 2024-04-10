@@ -1,4 +1,8 @@
 import { Types } from "mongoose";
+import * as z from "zod";
+import { petsSchema } from "@/schema";
+
+export type FormValues = z.infer<typeof petsSchema>;
 
 export type PetsTypes = {
   _id: Types.ObjectId;
