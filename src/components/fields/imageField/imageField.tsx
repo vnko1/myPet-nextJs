@@ -6,6 +6,7 @@ import { Icon } from "@/components";
 import { IconEnum } from "@/types";
 import { blobToBase64 } from "@/utils";
 import { useFormContext } from "react-hook-form";
+import Image from "next/image";
 
 const ImageField: FC<ImageFieldProps> = ({
   setImage,
@@ -92,9 +93,19 @@ const ImageField: FC<ImageFieldProps> = ({
         )
       ) : null}
       {variant === "pet" ? (
-        <span className={`${styles["button"]} ${styles["button-plus"]}`}>
-          <Icon icon={IconEnum.PLUS} size={72} />
-        </span>
+        file ? (
+          <Image
+            width={182}
+            height={182}
+            src={file || ""}
+            alt="pet photo"
+            className={styles["image"]}
+          />
+        ) : (
+          <span className={`${styles["button"]} ${styles["button-plus"]}`}>
+            <Icon icon={IconEnum.PLUS} size={72} />
+          </span>
+        )
       ) : null}
       {error ? <span className={styles["error"]}>{error}</span> : null}
     </label>
