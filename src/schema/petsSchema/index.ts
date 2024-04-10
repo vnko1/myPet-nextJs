@@ -25,12 +25,51 @@ export const petsSchema = z
     (data) => {
       if (
         ["sell", "lost/found", "in good hands"].includes(data.category) &&
-        (!data.title || !data.sex || !data.location || !data.price)
+        !data.title
       )
         return false;
     },
     {
       message: "Field is required",
-      path: ["title", "sex", "location", "price"],
+      path: ["title"],
+    }
+  )
+  .refine(
+    (data) => {
+      if (
+        ["sell", "lost/found", "in good hands"].includes(data.category) &&
+        !data.sex
+      )
+        return false;
+    },
+    {
+      message: "Field is required",
+      path: ["sex"],
+    }
+  )
+  .refine(
+    (data) => {
+      if (
+        ["sell", "lost/found", "in good hands"].includes(data.category) &&
+        !data.location
+      )
+        return false;
+    },
+    {
+      message: "Field is required",
+      path: ["location"],
+    }
+  )
+  .refine(
+    (data) => {
+      if (
+        ["sell", "lost/found", "in good hands"].includes(data.category) &&
+        !data.price
+      )
+        return false;
+    },
+    {
+      message: "Field is required",
+      path: ["price"],
     }
   );

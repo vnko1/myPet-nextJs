@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { IconEnum, LinksEnum } from "@/types";
@@ -37,7 +37,7 @@ function AddPetLayout({ children }: { children: React.ReactNode }) {
     router.refresh();
   };
 
-  const onHandleSubmit = (data) => {
+  const onHandleSubmit: SubmitHandler<FormValues> = (data) => {
     console.log(data);
   };
   return (
@@ -60,6 +60,11 @@ function AddPetLayout({ children }: { children: React.ReactNode }) {
               alignIcon="right"
               onClick={onHandleNextClick}
               fullWidth
+              disabled={
+                pathName === LinksEnum.ADD_PET_INFO
+                  ? !methods.formState.isValid
+                  : false
+              }
             >
               {pathName === LinksEnum.ADD_PET_INFO ? "Done" : "Next"}
             </UIButton>
