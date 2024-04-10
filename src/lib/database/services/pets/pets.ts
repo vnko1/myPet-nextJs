@@ -7,7 +7,7 @@ class Pets extends DBConstructor {
     super();
   }
 
-  async addPet(newPet: Omit<PetsTypes, "_id" | "owner">) {
+  async addPet(newPet: Omit<PetsTypes, "_id">) {
     return Pet.create(newPet);
   }
 

@@ -69,7 +69,7 @@ export async function signIn(
   if (!isPasswordValid) throw customError(error);
 
   const [token, tokenLifeTime] = await createToken(
-    { email: user.email },
+    { email: user.email, _id: user.id },
     process.env.JWT_KEY || "",
     TOKEN_LIFE
   );

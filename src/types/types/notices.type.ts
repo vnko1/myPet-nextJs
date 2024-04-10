@@ -4,7 +4,7 @@ import { UserTypes } from ".";
 export type NoticesTypes = {
   _id: Types.ObjectId;
   name: string;
-  category: "sell" | "lost-found" | "for-free";
+  category: "sell" | "lost/found" | "in good hands";
   date: string;
   type: string;
   imageUrl: string;
