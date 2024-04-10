@@ -6,7 +6,7 @@ export type PetsTypes = {
   date: string;
   type: string;
   imageUrl: string;
-  comment: string;
+  comment?: string;
   owner: string;
   // fileId: string;
 };

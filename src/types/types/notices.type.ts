@@ -8,7 +8,7 @@ export type NoticesTypes = {
   date: string;
   type: string;
   imageUrl: string;
-  comment: string;
+  comment?: string;
   title: string;
   sex: "male" | "female";
   location: string;
