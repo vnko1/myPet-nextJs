@@ -7,7 +7,7 @@ import { LinksEnum } from "@/types";
 const pets = new Pets();
 
 export async function DELETE(
-  _: undefined,
+  _: unknown,
   { params }: { params: { petId: string } }
 ) {
   try {
