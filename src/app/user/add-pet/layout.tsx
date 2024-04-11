@@ -46,8 +46,8 @@ function AddPetLayout({ children }: { children: React.ReactNode }) {
 
     if (res.redirected) return router.replace(res.url);
     if (res.status === 200) {
-      router.replace(LinksEnum.USER);
-      return router.refresh();
+      router.push(LinksEnum.USER);
+      router.refresh();
     }
     methods.reset();
   };

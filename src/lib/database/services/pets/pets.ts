@@ -14,10 +14,10 @@ class Pets extends DBConstructor {
     return Pet.find({ owner: userId });
   }
 
-  async findPet(id: Partial<PetsTypes>) {
+  async findPet(id: string) {
     return Pet.findById(id);
   }
-  async deletePet(id: Partial<PetsTypes>) {
+  async deletePet(id: string) {
     return Pet.findByIdAndDelete(id);
   }
 }

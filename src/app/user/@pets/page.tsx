@@ -1,25 +1,16 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useRouter } from "next/navigation";
 
-import { EndpointsEnum, IconEnum, LinksEnum, PetsTypes } from "@/types";
+import { IconEnum, LinksEnum } from "@/types";
 import { UIButton } from "@/components";
+import { Pets } from "./_components";
 import userStyles from "../user.module.scss";
 import petsStyles from "./pets.module.scss";
 
-function Pets() {
+function PetsPage() {
   const router = useRouter();
-  const [pets, setPets] = useState<PetsTypes[]>([]);
 
-  useEffect(() => {
-    fetch(EndpointsEnum.GET_PET)
-      .then((res) => {
-        return res.json();
-      })
-      .then((pets) => setPets(pets));
-  }, []);
-
-  console.log(pets);
   return (
     <div className={petsStyles["pets"]}>
       <div className={petsStyles["head-wrapper"]}>
@@ -38,9 +29,9 @@ function Pets() {
           Add pet
         </UIButton>
       </div>
-      <div className={`wrapper ${petsStyles["wrapper"]}`}>Pets</div>
+      <Pets />
     </div>
   );
 }
 
-export default Pets;
+export default PetsPage;
