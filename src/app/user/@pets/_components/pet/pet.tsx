@@ -19,7 +19,13 @@ const Pet: FC<PetProps> = ({ imageUrl, name, _id }) => {
   return (
     <div className={`wrapper ${styles["pet"]}`}>
       <div className={styles["pet__top-wrapper"]}>
-        <Image src={imageUrl} width={240} height={240} alt="Pet" />
+        <Image
+          src={imageUrl}
+          width={240}
+          height={240}
+          alt="Pet"
+          className={styles["image"]}
+        />
       </div>
       <div className={styles["pet__bottom-wrapper"]}>
         <div className={styles["trash-button"]}>
