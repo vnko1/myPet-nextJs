@@ -43,10 +43,13 @@ function AddPetLayout({ children }: { children: React.ReactNode }) {
       method: "POST",
       body: JSON.stringify(data),
     });
-    router.replace(LinksEnum.USER);
-    router.refresh();
 
-    if (res.redirected) router.replace(res.url);
+    if (res.redirected) return router.replace(res.url);
+    if (res.status === 204) {
+      router.replace(LinksEnum.USER);
+      return router.refresh();
+    }
+    methods.reset();
   };
 
   const baseClassNames = cn("wrapper", styles["add-pet"]);
