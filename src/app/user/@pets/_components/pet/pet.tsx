@@ -7,7 +7,7 @@ import { deletePet } from "@/lib/actions";
 import { PetProps } from "./pet.type";
 import styles from "./pet.module.scss";
 
-const Pet: FC<PetProps> = ({ imageUrl, name, _id }) => {
+const Pet: FC<PetProps> = ({ imageUrl, name, date, comments, type, _id }) => {
   const onHandleDeleteClick = async () => {
     await deletePet(_id.toString());
 
@@ -33,7 +33,23 @@ const Pet: FC<PetProps> = ({ imageUrl, name, _id }) => {
             onClick={onHandleDeleteClick}
           />
         </div>
-        <p>Name: {name}</p>
+        <p className={styles["label"]}>
+          <span>Name:</span> {name}
+        </p>
+        <p className={styles["label"]}>
+          <span>Date of birth: </span>
+          {date}
+        </p>
+        <p className={styles["label"]}>
+          <span>Type: </span>
+          {type}
+        </p>
+        {comments ? (
+          <p className={styles["label"]}>
+            <span>Comments: </span>
+            {comments}
+          </p>
+        ) : null}
       </div>
     </div>
   );
