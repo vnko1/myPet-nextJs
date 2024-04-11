@@ -11,31 +11,51 @@ import {
 } from "@/components";
 import { IconEnum } from "@/types";
 
+const fields = [
+  {
+    name: "location",
+    label: "Location",
+    placeholder: "Type location of pet",
+    isTextArea: false,
+  },
+  {
+    name: "comments",
+    label: "Comments",
+    placeholder: "Type comments",
+    isTextArea: true,
+  },
+];
+
+const forSellFields = [
+  {
+    name: "location",
+    label: "Location",
+    placeholder: "Type location of pet",
+    isTextArea: false,
+  },
+  {
+    name: "price",
+    label: "Price",
+    placeholder: "Type price of pet",
+    isTextArea: false,
+  },
+  {
+    name: "comments",
+    label: "Comments",
+    placeholder: "Type comments",
+    isTextArea: true,
+  },
+];
+
 function Info() {
   const watch = useWatch();
 
   const isYourPet = watch.category === "your pet";
+  const isForSrell = watch.category === "sell";
 
-  const fields = [
-    {
-      name: "location",
-      label: "Location",
-      placeholder: "Type location of pet",
-      isTextArea: false,
-    },
-    {
-      name: "price",
-      label: "Price",
-      placeholder: "Type price of pet",
-      isTextArea: false,
-    },
-    {
-      name: "comments",
-      label: "Comments",
-      placeholder: "Type comments",
-      isTextArea: true,
-    },
-  ];
+  const filtredFields = isForSrell
+    ? forSellFields
+    : fields.slice(isYourPet ? 1 : 0);
 
   return (
     <div className={styles["info"]}>
@@ -62,27 +82,25 @@ function Info() {
         <p className={styles["image__title"]}>Add photo</p>
         <ImageField variant="pet" name="file" />
       </div>
-      {fields
-        .slice(isYourPet ? 2 : 0)
-        .map(({ name, label, placeholder, isTextArea }) => {
-          if (isTextArea)
-            return (
-              <TextAreaField
-                key={name}
-                name={name}
-                label={label}
-                placeholder={placeholder}
-              />
-            );
+      {filtredFields.map(({ name, label, placeholder, isTextArea }) => {
+        if (isTextArea)
           return (
-            <Field
+            <TextAreaField
               key={name}
               name={name}
               label={label}
               placeholder={placeholder}
             />
           );
-        })}
+        return (
+          <Field
+            key={name}
+            name={name}
+            label={label}
+            placeholder={placeholder}
+          />
+        );
+      })}
     </div>
   );
 }
