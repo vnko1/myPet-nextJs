@@ -24,7 +24,7 @@ const ImageField: FC<ImageFieldProps> = ({
   const imageValue = getValues("file");
 
   const [isActive, setIsActive] = useState(false);
-  const [file, setFile] = useState<string | null>(imageValue || null);
+  const [file, setFile] = useState<string | null>(null);
 
   useEffect(() => {
     if (typeof imageValue === "string") setFile(imageValue);
