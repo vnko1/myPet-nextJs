@@ -10,6 +10,8 @@ import { deletePet } from "@/lib/actions";
 const Pet: FC<PetProps> = ({ imageUrl, name, _id }) => {
   const onHandleDeleteClick = async () => {
     await deletePet(_id.toString());
+
+    // await fetch(EndpointsEnum.PET + "/" + _id.toString(), { method: "DELETE" });
   };
   return (
     <div className={`wrapper ${styles["pet"]}`}>
