@@ -5,13 +5,16 @@ import { PetProps } from "./pet.type";
 import styles from "./pet.module.scss";
 import { UIButton } from "@/components";
 import { EndpointsEnum, IconEnum } from "@/types";
+import { revalidateTag } from "next/cache";
 
 const Pet: FC<PetProps> = ({ imageUrl, name, _id }) => {
   const onHandleDeleteClick = async () => {
     fetch(EndpointsEnum.PET + "/" + _id, {
       method: "DELETE",
-      next: { revalidate: 1 },
     });
+
+    // ("use server");
+    // revalidateTag("pets");
   };
   return (
     <div className={`wrapper ${styles["pet"]}`}>

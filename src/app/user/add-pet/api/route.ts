@@ -20,7 +20,6 @@ export async function POST(request: NextRequest) {
         resource_type: "image",
         folder: `pets/${folderName}/${userId}`,
         public_id: Date.now().toString(),
-        eager: "f_auto",
       });
       res.imageUrl = imageUrl.eager[0].secure_url;
       res.owner = userId;

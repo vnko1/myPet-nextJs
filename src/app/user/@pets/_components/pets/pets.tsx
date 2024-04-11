@@ -9,7 +9,7 @@ const Pets: FC = () => {
   const [pets, setPets] = useState<PetsTypes[]>([]);
 
   useEffect(() => {
-    fetch(EndpointsEnum.PET)
+    fetch(EndpointsEnum.PET, { next: { tags: ["pets"] } })
       .then((res) => {
         return res.json();
       })
