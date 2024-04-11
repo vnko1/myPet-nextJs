@@ -8,9 +8,8 @@ import { IconEnum } from "@/types";
 import { deletePet } from "@/lib/actions";
 
 const Pet: FC<PetProps> = ({ imageUrl, name, _id }) => {
-  const deletePeteWithId = deletePet.bind(null, _id.toString());
   const onHandleDeleteClick = async () => {
-    await deletePeteWithId();
+    await deletePet(_id.toString());
   };
   return (
     <div className={`wrapper ${styles["pet"]}`}>
