@@ -51,9 +51,9 @@ function Info() {
   const watch = useWatch();
 
   const isYourPet = watch.category === "your pet";
-  const isForSrell = watch.category === "sell";
+  const isForSell = watch.category === "sell";
 
-  const filtredFields = isForSrell
+  const filtredFields = isForSell
     ? forSellFields
     : fields.slice(isYourPet ? 1 : 0);
 
