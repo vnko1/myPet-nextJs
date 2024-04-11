@@ -4,17 +4,13 @@ import Image from "next/image";
 import { PetProps } from "./pet.type";
 import styles from "./pet.module.scss";
 import { UIButton } from "@/components";
-import { EndpointsEnum, IconEnum } from "@/types";
-import { revalidateTag } from "next/cache";
+import { IconEnum } from "@/types";
+import { deletePet } from "@/lib/actions";
 
 const Pet: FC<PetProps> = ({ imageUrl, name, _id }) => {
+  const deletePeteWithId = deletePet.bind(null, _id.toString());
   const onHandleDeleteClick = async () => {
-    fetch(EndpointsEnum.PET + "/" + _id, {
-      method: "DELETE",
-    });
-
-    // ("use server");
-    // revalidateTag("pets");
+    await deletePeteWithId();
   };
   return (
     <div className={`wrapper ${styles["pet"]}`}>

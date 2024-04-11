@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { errorResponse } from "@/utils";
 import { Pets } from "@/lib/database";
-// import { revalidatePath } from "next/cache";
-// import { LinksEnum } from "@/types";
+import { revalidatePath } from "next/cache";
+import { LinksEnum } from "@/types";
 
 const pets = new Pets();
 
@@ -13,7 +13,7 @@ export async function DELETE(
   try {
     await pets.deletePet(params.petId);
 
-    // revalidatePath(LinksEnum.HOME, "layout");
+    revalidatePath(LinksEnum.USER);
     return NextResponse.json({});
   } catch (error) {
     if (error instanceof Error)

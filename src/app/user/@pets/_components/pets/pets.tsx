@@ -1,21 +1,11 @@
-"usc client";
-import React, { FC, useEffect, useState } from "react";
+// "usc client";
+import React, { FC } from "react";
 
-import { EndpointsEnum, PetsTypes } from "@/types";
 import styles from "./pets.module.scss";
 import Pet from "../pet/pet";
+import { PetsProps } from "./pets.type";
 
-const Pets: FC = () => {
-  const [pets, setPets] = useState<PetsTypes[]>([]);
-
-  useEffect(() => {
-    fetch(EndpointsEnum.PET, { next: { tags: ["pets"] } })
-      .then((res) => {
-        return res.json();
-      })
-      .then((pets) => setPets(pets));
-  }, []);
-
+const Pets: FC<PetsProps> = ({ pets }) => {
   return (
     <ul className={styles["pets"]}>
       {pets.map((pet) => (
