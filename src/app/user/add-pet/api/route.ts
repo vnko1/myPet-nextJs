@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
         folder: `pets/${folderName}/${userId}`,
         public_id: Date.now().toString(),
       });
-      res.imageUrl = imageUrl.eager[0].secure_url;
+      res.imageUrl = imageUrl.secure_url;
       res.owner = userId;
       if (res.category === "your pet") await pets.addPet(res);
       else await notices.addNotice({ ...res, category: res.category });
