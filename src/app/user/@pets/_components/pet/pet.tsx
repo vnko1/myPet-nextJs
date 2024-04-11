@@ -1,11 +1,11 @@
 "use client";
 import React, { FC } from "react";
 import Image from "next/image";
-import { PetProps } from "./pet.type";
-import styles from "./pet.module.scss";
 import { UIButton } from "@/components";
 import { IconEnum } from "@/types";
 import { deletePet } from "@/lib/actions";
+import { PetProps } from "./pet.type";
+import styles from "./pet.module.scss";
 
 const Pet: FC<PetProps> = ({ imageUrl, name, _id }) => {
   const onHandleDeleteClick = async () => {
