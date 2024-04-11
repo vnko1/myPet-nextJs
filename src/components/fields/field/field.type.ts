@@ -6,4 +6,5 @@ export type FiledProps = {
   name: string;
   variant?: "small" | "normal";
   fieldIcons?: boolean;
+  fieldValidation?: boolean;
 } & Partial<InputHTMLAttributes<HTMLInputElement>>;

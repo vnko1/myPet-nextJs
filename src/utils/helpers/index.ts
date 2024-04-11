@@ -1,13 +1,8 @@
 import { CallBackType } from "@/types";
 
-export const errorResponse = (message?: string, name?: string) => {
-  const key = name || "error";
-  const errors = { [key]: "Something wrong" };
-
-  if (message) errors[key] = message;
-
-  return { errors };
-};
+export const errorResponse = (message?: string, name?: string) => ({
+  errors: { [name || "error"]: message || "Something wrong" },
+});
 
 export const customError = ({
   message,

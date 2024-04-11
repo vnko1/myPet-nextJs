@@ -10,10 +10,8 @@ const petSchema: Schema = new Schema(
       required: [true, "Set name for pet"],
     },
     date: {
-      type: Date,
+      type: String,
       required: [true, "Set birthday date for pet"],
-      min: "2000-01-01",
-      max: new Date(),
     },
     type: {
       type: String,

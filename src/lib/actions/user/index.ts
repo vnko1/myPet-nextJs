@@ -4,7 +4,13 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
 import { loginSchema, registerSchema } from "@/schema";
-import { logOut, createUser, signIn, isAuth, updateUser } from "@/lib/database";
+import {
+  logOut,
+  createUser,
+  signIn,
+  currentUser,
+  updateUser,
+} from "@/lib/database";
 import { LinksEnum, UserTypes } from "@/types";
 import { Files } from "@/services";
 import { customError, errorResponse } from "@/utils";
@@ -65,7 +71,7 @@ export async function signOut() {
 
 export async function updateUserProfile(formData: FormData) {
   try {
-    const user = await isAuth();
+    const user = await currentUser();
 
     if (!user) throw customError({ message: "Unauthorized" });
 
@@ -81,11 +87,12 @@ export async function updateUserProfile(formData: FormData) {
         eager: "f_auto",
         overwrite: true,
       });
+
       body.avatarUrl = res.eager[0].secure_url;
     }
 
     formData.forEach((value, key) => {
-      if (key === "image" || key === "avatarUrl") return;
+      if (key === "avatarUrl") return;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (body as any)[key] = value;
     });

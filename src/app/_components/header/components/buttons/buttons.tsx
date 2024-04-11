@@ -3,11 +3,18 @@ import React, { FC, useState } from "react";
 import { IconEnum, LinksEnum } from "@/types";
 import { LogOutModal, UIButton } from "@/components";
 import { ButtonsProps } from "./buttons.type";
+import { useRouter } from "next/navigation";
 
 const Buttons: FC<ButtonsProps> = ({ user }) => {
+  const router = useRouter();
   const [isActive, setIsActive] = useState(false);
   const onHandleClick = async () => {
     setIsActive(true);
+  };
+
+  const navigate = (url: string) => {
+    router.push(url);
+    router.refresh();
   };
 
   const renderButtons = user ? (
@@ -28,7 +35,7 @@ const Buttons: FC<ButtonsProps> = ({ user }) => {
         color="secondary"
         icon={IconEnum.USER}
         alignIcon="left"
-        href={LinksEnum.USER}
+        onClick={() => navigate(LinksEnum.USER)}
       >
         {user.name}
       </UIButton>

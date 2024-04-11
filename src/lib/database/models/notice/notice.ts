@@ -15,10 +15,8 @@ const noticeSchema: Schema = new Schema(
       enum: ["sell", "lost-found", "for-free"],
     },
     date: {
-      type: Date,
+      type: String,
       required: [true, "Set birthday date for pet"],
-      min: "2000-01-01",
-      max: new Date(),
     },
     type: {
       type: String,

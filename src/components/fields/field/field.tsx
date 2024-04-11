@@ -14,6 +14,7 @@ const Field: FC<FiledProps> = ({
   label,
   type,
   name,
+  fieldValidation = false,
   variant = "normal",
   fieldIcons = false,
   ...props
@@ -25,20 +26,30 @@ const Field: FC<FiledProps> = ({
   const [isVisiblePassword, setIsVisiblePassword] = useState(false);
   const isPassword = type === "password";
 
-  const labelClassNames = cn(styles["field__label"], {
+  const fieldClassNames = cn(
+    styles["field"],
+    {
+      [styles["small"]]: variant === "small",
+      [styles["normal"]]: variant === "normal",
+    },
+    classNames
+  );
+
+  const labelTextClassNames = cn(styles["field__label"], {
     [styles["small"]]: variant === "small",
+    [styles["normal"]]: variant === "normal",
   });
 
   const inputClassName = cn(styles["field__input"], {
     [styles["normal"]]: variant === "normal",
     [styles["small"]]: variant === "small",
     [styles["error"]]: errors[name],
-    [styles["valid"]]: isDirty && !invalid && isPassword,
+    [styles["valid"]]: fieldValidation && isDirty && !invalid,
   });
 
   return (
-    <label className={`${styles["field"]} ${styles["small"]} ${classNames}`}>
-      {label ? <span className={labelClassNames}>{label}</span> : null}
+    <label className={fieldClassNames}>
+      {label ? <span className={labelTextClassNames}>{label}</span> : null}
       <span
         className={`${styles["field__wrapper"]} ${
           variant === "small" ? styles["small"] : ""

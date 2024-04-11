@@ -1,53 +1,73 @@
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, FC, useEffect, useState } from "react";
 
 import { ImageFieldProps } from "./imageField.type";
 import styles from "./imageField.module.scss";
 import { Icon } from "@/components";
 import { IconEnum } from "@/types";
 import { blobToBase64 } from "@/utils";
+import { useFormContext } from "react-hook-form";
+import Image from "next/image";
 
 const ImageField: FC<ImageFieldProps> = ({
   setImage,
   setImageUrl,
   imageUrl,
   variant,
+  name = "file",
   iconSize = 24,
   classNames,
   isLoading,
   error,
 }) => {
+  const { register, setValue, trigger, getValues } = useFormContext();
+
+  const imageValue = getValues("file");
+
   const [isActive, setIsActive] = useState(false);
-  const [file, setFile] = useState<string | null>(null);
+  const [file, setFile] = useState<string | null>(imageValue || null);
+
+  useEffect(() => {
+    if (typeof imageValue === "string") setFile(imageValue);
+  }, [imageValue]);
+
+  const disabledPattern =
+    variant === "user" ? isLoading || isActive : isLoading;
 
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.currentTarget.files?.length) return;
     const file = e.currentTarget.files;
-    blobToBase64(file[0]).then((res: string) => {
-      setFile(res);
-      setImageUrl(res);
-    });
+
+    blobToBase64(file[0])
+      .then((res: string) => {
+        setFile(res);
+        setValue(name, res);
+        setImageUrl && setImageUrl(res);
+      })
+      .finally(() => {
+        trigger();
+      });
 
     e.currentTarget.value = "";
     setIsActive(true);
   };
 
   const onHandleConfirm = () => {
-    setImage(file);
+    setImage && setImage(file);
     setTimeout(() => setIsActive(false), 0);
   };
 
   const onHandleReset = () => {
     setFile(null);
-    setImageUrl(imageUrl);
+    setImageUrl && setImageUrl(imageUrl || "");
     setTimeout(() => setIsActive(false), 0);
   };
 
   return (
     <label className={`${styles["field"]} ${classNames}`}>
       <input
-        disabled={isLoading || isActive}
+        {...register(name)}
+        disabled={disabledPattern}
         type="file"
-        name="image"
         className={styles["field__input"]}
         onChange={handleChange}
         accept="image/*"
@@ -76,6 +96,21 @@ const ImageField: FC<ImageFieldProps> = ({
             >
               <Icon icon={IconEnum.CROSS} size={iconSize} />
             </button>
+          </span>
+        )
+      ) : null}
+      {variant === "pet" ? (
+        file ? (
+          <Image
+            width={182}
+            height={182}
+            src={file || ""}
+            alt="pet photo"
+            className={styles["image"]}
+          />
+        ) : (
+          <span className={`${styles["button"]} ${styles["button-plus"]}`}>
+            <Icon icon={IconEnum.PLUS} size={72} />
           </span>
         )
       ) : null}

@@ -2,13 +2,13 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import cn from "classnames";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { UserFormProps } from "./userForm.type";
-import { Icon, LogOutModal, UIButton } from "@/components";
+import { Icon, LogOutModal, UIButton, Field, ImageField } from "@/components";
 import { IconEnum } from "@/types";
-import { Field, ImageField } from "@/components/fields";
 import { userSchema } from "@/schema";
 import styles from "./userForm.module.scss";
 import { updateUserProfile } from "@/lib/actions";
@@ -17,7 +17,7 @@ function UserForm({ user }: UserFormProps) {
   const methods = useForm({
     mode: "all",
     resolver: zodResolver(userSchema),
-    defaultValues: {
+    values: {
       name: user.name,
       email: user.email,
       birthday: user.birthday,
@@ -40,11 +40,7 @@ function UserForm({ user }: UserFormProps) {
 
   const onHandleAction = async (formData: FormData) => {
     avatar && formData.set("avatarUrl", avatar);
-    const birthday = formData.get("birthday");
-    if (birthday && typeof birthday === "string") {
-      const formattedBirthday = new Date();
-      formData.set("birthday", formattedBirthday + "");
-    }
+    formData.delete("image");
 
     await updateUserProfile(formData);
     setIsEditing(false);

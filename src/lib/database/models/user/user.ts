@@ -23,6 +23,7 @@ const userSchema: Schema = new Schema(
     },
     birthday: {
       type: String,
+      default: "",
     },
     phone: { type: String, match: phoneRegex, minlength: 13 },
     city: { type: String, match: cityRegex, minlength: 2, maxlength: 30 },

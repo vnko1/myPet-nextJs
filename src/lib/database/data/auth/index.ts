@@ -28,7 +28,7 @@ async function getUser(
   return user;
 }
 
-export async function isAuth(type: "token" | "refreshToken" = "token") {
+export async function currentUser(type: "token" | "refreshToken" = "token") {
   const token = cookies().get(type);
 
   const isValidToken = token && (await authenticate(token?.name, token?.value));
@@ -69,7 +69,7 @@ export async function signIn(
   if (!isPasswordValid) throw customError(error);
 
   const [token, tokenLifeTime] = await createToken(
-    { email: user.email },
+    { email: user.email, _id: user.id },
     process.env.JWT_KEY || "",
     TOKEN_LIFE
   );
@@ -78,7 +78,7 @@ export async function signIn(
 }
 
 export const logOut = async () => {
-  const user = await isAuth();
+  const user = await currentUser();
   if (!user) throw new Error("Something wrong");
 
   cookies().delete("token");

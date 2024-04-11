@@ -1,16 +1,21 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { LinksEnum } from "./types";
+import { EndpointsEnum, LinksEnum } from "./types";
 import { authenticate } from "./auth";
 
 export default async function middleware(request: NextRequest) {
   const isToken = request.cookies.has("token");
   const token = request.cookies.get("token");
 
-  const isValidToken = token && (await authenticate(token.name, token.value));
+  const userData = token && (await authenticate(token.name, token.value));
 
-  const isAuthenticated = isToken && isValidToken;
+  const id = ((userData && userData?._id) || "").toString();
+
+  const isAuthenticated = isToken && userData;
   const currentPath = request.nextUrl.pathname;
+
+  if (currentPath.startsWith(EndpointsEnum.ADD_PET) && !isAuthenticated)
+    return NextResponse.rewrite(new URL(LinksEnum.HOME, request.url));
 
   if (currentPath.startsWith(LinksEnum.USER) && !isAuthenticated)
     return NextResponse.redirect(new URL(LinksEnum.LOGIN, request.url));
@@ -21,11 +26,21 @@ export default async function middleware(request: NextRequest) {
   if (currentPath.startsWith(LinksEnum.REGISTER) && isAuthenticated)
     return NextResponse.redirect(new URL(LinksEnum.USER, request.url));
 
-  return NextResponse.next();
+  const requestHeaders = new Headers(request.headers);
+
+  requestHeaders.set("userId", id);
+
+  const response = NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  });
+
+  return response;
 }
 
 export const config = {
   matcher: [
-    "/((?!sponsors|friends|api|_next/static|_next/image|news|.webp|favicon.ico|.*\\.webp$|$).*)",
+    "/((?!sponsors|friends|news|_next/static|_next/image|.webp|favicon.ico|.*\\.webp$|$).*)",
   ],
 };

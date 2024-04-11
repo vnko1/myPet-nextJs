@@ -20,9 +20,11 @@ const UIButton: FC<IUIButton> = ({
   icon,
   iconSize = 24,
   isCustomIcon,
-  alignIcon,
+  alignIcon = "left",
+  disabled,
   href,
   isCurrent,
+  replace = false,
   onClick,
   ...props
 }) => {
@@ -70,6 +72,7 @@ const UIButton: FC<IUIButton> = ({
     return (
       <Link
         href={href}
+        replace={replace}
         className={baseClassNames}
         onClick={onClick}
         aria-label="navigation link"
@@ -87,7 +90,7 @@ const UIButton: FC<IUIButton> = ({
       className={baseClassNames}
       aria-label="button"
       onClick={onClick}
-      disabled={pending || isLoading}
+      disabled={pending || isLoading || disabled}
     >
       {icon ? <Icon icon={icon} size={iconSize} /> : null}
       {children}
