@@ -1,5 +1,6 @@
 import { getArticlesPages } from "@/lib/database";
-import { Articles, Pagination, Search } from "./_components";
+import { Pagination, Search } from "@/app/_components";
+import { Articles } from "./_components";
 import styles from "./news.module.scss";
 
 type PageProps = { searchParams: { query?: string; page?: string } };
