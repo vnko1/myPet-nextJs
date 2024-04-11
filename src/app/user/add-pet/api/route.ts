@@ -26,10 +26,11 @@ export async function POST(request: NextRequest) {
       res.owner = userId;
       if (res.category === "your pet") await pets.addPet(res);
       else await notices.addNotice({ ...res, category: res.category });
-      return NextResponse.json({ status: 204 });
+
+      return NextResponse.json({});
     } else throw new Error("Something wrong");
   } catch (error) {
     if (error instanceof Error)
-      return NextResponse.json(errorResponse(error.message));
+      return NextResponse.json(errorResponse(error.message), { status: 400 });
   }
 }

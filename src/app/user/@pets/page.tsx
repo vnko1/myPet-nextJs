@@ -1,14 +1,25 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { IconEnum, LinksEnum } from "@/types";
+import { EndpointsEnum, IconEnum, LinksEnum, PetsTypes } from "@/types";
 import { UIButton } from "@/components";
 import userStyles from "../user.module.scss";
 import petsStyles from "./pets.module.scss";
 
 function Pets() {
   const router = useRouter();
+  const [pets, setPets] = useState<PetsTypes[]>([]);
+
+  useEffect(() => {
+    fetch(EndpointsEnum.GET_PET)
+      .then((res) => {
+        return res.json();
+      })
+      .then((pets) => setPets(pets));
+  }, []);
+
+  console.log(pets);
   return (
     <div className={petsStyles["pets"]}>
       <div className={petsStyles["head-wrapper"]}>

@@ -10,6 +10,9 @@ class Pets extends DBConstructor {
   async addPet(newPet: Partial<PetsTypes>) {
     return Pet.create(newPet);
   }
+  async findPets(userId: string) {
+    return Pet.find({ owner: userId });
+  }
 
   async findPet(id: Partial<PetsTypes>) {
     return Pet.findById(id);
