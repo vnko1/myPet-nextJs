@@ -12,9 +12,11 @@ export type ResType =
 export type SignUpProps = {
   classNames?: string;
   path: "login" | "register";
+
   fields: {
     name: string;
     type: HTMLInputTypeAttribute;
     placeholder: string;
+    fieldValidation: boolean;
   }[];
 };

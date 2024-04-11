@@ -41,6 +41,6 @@ export default async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!sponsors|friends|_next/static|_next/image|news|.webp|favicon.ico|.*\\.webp$|$).*)",
+    "/((?!sponsors|friends|news|_next/static|_next/image|.webp|favicon.ico|.*\\.webp$|$).*)",
   ],
 };

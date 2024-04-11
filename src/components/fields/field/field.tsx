@@ -14,6 +14,7 @@ const Field: FC<FiledProps> = ({
   label,
   type,
   name,
+  fieldValidation = false,
   variant = "normal",
   fieldIcons = false,
   ...props
@@ -43,7 +44,7 @@ const Field: FC<FiledProps> = ({
     [styles["normal"]]: variant === "normal",
     [styles["small"]]: variant === "small",
     [styles["error"]]: errors[name],
-    [styles["valid"]]: isDirty && !invalid && isPassword,
+    [styles["valid"]]: fieldValidation && isDirty && !invalid,
   });
 
   return (
