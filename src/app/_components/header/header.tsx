@@ -10,7 +10,7 @@ import { HeaderProps } from "./header.type";
 
 const links = [
   { label: "News", href: LinksEnum.NEWS },
-  { label: "Find pet", href: LinksEnum.PETS },
+  { label: "Find pet", href: LinksEnum.NOTICES },
   { label: "Our friends", href: LinksEnum.FRIENDS },
   // { label: "Sponsors", href: "/sponsors" },
   // { label: "User", href: "/user" },
