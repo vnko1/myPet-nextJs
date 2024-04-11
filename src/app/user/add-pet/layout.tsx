@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,6 +17,7 @@ import styles from "./styles.module.scss";
 function AddPetLayout({ children }: { children: React.ReactNode }) {
   const pathName = usePathname();
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const methods = useForm<FormValues>({
     resolver: zodResolver(petsSchema),
@@ -39,17 +40,20 @@ function AddPetLayout({ children }: { children: React.ReactNode }) {
   };
 
   const onHandleSubmit: SubmitHandler<FormValues> = async (data) => {
+    setIsLoading(true);
     const res = await fetch(EndpointsEnum.ADD_PET, {
       method: "POST",
       body: JSON.stringify(data),
+      cache: "no-cache",
     });
-
+    methods.reset();
     if (res.redirected) return router.replace(res.url);
     if (res.status === 200) {
       router.push(LinksEnum.USER);
       router.refresh();
     }
-    methods.reset();
+
+    setIsLoading(false);
   };
 
   const baseClassNames = cn("wrapper", styles["add-pet"]);
@@ -74,6 +78,9 @@ function AddPetLayout({ children }: { children: React.ReactNode }) {
               alignIcon="right"
               onClick={onHandleNextClick}
               fullWidth
+              isLoading={
+                pathName === LinksEnum.ADD_PET_INFO ? isLoading : false
+              }
               disabled={
                 pathName === LinksEnum.ADD_PET_INFO
                   ? !methods.formState.isValid
