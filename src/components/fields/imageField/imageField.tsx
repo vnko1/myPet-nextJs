@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, FC, useEffect, useState } from "react";
 
 import { ImageFieldProps } from "./imageField.type";
 import styles from "./imageField.module.scss";
@@ -19,9 +19,16 @@ const ImageField: FC<ImageFieldProps> = ({
   isLoading,
   error,
 }) => {
-  const { register, setValue, trigger } = useFormContext();
+  const { register, setValue, trigger, getValues } = useFormContext();
+
+  const imageValue = getValues("file");
+
   const [isActive, setIsActive] = useState(false);
-  const [file, setFile] = useState<string | null>(null);
+  const [file, setFile] = useState<string | null>(imageValue || null);
+
+  useEffect(() => {
+    if (typeof imageValue === "string") setFile(imageValue);
+  }, [imageValue]);
 
   const disabledPattern =
     variant === "user" ? isLoading || isActive : isLoading;
