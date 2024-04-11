@@ -13,6 +13,6 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(userPets);
   } catch (error) {
     if (error instanceof Error)
-      return NextResponse.json(errorResponse(error.message));
+      return NextResponse.json(errorResponse(error.message), { status: 400 });
   }
 }
