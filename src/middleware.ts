@@ -14,16 +14,26 @@ export default async function middleware(request: NextRequest) {
   const isAuthenticated = isToken && userData;
   const currentPath = request.nextUrl.pathname;
 
+  console.log("🚀 ~ middleware ~ currentPath:", currentPath);
+
   if (currentPath.startsWith(EndpointsEnum.ADD_PET) && !isAuthenticated)
     return NextResponse.rewrite(new URL(LinksEnum.HOME, request.url));
+
+  if (
+    (currentPath.startsWith(LinksEnum.NOTICES_FAVORITE) ||
+      currentPath.startsWith(LinksEnum.NOTICES_OWN)) &&
+    !isAuthenticated
+  )
+    return NextResponse.redirect(new URL(LinksEnum.NOTICES_SELL, request.url));
 
   if (currentPath.startsWith(LinksEnum.USER) && !isAuthenticated)
     return NextResponse.redirect(new URL(LinksEnum.LOGIN, request.url));
 
-  if (currentPath.startsWith(LinksEnum.LOGIN) && isAuthenticated)
-    return NextResponse.redirect(new URL(LinksEnum.USER, request.url));
-
-  if (currentPath.startsWith(LinksEnum.REGISTER) && isAuthenticated)
+  if (
+    (currentPath.startsWith(LinksEnum.LOGIN) ||
+      currentPath.startsWith(LinksEnum.REGISTER)) &&
+    isAuthenticated
+  )
     return NextResponse.redirect(new URL(LinksEnum.USER, request.url));
 
   const requestHeaders = new Headers(request.headers);
