@@ -20,14 +20,14 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const user = await userIsAuthenticated();
+  const user = (await userIsAuthenticated()) || null;
 
   return (
     <html lang="en">
       <body
         className={`${manrope.variable} ${inter.variable} ${poppins.variable}`}
       >
-        <Header user={JSON.parse(JSON.stringify(user || null))} />
+        <Header user={JSON.parse(JSON.stringify(user))} />
         {children}
       </body>
     </html>

@@ -6,7 +6,7 @@ import { Categories, Filters } from "./_components";
 import { userIsAuthenticated } from "@/auth";
 
 async function NoticesLayout({ children }: { children: React.ReactNode }) {
-  const user = await userIsAuthenticated();
+  const user = await userIsAuthenticated() || null;
 
   return (
     <main>
@@ -16,7 +16,7 @@ async function NoticesLayout({ children }: { children: React.ReactNode }) {
           <Search />
           <div className={styles["notices_nav-bar"]}>
             <div className={styles["categories"]}>
-              <Categories user={JSON.parse(JSON.stringify(user || null))} />
+              <Categories user={JSON.parse(JSON.stringify(user))} />
             </div>
             <div className={styles["filters"]}>
               <Filters />
