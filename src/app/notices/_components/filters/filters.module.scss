@@ -1,0 +1,16 @@
+.filters {
+  @apply flex;
+}
+
+.button {
+  @apply flex justify-center items-center rounded-[50px];
+}
+.filter {
+  @apply w-[40px] h-[40px] bg-blueLight active:bg-blue text-blue active:text-white;
+
+  .active {
+    @apply bg-blue text-white;
+  }
+}
+.nav {
+}

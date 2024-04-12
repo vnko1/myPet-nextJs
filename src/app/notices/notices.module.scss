@@ -1,5 +1,5 @@
 .notices {
-  @apply pb-4-xs;
+  @apply pb-4-xs relative;
   &__wrapper {
     @apply flex flex-col items-center;
   }
