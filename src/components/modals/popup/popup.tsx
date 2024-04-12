@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { PopupProps } from "./popup.type.ts";
+import { PopupProps } from "./popup.type";
 
 const Popup: FC<PopupProps> = () => {
   return <div>Popup</div>;
