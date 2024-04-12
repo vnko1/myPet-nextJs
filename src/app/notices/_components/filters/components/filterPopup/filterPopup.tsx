@@ -6,6 +6,17 @@ import styles from "./filterPopup.module.scss";
 import { Icon, CheckBox } from "@/components";
 import { IconEnum } from "@/types";
 
+const genderCheckBoxes = [
+  { value: "female", label: "female" },
+  { value: "male", label: "male" },
+];
+
+const ageCheckBoxes = [
+  { value: 0.5, label: "3-12 m" },
+  { value: 1, label: "up to 1 year" },
+  { value: 2, label: "up to 2 year" },
+];
+
 const FilterPopup: FC<FilterPopupProps> = () => {
   const [genderIsActive, setGenderIsActive] = useState(false);
   const [ageIsActive, setAgeIsActive] = useState(false);
@@ -45,9 +56,13 @@ const FilterPopup: FC<FilterPopupProps> = () => {
           By age
         </button>
         {ageIsActive ? (
-          <div className={ageContentClassNames}>
-            <CheckBox name="age" value={0.5} label="3-12 m" />
-          </div>
+          <ul className={ageContentClassNames}>
+            {ageCheckBoxes.map((checkBox) => (
+              <li key={checkBox.value}>
+                <CheckBox name="age" {...checkBox} />
+              </li>
+            ))}
+          </ul>
         ) : null}
       </div>
       <div className={`${styles["filter"]} ${styles["gender"]}`}>
@@ -59,7 +74,13 @@ const FilterPopup: FC<FilterPopupProps> = () => {
           By gender
         </button>
         {genderIsActive ? (
-          <div className={genderContentClassNames}></div>
+          <ul className={genderContentClassNames}>
+            {genderCheckBoxes.map((checkBox) => (
+              <li key={checkBox.value}>
+                <CheckBox name="sex" {...checkBox} />
+              </li>
+            ))}
+          </ul>
         ) : null}
       </div>
     </>
