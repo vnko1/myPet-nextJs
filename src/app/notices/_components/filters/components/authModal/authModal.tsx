@@ -6,7 +6,7 @@ import { Modal } from "@/components";
 const AuthModal: FC<AuthModalProps> = ({ isActive, setIsActive }) => {
   return (
     <Modal active={isActive} setActive={setIsActive}>
-      <div className={styles[""]}>AuthModal</div>;
+      <div className={styles[""]}>AuthModal</div>
     </Modal>
   );
 };
