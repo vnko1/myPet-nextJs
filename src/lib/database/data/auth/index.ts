@@ -33,7 +33,9 @@ export async function currentUser(type: "token" | "refreshToken" = "token") {
   return await getUser(isValidToken);
 }
 
-export async function createUser(newUser: Omit<UserTypes, "_id">) {
+export async function createUser(
+  newUser: Omit<UserTypes, "_id" | "avatarUrl">
+) {
   const userExist = await users.findUser({ email: newUser.email });
   if (userExist)
     throw customError({

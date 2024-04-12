@@ -6,6 +6,7 @@ import { Header } from "@/app/_components";
 import "../styles/globals.scss";
 
 import { userIsAuthenticated } from "@/auth";
+import { JSONParser } from "@/utils";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const metadata: Metadata = {
@@ -20,14 +21,16 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const user = (await userIsAuthenticated()) || null;
+  const data = (await userIsAuthenticated()) || null;
+
+  const user = JSONParser(data);
 
   return (
     <html lang="en">
       <body
         className={`${manrope.variable} ${inter.variable} ${poppins.variable}`}
       >
-        <Header user={JSON.parse(JSON.stringify(user))} />
+        <Header user={user} />
         {children}
       </body>
     </html>

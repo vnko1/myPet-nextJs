@@ -3,7 +3,7 @@
 }
 
 .button {
-  @apply flex justify-center items-center rounded-[50px] md:rounded-[40px] h-[40px] md:px-2-xs  duration-150 transition-all;
+  @apply flex justify-center items-center rounded-[50px] md:rounded-[40px] h-[40px] md:px-2-xs  duration-150 transition-all  text-xs md:text-base;
 }
 
 .filter {
@@ -18,5 +18,5 @@
   }
 }
 .nav {
-  @apply flex-col text-xs text-white max-md:w-[80px] max-md:h-[80px] border-transparent bg-grBlue fixed right-4 top-3/4 md:static md:flex-row-reverse md:min-w-[130px];
+  @apply flex-col text-white max-md:w-[80px] max-md:h-[80px] border-transparent bg-grBlue fixed right-4 top-3/4 md:static md:flex-row-reverse md:min-w-[130px];
 }

@@ -48,3 +48,5 @@ export const blobToBase64 = (blob: Blob): Promise<string> => {
     reader.readAsDataURL(blob);
   });
 };
+
+export const JSONParser = <T>(data: T): T => JSON.parse(JSON.stringify(data));
