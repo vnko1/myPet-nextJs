@@ -22,10 +22,12 @@ const Filters: FC<FilterProps> = ({ user }) => {
 
   return (
     <div className={styles["filters"]}>
-      <button className={`${styles["button"]} ${styles["filter"]}`}>
-        <span>Filter </span>
-        <Icon icon={IconEnum.FILTERS} size={24} />
-      </button>
+      <div className={styles["wrapper"]}>
+        <button className={`${styles["button"]} ${styles["filter"]}`}>
+          <span>Filter </span>
+          <Icon icon={IconEnum.FILTERS} size={24} />
+        </button>
+      </div>
       <button
         className={`${styles["button"]} ${styles["nav"]}`}
         onClick={onHandleNavClick}
