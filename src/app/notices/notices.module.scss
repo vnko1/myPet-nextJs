@@ -9,11 +9,12 @@
   }
 
   &__nav-bar {
-    @apply mb-2-md md:mb-4-xs;
+    @apply mb-2-md md:mb-4-xs flex justify-between gap-1-lg w-full;
   }
 }
 
 .categories {
+  @apply md:max-w-[50%];
 }
 .filters {
 }
