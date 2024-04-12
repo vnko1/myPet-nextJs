@@ -12,3 +12,4 @@ export {
 export { default as Loader } from "./loader/loader";
 export { default as Icon } from "./icon/icon";
 export { default as PaginationButtons } from "./paginationButtons/paginationButtons";
+export { default as Popup } from "./popup/popup";
