@@ -25,6 +25,11 @@ const FilterPopup: FC<FilterPopupProps> = ({
     if (active) {
       setIsVisible(true);
     }
+
+    return () => {
+      setGenderIsActive(false);
+      setAgeIsActive(false);
+    };
   }, [active, setIsVisible]);
 
   const popupClassNames = cn(
