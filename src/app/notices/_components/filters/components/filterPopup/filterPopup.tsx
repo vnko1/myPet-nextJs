@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { ChangeEvent, FC, useEffect, useState } from "react";
 import cn from "classnames";
 
 import { FilterPopupProps } from "./filterPopup.type";
@@ -27,6 +27,14 @@ const FilterPopup: FC<FilterPopupProps> = () => {
       setAgeIsActive(false);
     };
   }, []);
+
+  const onHandleChangeGender = (event: ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value);
+  };
+
+  const onHandleChangeAge = (event: ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value);
+  };
 
   const ageButtonClassNames = cn(
     styles["filter__button"],
@@ -59,7 +67,11 @@ const FilterPopup: FC<FilterPopupProps> = () => {
           <ul className={ageContentClassNames}>
             {ageCheckBoxes.map((checkBox) => (
               <li key={checkBox.value}>
-                <CheckBox name="age" {...checkBox} />
+                <CheckBox
+                  name="age"
+                  {...checkBox}
+                  onChange={onHandleChangeAge}
+                />
               </li>
             ))}
           </ul>
@@ -77,7 +89,11 @@ const FilterPopup: FC<FilterPopupProps> = () => {
           <ul className={genderContentClassNames}>
             {genderCheckBoxes.map((checkBox) => (
               <li key={checkBox.value}>
-                <CheckBox name="sex" {...checkBox} />
+                <CheckBox
+                  name="sex"
+                  {...checkBox}
+                  onChange={onHandleChangeGender}
+                />
               </li>
             ))}
           </ul>
