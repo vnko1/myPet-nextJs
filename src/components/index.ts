@@ -8,6 +8,7 @@ export {
   ImageField,
   RadioButtonField,
   TextAreaField,
+  CheckBox,
 } from "./fields";
 export { default as Loader } from "./loader/loader";
 export { default as Icon } from "./icon/icon";

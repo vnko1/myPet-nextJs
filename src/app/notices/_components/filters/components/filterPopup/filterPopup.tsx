@@ -3,9 +3,8 @@ import cn from "classnames";
 
 import { FilterPopupProps } from "./filterPopup.type";
 import styles from "./filterPopup.module.scss";
-import { Icon } from "@/components";
+import { Icon, CheckBox } from "@/components";
 import { IconEnum } from "@/types";
-import { CheckBox } from "./components";
 
 const FilterPopup: FC<FilterPopupProps> = () => {
   const [genderIsActive, setGenderIsActive] = useState(false);
@@ -30,13 +29,9 @@ const FilterPopup: FC<FilterPopupProps> = () => {
     { [styles["active"]]: genderIsActive }
   );
 
-  const ageContentClassNames = cn(styles["filter__content"], {
-    [styles["active"]]: ageIsActive,
-  });
+  const ageContentClassNames = cn(styles["filter__content"], {});
 
-  const genderContentClassNames = cn(styles["filter__content"], {
-    [styles["active"]]: genderIsActive,
-  });
+  const genderContentClassNames = cn(styles["filter__content"], {});
 
   return (
     <>
@@ -49,9 +44,11 @@ const FilterPopup: FC<FilterPopupProps> = () => {
           <Icon icon={IconEnum.CHEVRON} size={24} />
           By age
         </button>
-        <div className={ageContentClassNames}>
-          <CheckBox name="age" value={0.5} label="3-12 m" />
-        </div>
+        {ageIsActive ? (
+          <div className={ageContentClassNames}>
+            <CheckBox name="age" value={0.5} label="3-12 m" />
+          </div>
+        ) : null}
       </div>
       <div className={`${styles["filter"]} ${styles["gender"]}`}>
         <button
@@ -61,7 +58,9 @@ const FilterPopup: FC<FilterPopupProps> = () => {
           <Icon icon={IconEnum.CHEVRON} size={24} />
           By gender
         </button>
-        <div className={genderContentClassNames}></div>
+        {genderIsActive ? (
+          <div className={genderContentClassNames}></div>
+        ) : null}
       </div>
     </>
   );
