@@ -40,7 +40,6 @@ const Categories: FC<CategoriesProps> = ({ user }) => {
   const router = useRouter();
 
   const onHandleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value);
     router.push(event.target.value);
   };
 
