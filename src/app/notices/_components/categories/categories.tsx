@@ -34,10 +34,11 @@ const notices = [
   },
 ];
 
-const Categories: FC<CategoriesProps> = () => {
+const Categories: FC<CategoriesProps> = ({ user }) => {
+  const endSliceValue = user ? notices.length : 3;
   return (
     <ul className={styles["categories"]}>
-      {notices.map((notice) => (
+      {notices.slice(0, endSliceValue).map((notice) => (
         <li key={notice.value}>
           <RadioButtonField {...notice} />
         </li>

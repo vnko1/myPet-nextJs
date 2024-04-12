@@ -27,7 +27,7 @@ export default async function RootLayout({
       <body
         className={`${manrope.variable} ${inter.variable} ${poppins.variable}`}
       >
-        <Header user={JSON.parse(JSON.stringify(user || ""))} />
+        <Header user={JSON.parse(JSON.stringify(user || null))} />
         {children}
       </body>
     </html>

@@ -3,8 +3,11 @@ import React from "react";
 import styles from "./notices.module.scss";
 import { Search } from "../_components";
 import { Categories, Filters } from "./_components";
+import { userIsAuthenticated } from "@/auth";
 
-function NoticesLayout({ children }: { children: React.ReactNode }) {
+async function NoticesLayout({ children }: { children: React.ReactNode }) {
+  const user = await userIsAuthenticated();
+
   return (
     <main>
       <section className={`${styles["notices"]} section`}>
@@ -13,7 +16,7 @@ function NoticesLayout({ children }: { children: React.ReactNode }) {
           <Search />
           <div className={styles["notices_nav-bar"]}>
             <div className={styles["categories"]}>
-              <Categories />
+              <Categories user={JSON.parse(JSON.stringify(user || null))} />
             </div>
             <div className={styles["filters"]}>
               <Filters />
