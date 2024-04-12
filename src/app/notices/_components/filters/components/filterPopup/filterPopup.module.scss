@@ -1,6 +1,43 @@
-.filter {
-  @apply absolute transition-all duration-150 opacity-0;
+.filters {
+  @apply absolute transition-all duration-150 opacity-0 px-0-md py-1-md rounded-[20px] bg-originWhite shadow-sm w-[152px] flex flex-col gap-0-md;
   &.active {
     @apply opacity-100;
+  }
+
+  & > h2 {
+    @apply text-blue text-base font-bold;
+  }
+}
+
+.filter {
+  @apply p-1-md rounded-[20px] bg-blueLight;
+  &__button {
+    @apply flex gap-1-xs justify-center items-center transition-all duration-150 bg-transparent text-blue text-sm font-normal leading-4;
+  }
+}
+
+.age {
+  &__button {
+    & > svg {
+      @apply transition-all duration-150;
+    }
+    &.active {
+      & > svg {
+        @apply rotate-180;
+      }
+    }
+  }
+}
+
+.gender {
+  &__button {
+    & > svg {
+      @apply transition-all duration-150;
+    }
+    &.active {
+      & > svg {
+        @apply rotate-180;
+      }
+    }
   }
 }
