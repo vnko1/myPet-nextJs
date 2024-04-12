@@ -9,5 +9,11 @@
   }
 
   &__nav-bar {
+    @apply mb-2-md md:mb-4-xs;
   }
+}
+
+.categories {
+}
+.filters {
 }

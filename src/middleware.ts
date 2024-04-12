@@ -14,8 +14,6 @@ export default async function middleware(request: NextRequest) {
   const isAuthenticated = isToken && userData;
   const currentPath = request.nextUrl.pathname;
 
-  console.log("🚀 ~ middleware ~ currentPath:", currentPath);
-
   if (currentPath.startsWith(EndpointsEnum.ADD_PET) && !isAuthenticated)
     return NextResponse.rewrite(new URL(LinksEnum.HOME, request.url));
 
