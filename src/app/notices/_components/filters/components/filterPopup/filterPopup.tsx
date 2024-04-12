@@ -6,6 +6,7 @@ import { FilterPopupProps } from "./filterPopup.type";
 import styles from "./filterPopup.module.scss";
 import { Icon } from "@/components";
 import { IconEnum } from "@/types";
+import { CheckBox } from "./components";
 
 const FilterPopup: FC<FilterPopupProps> = ({
   active,
@@ -52,6 +53,14 @@ const FilterPopup: FC<FilterPopupProps> = ({
     { [styles["active"]]: genderIsActive }
   );
 
+  const ageContentClassNames = cn(styles["filter__content"], {
+    [styles["active"]]: ageIsActive,
+  });
+
+  const genderContentClassNames = cn(styles["filter__content"], {
+    [styles["active"]]: genderIsActive,
+  });
+
   if (!active) return null;
 
   return (
@@ -65,6 +74,9 @@ const FilterPopup: FC<FilterPopupProps> = ({
           <Icon icon={IconEnum.CHEVRON} size={24} />
           By age
         </button>
+        <div className={ageContentClassNames}>
+          <CheckBox name="age" value={0.5} label="3-12 m" />
+        </div>
       </div>
       <div className={`${styles["filter"]} ${styles["gender"]}`}>
         <button
@@ -74,6 +86,7 @@ const FilterPopup: FC<FilterPopupProps> = ({
           <Icon icon={IconEnum.CHEVRON} size={24} />
           By gender
         </button>
+        <div className={genderContentClassNames}></div>
       </div>
     </div>
   );

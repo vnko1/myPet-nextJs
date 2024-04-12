@@ -5,14 +5,22 @@
   }
 
   & > h2 {
-    @apply text-blue text-base font-bold;
+    @apply text-blue text-base font-bold font-inter;
   }
 }
 
 .filter {
   @apply p-1-md rounded-[20px] bg-blueLight;
   &__button {
-    @apply flex gap-1-xs justify-center items-center transition-all duration-150 bg-transparent text-blue text-sm font-normal leading-4;
+    @apply flex gap-1-xs justify-center items-center transition-all duration-150 bg-transparent text-blue font-inter text-sm font-normal leading-4 mb-1-md;
+  }
+
+  &__content {
+    @apply absolute flex flex-col gap-1-xs transition-all duration-150 opacity-0 -translate-y-1/4;
+
+    &.active {
+      @apply opacity-100 translate-y-0;
+    }
   }
 }
 

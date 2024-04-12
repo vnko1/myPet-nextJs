@@ -1,0 +1,10 @@
+.container {
+  @apply flex items-center pl-3-lg;
+  & > input {
+    @apply w-[0.1px] h-[0.1px] opacity-0 hidden absolute z-[-1];
+  }
+}
+
+.checkmark {
+  @apply font-inter text-xs font-normal leading-4 text-blue;
+}
