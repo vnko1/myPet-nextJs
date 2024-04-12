@@ -53,7 +53,10 @@ function AddPetLayout({ children }: { children: React.ReactNode }) {
       if (data.category === "your pet") {
         router.push(LinksEnum.USER);
         router.refresh();
-      } else router.push(LinksEnum.NOTICES);
+      } else {
+        router.push(LinksEnum.NOTICES);
+        // router.refresh();
+      }
     }
 
     setIsLoading(false);

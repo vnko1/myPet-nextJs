@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Files } from "@/services";
-import { PetResponseValue } from "@/types";
+import { LinksEnum, PetResponseValue } from "@/types";
 import { errorResponse } from "@/utils";
 import { Notices, Pets } from "@/lib/database";
+import { revalidatePath } from "next/cache";
 
 const files = new Files();
 const pets = new Pets();
@@ -24,8 +25,11 @@ export async function POST(request: NextRequest) {
       });
       res.imageUrl = imageUrl.eager[0].secure_url;
       res.owner = userId;
+
       if (res.category === "your pet") await pets.addPet(res);
       else await notices.addNotice({ ...res, category: res.category });
+
+      revalidatePath(LinksEnum.NOTICES, "layout");
 
       return NextResponse.json({});
     } else throw new Error("Something wrong");
