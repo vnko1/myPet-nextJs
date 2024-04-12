@@ -6,11 +6,19 @@ import { UIButton } from "@/components/buttons";
 import { ModalProps } from "./modal.type";
 import styles from "./modal.module.scss";
 
-const Modal: FC<ModalProps> = ({ children, active, setActive, classNames }) => {
+const Modal: FC<ModalProps> = ({
+  children,
+  active,
+  classNames,
+  setActive,
+  eventHandler,
+}) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const closeModal = () => {
     setIsVisible(false);
+    eventHandler && eventHandler();
+
     setTimeout(() => {
       setActive(false);
     }, 300);

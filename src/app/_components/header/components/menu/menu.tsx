@@ -2,7 +2,7 @@ import { FC } from "react";
 
 import { IMenu } from "./menu.type";
 import styles from "./menu.module.scss";
-import { UIButton, AnimatedModal } from "@/components";
+import { UIButton, Menu as Modal } from "@/components";
 import Buttons from "../buttons/buttons";
 
 const transitionClassNames = {
@@ -14,7 +14,7 @@ const transitionClassNames = {
 
 const Menu: FC<IMenu> = ({ isOpen, links, pathName, user, setIsOpen }) => {
   return (
-    <AnimatedModal
+    <Modal
       isOpen={isOpen}
       setIsOpen={setIsOpen}
       backdropClassName={styles["modal"]}
@@ -43,7 +43,7 @@ const Menu: FC<IMenu> = ({ isOpen, links, pathName, user, setIsOpen }) => {
           ))}
         </ul>
       </nav>
-    </AnimatedModal>
+    </Modal>
   );
 };
 

@@ -57,7 +57,9 @@ const Buttons: FC<ButtonsProps> = ({ user }) => {
     </>
   );
 
-  const renderModal = isActive && <LogOutModal setIsActive={setIsActive} />;
+  const renderModal = (
+    <LogOutModal setIsActive={setIsActive} isActive={isActive} />
+  );
   return (
     <>
       {renderButtons}

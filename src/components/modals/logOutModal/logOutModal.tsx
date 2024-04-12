@@ -2,25 +2,29 @@
 import React, { FC } from "react";
 import { useRouter } from "next/navigation";
 
-import { CustomModal, UIButton } from "@/components";
+import { Modal, UIButton } from "@/components";
 import { IconEnum } from "@/types";
 import { signOut } from "@/lib/actions";
 import { LogOutModalProps } from "./logOutModal.type";
 import styles from "./logOutModal.module.scss";
 
-const LogOutModal: FC<LogOutModalProps> = ({ classNames, ...props }) => {
+const LogOutModal: FC<LogOutModalProps> = ({
+  classNames,
+  isActive,
+  setIsActive,
+}) => {
   const router = useRouter();
 
   const onHandleClick = async () => {
-    props.setIsActive(false);
+    setIsActive(false);
     await signOut();
     router.refresh();
   };
   return (
-    <CustomModal
+    <Modal
       classNames={`${styles["modal"]} ${classNames}`}
-      portal
-      {...props}
+      active={isActive}
+      setActive={setIsActive}
     >
       <div className={styles["modal__content"]}>
         <h2 className={styles["title"]}>Already leaving?</h2>
@@ -29,7 +33,7 @@ const LogOutModal: FC<LogOutModalProps> = ({ classNames, ...props }) => {
             variant="outlined"
             color="secondary"
             fullWidth
-            onClick={() => props.setIsActive(false)}
+            onClick={() => setIsActive(false)}
           >
             Cancel
           </UIButton>
@@ -45,7 +49,7 @@ const LogOutModal: FC<LogOutModalProps> = ({ classNames, ...props }) => {
           </UIButton>
         </div>
       </div>
-    </CustomModal>
+    </Modal>
   );
 };
 

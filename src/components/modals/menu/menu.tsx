@@ -3,13 +3,13 @@ import { createPortal } from "react-dom";
 import { FC, MouseEvent, useEffect, useRef } from "react";
 import cn from "classnames";
 
-import { ModalProps } from "./animatedModal.type";
+import { ModalProps } from "./menu.type";
 import { useSwipe } from "@/hooks";
-import styles from "./animatedModal.module.scss";
+import styles from "./menu.module.scss";
 
 import { Animation } from "@/components";
 
-const Modal: FC<ModalProps> = ({
+const Menu: FC<ModalProps> = ({
   setIsOpen,
   isOpen,
   children,
@@ -107,4 +107,4 @@ const Modal: FC<ModalProps> = ({
   );
 };
 
-export default Modal;
+export default Menu;

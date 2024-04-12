@@ -5,4 +5,5 @@ export type ModalProps = {
   setActive: Dispatch<SetStateAction<boolean>>;
   children: ReactNode;
   classNames?: string;
+  eventHandler?: () => void;
 };

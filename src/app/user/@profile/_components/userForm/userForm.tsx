@@ -143,7 +143,7 @@ function UserForm({ user }: UserFormProps) {
           </div>
         </form>
       </FormProvider>
-      {isActive && <LogOutModal setIsActive={setIsActive} />}
+      <LogOutModal setIsActive={setIsActive} isActive={isActive} />
     </>
   );
 }
