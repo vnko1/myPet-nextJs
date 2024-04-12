@@ -1,2 +1,15 @@
-.body {
+.modal {
+  @apply px-2-xs py-[60px] md:px-4-xs;
+
+  & > h2 {
+    @apply text-[24px] tracking-[0.56px] font-medium mb-2-xs text-black md:text-[36px] md:tracking-[1.44px] md:mb-4-xs;
+  }
+
+  & > p {
+    @apply text-center leading-[18px] tracking-[0.56px] text-sm text-black mb-4-xs md:text-lg md:leading-[28px] md:tracking-[0.8px];
+  }
+}
+
+.buttons {
+  @apply w-full flex flex-col gap-1-sm md:max-w-[328px] md:flex-row  mx-auto md:justify-between;
 }
