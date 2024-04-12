@@ -1,0 +1,13 @@
+.notices {
+  @apply pb-4-xs;
+  &__wrapper {
+    @apply flex flex-col items-center;
+  }
+
+  &__title {
+    @apply mb-2-md md:mb-4-xs;
+  }
+
+  &__nav-bar {
+  }
+}

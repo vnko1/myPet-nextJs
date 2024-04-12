@@ -12,7 +12,7 @@ const NavButton: FC = () => {
       variant="contained"
       onClick={() => {
         router.push(LinksEnum.ADD_PET_CATEGORY);
-        router.refresh();
+        // router.refresh();
       }}
       icon={IconEnum.PLUS}
       alignIcon="right"
