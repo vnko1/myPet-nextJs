@@ -1,18 +1,14 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { EndpointsEnum, LinksEnum } from "./types";
-import { authenticate } from "./auth";
+import { userIsAuthenticated } from "./auth";
 
 export default async function middleware(request: NextRequest) {
-  const isToken = request.cookies.has("token");
-  const token = request.cookies.get("token");
+  const userData = await userIsAuthenticated();
 
-  const userData = token && (await authenticate(token.name, token.value));
-
-  const id = ((userData && userData?._id) || "").toString();
-
-  const isAuthenticated = isToken && userData;
+  const isAuthenticated = userData;
   const currentPath = request.nextUrl.pathname;
+  const id = ((userData && userData?._id) || "").toString();
 
   if (currentPath.startsWith(EndpointsEnum.ADD_PET) && !isAuthenticated)
     return NextResponse.rewrite(new URL(LinksEnum.HOME, request.url));

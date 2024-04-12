@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "./notices.module.scss";
 import { Search } from "../_components";
-import { Categories } from "./_components";
+import { Categories, Filters } from "./_components";
 
 function NoticesLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -15,7 +15,9 @@ function NoticesLayout({ children }: { children: React.ReactNode }) {
             <div className={styles["categories"]}>
               <Categories />
             </div>
-            <div className={styles["filters"]}></div>
+            <div className={styles["filters"]}>
+              <Filters />
+            </div>
           </div>
           {children}
         </div>

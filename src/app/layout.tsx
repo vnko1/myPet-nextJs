@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
 
 import { manrope, inter, poppins } from "@/fonts";
 import { Header } from "@/app/_components";
 
-import { authenticate } from "@/auth";
 import "../styles/globals.scss";
+
+import { userIsAuthenticated } from "@/auth";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const metadata: Metadata = {
@@ -20,9 +20,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const token = cookies().get("token");
-
-  const user = token && (await authenticate(token.name, token.value));
+  const user = await userIsAuthenticated();
 
   return (
     <html lang="en">
