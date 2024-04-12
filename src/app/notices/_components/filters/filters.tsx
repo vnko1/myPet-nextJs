@@ -1,32 +1,57 @@
 "use client";
 
 import React, { FC, useState } from "react";
+import { useRouter } from "next/navigation";
+import cn from "classnames";
 
 import { useGetScreenSize } from "@/hooks";
 import { Icon } from "@/components";
 import { IconEnum, LinksEnum } from "@/types";
+import { AuthModal, FilterPopup } from "./components";
 import { FilterProps } from "./filters.type";
-import { AuthModal } from "./components";
 import styles from "./filters.module.scss";
-import { useRouter } from "next/navigation";
 
 const Filters: FC<FilterProps> = ({ user }) => {
   const { push } = useRouter();
   const [screenSize] = useGetScreenSize();
   const [isActive, setIsActive] = useState(false);
+  const [popupIsActive, setPopupIsActive] = useState(false);
+  const [popupIsVisible, setPopupIsVisible] = useState(false);
 
   const onHandleNavClick = () => {
     if (user) return push(LinksEnum.ADD_PET_CATEGORY);
     setIsActive(true);
   };
 
+  const onHandleFilterClick = () => {
+    setPopupIsActive(true);
+  };
+
+  const closePopup = () => {
+    setPopupIsVisible(false);
+
+    setTimeout(() => {
+      setPopupIsActive(false);
+    }, 300);
+  };
+
+  const filterClassNames = cn(styles["button"], styles["filter"], {
+    [styles["active"]]: popupIsActive,
+  });
+
   return (
     <div className={styles["filters"]}>
       <div className={styles["wrapper"]}>
-        <button className={`${styles["button"]} ${styles["filter"]}`}>
+        <button className={filterClassNames} onClick={onHandleFilterClick}>
           <span>Filter </span>
           <Icon icon={IconEnum.FILTERS} size={24} />
         </button>
+        <FilterPopup
+          active={popupIsActive}
+          isVisible={popupIsVisible}
+          setIsVisible={setPopupIsVisible}
+          eventHandler={closePopup}
+        />
       </div>
       <button
         className={`${styles["button"]} ${styles["nav"]}`}

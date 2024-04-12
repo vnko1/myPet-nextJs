@@ -1,0 +1,6 @@
+.filter {
+  @apply absolute transition-all duration-150 opacity-0;
+  &.active {
+    @apply opacity-100;
+  }
+}

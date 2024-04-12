@@ -7,7 +7,7 @@
 }
 
 .filter {
-  @apply max-md:w-[40px] h-[40px] bg-blueLight active:bg-grBlue active:border-transparent text-blue active:text-white md:border-2 md:border-blue md:bg-transparent md:min-w-[152px] overflow-hidden;
+  @apply max-md:w-[40px] h-[40px] bg-blueLight text-blue md:border-2 md:border-blue md:bg-transparent md:min-w-[152px] overflow-hidden;
 
   & > span {
     @apply hidden md:inline-block;
@@ -22,4 +22,5 @@
 }
 
 .wrapper {
+  @apply relative;
 }
