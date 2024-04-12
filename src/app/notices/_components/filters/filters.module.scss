@@ -9,6 +9,10 @@
 .filter {
   @apply max-md:w-[40px] h-[40px] bg-blueLight text-blue md:border-2 md:border-blue md:bg-transparent md:min-w-[152px] overflow-hidden;
 
+  &__wrapper {
+    @apply relative;
+  }
+
   & > span {
     @apply hidden md:inline-block;
   }
@@ -19,8 +23,4 @@
 }
 .nav {
   @apply flex-col text-white max-md:w-[80px] max-md:h-[80px] border-transparent bg-grBlue fixed right-4 top-3/4 md:static md:flex-row-reverse md:min-w-[130px];
-}
-
-.wrapper {
-  @apply relative;
 }

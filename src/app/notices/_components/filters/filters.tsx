@@ -41,7 +41,7 @@ const Filters: FC<FilterProps> = ({ user }) => {
 
   return (
     <div className={styles["filters"]}>
-      <div className={styles["wrapper"]}>
+      <div className={styles["filter__wrapper"]}>
         <button className={filterClassNames} onClick={onHandleFilterClick}>
           <span>Filter </span>
           <Icon icon={IconEnum.FILTERS} size={24} />
