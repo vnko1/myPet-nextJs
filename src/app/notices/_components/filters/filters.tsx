@@ -3,9 +3,10 @@
 import React, { FC, useState } from "react";
 
 import { useGetScreenSize } from "@/hooks";
-import { Icon, Modal } from "@/components";
+import { Icon } from "@/components";
 import { IconEnum } from "@/types";
 import { FilterProps } from "./filters.type";
+import { AuthModal } from "./components";
 import styles from "./filters.module.scss";
 
 const Filters: FC<FilterProps> = () => {
@@ -33,9 +34,7 @@ const Filters: FC<FilterProps> = () => {
         />
         Add pet
       </button>
-      <Modal active={isActive} setActive={setIsActive}>
-        <div>MODAL</div>
-      </Modal>
+      <AuthModal isActive={isActive} setIsActive={setIsActive} />
     </div>
   );
 };
