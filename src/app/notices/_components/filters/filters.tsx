@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import cn from "classnames";
 
 import { useGetScreenSize } from "@/hooks";
-import { Icon } from "@/components";
+import { Icon, Popup } from "@/components";
 import { IconEnum, LinksEnum } from "@/types";
 import { AuthModal, FilterPopup } from "./components";
 import { FilterProps } from "./filters.type";
@@ -46,12 +46,16 @@ const Filters: FC<FilterProps> = ({ user }) => {
           <span>Filter </span>
           <Icon icon={IconEnum.FILTERS} size={24} />
         </button>
-        <FilterPopup
-          active={popupIsActive}
-          isVisible={popupIsVisible}
-          setIsVisible={setPopupIsVisible}
+        <Popup
           eventHandler={closePopup}
-        />
+          isVisible={popupIsVisible}
+          active={popupIsActive}
+          setIsVisible={setPopupIsVisible}
+          classNames={styles["popup"]}
+          customAnimationClassNames={styles["active"]}
+        >
+          <FilterPopup />
+        </Popup>
       </div>
       <button
         className={`${styles["button"]} ${styles["nav"]}`}

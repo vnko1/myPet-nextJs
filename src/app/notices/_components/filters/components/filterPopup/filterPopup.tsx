@@ -1,45 +1,22 @@
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import cn from "classnames";
 
-import { useOutsideEventHandler } from "@/hooks";
 import { FilterPopupProps } from "./filterPopup.type";
 import styles from "./filterPopup.module.scss";
 import { Icon } from "@/components";
 import { IconEnum } from "@/types";
 import { CheckBox } from "./components";
 
-const FilterPopup: FC<FilterPopupProps> = ({
-  active,
-  classNames,
-  isVisible,
-  setIsVisible,
-  eventHandler,
-}) => {
-  const nodeRef = useRef(null);
-
+const FilterPopup: FC<FilterPopupProps> = () => {
   const [genderIsActive, setGenderIsActive] = useState(false);
   const [ageIsActive, setAgeIsActive] = useState(false);
 
-  useOutsideEventHandler(nodeRef, eventHandler);
-
   useEffect(() => {
-    if (active) {
-      setIsVisible(true);
-    }
-
     return () => {
       setGenderIsActive(false);
       setAgeIsActive(false);
     };
-  }, [active, setIsVisible]);
-
-  const popupClassNames = cn(
-    styles["filters"],
-    {
-      [styles["active"]]: isVisible,
-    },
-    classNames
-  );
+  }, []);
 
   const ageButtonClassNames = cn(
     styles["filter__button"],
@@ -61,11 +38,9 @@ const FilterPopup: FC<FilterPopupProps> = ({
     [styles["active"]]: genderIsActive,
   });
 
-  if (!active) return null;
-
   return (
-    <div ref={nodeRef} className={popupClassNames}>
-      <h2>Filters</h2>
+    <>
+      <h2 className={styles["title"]}>Filters</h2>
       <div className={`${styles["filter"]} ${styles["age"]}`}>
         <button
           className={ageButtonClassNames}
@@ -88,7 +63,7 @@ const FilterPopup: FC<FilterPopupProps> = ({
         </button>
         <div className={genderContentClassNames}></div>
       </div>
-    </div>
+    </>
   );
 };
 
