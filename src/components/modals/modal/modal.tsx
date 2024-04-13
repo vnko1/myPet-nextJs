@@ -45,7 +45,8 @@ const Modal: FC<ModalProps> = ({
     return () => {
       window.removeEventListener("keydown", handlePressESC);
     };
-  }, [closeModal]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onHandleBackDropClick = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();

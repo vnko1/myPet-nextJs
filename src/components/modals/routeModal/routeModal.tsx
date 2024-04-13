@@ -9,6 +9,7 @@ import styles from "./routeModal.module.scss";
 
 const RouteModal: FC<RouteModalProps> = ({ classNames, children }) => {
   const router = useRouter();
+
   const closeModal = () => {
     router.back();
   };
@@ -40,7 +41,8 @@ const RouteModal: FC<RouteModalProps> = ({ classNames, children }) => {
     return () => {
       window.removeEventListener("keydown", handlePressESC);
     };
-  }, [closeModal]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onHandleBackDropClick = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();

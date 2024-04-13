@@ -1,6 +1,10 @@
 import React from "react";
+import { getNotice } from "@/lib/actions";
 
-function NoticePage({ params }: { params: { id: string } }) {
+async function NoticePage({ params }: { params: { id: string } }) {
+  const data = await getNotice(params.id);
+  console.log("🚀 ~ NoticePage ~ data:", data);
+
   return <div>NoticePage id: {params.id}</div>;
 }
 
