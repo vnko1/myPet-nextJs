@@ -11,7 +11,7 @@ const sponsors = new Sponsors();
 export async function GET(request: NextRequest) {
   request;
   try {
-    const res = await sponsors.getSponsorsData();
+    const res = await sponsors.findSponsorsData();
 
     // const path = request.nextUrl.pathname;
 

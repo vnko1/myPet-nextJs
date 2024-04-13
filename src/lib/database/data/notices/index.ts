@@ -7,12 +7,12 @@ export const getNotices = notices.tryCatchWrapper<
   NoticesTypes[],
   NoticeQueryParams
 >(async function (query: NoticeQueryParams) {
-  return await notices.getNotices(query);
+  return await notices.findNotices(query);
 });
 
 export const getNoticesPages = notices.tryCatchWrapper<
   number,
   NoticeQueryParams
 >(async function (query: NoticeQueryParams) {
-  return await notices.getNoticesPagesData(query);
+  return await notices.countNoticesPagesData(query);
 });
