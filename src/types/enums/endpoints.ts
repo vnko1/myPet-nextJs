@@ -1,4 +1,4 @@
 export enum EndpointsEnum {
-  ADD_PET = "/user/add-pet/api",
+  ADD_PET = "/add-pet/api",
   PET = "/user/api",
 }

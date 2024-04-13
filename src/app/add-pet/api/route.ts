@@ -13,6 +13,7 @@ const notices = new Notices();
 export async function POST(request: NextRequest) {
   try {
     const userId = request.headers.get("userId");
+
     const res: PetResponseValue = await request.json();
     const folderName = res.category === "your-pet" ? "pets" : "notices";
 
@@ -27,10 +28,13 @@ export async function POST(request: NextRequest) {
       res.imageUrl = imageUrl.eager[0].secure_url;
       res.owner = userId;
 
-      if (res.category === "your-pet") await pets.addPet(res);
-      else await notices.addNotice({ ...res, category: res.category });
-
-      revalidatePath(LinksEnum.NOTICES, "layout");
+      if (res.category === "your-pet") {
+        await pets.addPet(res);
+        revalidatePath(LinksEnum.USER, "layout");
+      } else {
+        await notices.addNotice({ ...res, category: res.category });
+        revalidatePath(LinksEnum.NOTICES, "layout");
+      }
 
       return NextResponse.json({});
     }
