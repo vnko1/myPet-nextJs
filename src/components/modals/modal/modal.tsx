@@ -27,7 +27,11 @@ const Modal: FC<ModalProps> = ({
   useEffect(() => {
     if (active) {
       setIsVisible(true);
+      document.body.classList.add(styles["no-scroll"]);
     }
+    return () => {
+      document.body.classList.remove(styles["no-scroll"]);
+    };
   }, [active]);
 
   useEffect(() => {
@@ -37,11 +41,9 @@ const Modal: FC<ModalProps> = ({
       }
     };
     window.addEventListener("keydown", handlePressESC);
-    document.body.classList.add(styles["no-scroll"]);
 
     return () => {
       window.removeEventListener("keydown", handlePressESC);
-      document.body.classList.remove(styles["no-scroll"]);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
