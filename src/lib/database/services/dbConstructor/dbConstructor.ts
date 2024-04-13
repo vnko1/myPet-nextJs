@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { Sort } from "./dbConstructor.type";
+import { QueryData, Sort } from "./dbConstructor.type";
 import { CallBackType, NoticeQueryParams, QueryParams } from "@/types";
 import { customError } from "@/utils";
 
@@ -24,7 +24,7 @@ export default abstract class DBConstructor {
     }
   }
 
-  protected getSearchQueryPattern({ query }: QueryParams = {}) {
+  protected getSearchQueryPattern({ query }: QueryParams = {}): QueryData {
     return query
       ? {
           $or: [
@@ -36,10 +36,12 @@ export default abstract class DBConstructor {
       : {};
   }
 
-  protected getNoticesSearchPattern({ query }: NoticeQueryParams) {
-    const queryOptions = {};
-
-    return queryOptions;
+  protected getNoticesSearchPattern({
+    query,
+    category,
+    sex,
+  }: NoticeQueryParams) {
+    return { ...this.getSearchQueryPattern({ query }), category, sex };
   }
 
   protected getSortingPattern(key: string) {
