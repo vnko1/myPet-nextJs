@@ -1,7 +1,18 @@
+import { NoticeQueryParams, NoticesTypes } from "@/types";
 import { Notices } from "../../services";
 
 const notices = new Notices();
 
-export async function getNotices() {}
+export const getArticles = notices.tryCatchWrapper<
+  NoticesTypes[],
+  NoticeQueryParams
+>(async function (query: NoticeQueryParams) {
+  return await notices.getNotices(query);
+});
 
-export async function getNoticesPages() {}
+export const getNoticesPages = notices.tryCatchWrapper<
+  number,
+  NoticeQueryParams
+>(async function (query: NoticeQueryParams) {
+  return await notices.getNoticesPagesData(query);
+});

@@ -24,7 +24,7 @@ class Notices extends DBConstructor {
       .sort(sortPattern);
   }
 
-  async getArticlesPagesData(queryParams: NoticeQueryParams) {
+  async getNoticesPagesData(queryParams: NoticeQueryParams) {
     const queryPattern = this.getNoticesSearchPattern(queryParams);
 
     return Notice.countDocuments(queryPattern);
