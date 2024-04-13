@@ -24,7 +24,7 @@ export default abstract class DBConstructor {
     }
   }
 
-  protected getArticlesSearchPattern({ query }: QueryParams = {}) {
+  protected getSearchQueryPattern({ query }: QueryParams = {}) {
     return query
       ? {
           $or: [
@@ -35,7 +35,11 @@ export default abstract class DBConstructor {
       : {};
   }
 
-  protected getNoticesSearchPattern(searchParams: NoticeQueryParams) {}
+  protected getNoticesSearchPattern({ query }: NoticeQueryParams) {
+    const queryOptions = {};
+
+    return queryOptions;
+  }
 
   protected getSortingPattern(key: string) {
     return { [key]: this.sort };

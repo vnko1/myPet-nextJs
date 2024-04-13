@@ -14,7 +14,7 @@ class News extends DBConstructor implements INews {
   }
 
   async getArticlesData({ query, page }: QueryParams) {
-    const queryPattern = this.getArticlesSearchPattern({ query });
+    const queryPattern = this.getSearchQueryPattern({ query });
     const sortPattern = this.getSortingPattern("date");
     const perPage = this.getSkipPattern(page, this.limit);
 
@@ -25,7 +25,7 @@ class News extends DBConstructor implements INews {
   }
 
   getArticlesPagesData({ query }: QueryParams) {
-    const queryParams = this.getArticlesSearchPattern({ query });
+    const queryParams = this.getSearchQueryPattern({ query });
     return Article.countDocuments(queryParams);
   }
 }
