@@ -6,7 +6,7 @@ import { Notices, Pets } from "@/lib/database";
 
 const files = new Files();
 const pets = new Pets();
-const notices = new Notices();
+const notices = new Notices("desc");
 
 export async function POST(request: NextRequest) {
   try {

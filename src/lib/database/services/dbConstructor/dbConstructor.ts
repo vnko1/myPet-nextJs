@@ -24,7 +24,7 @@ export default abstract class DBConstructor {
     }
   }
 
-  protected getSearchPattern({ query }: QueryParams = {}) {
+  protected getArticleSearchPattern({ query }: QueryParams = {}) {
     return query
       ? {
           $or: [
