@@ -3,18 +3,18 @@ import React, { ChangeEvent, FC } from "react";
 import { useRouter } from "next/navigation";
 import { Pagination } from "@mui/material";
 
-import { NEWS_LIMIT } from "@/types";
 import styles from "./paginationButtons.module.scss";
 
 import { PaginationButtonsProps } from "./paginationButtons.type";
 
 const PaginationButtons: FC<PaginationButtonsProps> = ({
   currentPage,
-  totalPages,
+  totals,
   classNames,
+  limit,
   createPageUrl,
 }) => {
-  const count = Math.floor(totalPages / NEWS_LIMIT);
+  const count = Math.floor(totals / limit);
   const router = useRouter();
 
   const onHandleChange = (_: ChangeEvent<unknown>, page: number) => {

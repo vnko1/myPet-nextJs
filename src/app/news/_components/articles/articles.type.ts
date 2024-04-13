@@ -1,1 +1,1 @@
-export type ArticlesParams = { query: string; page: string };
+export type ArticlesParams = { query: string; page: string | number };

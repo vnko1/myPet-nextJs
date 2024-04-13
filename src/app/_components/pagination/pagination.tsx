@@ -7,7 +7,7 @@ import { PaginationProps } from "./pagination.type";
 import { ConstantsEnum } from "@/types";
 import { PaginationButtons } from "@/components";
 
-const Pagination: FC<PaginationProps> = ({ classNames, totalPages }) => {
+const Pagination: FC<PaginationProps> = ({ classNames, totals, limit }) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const currentPage = Number(searchParams.get(ConstantsEnum.PAGE_PARAM)) || 1;
@@ -21,7 +21,8 @@ const Pagination: FC<PaginationProps> = ({ classNames, totalPages }) => {
   return (
     <div className={`${classNames}`}>
       <PaginationButtons
-        totalPages={totalPages}
+        limit={limit}
+        totals={totals}
         currentPage={currentPage}
         createPageUrl={createPageUrl}
       />

@@ -18,7 +18,7 @@ class Notices extends DBConstructor {
     const sortPattern = this.getSortingPattern("date");
     const perPage = this.getSkipPattern(queryParams.page, this.limit);
 
-    return Notice.find(queryPattern)
+    return await Notice.find(queryPattern)
       .skip(perPage)
       .limit(this.limit)
       .sort(sortPattern);

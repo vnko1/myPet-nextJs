@@ -1,1 +1,5 @@
-export type PaginationProps = { classNames?: string; totalPages: number };
+export type PaginationProps = {
+  classNames?: string;
+  totals: number;
+  limit: number;
+};
