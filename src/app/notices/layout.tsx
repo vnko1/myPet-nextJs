@@ -3,15 +3,15 @@ import React from "react";
 import { JSONParser } from "@/utils";
 import { userIsAuthenticated } from "@/auth";
 import { Search } from "../_components";
-import { Categories, Filters } from "./_components";
+import { Categories, Filters } from "@/app/_components";
 import styles from "./notices.module.scss";
 
 async function NoticesLayout({
   children,
-  notice,
+  pet,
 }: {
   children: React.ReactNode;
-  notice: React.ReactNode;
+  pet: React.ReactNode;
 }) {
   const data = (await userIsAuthenticated()) || null;
 
@@ -32,9 +32,9 @@ async function NoticesLayout({
             </div>
           </div>
           {children}
+          {pet}
         </div>
       </section>
-      {notice}
     </main>
   );
 }
