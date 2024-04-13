@@ -12,7 +12,7 @@ const Notice: FC<NoticeProps> = ({ _id, imageUrl, title }) => {
         <Image src={imageUrl} alt="pet" width={288} height={288} />
       </div>
       <h3>{title}</h3>
-      {/* <Link></Link> */}
+      <Link href={"/notice/" + "12"}>Notice</Link>
     </div>
   );
 };
