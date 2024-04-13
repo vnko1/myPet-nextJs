@@ -60,7 +60,7 @@ function AddPetLayout({ children }: { children: React.ReactNode }) {
       } else if (data.category === "in-good-hands") {
         router.push(LinksEnum.NOTICES_IN_GOOD_HANDS);
       }
-      // router.refresh();
+      router.refresh();
     }
 
     setIsLoading(false);
