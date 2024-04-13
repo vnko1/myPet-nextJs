@@ -4,7 +4,6 @@ import { Files } from "@/services";
 import { LinksEnum, PetResponseValue } from "@/types";
 import { errorResponse } from "@/utils";
 import { Notices, Pets } from "@/lib/database";
-import { revalidatePath } from "next/cache";
 
 const files = new Files();
 const pets = new Pets();
@@ -30,10 +29,8 @@ export async function POST(request: NextRequest) {
 
       if (res.category === "your-pet") {
         await pets.addPet(res);
-        revalidatePath(LinksEnum.USER, "layout");
       } else {
         await notices.addNotice({ ...res, category: res.category });
-        revalidatePath(LinksEnum.NOTICES, "layout");
       }
 
       return NextResponse.json({});

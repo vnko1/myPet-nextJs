@@ -11,7 +11,6 @@ async function PetsPage() {
   const data: PetsTypes[] = await getPets();
 
   const pets = JSONParser(data);
-  console.log("🚀 ~ PetsPage ~ pets:", pets);
 
   return (
     <div className={petsStyles["pets"]}>
