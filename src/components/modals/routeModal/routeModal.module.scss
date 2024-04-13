@@ -1,8 +1,8 @@
 .backdrop {
-  @apply fixed top-0 left-0 h-screen w-screen bg-[#57565699] z-50 flex justify-center items-center opacity-0  transition-all duration-300;
+  @apply fixed top-0 left-0 h-screen w-screen bg-[#57565699] z-50 flex justify-center items-center;
 }
 .active {
-  @apply opacity-100;
+  @apply visible opacity-100;
 }
 .modal {
   @apply relative flex flex-col justify-center transition-all duration-300 text-center bg-originWhite rounded-[20px] w-full  max-w-[280px]  md:max-w-[608px] shadow-sm;

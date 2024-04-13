@@ -1,16 +1,13 @@
 "use client";
-import { useRouter } from "next/navigation";
 import React from "react";
 
+import { RouteModal } from "@/components";
+
 function PetModalPage({ params }: { params: { id: string } }) {
-  const router = useRouter();
   return (
-    <div>
-      PetModalPage : {params.id}
-      <div>
-        <button onClick={() => router.back()}>BACK</button>
-      </div>{" "}
-    </div>
+    <RouteModal classNames="h-[100px]">
+      <p>PetModalPage : {params.id}</p>
+    </RouteModal>
   );
 }
 

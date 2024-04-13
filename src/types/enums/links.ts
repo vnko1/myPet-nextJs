@@ -1,6 +1,7 @@
 export enum LinksEnum {
   HOME = "/",
   NEWS = "/news",
+  PET = "/pet",
   NOTICES = "/notices",
   NOTICES_SELL = NOTICES + "/sell",
   NOTICES_IN_GOOD_HANDS = NOTICES + "/in-good-hands",
