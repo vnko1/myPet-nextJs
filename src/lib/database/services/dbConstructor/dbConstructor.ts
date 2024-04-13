@@ -30,6 +30,7 @@ export default abstract class DBConstructor {
           $or: [
             { title: { $regex: query, $options: "i" } },
             { text: { $regex: query, $options: "i" } },
+            { comments: { $regex: query, $options: "i" } },
           ],
         }
       : {};
