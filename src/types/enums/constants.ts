@@ -8,3 +8,5 @@ export enum ConstantsEnum {
 }
 
 export const NEWS_LIMIT = 6;
+
+export const NOTICES_LIMIT = 6;

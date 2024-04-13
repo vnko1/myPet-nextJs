@@ -24,7 +24,9 @@ export default abstract class DBConstructor {
     }
   }
 
-  protected getSearchQueryPattern({ query }: QueryParams = {}): QueryData {
+  protected getSearchQueryPattern({
+    query,
+  }: Pick<QueryParams, "query"> = {}): QueryData {
     return query
       ? {
           $or: [
