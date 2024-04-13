@@ -1,7 +1,14 @@
 import mongoose from "mongoose";
 import { QueryData, Sort } from "./dbConstructor.type";
-import { CallBackType, NoticeQueryParams, QueryParams } from "@/types";
+import {
+  CallBackType,
+  LinksEnum,
+  NoticeQueryParams,
+  QueryParams,
+} from "@/types";
 import { customError } from "@/utils";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 export default abstract class DBConstructor {
   private mongoUri = process.env.MONGODB_URI!;
@@ -24,6 +31,15 @@ export default abstract class DBConstructor {
     }
   }
 
+  private getUserId() {
+    const headersList = headers();
+
+    const userId = headersList.get("userId");
+    if (!userId) return redirect(LinksEnum.NOTICES_SELL);
+
+    return userId;
+  }
+
   protected getSearchQueryPattern({
     query,
   }: Pick<QueryParams, "query"> = {}): QueryData {
@@ -38,26 +54,39 @@ export default abstract class DBConstructor {
       : {};
   }
 
-  private formatNumberData(data: string | undefined) {
-    const currentDate = new Date();
-    const splittedData = data?.split(",");
-    if (splittedData && splittedData?.length > 1) {
-      const dates = splittedData.map((item) => {
-        const value = +item;
-        if (value < 1) return currentDate.setMonth(currentDate.getMonth() - 3);
-        return currentDate.setFullYear(currentDate.getFullYear() - value);
-      });
-      const from = Math.max(...dates);
-      return { $lte: from };
-    }
-  }
+  // private formatNumberData(data: string | undefined) {
+  //   const currentDate = new Date();
+  //   const splittedData = data?.split(",");
+  //   if (splittedData && splittedData?.length > 1) {
+  //     const dates = splittedData.map((item) => {
+  //       const value = +item;
+  //       if (value < 1) return currentDate.setMonth(currentDate.getMonth() - 3);
+  //       return currentDate.setFullYear(currentDate.getFullYear() - value);
+  //     });
+  //     const from = Math.max(...dates);
+  //     return { $lte: from };
+  //   }
+  // }
 
   protected getNoticesSearchPattern({
     query,
-    category,
     sex,
+    category,
   }: NoticeQueryParams) {
-    return { ...this.getSearchQueryPattern({ query }), category, sex };
+    const userId = this.getUserId();
+    const queryParams: QueryData = this.getSearchQueryPattern({ query });
+
+    if (sex) queryParams.sex = sex.split(",");
+
+    if (category === "own" || category === "favorite") {
+      if (category === "favorite") {
+        queryParams[category] = { $elemMatch: { $eq: userId } };
+      } else {
+        queryParams.owner = userId;
+      }
+    } else queryParams.category = category;
+
+    return queryParams;
   }
 
   protected getSortingPattern(key: string) {

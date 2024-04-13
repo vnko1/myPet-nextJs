@@ -7,7 +7,7 @@ import layoutStyles from "@/app/notices/notices.module.scss";
 type PageProps = { searchParams: NoticeQueryParams };
 
 async function SellPage({ searchParams }: PageProps) {
-  const query = { ...searchParams, category: "sell" };
+  const query: NoticeQueryParams = { ...searchParams, category: "sell" };
   const totals = await getNoticesPages(query);
   const notices = await getNotices(query);
 

@@ -21,7 +21,7 @@ function AddPetLayout({ children }: { children: React.ReactNode }) {
 
   const methods = useForm<FormValues>({
     resolver: zodResolver(petsSchema),
-    defaultValues: { category: "your pet" },
+    defaultValues: { category: "your-pet" },
     mode: "all",
   });
 

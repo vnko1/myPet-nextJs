@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
   try {
     const userId = request.headers.get("userId");
     const res: PetResponseValue = await request.json();
-    const folderName = res.category === "your pet" ? "pets" : "notices";
+    const folderName = res.category === "your-pet" ? "pets" : "notices";
 
     if (userId) {
       const imageUrl = await files.upload(res.file, {
@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
       });
       res.imageUrl = imageUrl.eager[0].secure_url;
       res.owner = userId;
-      if (res.category === "your pet") await pets.addPet(res);
+      if (res.category === "your-pet") await pets.addPet(res);
       else await notices.addNotice({ ...res, category: res.category });
 
       return NextResponse.json({});

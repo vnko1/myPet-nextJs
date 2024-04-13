@@ -16,7 +16,7 @@ function Details() {
 
   return (
     <div className={styles["details"]}>
-      {fields.slice(watch.category === "your pet" ? 1 : 0).map((field) => (
+      {fields.slice(watch.category === "your-pet" ? 1 : 0).map((field) => (
         <Field key={field.name} {...field} />
       ))}
     </div>

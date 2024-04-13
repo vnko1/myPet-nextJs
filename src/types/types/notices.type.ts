@@ -3,7 +3,7 @@ import { Types } from "mongoose";
 export type NoticesTypes = {
   _id: Types.ObjectId;
   name: string;
-  category: "sell" | "lost/found" | "in good hands";
+  category: "sell" | "lost-found" | "in-good-hands";
   date: string;
   type: string;
   imageUrl: string;

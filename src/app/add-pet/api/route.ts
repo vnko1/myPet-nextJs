@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { redirect } from "next/navigation";
 import { Files } from "@/services";
 import { LinksEnum, PetResponseValue } from "@/types";
 import { errorResponse } from "@/utils";
@@ -13,7 +14,7 @@ export async function POST(request: NextRequest) {
   try {
     const userId = request.headers.get("userId");
     const res: PetResponseValue = await request.json();
-    const folderName = res.category === "your pet" ? "pets" : "notices";
+    const folderName = res.category === "your-pet" ? "pets" : "notices";
 
     if (userId) {
       const imageUrl = await files.upload(res.file, {
@@ -26,13 +27,14 @@ export async function POST(request: NextRequest) {
       res.imageUrl = imageUrl.eager[0].secure_url;
       res.owner = userId;
 
-      if (res.category === "your pet") await pets.addPet(res);
+      if (res.category === "your-pet") await pets.addPet(res);
       else await notices.addNotice({ ...res, category: res.category });
 
       revalidatePath(LinksEnum.NOTICES, "layout");
 
       return NextResponse.json({});
-    } else throw new Error("Something wrong");
+    }
+    redirect(LinksEnum.HOME);
   } catch (error) {
     if (error instanceof Error)
       return NextResponse.json(errorResponse(error.message), { status: 400 });

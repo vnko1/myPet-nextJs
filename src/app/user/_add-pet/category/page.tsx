@@ -7,7 +7,7 @@ const inputs = [
   {
     label: "your pet",
     name: "category",
-    value: "your pet",
+    value: "your-pet",
   },
   {
     label: "sell",
@@ -17,12 +17,12 @@ const inputs = [
   {
     label: "lost/found",
     name: "category",
-    value: "lost/found",
+    value: "lost-found",
   },
   {
     label: "in good hands",
     name: "category",
-    value: "in good hands",
+    value: "in-good-hands",
   },
 ];
 

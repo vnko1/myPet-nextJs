@@ -50,7 +50,7 @@ const forSellFields = [
 function Info() {
   const watch = useWatch();
 
-  const isYourPet = watch.category === "your pet";
+  const isYourPet = watch.category === "your-pet";
   const isForSell = watch.category === "sell";
 
   const filtredFields = isForSell

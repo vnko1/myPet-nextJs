@@ -3,7 +3,7 @@ import { birthdayRegex } from "@/utils";
 
 export const petsSchema = z
   .object({
-    category: z.enum(["sell", "lost/found", "in good hands", "your pet"], {
+    category: z.enum(["sell", "lost-found", "in-good-hands", "your-pet"], {
       required_error: "Field is required",
     }),
     title: z.string().optional(),
@@ -29,7 +29,7 @@ export const petsSchema = z
   .refine(
     (data) => {
       if (
-        ["sell", "lost/found", "in good hands"].includes(data.category) &&
+        ["sell", "lost-found", "in-good-hands"].includes(data.category) &&
         !data.title
       )
         return false;
@@ -44,7 +44,7 @@ export const petsSchema = z
   .refine(
     (data) => {
       if (
-        ["sell", "lost/found", "in good hands"].includes(data.category) &&
+        ["sell", "lost-found", "in-good-hands"].includes(data.category) &&
         !data.sex
       )
         return false;
@@ -59,7 +59,7 @@ export const petsSchema = z
   .refine(
     (data) => {
       if (
-        ["sell", "lost/found", "in good hands"].includes(data.category) &&
+        ["sell", "lost-found", "in-good-hands"].includes(data.category) &&
         !data.location
       )
         return false;

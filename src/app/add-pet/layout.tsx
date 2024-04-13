@@ -21,7 +21,7 @@ function AddPetLayout({ children }: { children: React.ReactNode }) {
 
   const methods = useForm<FormValues>({
     resolver: zodResolver(petsSchema),
-    defaultValues: { category: "your pet" },
+    defaultValues: { category: "your-pet" },
     mode: "all",
   });
 
@@ -50,7 +50,7 @@ function AddPetLayout({ children }: { children: React.ReactNode }) {
     methods.reset();
     if (res.redirected) return router.replace(res.url);
     if (res.status === 200) {
-      if (data.category === "your pet") {
+      if (data.category === "your-pet") {
         router.push(LinksEnum.USER);
         router.refresh();
       } else {
