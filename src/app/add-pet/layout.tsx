@@ -49,14 +49,18 @@ function AddPetLayout({ children }: { children: React.ReactNode }) {
     });
     methods.reset();
     if (res.redirected) return router.replace(res.url);
+
     if (res.status === 200) {
       if (data.category === "your-pet") {
         router.push(LinksEnum.USER);
-        router.refresh();
-      } else {
+      } else if (data.category === "sell") {
         router.push(LinksEnum.NOTICES);
-        // router.refresh();
+      } else if (data.category === "lost-found") {
+        router.push(LinksEnum.NOTICES_LOST_FOUND);
+      } else if (data.category === "in-good-hands") {
+        router.push(LinksEnum.NOTICES_IN_GOOD_HANDS);
       }
+      // router.refresh();
     }
 
     setIsLoading(false);

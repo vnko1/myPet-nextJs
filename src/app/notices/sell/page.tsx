@@ -13,10 +13,10 @@ async function SellPage({ searchParams }: PageProps) {
   console.log("🚀 ~ SellPage ~ notices:", notices);
 
   return (
-    <div>
+    <>
       <div className={layoutStyles["content-wrapper"]}>SellPage</div>
       <Pagination totals={totals} limit={NOTICES_LIMIT} />
-    </div>
+    </>
   );
 }
 

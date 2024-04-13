@@ -54,20 +54,6 @@ export default abstract class DBConstructor {
       : {};
   }
 
-  // private formatNumberData(data: string | undefined) {
-  //   const currentDate = new Date();
-  //   const splittedData = data?.split(",");
-  //   if (splittedData && splittedData?.length > 1) {
-  //     const dates = splittedData.map((item) => {
-  //       const value = +item;
-  //       if (value < 1) return currentDate.setMonth(currentDate.getMonth() - 3);
-  //       return currentDate.setFullYear(currentDate.getFullYear() - value);
-  //     });
-  //     const from = Math.max(...dates);
-  //     return { $lte: from };
-  //   }
-  // }
-
   protected getNoticesSearchPattern({
     query,
     sex,
