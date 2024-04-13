@@ -3,7 +3,7 @@ import { Notices } from "../../services";
 
 const notices = new Notices();
 
-export const getArticles = notices.tryCatchWrapper<
+export const getNotices = notices.tryCatchWrapper<
   NoticesTypes[],
   NoticeQueryParams
 >(async function (query: NoticeQueryParams) {

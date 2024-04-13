@@ -2,8 +2,9 @@ import { getArticlesPages } from "@/lib/database";
 import { Pagination, Search } from "@/app/_components";
 import { Articles } from "./_components";
 import styles from "./news.module.scss";
+import { QueryParams } from "@/types";
 
-type PageProps = { searchParams: { query?: string; page?: string } };
+type PageProps = { searchParams: QueryParams };
 
 // export const fetchCache = "force-no-store";
 

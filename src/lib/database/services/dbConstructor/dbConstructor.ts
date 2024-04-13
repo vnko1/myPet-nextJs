@@ -50,8 +50,8 @@ export default abstract class DBConstructor {
     return { [key]: this.sort };
   }
 
-  protected getSkipPattern(page = this.page, limit: number) {
-    return page > 0 ? (page - 1) * limit : 0;
+  protected getSkipPattern(page: string | number = this.page, limit: number) {
+    return +page > 0 ? (+page - 1) * limit : 0;
   }
 
   tryCatchWrapper<T, K>(cb: CallBackType<T, K>) {

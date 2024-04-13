@@ -1,4 +1,4 @@
-export type QueryParams = { page?: number; query?: string };
+export type QueryParams = { page?: string; query?: string };
 
 export type NoticeQueryParams = {
   sex?: "male" | "female";
