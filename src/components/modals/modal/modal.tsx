@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, MouseEvent, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import cn from "classnames";
 import { IconEnum } from "@/types";
@@ -45,8 +45,14 @@ const Modal: FC<ModalProps> = ({
     return () => {
       window.removeEventListener("keydown", handlePressESC);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [closeModal]);
+
+  const onHandleBackDropClick = (event: MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+    if (event.target === event.currentTarget) {
+      closeModal();
+    }
+  };
 
   const backDropClassNames = cn(styles["backdrop"], {
     [styles["active"]]: isVisible,
@@ -55,7 +61,7 @@ const Modal: FC<ModalProps> = ({
   const modalClassNames = cn(styles["modal"], classNames);
 
   const markup = (
-    <div className={backDropClassNames} onClick={() => closeModal()}>
+    <div className={backDropClassNames} onClick={onHandleBackDropClick}>
       <div className={modalClassNames}>
         <UIButton
           onClick={closeModal}

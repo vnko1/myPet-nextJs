@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, MouseEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { IconEnum } from "@/types";
@@ -29,8 +29,28 @@ const RouteModal: FC<RouteModalProps> = ({ classNames, children }) => {
     };
   }, [mounted]);
 
+  useEffect(() => {
+    const handlePressESC = (event: { code: string }) => {
+      if (event.code === "Escape") {
+        closeModal();
+      }
+    };
+    window.addEventListener("keydown", handlePressESC);
+
+    return () => {
+      window.removeEventListener("keydown", handlePressESC);
+    };
+  }, [closeModal]);
+
+  const onHandleBackDropClick = (event: MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+    if (event.target === event.currentTarget) {
+      closeModal();
+    }
+  };
+
   return (
-    <div className={styles["backdrop"]}>
+    <div className={styles["backdrop"]} onClick={onHandleBackDropClick}>
       <div className={`${styles["modal"]} ${classNames}`}>
         <UIButton
           onClick={closeModal}
