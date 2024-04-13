@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { Sort } from "./dbConstructor.type";
-import { CallBackType, QueryParams } from "@/types";
+import { CallBackType, NoticeQueryParams, QueryParams } from "@/types";
 import { customError } from "@/utils";
 
 export default abstract class DBConstructor {
@@ -24,7 +24,7 @@ export default abstract class DBConstructor {
     }
   }
 
-  protected getArticleSearchPattern({ query }: QueryParams = {}) {
+  protected getArticlesSearchPattern({ query }: QueryParams = {}) {
     return query
       ? {
           $or: [
@@ -34,6 +34,8 @@ export default abstract class DBConstructor {
         }
       : {};
   }
+
+  protected getNoticesSearchPattern(searchParams: NoticeQueryParams) {}
 
   protected getSortingPattern(key: string) {
     return { [key]: this.sort };
