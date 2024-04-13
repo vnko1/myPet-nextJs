@@ -33,6 +33,10 @@ class Notices extends DBConstructor {
   async findNotice(id: string) {
     return Notice.findById(id).populate("owner", "email phone");
   }
+
+  deleteNotice(id: string) {
+    return Notice.findByIdAndDelete(id);
+  }
 }
 
 export default Notices;
