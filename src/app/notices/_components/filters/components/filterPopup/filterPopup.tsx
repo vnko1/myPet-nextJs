@@ -1,25 +1,61 @@
 import React, { ChangeEvent, FC, useEffect, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import cn from "classnames";
 
 import { FilterPopupProps } from "./filterPopup.type";
 import styles from "./filterPopup.module.scss";
 import { Icon, CheckBox } from "@/components";
-import { IconEnum } from "@/types";
+import { ConstantsEnum, IconEnum } from "@/types";
 
 const genderCheckBoxes = [
-  { value: "female", label: "female" },
-  { value: "male", label: "male" },
+  {
+    id: "female",
+    value: "female",
+    label: "female",
+    checked: false,
+  },
+  {
+    id: "male",
+    value: "male",
+    label: "male",
+    checked: false,
+  },
 ];
 
 const ageCheckBoxes = [
-  { value: 0.5, label: "3-12 m" },
-  { value: 1, label: "up to 1 year" },
-  { value: 2, label: "up to 2 year" },
+  {
+    id: "0.5",
+    value: 0.5,
+    label: "3-12 m",
+    checked: false,
+  },
+  {
+    id: "1",
+    value: 1,
+    label: "up to 1 year",
+    checked: false,
+  },
+  {
+    id: "2",
+    value: 2,
+    label: "up to 2 year",
+    checked: false,
+  },
 ];
 
 const FilterPopup: FC<FilterPopupProps> = () => {
   const [genderIsActive, setGenderIsActive] = useState(false);
   const [ageIsActive, setAgeIsActive] = useState(false);
+  const [selectedGenderCheckBoxes, setSelectedGenderCheckBoxes] = useState<
+    string[]
+  >([]);
+  const [selectedAgeCheckBoxes, setSelectedAgeCheckBoxes] = useState<string[]>(
+    []
+  );
+
+  const pathname = usePathname();
+  const { replace } = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     return () => {
@@ -28,12 +64,58 @@ const FilterPopup: FC<FilterPopupProps> = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (searchParams.has(ConstantsEnum.SEX))
+      setSelectedGenderCheckBoxes(
+        searchParams.get(ConstantsEnum.SEX)?.split(",") || []
+      );
+
+    if (searchParams.has(ConstantsEnum.AGE))
+      setSelectedAgeCheckBoxes(
+        searchParams.get(ConstantsEnum.AGE)?.split(",") || []
+      );
+  }, [searchParams]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams);
+
+    if (selectedGenderCheckBoxes.length) {
+      params.set(ConstantsEnum.PAGE_PARAM, "1");
+      params.set(ConstantsEnum.SEX, selectedGenderCheckBoxes.join(","));
+    } else {
+      params.delete(ConstantsEnum.PAGE_PARAM);
+      params.delete(ConstantsEnum.SEX);
+    }
+    if (selectedAgeCheckBoxes.length) {
+      params.set(ConstantsEnum.PAGE_PARAM, "1");
+      params.set(ConstantsEnum.AGE, selectedAgeCheckBoxes.join(","));
+    } else {
+      params.delete(ConstantsEnum.PAGE_PARAM);
+      params.delete(ConstantsEnum.AGE);
+    }
+
+    replace(pathname + "?" + params.toString());
+  }, [
+    pathname,
+    searchParams,
+    selectedAgeCheckBoxes,
+    selectedGenderCheckBoxes,
+    replace,
+  ]);
+
   const onHandleChangeGender = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value);
+    const { value, checked } = event.target;
+
+    if (checked)
+      return setSelectedGenderCheckBoxes((state) => [...state, value]);
+    setSelectedGenderCheckBoxes((state) => state.filter((e) => e !== value));
   };
 
   const onHandleChangeAge = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value);
+    const { value, checked } = event.target;
+
+    if (checked) return setSelectedAgeCheckBoxes((state) => [...state, value]);
+    setSelectedAgeCheckBoxes((state) => state.filter((e) => e !== value));
   };
 
   const ageButtonClassNames = cn(
@@ -68,9 +150,10 @@ const FilterPopup: FC<FilterPopupProps> = () => {
             {ageCheckBoxes.map((checkBox) => (
               <li key={checkBox.value}>
                 <CheckBox
-                  name="age"
                   {...checkBox}
+                  name="age"
                   onChange={onHandleChangeAge}
+                  checked={selectedAgeCheckBoxes.includes(checkBox.id)}
                 />
               </li>
             ))}
@@ -90,9 +173,10 @@ const FilterPopup: FC<FilterPopupProps> = () => {
             {genderCheckBoxes.map((checkBox) => (
               <li key={checkBox.value}>
                 <CheckBox
-                  name="sex"
                   {...checkBox}
+                  name="sex"
                   onChange={onHandleChangeGender}
+                  checked={selectedGenderCheckBoxes.includes(checkBox.id)}
                 />
               </li>
             ))}
