@@ -11,7 +11,6 @@ async function SellPage({ searchParams }: PageProps) {
   const totals = await getNoticesPages(query);
   const notices = await getNotices(query);
 
-  totals;
   notices;
   return (
     <div>
