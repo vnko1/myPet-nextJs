@@ -10,8 +10,8 @@ async function SellPage({ searchParams }: PageProps) {
   const query: NoticeQueryParams = { ...searchParams, category: "sell" };
   const totals = await getNoticesPages(query);
   const notices = await getNotices(query);
+  console.log("🚀 ~ SellPage ~ notices:", notices);
 
-  notices;
   return (
     <div>
       <div className={layoutStyles["content-wrapper"]}>SellPage</div>
