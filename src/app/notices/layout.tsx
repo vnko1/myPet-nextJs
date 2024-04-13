@@ -8,10 +8,10 @@ import styles from "./notices.module.scss";
 
 async function NoticesLayout({
   children,
-  pet,
+  notice,
 }: {
   children: React.ReactNode;
-  pet: React.ReactNode;
+  notice: React.ReactNode;
 }) {
   const data = (await userIsAuthenticated()) || null;
 
@@ -32,7 +32,7 @@ async function NoticesLayout({
             </div>
           </div>
           {children}
-          {pet}
+          {notice}
         </div>
       </section>
     </main>

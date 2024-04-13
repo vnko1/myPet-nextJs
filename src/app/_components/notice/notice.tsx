@@ -17,7 +17,7 @@ const Notice: FC<NoticeProps> = ({ _id, imageUrl, title }) => {
         variant="outlined"
         color="secondary"
         fullWidth
-        href={LinksEnum.PET + "/" + _id}
+        href={LinksEnum.NOTICE + "/" + _id}
       >
         Learn more
       </UIButton>
