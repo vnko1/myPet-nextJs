@@ -1,14 +1,7 @@
 import mongoose from "mongoose";
-import { QueryData, Sort } from "./dbConstructor.type";
-import {
-  CallBackType,
-  LinksEnum,
-  NoticeQueryParams,
-  QueryParams,
-} from "@/types";
+import { CallBackType, NoticeQueryParams, QueryParams } from "@/types";
 import { customError } from "@/utils";
-import { headers } from "next/headers";
-import { redirect } from "next/navigation";
+import { QueryData, Sort } from "./dbConstructor.type";
 
 export default abstract class DBConstructor {
   private mongoUri = process.env.MONGODB_URI!;
@@ -31,15 +24,6 @@ export default abstract class DBConstructor {
     }
   }
 
-  private getUserId() {
-    const headersList = headers();
-
-    const userId = headersList.get("userId");
-    if (!userId) return redirect(LinksEnum.NOTICES_SELL);
-
-    return userId;
-  }
-
   protected getSearchQueryPattern({
     query,
   }: Pick<QueryParams, "query"> = {}): QueryData {
@@ -54,20 +38,18 @@ export default abstract class DBConstructor {
       : {};
   }
 
-  protected getNoticesSearchPattern({
-    query,
-    sex,
-    category,
-  }: NoticeQueryParams) {
-    const userId = this.getUserId();
+  protected getNoticesSearchPattern(
+    { query, sex, category }: NoticeQueryParams,
+    userId: string | null
+  ) {
     const queryParams: QueryData = this.getSearchQueryPattern({ query });
 
     if (sex) queryParams.sex = sex.split(",");
 
     if (category === "own" || category === "favorite") {
-      if (category === "favorite") {
+      if (category === "favorite" && userId) {
         queryParams[category] = { $elemMatch: { $eq: userId } };
-      } else {
+      } else if (userId) {
         queryParams.owner = userId;
       }
     } else queryParams.category = category;

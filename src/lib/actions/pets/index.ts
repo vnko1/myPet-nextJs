@@ -9,9 +9,7 @@ import { redirect } from "next/navigation";
 const pets = new Pets();
 
 export async function getPets() {
-  const headersList = headers();
-
-  const userId = headersList.get("userId");
+  const userId = headers().get("userId");
 
   if (userId) return await pets.findPets(userId);
 

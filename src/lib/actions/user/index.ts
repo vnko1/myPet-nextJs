@@ -103,7 +103,6 @@ export async function updateUserProfile(formData: FormData) {
   }
   revalidatePath(LinksEnum.USER);
 }
-
 // **************************************************************************
 
 // export const register = tryCatchWrapper(async (formData: FormData) => {

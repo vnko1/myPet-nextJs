@@ -13,8 +13,8 @@ class Notices extends DBConstructor {
     return Notice.create(newNotice);
   }
 
-  async findNotices(queryParams: NoticeQueryParams) {
-    const queryPattern = this.getNoticesSearchPattern(queryParams);
+  async findNotices(queryParams: NoticeQueryParams, userId: string | null) {
+    const queryPattern = this.getNoticesSearchPattern(queryParams, userId);
     const sortPattern = this.getSortingPattern("date");
     const perPage = this.getSkipPattern(queryParams.page, this.limit);
 
@@ -24,8 +24,11 @@ class Notices extends DBConstructor {
       .sort(sortPattern);
   }
 
-  async countNoticesPagesData(queryParams: NoticeQueryParams) {
-    const queryPattern = this.getNoticesSearchPattern(queryParams);
+  async countNoticesPagesData(
+    queryParams: NoticeQueryParams,
+    userId: string | null
+  ) {
+    const queryPattern = this.getNoticesSearchPattern(queryParams, userId);
 
     return Notice.countDocuments(queryPattern);
   }
