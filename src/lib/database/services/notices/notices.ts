@@ -1,7 +1,15 @@
-import { NOTICES_LIMIT, NoticeQueryParams, NoticesTypes } from "@/types";
+import {
+  ID,
+  NOTICES_LIMIT,
+  NoticeQueryParams,
+  NoticesTypes,
+  Options,
+} from "@/types";
 import DBConstructor from "../dbConstructor/dbConstructor";
 import { Notice } from "../../models";
 import { Sort } from "../dbConstructor/dbConstructor.type";
+
+type NoticeOptions = { fieldName: keyof NoticesTypes | null } & Options;
 
 class Notices extends DBConstructor {
   protected limit = NOTICES_LIMIT;
@@ -35,6 +43,30 @@ class Notices extends DBConstructor {
 
   async findNotice(id: string) {
     return Notice.findById(id).populate("owner", "email phone");
+  }
+
+  async updateNotice(
+    _id: ID,
+    notice: Partial<NoticesTypes | { [name: string]: string }>,
+    {
+      fieldName = null,
+      projection = "",
+      newDoc = true,
+    }: Partial<NoticeOptions> = {}
+  ) {
+    if (fieldName) {
+      const [key] = Object.keys(notice);
+
+      return Notice.findByIdAndUpdate(
+        _id,
+        {
+          [key]: { [fieldName]: notice[key as keyof NoticesTypes] },
+        },
+        { new: newDoc, projection }
+      );
+    }
+
+    return Notice.findByIdAndUpdate(_id, notice, { new: newDoc, projection });
   }
 
   deleteNotice(id: string) {
