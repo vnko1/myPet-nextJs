@@ -26,8 +26,9 @@ export async function addToFavorite(noticeId: string) {
   await notices.updateNotice(
     noticeId,
     { $addToSet: userId },
-    { fieldName: "favorite" }
+    { fieldName: "favorites" }
   );
+
   revalidatePath(LinksEnum.NOTICES, "layout");
 }
 
@@ -39,7 +40,8 @@ export async function removeFromFavorite(noticeId: string) {
   await notices.updateNotice(
     noticeId,
     { $pull: userId },
-    { fieldName: "favorite" }
+    { fieldName: "favorites" }
   );
+
   revalidatePath(LinksEnum.NOTICES, "layout");
 }

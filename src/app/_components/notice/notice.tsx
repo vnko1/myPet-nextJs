@@ -3,12 +3,14 @@ import React, { FC, useState } from "react";
 import Image from "next/image";
 import { Modal, UIButton } from "@/components";
 import { IconEnum, LinksEnum } from "@/types";
-import { deleteNotice } from "@/lib/actions";
+import { addToFavorite, deleteNotice, removeFromFavorite } from "@/lib/actions";
 import { NoticeProps } from "./notice.type";
 import styles from "./notice.module.scss";
+import AuthModal from "../authModal/authModal";
 
-const Notice: FC<NoticeProps> = ({ _id, imageUrl, title }) => {
+const Notice: FC<NoticeProps> = ({ _id, imageUrl, title, user }) => {
   const [isActive, setIsActive] = useState(false);
+  const [authIsActive, setAuthIsActive] = useState(false);
 
   const onDelete = async () => {
     await deleteNotice(_id.toString());
@@ -18,6 +20,11 @@ const Notice: FC<NoticeProps> = ({ _id, imageUrl, title }) => {
   };
   const onCancel = () => {
     setIsActive(false);
+  };
+
+  const onHandleFavoriteClick = async () => {
+    if (!user) setAuthIsActive(true);
+    await addToFavorite(_id.toString());
   };
   return (
     <div className={styles["notice"]}>
@@ -33,9 +40,22 @@ const Notice: FC<NoticeProps> = ({ _id, imageUrl, title }) => {
       >
         Learn more
       </UIButton>
-      <button onClick={onTrashClick}>DELETE</button>
+      <button className="block" onClick={onTrashClick}>
+        DELETE
+      </button>
+      <button className="block" onClick={onHandleFavoriteClick}>
+        ADD fav
+      </button>
+      <button
+        className="block"
+        onClick={async () => {
+          await removeFromFavorite(_id.toString());
+        }}
+      >
+        REmove fav
+      </button>
       <Modal active={isActive} setActive={setIsActive}>
-        <h2>Delete adverstiment?</h2>
+        <h2>Delete advertisement?</h2>
         <p>
           Are you sure you want to delete “Cute dog looking for a home”? You
           can`t undo this action.
@@ -53,6 +73,7 @@ const Notice: FC<NoticeProps> = ({ _id, imageUrl, title }) => {
           Yes
         </UIButton>
       </Modal>
+      <AuthModal isActive={authIsActive} setIsActive={setAuthIsActive} />
     </div>
   );
 };

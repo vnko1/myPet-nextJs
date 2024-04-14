@@ -1,3 +1,4 @@
+"use client";
 import { ChangeEvent, FC } from "react";
 import { SearchFieldProps } from "./searchField.type";
 

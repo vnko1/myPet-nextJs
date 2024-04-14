@@ -7,7 +7,8 @@ import cn from "classnames";
 import { useGetScreenSize } from "@/hooks";
 import { Icon, Popup } from "@/components";
 import { IconEnum, LinksEnum } from "@/types";
-import { AuthModal, FilterPopup } from "./components";
+import AuthModal from "../authModal/authModal";
+import { FilterPopup } from "./components";
 import { FilterProps } from "./filters.type";
 import styles from "./filters.module.scss";
 

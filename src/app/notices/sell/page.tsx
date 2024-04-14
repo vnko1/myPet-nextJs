@@ -4,6 +4,7 @@ import { getNotices, getNoticesPages } from "@/lib/database";
 import { Pagination, Notices } from "@/app/_components";
 import layoutStyles from "@/app/notices/notices.module.scss";
 import { JSONParser } from "@/utils";
+import { userIsAuthenticated } from "@/auth";
 
 type PageProps = { searchParams: NoticeQueryParams };
 
@@ -16,10 +17,14 @@ async function SellPage({ searchParams }: PageProps) {
   const data = await getNotices(query);
 
   const notices = JSONParser(data);
+
+  const userData = (await userIsAuthenticated()) || null;
+
+  const user = JSONParser(userData);
   return (
     <>
       <div className={layoutStyles["content-wrapper"]}>
-        <Notices notices={notices || []} />
+        <Notices notices={notices || []} user={user} />
       </div>
       <Pagination totals={totals || 0} limit={NOTICES_LIMIT} />
     </>

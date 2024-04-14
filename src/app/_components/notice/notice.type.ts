@@ -1,3 +1,6 @@
-import { NoticesTypes } from "@/types";
+import { JWTPayloadType, NoticesTypes } from "@/types";
 
-export type NoticeProps = { classNames?: string } & NoticesTypes;
+export type NoticeProps = {
+  classNames?: string;
+  user: JWTPayloadType | null;
+} & NoticesTypes;
