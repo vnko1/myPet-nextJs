@@ -14,7 +14,7 @@ export type NoticesTypes = {
   title: string;
   sex: "male" | "female";
   location: string;
-  price: number;
+  price?: number;
   owner: Partial<UserTypes>;
   favorites: Array<Types.ObjectId>;
 
