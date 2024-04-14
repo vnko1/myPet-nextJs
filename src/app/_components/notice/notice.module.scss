@@ -1,12 +1,12 @@
 .notice {
-  @apply w-full shadow-sm rounded-b-[40px] bg-accentWhite;
+  @apply w-full shadow-sm rounded-b-[40px] bg-accentWhite flex flex-col items-center justify-center;
 
   &__thumb {
-    @apply relative w-[280px] h-[280px] mb-2-xs;
+    @apply relative w-[280px] h-[280px] md:w-[336px] md:h-[288px] base:w-[288px];
   }
 
   &__content {
-    @apply px-1-lg pb-2-md;
+    @apply w-full px-1-lg pb-2-md pt-2-xs md:px-2-xs;
   }
 }
 

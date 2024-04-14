@@ -1,10 +1,10 @@
 import React from "react";
 import { NOTICES_LIMIT, NoticeQueryParams } from "@/types";
+import { userIsAuthenticated } from "@/auth";
+import { JSONParser } from "@/utils";
 import { getNotices, getNoticesPages } from "@/lib/database";
 import { Pagination, Notices } from "@/app/_components";
 import layoutStyles from "@/app/notices/notices.module.scss";
-import { JSONParser } from "@/utils";
-import { userIsAuthenticated } from "@/auth";
 
 type PageProps = { searchParams: NoticeQueryParams };
 
