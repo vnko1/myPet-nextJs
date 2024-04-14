@@ -1,13 +1,13 @@
 "use client";
 import React, { FC, useEffect, useState } from "react";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 import { UIButton } from "@/components";
 import { IconEnum } from "@/types";
 import { getCategory } from "@/utils";
 import { addToFavorite, removeFromFavorite } from "@/lib/actions";
-import AuthModal from "../authModal/authModal";
+import { AuthModal } from "@/app/_components";
 import { PetProps } from "./pet.type";
 import styles from "./pet.module.scss";
 
@@ -29,11 +29,9 @@ const Pet: FC<PetProps> = ({
   },
 }) => {
   const [authIsActive, setAuthIsActive] = useState(false);
-
   const [isFavorite, setIsFavorite] = useState(
     favorites.some((item) => item.toString() === userId)
   );
-
   const pathName = usePathname();
 
   useEffect(() => {

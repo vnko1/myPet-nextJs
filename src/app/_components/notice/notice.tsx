@@ -4,14 +4,18 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import cn from "classnames";
 
-import { Icon, Modal, UIButton } from "@/components";
 import { IconEnum, LinksEnum, NoticesTypes } from "@/types";
 import { getCategory } from "@/utils";
-import { addToFavorite, deleteNotice, removeFromFavorite } from "@/lib/actions";
-import AuthModal from "../authModal/authModal";
+import {
+  addToFavorite,
+  deleteNotice,
+  getNotice,
+  removeFromFavorite,
+} from "@/lib/actions";
+import { Icon, Modal, UIButton } from "@/components";
+import { AuthModal, Pet } from "@/app/_components";
 import { NoticeProps } from "./notice.type";
 import styles from "./notice.module.scss";
-import Pet from "../pet/pet";
 
 const Notice: FC<NoticeProps> = ({
   _id,
@@ -27,13 +31,26 @@ const Notice: FC<NoticeProps> = ({
   const [authIsActive, setAuthIsActive] = useState(false);
   const [petIsActive, setPetIsActive] = useState(false);
   const [petIsLoading, setPetOsLoading] = useState(false);
-
+  const [petCard, setPetCard] = useState<NoticesTypes | null>(null);
   const [isFavorite, setIsFavorite] = useState(
     favorites.some((item) => item.toString() === userId)
   );
-  const [petCard, setPetCard] = useState<NoticesTypes | null>(null);
 
   const pathName = usePathname();
+
+  const openPetModal = async () => {
+    try {
+      setPetOsLoading(true);
+      const pet = await getNotice(_id.toString());
+
+      setPetCard(pet as NoticesTypes);
+      setPetIsActive(true);
+    } catch (error) {
+      if (error instanceof Error) throw new Error(error.message);
+    } finally {
+      setPetOsLoading(false);
+    }
+  };
 
   useEffect(() => {
     setIsFavorite(favorites.some((item) => item.toString() === userId));
@@ -47,20 +64,6 @@ const Notice: FC<NoticeProps> = ({
   };
   const onCancel = () => {
     setIsActive(false);
-  };
-
-  const openPetModal = async () => {
-    try {
-      setPetOsLoading(true);
-      const data = await fetch("/notice/api/" + _id);
-      const pet = await data.json();
-      setPetCard(pet);
-      setPetIsActive(true);
-    } catch (error) {
-      if (error instanceof Error) throw new Error(error.message);
-    } finally {
-      setPetOsLoading(false);
-    }
   };
 
   const onHandleFavoriteClick = async () => {
@@ -152,7 +155,7 @@ const Notice: FC<NoticeProps> = ({
         active={petIsActive}
         setActive={setPetIsActive}
       >
-        {petCard ? <Pet pet={petCard} userId={userId} /> : null}
+        <Pet pet={petCard as NoticesTypes} userId={userId} />
       </Modal>
       <AuthModal isActive={authIsActive} setIsActive={setAuthIsActive} />
     </div>
@@ -160,3 +163,7 @@ const Notice: FC<NoticeProps> = ({
 };
 
 export default Notice;
+
+//  href={LinksEnum.NOTICE + "/" + _id}
+// const data = await fetch("/notice/api/" + _id);
+// const pet = await data.json();

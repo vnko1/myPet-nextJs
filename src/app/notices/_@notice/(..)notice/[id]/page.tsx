@@ -1,6 +1,6 @@
 import React from "react";
 import { headers } from "next/headers";
-import { ConstantsEnum } from "@/types";
+import { ConstantsEnum, NoticesTypes } from "@/types";
 import { JSONParser } from "@/utils";
 import { RouteModal } from "@/components";
 import { getNotice } from "@/lib/actions";
@@ -14,7 +14,7 @@ async function NoticeModalPage({ params: { id } }: { params: { id: string } }) {
 
   return (
     <RouteModal classNames={styles["modal"]}>
-      <Pet pet={pet} userId={userId} />
+      <Pet pet={pet as NoticesTypes} userId={userId} />
     </RouteModal>
   );
 }

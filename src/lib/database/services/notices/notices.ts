@@ -46,7 +46,7 @@ class Notices extends DBConstructor {
   }
 
   async findNotice(id: string) {
-    return Notice.findById(id).populate("owner", "email phone");
+    return Notice.findById(id).populate("owner", "email phone").lean();
   }
 
   async updateNotice(
