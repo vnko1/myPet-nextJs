@@ -18,8 +18,28 @@ export async function deleteNotice(id: string) {
   revalidatePath(LinksEnum.NOTICES, "layout");
 }
 
-export async function addToFavorite() {
+export async function addToFavorite(noticeId: string) {
   const userId = headers().get(ConstantsEnum.USER_ID);
 
   if (!userId) return redirect(LinksEnum.HOME);
+
+  await notices.updateNotice(
+    noticeId,
+    { $addToSet: userId },
+    { fieldName: "favorite" }
+  );
+  revalidatePath(LinksEnum.NOTICES, "layout");
+}
+
+export async function removeFromFavorite(noticeId: string) {
+  const userId = headers().get(ConstantsEnum.USER_ID);
+
+  if (!userId) return redirect(LinksEnum.HOME);
+
+  await notices.updateNotice(
+    noticeId,
+    { $pull: userId },
+    { fieldName: "favorite" }
+  );
+  revalidatePath(LinksEnum.NOTICES, "layout");
 }

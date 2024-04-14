@@ -9,7 +9,9 @@ import DBConstructor from "../dbConstructor/dbConstructor";
 import { Notice } from "../../models";
 import { Sort } from "../dbConstructor/dbConstructor.type";
 
-type NoticeOptions = { fieldName: keyof NoticesTypes | null } & Options;
+type NoticeOptions = {
+  fieldName: keyof NoticesTypes | null | string;
+} & Options;
 
 class Notices extends DBConstructor {
   protected limit = NOTICES_LIMIT;
@@ -46,7 +48,7 @@ class Notices extends DBConstructor {
   }
 
   async updateNotice(
-    _id: ID,
+    _id: ID | string,
     notice: Partial<NoticesTypes | { [name: string]: string }>,
     {
       fieldName = null,

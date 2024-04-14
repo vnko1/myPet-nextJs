@@ -13,6 +13,7 @@ export type NoticesTypes = {
   location: string;
   price: number;
   owner: string;
+
   // favorites: Array<UserTypes>;
   // fileId: string;
 };
