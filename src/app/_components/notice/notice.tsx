@@ -4,13 +4,17 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import cn from "classnames";
 
-import { Icon, Modal, UIButton } from "@/components";
 import { IconEnum, LinksEnum, NoticesTypes } from "@/types";
 import { getCategory } from "@/utils";
-import { addToFavorite, deleteNotice, removeFromFavorite } from "@/lib/actions";
-import AuthModal from "../authModal/authModal";
+import {
+  addToFavorite,
+  deleteNotice,
+  getNotice,
+  removeFromFavorite,
+} from "@/lib/actions";
+import { Icon, Modal, UIButton } from "@/components";
+import { AuthModal, Pet } from "@/app/_components";
 import { NoticeProps } from "./notice.type";
-import Pet from "../pet/pet";
 import styles from "./notice.module.scss";
 
 const Notice: FC<NoticeProps> = ({
@@ -37,9 +41,9 @@ const Notice: FC<NoticeProps> = ({
   const openPetModal = async () => {
     try {
       setPetOsLoading(true);
-      const data = await fetch("/notice/api/" + _id);
-      const pet = await data.json();
-      setPetCard(pet);
+      const pet = await getNotice(_id.toString());
+
+      setPetCard(pet as NoticesTypes);
       setPetIsActive(true);
     } catch (error) {
       if (error instanceof Error) throw new Error(error.message);
@@ -161,3 +165,5 @@ const Notice: FC<NoticeProps> = ({
 export default Notice;
 
 //  href={LinksEnum.NOTICE + "/" + _id}
+// const data = await fetch("/notice/api/" + _id);
+// const pet = await data.json();
