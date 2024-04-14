@@ -22,36 +22,12 @@ const genderCheckBoxes = [
   },
 ];
 
-// const ageCheckBoxes = [
-//   {
-//     id: "0.5",
-//     value: 0.5,
-//     label: "3-12 m",
-//     checked: false,
-//   },
-//   {
-//     id: "1",
-//     value: 1,
-//     label: "up to 1 year",
-//     checked: false,
-//   },
-//   {
-//     id: "2",
-//     value: 2,
-//     label: "up to 2 year",
-//     checked: false,
-//   },
-// ];
-
 const FilterPopup: FC<FilterPopupProps> = () => {
   const [genderIsActive, setGenderIsActive] = useState(false);
-  // const [ageIsActive, setAgeIsActive] = useState(false);
+
   const [selectedGenderCheckBoxes, setSelectedGenderCheckBoxes] = useState<
     string[]
   >([]);
-  // const [selectedAgeCheckBoxes, setSelectedAgeCheckBoxes] = useState<string[]>(
-  //   []
-  // );
 
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -60,7 +36,6 @@ const FilterPopup: FC<FilterPopupProps> = () => {
   useEffect(() => {
     return () => {
       setGenderIsActive(false);
-      // setAgeIsActive(false);
     };
   }, []);
 
@@ -69,11 +44,6 @@ const FilterPopup: FC<FilterPopupProps> = () => {
       setSelectedGenderCheckBoxes(
         searchParams.get(ConstantsEnum.SEX)?.split(",") || []
       );
-
-    // if (searchParams.has(ConstantsEnum.AGE))
-    //   setSelectedAgeCheckBoxes(
-    //     searchParams.get(ConstantsEnum.AGE)?.split(",") || []
-    //   );
   }, [searchParams]);
 
   useEffect(() => {
@@ -86,13 +56,6 @@ const FilterPopup: FC<FilterPopupProps> = () => {
       params.delete(ConstantsEnum.PAGE_PARAM);
       params.delete(ConstantsEnum.SEX);
     }
-    // if (selectedAgeCheckBoxes.length) {
-    //   params.set(ConstantsEnum.PAGE_PARAM, "1");
-    //   params.set(ConstantsEnum.AGE, selectedAgeCheckBoxes.join(","));
-    // } else {
-    //   params.delete(ConstantsEnum.PAGE_PARAM);
-    //   params.delete(ConstantsEnum.AGE);
-    // }
 
     replace(pathname + "?" + params.toString());
   }, [pathname, replace, searchParams, selectedGenderCheckBoxes]);
@@ -105,55 +68,18 @@ const FilterPopup: FC<FilterPopupProps> = () => {
     setSelectedGenderCheckBoxes((state) => state.filter((e) => e !== value));
   };
 
-  // const onHandleChangeAge = (event: ChangeEvent<HTMLInputElement>) => {
-  //   const { value, checked } = event.target;
-
-  //   if (checked) return setSelectedAgeCheckBoxes((state) => [...state, value]);
-  //   setSelectedAgeCheckBoxes((state) => state.filter((e) => e !== value));
-  // };
-
-  // const ageButtonClassNames = cn(
-  //   styles["filter__button"],
-  //   styles["age__button"],
-  //   { [styles["active"]]: ageIsActive }
-  // );
-
   const genderButtonClassNames = cn(
     styles["filter__button"],
     styles["gender__button"],
     { [styles["active"]]: genderIsActive }
   );
 
-  // const ageContentClassNames = cn(styles["filter__content"], {});
-
   const genderContentClassNames = cn(styles["filter__content"], {});
 
   return (
     <>
       <h2 className={styles["title"]}>Filters</h2>
-      {/* <div className={`${styles["filter"]} ${styles["age"]}`}>
-        <button
-          className={ageButtonClassNames}
-          onClick={() => setAgeIsActive(!ageIsActive)}
-        >
-          <Icon icon={IconEnum.CHEVRON} size={24} />
-          By age
-        </button>
-        {ageIsActive ? (
-          <ul className={ageContentClassNames}>
-            {ageCheckBoxes.map((checkBox) => (
-              <li key={checkBox.value}>
-                <CheckBox
-                  {...checkBox}
-                  name="age"
-                  onChange={onHandleChangeAge}
-                  checked={selectedAgeCheckBoxes.includes(checkBox.id)}
-                />
-              </li>
-            ))}
-          </ul>
-        ) : null}
-      </div> */}
+
       <div className={`${styles["filter"]} ${styles["gender"]}`}>
         <button
           className={genderButtonClassNames}
@@ -182,3 +108,81 @@ const FilterPopup: FC<FilterPopupProps> = () => {
 };
 
 export default FilterPopup;
+
+// const ageCheckBoxes = [
+//   {
+//     id: "0.5",
+//     value: 0.5,
+//     label: "3-12 m",
+//     checked: false,
+//   },
+//   {
+//     id: "1",
+//     value: 1,
+//     label: "up to 1 year",
+//     checked: false,
+//   },
+//   {
+//     id: "2",
+//     value: 2,
+//     label: "up to 2 year",
+//     checked: false,
+//   },
+// ];
+
+/* <div className={`${styles["filter"]} ${styles["age"]}`}>
+        <button
+          className={ageButtonClassNames}
+          onClick={() => setAgeIsActive(!ageIsActive)}
+        >
+          <Icon icon={IconEnum.CHEVRON} size={24} />
+          By age
+        </button>
+        {ageIsActive ? (
+          <ul className={ageContentClassNames}>
+            {ageCheckBoxes.map((checkBox) => (
+              <li key={checkBox.value}>
+                <CheckBox
+                  {...checkBox}
+                  name="age"
+                  onChange={onHandleChangeAge}
+                  checked={selectedAgeCheckBoxes.includes(checkBox.id)}
+                />
+              </li>
+            ))}
+          </ul>
+        ) : null}
+      </div> */
+
+// const onHandleChangeAge = (event: ChangeEvent<HTMLInputElement>) => {
+//   const { value, checked } = event.target;
+
+//   if (checked) return setSelectedAgeCheckBoxes((state) => [...state, value]);
+//   setSelectedAgeCheckBoxes((state) => state.filter((e) => e !== value));
+// };
+
+// const ageButtonClassNames = cn(
+//   styles["filter__button"],
+//   styles["age__button"],
+//   { [styles["active"]]: ageIsActive }
+// );
+// const ageContentClassNames = cn(styles["filter__content"], {});
+
+// const [ageIsActive, setAgeIsActive] = useState(false);
+
+// const [selectedAgeCheckBoxes, setSelectedAgeCheckBoxes] = useState<string[]>(
+//   []
+// );
+
+// if (searchParams.has(ConstantsEnum.AGE))
+//   setSelectedAgeCheckBoxes(
+//     searchParams.get(ConstantsEnum.AGE)?.split(",") || []
+//   );
+
+// if (selectedAgeCheckBoxes.length) {
+//   params.set(ConstantsEnum.PAGE_PARAM, "1");
+//   params.set(ConstantsEnum.AGE, selectedAgeCheckBoxes.join(","));
+// } else {
+//   params.delete(ConstantsEnum.PAGE_PARAM);
+//   params.delete(ConstantsEnum.AGE);
+// }

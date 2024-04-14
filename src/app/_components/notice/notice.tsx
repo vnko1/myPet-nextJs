@@ -29,7 +29,7 @@ const Notice: FC<NoticeProps> = ({ _id, imageUrl, title, user }) => {
   return (
     <div className={styles["notice"]}>
       <div className={styles["thumb"]}>
-        <Image src={imageUrl} alt="pet" width={288} height={288} />
+        <Image src={imageUrl} alt="pet" sizes="(min-width:320px) 100%" fill />
       </div>
       <h3>{title}</h3>
       <UIButton
