@@ -10,8 +10,8 @@ import { getCategory } from "@/utils";
 import { addToFavorite, deleteNotice, removeFromFavorite } from "@/lib/actions";
 import AuthModal from "../authModal/authModal";
 import { NoticeProps } from "./notice.type";
-import styles from "./notice.module.scss";
 import Pet from "../pet/pet";
+import styles from "./notice.module.scss";
 
 const Notice: FC<NoticeProps> = ({
   _id,
@@ -27,27 +27,12 @@ const Notice: FC<NoticeProps> = ({
   const [authIsActive, setAuthIsActive] = useState(false);
   const [petIsActive, setPetIsActive] = useState(false);
   const [petIsLoading, setPetOsLoading] = useState(false);
-
+  const [petCard, setPetCard] = useState<NoticesTypes | null>(null);
   const [isFavorite, setIsFavorite] = useState(
     favorites.some((item) => item.toString() === userId)
   );
-  const [petCard, setPetCard] = useState<NoticesTypes | null>(null);
 
   const pathName = usePathname();
-
-  useEffect(() => {
-    setIsFavorite(favorites.some((item) => item.toString() === userId));
-  }, [favorites, userId]);
-
-  const onDelete = async () => {
-    await deleteNotice(_id.toString());
-  };
-  const onTrashClick = () => {
-    setIsActive(true);
-  };
-  const onCancel = () => {
-    setIsActive(false);
-  };
 
   const openPetModal = async () => {
     try {
@@ -61,6 +46,20 @@ const Notice: FC<NoticeProps> = ({
     } finally {
       setPetOsLoading(false);
     }
+  };
+
+  useEffect(() => {
+    setIsFavorite(favorites.some((item) => item.toString() === userId));
+  }, [favorites, userId]);
+
+  const onDelete = async () => {
+    await deleteNotice(_id.toString());
+  };
+  const onTrashClick = () => {
+    setIsActive(true);
+  };
+  const onCancel = () => {
+    setIsActive(false);
   };
 
   const onHandleFavoriteClick = async () => {
@@ -160,3 +159,5 @@ const Notice: FC<NoticeProps> = ({
 };
 
 export default Notice;
+
+//  href={LinksEnum.NOTICE + "/" + _id}

@@ -19,7 +19,7 @@ export async function deleteNotice(id: string) {
   revalidatePath(LinksEnum.NOTICES, "layout");
 }
 
-export async function addToFavorite(noticeId: string, path: string) {
+export async function addToFavorite(noticeId: string, path?: string) {
   const userId = headers().get(ConstantsEnum.USER_ID);
   if (!userId) return redirect(LinksEnum.HOME);
 
@@ -29,14 +29,14 @@ export async function addToFavorite(noticeId: string, path: string) {
     { fieldName: "favorites" }
   );
 
-  revalidatePath(path);
+  path && revalidatePath(path);
 
   const data = JSONParser(response);
 
   return data.favorites;
 }
 
-export async function removeFromFavorite(noticeId: string, path: string) {
+export async function removeFromFavorite(noticeId: string, path?: string) {
   const userId = headers().get(ConstantsEnum.USER_ID);
 
   if (!userId) return redirect(LinksEnum.HOME);
@@ -47,7 +47,7 @@ export async function removeFromFavorite(noticeId: string, path: string) {
     { fieldName: "favorites" }
   );
 
-  revalidatePath(path);
+  path && revalidatePath(path);
   const data = JSONParser(response);
 
   return data.favorites;
