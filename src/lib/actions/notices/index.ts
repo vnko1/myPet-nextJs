@@ -10,7 +10,9 @@ import { JSONParser } from "@/utils";
 const notices = new Notices();
 
 export async function getNotice(id: string) {
-  return await notices.findNotice(id);
+  const data = await notices.findNotice(id);
+
+  return JSONParser(data);
 }
 
 export async function deleteNotice(id: string) {
