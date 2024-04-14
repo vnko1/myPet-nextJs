@@ -26,7 +26,7 @@
   }
 }
 .nav {
-  @apply flex-col text-white max-md:w-[80px] max-md:h-[80px] border-transparent bg-grBlue fixed right-4 top-3/4 md:static md:flex-row-reverse md:min-w-[130px];
+  @apply flex-col text-white max-md:w-[80px] max-md:h-[80px] border-transparent bg-grBlue fixed z-20 right-4 top-3/4 md:static md:flex-row-reverse md:min-w-[130px];
 }
 
 .popup {

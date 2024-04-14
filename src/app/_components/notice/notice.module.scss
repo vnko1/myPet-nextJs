@@ -1,6 +1,15 @@
 .notice {
+  @apply w-full shadow-sm rounded-b-[40px] bg-accentWhite;
+
+  &__thumb {
+    @apply relative w-[280px] h-[280px] mb-2-xs;
+  }
+
+  &__content {
+    @apply px-1-lg pb-2-md;
+  }
 }
 
-.thumb {
-  @apply relative w-[280px] h-[280px];
+.title {
+  @apply text-[24px] font-bold mb-2-xs;
 }

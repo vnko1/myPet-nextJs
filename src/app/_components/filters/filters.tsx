@@ -102,7 +102,6 @@ const Filters: FC<FilterProps> = ({ user }) => {
           />
           Add pet
         </button>
-
         <AuthModal isActive={isActive} setIsActive={setIsActive} />
       </div>
       <div className={styles["filter-btn-wrapper"]}>

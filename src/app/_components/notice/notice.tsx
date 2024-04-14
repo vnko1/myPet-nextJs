@@ -28,32 +28,20 @@ const Notice: FC<NoticeProps> = ({ _id, imageUrl, title, user }) => {
   };
   return (
     <div className={styles["notice"]}>
-      <div className={styles["thumb"]}>
+      <div className={styles["notice__thumb"]}>
         <Image src={imageUrl} alt="pet" sizes="(min-width:320px) 100%" fill />
       </div>
-      <h3>{title}</h3>
-      <UIButton
-        variant="outlined"
-        color="secondary"
-        fullWidth
-        href={LinksEnum.NOTICE + "/" + _id}
-      >
-        Learn more
-      </UIButton>
-      <button className="block" onClick={onTrashClick}>
-        DELETE
-      </button>
-      <button className="block" onClick={onHandleFavoriteClick}>
-        ADD fav
-      </button>
-      <button
-        className="block"
-        onClick={async () => {
-          await removeFromFavorite(_id.toString());
-        }}
-      >
-        REmove fav
-      </button>
+      <div className={styles["notice__content"]}>
+        <h3 className={styles["title"]}>{title}</h3>
+        <UIButton
+          variant="outlined"
+          color="secondary"
+          fullWidth
+          href={LinksEnum.NOTICE + "/" + _id}
+        >
+          Learn more
+        </UIButton>
+      </div>
       <Modal active={isActive} setActive={setIsActive}>
         <h2>Delete advertisement?</h2>
         <p>
