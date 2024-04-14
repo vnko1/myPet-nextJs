@@ -155,7 +155,7 @@ const Notice: FC<NoticeProps> = ({
         active={petIsActive}
         setActive={setPetIsActive}
       >
-        {petCard ? <Pet pet={petCard} userId={userId} /> : null}
+        <Pet pet={petCard as NoticesTypes} userId={userId} />
       </Modal>
       <AuthModal isActive={authIsActive} setIsActive={setAuthIsActive} />
     </div>
