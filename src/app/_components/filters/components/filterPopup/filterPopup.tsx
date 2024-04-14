@@ -1,11 +1,10 @@
 import React, { ChangeEvent, FC, useEffect, useState } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import cn from "classnames";
 
 import { FilterPopupProps } from "./filterPopup.type";
 import styles from "./filterPopup.module.scss";
 import { Icon, CheckBox } from "@/components";
-import { ConstantsEnum, IconEnum } from "@/types";
+import { IconEnum } from "@/types";
 
 const genderCheckBoxes = [
   {
@@ -22,43 +21,17 @@ const genderCheckBoxes = [
   },
 ];
 
-const FilterPopup: FC<FilterPopupProps> = () => {
+const FilterPopup: FC<FilterPopupProps> = ({
+  selectedGenderCheckBoxes,
+  setSelectedGenderCheckBoxes,
+}) => {
   const [genderIsActive, setGenderIsActive] = useState(false);
-
-  const [selectedGenderCheckBoxes, setSelectedGenderCheckBoxes] = useState<
-    string[]
-  >([]);
-
-  const pathname = usePathname();
-  const { replace } = useRouter();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
     return () => {
       setGenderIsActive(false);
     };
   }, []);
-
-  useEffect(() => {
-    if (searchParams.has(ConstantsEnum.SEX))
-      setSelectedGenderCheckBoxes(
-        searchParams.get(ConstantsEnum.SEX)?.split(",") || []
-      );
-  }, [searchParams]);
-
-  useEffect(() => {
-    const params = new URLSearchParams(searchParams);
-
-    if (selectedGenderCheckBoxes.length) {
-      params.set(ConstantsEnum.PAGE_PARAM, "1");
-      params.set(ConstantsEnum.SEX, selectedGenderCheckBoxes.join(","));
-    } else {
-      params.delete(ConstantsEnum.PAGE_PARAM);
-      params.delete(ConstantsEnum.SEX);
-    }
-
-    replace(pathname + "?" + params.toString());
-  }, [pathname, replace, searchParams, selectedGenderCheckBoxes]);
 
   const onHandleChangeGender = (event: ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = event.target;

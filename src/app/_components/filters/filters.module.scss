@@ -1,3 +1,7 @@
+.wrapper {
+  @apply flex flex-col gap-2-md items-end;
+}
+
 .filters {
   @apply flex md:gap-1-sm;
 }
@@ -31,4 +35,8 @@
 
 .active {
   @apply opacity-100 scale-100;
+}
+
+.filter-btn-wrapper {
+  @apply flex gap-1-sm;
 }
