@@ -1,3 +1,6 @@
 import { NoticesTypes } from "@/types";
 
-export type PetProps = { classNames?: string } & NoticesTypes;
+export type PetProps = {
+  classNames?: string;
+  pet: NoticesTypes;
+};

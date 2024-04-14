@@ -1,4 +1,4 @@
-import { CallBackType } from "@/types";
+import { CallBackType, NoticeCategory } from "@/types";
 
 export const errorResponse = (message?: string, name?: string) => ({
   errors: { [name || "error"]: message || "Something wrong" },
@@ -50,3 +50,14 @@ export const blobToBase64 = (blob: Blob): Promise<string> => {
 };
 
 export const JSONParser = <T>(data: T): T => JSON.parse(JSON.stringify(data));
+
+export function getCategory(category: NoticeCategory) {
+  switch (category) {
+    case "sell":
+      return "Sell";
+    case "in-good-hands":
+      return "In good hands";
+    case "lost-found":
+      return "lost/found";
+  }
+}

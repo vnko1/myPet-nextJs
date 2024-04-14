@@ -5,22 +5,12 @@ import Image from "next/image";
 import cn from "classnames";
 
 import { Icon, Modal, UIButton } from "@/components";
-import { IconEnum, LinksEnum, NoticeCategory } from "@/types";
+import { IconEnum, LinksEnum } from "@/types";
+import { getCategory } from "@/utils";
 import { addToFavorite, deleteNotice, removeFromFavorite } from "@/lib/actions";
+import AuthModal from "../authModal/authModal";
 import { NoticeProps } from "./notice.type";
 import styles from "./notice.module.scss";
-import AuthModal from "../authModal/authModal";
-
-function getCategory(category: NoticeCategory) {
-  switch (category) {
-    case "sell":
-      return "Sell";
-    case "in-good-hands":
-      return "In good hands";
-    case "lost-found":
-      return "lost/found";
-  }
-}
 
 const Notice: FC<NoticeProps> = ({
   _id,
