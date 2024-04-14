@@ -22,7 +22,7 @@ const Modal: FC<ModalProps> = ({
 
     setTimeout(() => {
       setActive(false);
-    }, 300);
+    }, 350);
   };
 
   useEffect(() => {

@@ -1,9 +1,10 @@
 import { Types } from "mongoose";
+export type NoticeCategory = "sell" | "lost-found" | "in-good-hands";
 
 export type NoticesTypes = {
   _id: Types.ObjectId;
   name: string;
-  category: "sell" | "lost-found" | "in-good-hands";
+  category: NoticeCategory;
   date: string;
   type: string;
   imageUrl: string;
