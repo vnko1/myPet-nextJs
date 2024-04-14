@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { EndpointsEnum, LinksEnum } from "./types";
+import { ConstantsEnum, EndpointsEnum, LinksEnum } from "./types";
 import { userIsAuthenticated } from "./auth";
 
 export default async function middleware(request: NextRequest) {
@@ -32,7 +32,7 @@ export default async function middleware(request: NextRequest) {
 
   const requestHeaders = new Headers(request.headers);
 
-  requestHeaders.set("userId", id);
+  requestHeaders.set(ConstantsEnum.USER_ID, id);
 
   const response = NextResponse.next({
     request: {

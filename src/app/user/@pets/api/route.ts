@@ -1,4 +1,5 @@
 import { Pets } from "@/lib/database";
+import { ConstantsEnum } from "@/types";
 import { errorResponse } from "@/utils";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -6,7 +7,7 @@ const pets = new Pets();
 
 export async function GET(request: NextRequest) {
   try {
-    const userId = request.headers.get("userId") || "";
+    const userId = request.headers.get(ConstantsEnum.USER_ID) || "";
 
     const userPets = await pets.findPets(userId);
 

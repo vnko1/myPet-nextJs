@@ -5,6 +5,7 @@ export enum ConstantsEnum {
   IS_NEW_USER = "isNewUser",
   SEX = "sex",
   AGE = "age",
+  USER_ID = "userId",
 }
 
 export const NEWS_LIMIT = 6;

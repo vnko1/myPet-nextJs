@@ -7,6 +7,9 @@ import { JSONParser } from "@/utils";
 
 type PageProps = { searchParams: NoticeQueryParams };
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 async function SellPage({ searchParams }: PageProps) {
   const query: NoticeQueryParams = { ...searchParams, category: "sell" };
   const totals = await getNoticesPages(query);
