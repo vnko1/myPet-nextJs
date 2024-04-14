@@ -1,6 +1,6 @@
-import { JWTPayloadType, NoticesTypes } from "@/types";
+import { NoticesTypes } from "@/types";
 
 export type NoticesProps = {
   notices: NoticesTypes[];
-  user: JWTPayloadType | null;
+  userId: string | null;
 };

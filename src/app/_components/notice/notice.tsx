@@ -1,22 +1,23 @@
 "use client";
 import React, { FC, useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import cn from "classnames";
 
 import { Icon, Modal, UIButton } from "@/components";
-import { IconEnum, LinksEnum } from "@/types";
+import { IconEnum, LinksEnum, NoticesTypes } from "@/types";
 import { getCategory } from "@/utils";
 import { addToFavorite, deleteNotice, removeFromFavorite } from "@/lib/actions";
 import AuthModal from "../authModal/authModal";
 import { NoticeProps } from "./notice.type";
 import styles from "./notice.module.scss";
+import Pet from "../pet/pet";
 
 const Notice: FC<NoticeProps> = ({
   _id,
   imageUrl,
   title,
-  user,
+  userId,
   category,
   location,
   favorites,
@@ -24,17 +25,19 @@ const Notice: FC<NoticeProps> = ({
 }) => {
   const [isActive, setIsActive] = useState(false);
   const [authIsActive, setAuthIsActive] = useState(false);
+  const [petIsActive, setPetIsActive] = useState(false);
+  const [petIsLoading, setPetOsLoading] = useState(false);
 
   const [isFavorite, setIsFavorite] = useState(
-    favorites.some((item) => item === user?._id)
+    favorites.some((item) => item.toString() === userId)
   );
+  const [petCard, setPetCard] = useState<NoticesTypes | null>(null);
 
-  const { replace } = useRouter();
   const pathName = usePathname();
 
   useEffect(() => {
-    setIsFavorite(favorites.some((item) => item === user?._id));
-  }, [favorites, user?._id]);
+    setIsFavorite(favorites.some((item) => item.toString() === userId));
+  }, [favorites, userId]);
 
   const onDelete = async () => {
     await deleteNotice(_id.toString());
@@ -46,8 +49,22 @@ const Notice: FC<NoticeProps> = ({
     setIsActive(false);
   };
 
+  const openPetModal = async () => {
+    try {
+      setPetOsLoading(true);
+      const data = await fetch("/notice/api/" + _id);
+      const pet = await data.json();
+      setPetCard(pet);
+      setPetIsActive(true);
+    } catch (error) {
+      if (error instanceof Error) throw new Error(error.message);
+    } finally {
+      setPetOsLoading(false);
+    }
+  };
+
   const onHandleFavoriteClick = async () => {
-    if (!user) return setAuthIsActive(true);
+    if (!userId) return setAuthIsActive(true);
 
     if (isFavorite) await removeFromFavorite(_id.toString(), pathName);
     else await addToFavorite(_id.toString(), pathName);
@@ -99,7 +116,8 @@ const Notice: FC<NoticeProps> = ({
           variant="outlined"
           color="secondary"
           fullWidth
-          onClick={() => replace(LinksEnum.NOTICE + "/" + _id)}
+          onClick={openPetModal}
+          isLoading={petIsLoading}
         >
           Learn more
         </UIButton>
@@ -128,6 +146,13 @@ const Notice: FC<NoticeProps> = ({
             Yes
           </UIButton>
         </div>
+      </Modal>
+      <Modal
+        classNames={styles["pet-modal"]}
+        active={petIsActive}
+        setActive={setPetIsActive}
+      >
+        {petCard ? <Pet pet={petCard} userId={userId} /> : null}
       </Modal>
       <AuthModal isActive={authIsActive} setIsActive={setAuthIsActive} />
     </div>

@@ -68,3 +68,7 @@
     @apply flex flex-col gap-0-md md:max-w-[336px] md:gap-1-lg md:flex-row;
   }
 }
+
+.pet-modal {
+  @apply px-1-xs pb-1-lg pt-4-md md:p-3-sm;
+}

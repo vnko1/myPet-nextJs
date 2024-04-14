@@ -43,8 +43,13 @@ const Pet: FC<PetProps> = ({
   const onHandleFavoriteClick = async () => {
     if (!userId) return setAuthIsActive(true);
 
-    if (isFavorite) await removeFromFavorite(_id.toString(), pathName);
-    else await addToFavorite(_id.toString(), pathName);
+    if (isFavorite) {
+      const res = await removeFromFavorite(_id.toString(), pathName);
+      setIsFavorite(res.some((item) => item.toString() === userId));
+    } else {
+      const res = await addToFavorite(_id.toString(), pathName);
+      setIsFavorite(res.some((item) => item.toString() === userId));
+    }
   };
 
   return (

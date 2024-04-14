@@ -1,6 +1,6 @@
 import React from "react";
-import { NOTICES_LIMIT, NoticeQueryParams } from "@/types";
-import { userIsAuthenticated } from "@/auth";
+import { headers } from "next/headers";
+import { ConstantsEnum, NOTICES_LIMIT, NoticeQueryParams } from "@/types";
 import { JSONParser } from "@/utils";
 import { getNotices, getNoticesPages } from "@/lib/database";
 import { Pagination, Notices } from "@/app/_components";
@@ -18,13 +18,11 @@ async function SellPage({ searchParams }: PageProps) {
 
   const notices = JSONParser(data);
 
-  const userData = (await userIsAuthenticated()) || null;
-
-  const user = JSONParser(userData);
+  const userId = headers().get(ConstantsEnum.USER_ID);
   return (
     <>
       <div className={layoutStyles["content-wrapper"]}>
-        <Notices notices={notices || []} user={user} />
+        <Notices notices={notices || []} userId={userId} />
       </div>
       <Pagination totals={totals || 0} limit={NOTICES_LIMIT} />
     </>
