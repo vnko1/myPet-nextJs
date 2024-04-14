@@ -16,9 +16,9 @@ async function SellPage({ searchParams }: PageProps) {
   return (
     <>
       <div className={layoutStyles["content-wrapper"]}>
-        <Notices notices={notices} />
+        <Notices notices={notices || []} />
       </div>
-      <Pagination totals={totals} limit={NOTICES_LIMIT} />
+      <Pagination totals={totals || 0} limit={NOTICES_LIMIT} />
     </>
   );
 }

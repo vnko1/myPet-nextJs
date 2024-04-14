@@ -15,7 +15,7 @@ async function LostFoundPage({ searchParams }: PageProps) {
   return (
     <>
       <div className={layoutStyles["content-wrapper"]}>LostFoundPage</div>{" "}
-      <Pagination totals={totals} limit={NOTICES_LIMIT} />
+      <Pagination totals={totals || 0} limit={NOTICES_LIMIT} />
     </>
   );
 }

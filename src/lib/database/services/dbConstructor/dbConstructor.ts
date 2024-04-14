@@ -88,9 +88,10 @@ export default abstract class DBConstructor {
       try {
         return await cb(data);
       } catch (error) {
-        throw customError({
-          message: '"Something went wrong! Try again later."',
-        });
+        if (error instanceof Error)
+          throw customError({
+            message: error.message,
+          });
       }
     };
   }

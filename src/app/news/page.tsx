@@ -20,7 +20,7 @@ export default async function News({
           <h1 className="title">News</h1>
           <Search />
           <Articles page={page} query={query} />
-          <Pagination totals={totalPages} limit={NEWS_LIMIT} />
+          <Pagination totals={totalPages || 0} limit={NEWS_LIMIT} />
         </div>
       </section>
     </main>

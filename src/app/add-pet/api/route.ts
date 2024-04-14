@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
         public_id: Date.now().toString(),
         eager: "f_auto",
       });
-      res.imageUrl = imageUrl.eager[0].secure_url;
+      if (imageUrl) res.imageUrl = imageUrl.eager[0].secure_url;
       res.owner = userId;
 
       if (res.category === "your-pet") {
