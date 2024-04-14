@@ -1,5 +1,5 @@
 .pet {
-  @apply w-full rounded-b-[40px] bg-accentWhite flex flex-col items-center justify-center;
+  @apply w-full rounded-b-[40px] bg-transparent flex flex-col items-center justify-center;
 
   &__thumb {
     @apply relative w-[240px] h-[240px] md:w-[262px] md:h-[298px] rounded-b-[40px] overflow-hidden;

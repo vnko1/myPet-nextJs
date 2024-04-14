@@ -1,6 +1,6 @@
 "use client";
 import React, { FC, useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import cn from "classnames";
 
@@ -29,6 +29,7 @@ const Notice: FC<NoticeProps> = ({
     favorites.some((item) => item === user?._id)
   );
 
+  const { replace } = useRouter();
   const pathName = usePathname();
 
   useEffect(() => {
@@ -98,7 +99,7 @@ const Notice: FC<NoticeProps> = ({
           variant="outlined"
           color="secondary"
           fullWidth
-          href={LinksEnum.NOTICE + "/" + _id}
+          onClick={() => replace(LinksEnum.NOTICE + "/" + _id)}
         >
           Learn more
         </UIButton>

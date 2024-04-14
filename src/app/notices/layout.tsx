@@ -6,13 +6,7 @@ import { Search } from "../_components";
 import { Categories, Filters } from "@/app/_components";
 import styles from "./notices.module.scss";
 
-async function NoticesLayout({
-  children,
-  notice,
-}: {
-  children: React.ReactNode;
-  notice: React.ReactNode;
-}) {
+async function NoticesLayout({ children }: { children: React.ReactNode }) {
   const data = (await userIsAuthenticated()) || null;
 
   const user = JSONParser(data);
@@ -32,7 +26,6 @@ async function NoticesLayout({
             </div>
           </div>
           {children}
-          {notice}
         </div>
       </section>
     </main>
