@@ -1,4 +1,6 @@
 import { Types } from "mongoose";
+import { UserTypes } from "./user.type";
+
 export type NoticeCategory = "sell" | "lost-found" | "in-good-hands";
 
 export type NoticesTypes = {
@@ -13,7 +15,8 @@ export type NoticesTypes = {
   sex: "male" | "female";
   location: string;
   price: number;
-  owner: string;
+  owner: Partial<UserTypes>;
+  favorites: Array<Types.ObjectId>;
 
   // favorites: Array<UserTypes>;
   // fileId: string;

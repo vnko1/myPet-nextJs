@@ -1,7 +1,9 @@
 "use client";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import cn from "classnames";
+
 import { Icon, Modal, UIButton } from "@/components";
 import { IconEnum, LinksEnum, NoticeCategory } from "@/types";
 import { addToFavorite, deleteNotice, removeFromFavorite } from "@/lib/actions";
@@ -27,13 +29,21 @@ const Notice: FC<NoticeProps> = ({
   user,
   category,
   location,
+  favorites,
   sex,
 }) => {
   const [isActive, setIsActive] = useState(false);
   const [authIsActive, setAuthIsActive] = useState(false);
 
+  const [isFavorite, setIsFavorite] = useState(
+    favorites.some((item) => item === user?._id)
+  );
+
   const pathName = usePathname();
-  console.log(pathName);
+
+  useEffect(() => {
+    setIsFavorite(favorites.some((item) => item === user?._id));
+  }, [favorites, user?._id]);
 
   const onDelete = async () => {
     await deleteNotice(_id.toString());
@@ -46,10 +56,18 @@ const Notice: FC<NoticeProps> = ({
   };
 
   const onHandleFavoriteClick = async () => {
-    if (!user) setAuthIsActive(true);
-    await addToFavorite(_id.toString());
+    if (!user) return setAuthIsActive(true);
+
+    if (isFavorite) await removeFromFavorite(_id.toString());
+    else await addToFavorite(_id.toString());
   };
 
+  const favoriteClassNames = cn(
+    styles["label"],
+    styles["label__btn"],
+    styles["favorite"],
+    { [styles["active"]]: isFavorite }
+  );
   return (
     <div className={styles["notice"]}>
       <div className={styles["notice__thumb"]}>
@@ -80,9 +98,7 @@ const Notice: FC<NoticeProps> = ({
             <Icon size={24} icon={IconEnum.TRASH} />
           </button>
         ) : null}
-        <button
-          className={`${styles["label"]} ${styles["label__btn"]} ${styles["favorite"]}`}
-        >
+        <button className={favoriteClassNames} onClick={onHandleFavoriteClick}>
           <Icon size={24} icon={IconEnum.HEART} />
         </button>
       </div>

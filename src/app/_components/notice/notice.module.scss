@@ -47,6 +47,10 @@
 
 .favorite {
   @apply top-[12px];
+
+  &.active {
+    @apply bg-yellow text-accentWhite;
+  }
 }
 
 .modal {

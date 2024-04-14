@@ -19,7 +19,9 @@ class Notices extends DBConstructor {
     super(sort);
   }
 
-  async addNotice(newNotice: Partial<NoticesTypes>) {
+  async addNotice(
+    newNotice: Partial<Omit<NoticesTypes, "owner">> & { owner?: string }
+  ) {
     return Notice.create(newNotice);
   }
 
