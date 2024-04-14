@@ -5,9 +5,6 @@
     @apply relative w-[240px] h-[240px] md:w-[262px] md:h-[298px] rounded-b-[40px] overflow-hidden;
   }
 
-  //   &__info {
-  //   }
-
   &__comment {
     @apply mb-1-sm md:mb-[70px];
     & > p {
@@ -16,7 +13,7 @@
   }
 
   &__buttons {
-    @apply w-full flex flex-col gap-0-md md:max-w-[272px] md:gap-1-lg md:flex-row md:ml-auto;
+    @apply w-full flex flex-col gap-0-md md:max-w-[372px] md:gap-1-lg md:flex-row md:ml-auto;
   }
 }
 

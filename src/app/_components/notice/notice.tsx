@@ -48,8 +48,8 @@ const Notice: FC<NoticeProps> = ({
   const onHandleFavoriteClick = async () => {
     if (!user) return setAuthIsActive(true);
 
-    if (isFavorite) await removeFromFavorite(_id.toString());
-    else await addToFavorite(_id.toString());
+    if (isFavorite) await removeFromFavorite(_id.toString(), pathName);
+    else await addToFavorite(_id.toString(), pathName);
   };
 
   const favoriteClassNames = cn(

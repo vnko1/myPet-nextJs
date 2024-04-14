@@ -1,14 +1,20 @@
 "use client";
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import Image from "next/image";
-import { PetProps } from "./pet.type";
-import styles from "./pet.module.scss";
-import { getCategory } from "@/utils";
+import { usePathname } from "next/navigation";
+
 import { UIButton } from "@/components";
 import { IconEnum } from "@/types";
+import { getCategory } from "@/utils";
+import { addToFavorite, removeFromFavorite } from "@/lib/actions";
+import AuthModal from "../authModal/authModal";
+import { PetProps } from "./pet.type";
+import styles from "./pet.module.scss";
 
 const Pet: FC<PetProps> = ({
+  userId,
   pet: {
+    _id,
     imageUrl,
     category,
     title,
@@ -17,10 +23,30 @@ const Pet: FC<PetProps> = ({
     location,
     sex,
     price,
+    favorites,
     owner: { email, phone },
     comment,
   },
 }) => {
+  const [authIsActive, setAuthIsActive] = useState(false);
+
+  const [isFavorite, setIsFavorite] = useState(
+    favorites.some((item) => item.toString() === userId)
+  );
+
+  const pathName = usePathname();
+
+  useEffect(() => {
+    setIsFavorite(favorites.some((item) => item.toString() === userId));
+  }, [favorites, userId]);
+
+  const onHandleFavoriteClick = async () => {
+    if (!userId) return setAuthIsActive(true);
+
+    if (isFavorite) await removeFromFavorite(_id.toString(), pathName);
+    else await addToFavorite(_id.toString(), pathName);
+  };
+
   return (
     <div className={styles["pet"]}>
       <div className={styles["wrapper"]}>
@@ -48,7 +74,7 @@ const Pet: FC<PetProps> = ({
             {price ? (
               <div className={styles["info"]}>
                 <p className={styles["info__name"]}>Price:</p>
-                <p className={styles["info__value"]}>{price}</p>
+                <p className={styles["info__value"]}>{price} UAH</p>
               </div>
             ) : null}
             <div className={styles["info"]}>
@@ -90,14 +116,16 @@ const Pet: FC<PetProps> = ({
         </UIButton>
         <UIButton
           variant="contained"
-          color="secondary"
+          color={isFavorite ? "primary" : "secondary"}
           fullWidth
           icon={IconEnum.HEART}
           alignIcon="right"
+          onClick={onHandleFavoriteClick}
         >
-          Add to
+          {isFavorite ? "Remove from" : "Add to"}
         </UIButton>
       </div>
+      <AuthModal isActive={authIsActive} setIsActive={setAuthIsActive} />
     </div>
   );
 };
