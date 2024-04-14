@@ -1,3 +1,4 @@
+"use client";
 import { ChangeEvent, FC, useEffect, useState } from "react";
 
 import { ImageFieldProps } from "./imageField.type";

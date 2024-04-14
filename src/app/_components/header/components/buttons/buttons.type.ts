@@ -1,3 +1,3 @@
-import { UserTypes } from "@/types";
+import { JWTPayloadType } from "@/types";
 
-export type ButtonsProps = { user: UserTypes | null };
+export type ButtonsProps = { user: JWTPayloadType | null };

@@ -6,7 +6,7 @@ const sponsors = new Sponsors();
 export const getSponsors = sponsors.tryCatchWrapper<SponsorType[], undefined>(
   async function () {
     // noStore();
-    const res = await sponsors.getSponsorsData();
+    const res = await sponsors.findSponsorsData();
     return res;
   }
 );

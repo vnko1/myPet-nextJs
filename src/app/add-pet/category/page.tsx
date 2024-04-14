@@ -1,4 +1,3 @@
-"use client";
 import { RadioButtonField } from "@/components";
 import React from "react";
 import styles from "./styles.module.scss";
@@ -7,7 +6,7 @@ const inputs = [
   {
     label: "your pet",
     name: "category",
-    value: "your pet",
+    value: "your-pet",
   },
   {
     label: "sell",
@@ -17,12 +16,12 @@ const inputs = [
   {
     label: "lost/found",
     name: "category",
-    value: "lost/found",
+    value: "lost-found",
   },
   {
     label: "in good hands",
     name: "category",
-    value: "in good hands",
+    value: "in-good-hands",
   },
 ];
 

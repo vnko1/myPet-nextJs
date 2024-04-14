@@ -1,7 +1,6 @@
 import bcrypt from "bcrypt";
 import { cookies } from "next/headers";
-
-import { authenticate } from "@/auth";
+import { userIsAuthenticated } from "@/auth";
 import { TOKEN_LIFE, createToken, customError } from "@/utils";
 import { Users } from "../../services";
 import { ID, JWTPayloadType, UserTypes } from "@/types";
@@ -29,14 +28,14 @@ async function getUser(
 }
 
 export async function currentUser(type: "token" | "refreshToken" = "token") {
-  const token = cookies().get(type);
-
-  const isValidToken = token && (await authenticate(token?.name, token?.value));
+  const isValidToken = await userIsAuthenticated(type);
 
   return await getUser(isValidToken);
 }
 
-export async function createUser(newUser: Omit<UserTypes, "_id">) {
+export async function createUser(
+  newUser: Omit<UserTypes, "_id" | "avatarUrl">
+) {
   const userExist = await users.findUser({ email: newUser.email });
   if (userExist)
     throw customError({

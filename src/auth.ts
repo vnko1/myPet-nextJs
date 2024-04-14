@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { verifyToken } from "./utils/token";
 
 export const authenticate = async (type: string, credential: string) => {
@@ -9,3 +10,9 @@ export const authenticate = async (type: string, credential: string) => {
     console.log("🚀 ~ authenticate ~ error:", error);
   }
 };
+
+export async function userIsAuthenticated(credName = "token") {
+  const token = cookies().get(credName);
+
+  return await authenticate(token?.name || "", token?.value || "");
+}

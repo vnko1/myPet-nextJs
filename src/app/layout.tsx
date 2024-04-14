@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
 
 import { manrope, inter, poppins } from "@/fonts";
 import { Header } from "@/app/_components";
 
-import { authenticate } from "@/auth";
 import "../styles/globals.scss";
+
+import { userIsAuthenticated } from "@/auth";
+import { JSONParser } from "@/utils";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const metadata: Metadata = {
@@ -20,16 +21,16 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const token = cookies().get("token");
+  const data = (await userIsAuthenticated()) || null;
 
-  const user = token && (await authenticate(token.name, token.value));
+  const user = JSONParser(data);
 
   return (
     <html lang="en">
       <body
         className={`${manrope.variable} ${inter.variable} ${poppins.variable}`}
       >
-        <Header user={JSON.parse(JSON.stringify(user || ""))} />
+        <Header user={user} />
         {children}
       </body>
     </html>

@@ -2,8 +2,9 @@ import { getArticlesPages } from "@/lib/database";
 import { Pagination, Search } from "@/app/_components";
 import { Articles } from "./_components";
 import styles from "./news.module.scss";
+import { NEWS_LIMIT, QueryParams } from "@/types";
 
-type PageProps = { searchParams: { query?: string; page?: string } };
+type PageProps = { searchParams: QueryParams };
 
 // export const fetchCache = "force-no-store";
 
@@ -19,7 +20,7 @@ export default async function News({
           <h1 className="title">News</h1>
           <Search />
           <Articles page={page} query={query} />
-          <Pagination totalPages={totalPages} />
+          <Pagination totals={totalPages || 0} limit={NEWS_LIMIT} />
         </div>
       </section>
     </main>

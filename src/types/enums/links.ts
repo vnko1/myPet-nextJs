@@ -1,8 +1,13 @@
 export enum LinksEnum {
   HOME = "/",
   NEWS = "/news",
+  NOTICE = "/notice",
   NOTICES = "/notices",
   NOTICES_SELL = NOTICES + "/sell",
+  NOTICES_IN_GOOD_HANDS = NOTICES + "/in-good-hands",
+  NOTICES_LOST_FOUND = NOTICES + "/lost-found",
+  NOTICES_FAVORITE = NOTICES + "/favorite",
+  NOTICES_OWN = NOTICES + "/own",
   FRIENDS = "/friends",
   LOGIN = "/login",
   REGISTER = "/register",

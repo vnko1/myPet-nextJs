@@ -1,22 +1,21 @@
-import { UserTypes, ID } from "@/types";
+import { UserTypes, ID, Options } from "@/types";
 import DBConstructor from "../dbConstructor/dbConstructor";
 import { User } from "../../models";
 
 type QueryType = { [key: string]: string };
-type Options = {
+
+type UserOptions = {
   fieldName: keyof UserTypes | null;
-  projection: string;
-  newDoc: boolean;
-};
+} & Options;
 
 interface IUsers {
   createUser(newUser: UserTypes): Promise<UserTypes>;
   findUser(query: QueryType): Promise<UserTypes>;
-  findUserById(_id: ID, options?: Partial<Options>): Promise<UserTypes>;
+  findUserById(_id: ID, options?: Partial<UserOptions>): Promise<UserTypes>;
   updateUser(
     _id: ID,
-    user: UserTypes,
-    options?: Partial<Options>
+    userData: Partial<UserTypes> & { [name: string]: string },
+    options?: Partial<UserOptions>
   ): Promise<UserTypes>;
 }
 
@@ -25,34 +24,38 @@ class Users extends DBConstructor implements IUsers {
     super();
   }
 
-  createUser(newUser: Omit<UserTypes, "_id">) {
+  createUser(newUser: Omit<UserTypes, "_id" | "avatarUrl">) {
     return User.create(newUser);
   }
 
-  findUser(query: QueryType, { projection = "" }: Partial<Options> = {}) {
+  findUser(query: QueryType, { projection = "" }: Partial<UserOptions> = {}) {
     return User.findOne(query, projection);
   }
 
-  findUserById(id: ID, { projection = "" }: Partial<Options> = {}) {
+  findUserById(id: ID, { projection = "" }: Partial<UserOptions> = {}) {
     return User.findById(id, projection);
   }
   updateUser(
     _id: ID,
-    user: Partial<UserTypes>,
-    { fieldName = null, projection = "", newDoc = true }: Partial<Options> = {}
+    userData: Partial<UserTypes | { [name: string]: string }>,
+    {
+      fieldName = null,
+      projection = "",
+      newDoc = true,
+    }: Partial<UserOptions> = {}
   ) {
     if (fieldName) {
-      const [key] = Object.keys(user);
+      const [key] = Object.keys(userData);
       return User.findByIdAndUpdate(
         _id,
         {
-          [key]: { fieldName: user[key as keyof UserTypes] },
+          [key]: { fieldName: userData[key as keyof UserTypes] },
         },
         { new: newDoc, projection }
       );
     }
 
-    return User.findByIdAndUpdate(_id, user, {
+    return User.findByIdAndUpdate(_id, userData, {
       new: newDoc,
       projection,
     });

@@ -81,12 +81,12 @@ const Field: FC<FiledProps> = ({
                   />
                 </button>
               ) : null}
-              {isDirty && !invalid ? (
+              {isDirty && !invalid && fieldValidation ? (
                 <span className={`${styles["icon"]} ${styles["check"]}`}>
                   <Icon icon={IconEnum.CHECK} size={24} />
                 </span>
               ) : null}
-              {isDirty && invalid ? (
+              {isDirty && invalid && fieldValidation ? (
                 <span className={`${styles["icon"]} ${styles["cross"]}`}>
                   <Icon icon={IconEnum.CROSS_SMALL} size={24} />
                 </span>

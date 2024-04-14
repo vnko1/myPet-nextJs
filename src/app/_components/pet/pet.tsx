@@ -1,0 +1,138 @@
+"use client";
+import React, { FC, useEffect, useState } from "react";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+
+import { UIButton } from "@/components";
+import { IconEnum } from "@/types";
+import { getCategory } from "@/utils";
+import { addToFavorite, removeFromFavorite } from "@/lib/actions";
+import AuthModal from "../authModal/authModal";
+import { PetProps } from "./pet.type";
+import styles from "./pet.module.scss";
+
+const Pet: FC<PetProps> = ({
+  userId,
+  pet: {
+    _id,
+    imageUrl,
+    category,
+    title,
+    name,
+    type,
+    location,
+    sex,
+    price,
+    favorites,
+    owner: { email, phone },
+    comment,
+  },
+}) => {
+  const [authIsActive, setAuthIsActive] = useState(false);
+
+  const [isFavorite, setIsFavorite] = useState(
+    favorites.some((item) => item.toString() === userId)
+  );
+
+  const pathName = usePathname();
+
+  useEffect(() => {
+    setIsFavorite(favorites.some((item) => item.toString() === userId));
+  }, [favorites, userId]);
+
+  const onHandleFavoriteClick = async () => {
+    if (!userId) return setAuthIsActive(true);
+
+    if (isFavorite) {
+      const res = await removeFromFavorite(_id.toString(), pathName);
+      setIsFavorite(res.some((item) => item.toString() === userId));
+    } else {
+      const res = await addToFavorite(_id.toString(), pathName);
+      setIsFavorite(res.some((item) => item.toString() === userId));
+    }
+  };
+
+  return (
+    <div className={styles["pet"]}>
+      <div className={styles["wrapper"]}>
+        <div className={styles["pet__thumb"]}>
+          <Image src={imageUrl} alt="pet" sizes="(min-width:320px) 100%" fill />
+          <p className={`${styles["label"]} ${styles["category"]}`}>
+            {getCategory(category)}
+          </p>
+        </div>
+        <div className={styles["pet__info"]}>
+          <h2 className={styles["title"]}>{title}</h2>
+          <div className={styles["details"]}>
+            <div className={styles["info"]}>
+              <p className={styles["info__name"]}>Name:</p>
+              <p className={styles["info__value"]}>{name}</p>
+            </div>
+            <div className={styles["info"]}>
+              <p className={styles["info__name"]}>Type:</p>
+              <p className={styles["info__value"]}>{type}</p>
+            </div>
+            <div className={styles["info"]}>
+              <p className={styles["info__name"]}>Place:</p>
+              <p className={styles["info__value"]}>{location}</p>
+            </div>
+            {price ? (
+              <div className={styles["info"]}>
+                <p className={styles["info__name"]}>Price:</p>
+                <p className={styles["info__value"]}>{price} UAH</p>
+              </div>
+            ) : null}
+            <div className={styles["info"]}>
+              <p className={styles["info__name"]}>The sex:</p>
+              <p className={styles["info__value"]}>{sex}</p>
+            </div>
+            <div className={styles["info"]}>
+              <p className={styles["info__name"]}>Email:</p>
+              <a
+                className={`${styles["info__value"]} ${styles["accent"]}`}
+                href={`mailto:${email}`}
+              >
+                {email}
+              </a>
+            </div>
+            <div className={styles["info"]}>
+              <p className={styles["info__name"]}>Phone:</p>
+              <a
+                className={`${styles["info__value"]} ${styles["accent"]}`}
+                href={`tel:${phone}`}
+              >
+                {phone}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className={styles["pet__comment"]}>
+        <p>{comment}</p>
+      </div>
+      <div className={styles["pet__buttons"]}>
+        <UIButton
+          variant="outlined"
+          color="secondary"
+          fullWidth
+          href={`tel:${phone}`}
+        >
+          Contact
+        </UIButton>
+        <UIButton
+          variant="contained"
+          color={isFavorite ? "primary" : "secondary"}
+          fullWidth
+          icon={IconEnum.HEART}
+          alignIcon="right"
+          onClick={onHandleFavoriteClick}
+        >
+          {isFavorite ? "Remove from" : "Add to"}
+        </UIButton>
+      </div>
+      <AuthModal isActive={authIsActive} setIsActive={setAuthIsActive} />
+    </div>
+  );
+};
+
+export default Pet;

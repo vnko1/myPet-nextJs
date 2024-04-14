@@ -7,7 +7,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { UserFormProps } from "./userForm.type";
-import { Icon, LogOutModal, UIButton, Field, ImageField } from "@/components";
+import { Icon, UIButton, Field, ImageField } from "@/components";
+import { LogOutModal } from "@/app/_components";
 import { IconEnum } from "@/types";
 import { userSchema } from "@/schema";
 import styles from "./userForm.module.scss";
@@ -143,7 +144,7 @@ function UserForm({ user }: UserFormProps) {
           </div>
         </form>
       </FormProvider>
-      {isActive && <LogOutModal setIsActive={setIsActive} />}
+      <LogOutModal setIsActive={setIsActive} isActive={isActive} />
     </>
   );
 }

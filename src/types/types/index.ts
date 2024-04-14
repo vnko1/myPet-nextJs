@@ -6,3 +6,4 @@ export * from "./user.type";
 export * from "./notices.type";
 export * from "./tokenPayload.type";
 export * from "./callBacks.type";
+export * from "./options.type";

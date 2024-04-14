@@ -1,7 +1,8 @@
 "use client";
 import React, { FC, useState } from "react";
 import { IconEnum, LinksEnum } from "@/types";
-import { LogOutModal, UIButton } from "@/components";
+import { UIButton } from "@/components";
+import { LogOutModal } from "@/app/_components";
 import { ButtonsProps } from "./buttons.type";
 import { useRouter } from "next/navigation";
 
@@ -57,7 +58,9 @@ const Buttons: FC<ButtonsProps> = ({ user }) => {
     </>
   );
 
-  const renderModal = isActive && <LogOutModal setIsActive={setIsActive} />;
+  const renderModal = (
+    <LogOutModal setIsActive={setIsActive} isActive={isActive} />
+  );
   return (
     <>
       {renderButtons}

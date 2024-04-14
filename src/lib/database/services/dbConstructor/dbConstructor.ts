@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import { Sort } from "./dbConstructor.type";
-import { CallBackType, QueryParams } from "@/types";
+import { CallBackType, NoticeQueryParams, QueryParams } from "@/types";
 import { customError } from "@/utils";
+import { QueryData, Sort } from "./dbConstructor.type";
 
 export default abstract class DBConstructor {
   private mongoUri = process.env.MONGODB_URI!;
@@ -24,23 +24,45 @@ export default abstract class DBConstructor {
     }
   }
 
-  protected getSearchPattern({ query }: QueryParams = {}) {
+  protected getSearchQueryPattern({
+    query,
+  }: Pick<QueryParams, "query"> = {}): QueryData {
     return query
       ? {
           $or: [
             { title: { $regex: query, $options: "i" } },
             { text: { $regex: query, $options: "i" } },
+            { comments: { $regex: query, $options: "i" } },
           ],
         }
       : {};
+  }
+
+  protected getNoticesSearchPattern(
+    { query, sex, category }: NoticeQueryParams,
+    userId: string | null
+  ) {
+    const queryParams: QueryData = this.getSearchQueryPattern({ query });
+
+    if (sex) queryParams.sex = sex.split(",");
+
+    if (category === "own" || category === "favorite") {
+      if (category === "favorite" && userId) {
+        queryParams[category] = { $elemMatch: { $eq: userId } };
+      } else if (userId) {
+        queryParams.owner = userId;
+      }
+    } else queryParams.category = category;
+
+    return queryParams;
   }
 
   protected getSortingPattern(key: string) {
     return { [key]: this.sort };
   }
 
-  protected getSkipPattern(page = this.page, limit: number) {
-    return page > 0 ? (page - 1) * limit : 0;
+  protected getSkipPattern(page: string | number = this.page, limit: number) {
+    return +page > 0 ? (+page - 1) * limit : 0;
   }
 
   tryCatchWrapper<T, K>(cb: CallBackType<T, K>) {
@@ -48,9 +70,10 @@ export default abstract class DBConstructor {
       try {
         return await cb(data);
       } catch (error) {
-        throw customError({
-          message: '"Something went wrong! Try again later."',
-        });
+        if (error instanceof Error)
+          throw customError({
+            message: error.message,
+          });
       }
     };
   }

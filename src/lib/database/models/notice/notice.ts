@@ -12,7 +12,7 @@ const noticeSchema: Schema = new Schema(
     category: {
       type: String,
       required: true,
-      enum: ["sell", "in good hands", "lost/found"],
+      enum: ["sell", "in-good-hands", "lost-found"],
     },
     date: {
       type: String,

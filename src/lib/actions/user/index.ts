@@ -88,7 +88,7 @@ export async function updateUserProfile(formData: FormData) {
         overwrite: true,
       });
 
-      body.avatarUrl = res.eager[0].secure_url;
+      if (res) body.avatarUrl = res.eager[0].secure_url;
     }
 
     formData.forEach((value, key) => {
@@ -103,7 +103,6 @@ export async function updateUserProfile(formData: FormData) {
   }
   revalidatePath(LinksEnum.USER);
 }
-
 // **************************************************************************
 
 // export const register = tryCatchWrapper(async (formData: FormData) => {

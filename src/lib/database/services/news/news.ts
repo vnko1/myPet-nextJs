@@ -4,8 +4,8 @@ import { Article } from "../../models";
 import { ArticleTypes, NEWS_LIMIT, QueryParams } from "@/types";
 
 interface INews {
-  getArticlesData(params: QueryParams): Promise<ArticleTypes[]>;
-  getArticlesPagesData(params: QueryParams): Promise<number>;
+  findArticlesData(params: QueryParams): Promise<ArticleTypes[]>;
+  countArticlesPagesData(params: QueryParams): Promise<number>;
 }
 class News extends DBConstructor implements INews {
   protected limit = NEWS_LIMIT;
@@ -13,8 +13,8 @@ class News extends DBConstructor implements INews {
     super(sort);
   }
 
-  async getArticlesData({ query, page }: QueryParams) {
-    const queryPattern = this.getSearchPattern({ query });
+  async findArticlesData({ query, page }: QueryParams) {
+    const queryPattern = this.getSearchQueryPattern({ query });
     const sortPattern = this.getSortingPattern("date");
     const perPage = this.getSkipPattern(page, this.limit);
 
@@ -24,8 +24,8 @@ class News extends DBConstructor implements INews {
       .sort(sortPattern);
   }
 
-  getArticlesPagesData({ query }: QueryParams) {
-    const queryParams = this.getSearchPattern({ query });
+  countArticlesPagesData({ query }: QueryParams) {
+    const queryParams = this.getSearchQueryPattern({ query });
     return Article.countDocuments(queryParams);
   }
 }

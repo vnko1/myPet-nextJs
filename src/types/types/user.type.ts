@@ -12,7 +12,7 @@ export type UserTypes = {
   birthday?: string;
   phone?: string;
   city?: string;
-  avatarUrl?: string;
+  avatarUrl: string;
   // token?: string;
   // pets?: Array<PetsTypes & { id: string }>;
   // favorites?: Array<NoticesTypes & { id: string }>;

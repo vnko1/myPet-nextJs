@@ -31,9 +31,10 @@ class Files {
     try {
       return await this.cloudinary.uploader.upload(file, options);
     } catch (error) {
-      throw customError({
-        message: '"Something went wrong! Try again later."',
-      });
+      if (error instanceof Error)
+        throw customError({
+          message: error.message,
+        });
     }
   }
 
@@ -43,9 +44,10 @@ class Files {
 
       await this.cloudinary.uploader.destroy(publicId, options);
     } catch (error) {
-      throw customError({
-        message: '"Something went wrong! Try again later."',
-      });
+      if (error instanceof Error)
+        throw customError({
+          message: error.message,
+        });
     }
   }
 }

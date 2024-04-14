@@ -17,7 +17,7 @@ const RadioButtonField: FC<RadioButtonProps> = ({
   iconColors,
   ...props
 }) => {
-  const { register } = useFormContext();
+  const methods = useFormContext();
 
   const buttonClassNames = cn(
     styles["button"],
@@ -33,7 +33,7 @@ const RadioButtonField: FC<RadioButtonProps> = ({
     <label className={`${styles["radio"]} ${classNames}`}>
       <input
         {...props}
-        {...register(name)}
+        {...methods?.register(name)}
         type="radio"
         className={styles["field"]}
       />

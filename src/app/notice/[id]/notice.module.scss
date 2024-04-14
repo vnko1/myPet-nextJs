@@ -1,0 +1,7 @@
+.notice {
+  @apply flex flex-col items-center;
+}
+
+.wrapper {
+  @apply p-1-sm rounded-[20px] bg-accentWhite md:p-3-sm shadow-sm;
+}
