@@ -65,13 +65,14 @@ const Modal: FC<ModalProps> = ({
   const markup = (
     <div className={backDropClassNames} onClick={onHandleBackDropClick}>
       <div className={modalClassNames}>
-        <UIButton
-          onClick={closeModal}
-          variant="text"
-          icon={IconEnum.CROSS}
-          color="accent"
-          className={styles["button"]}
-        />
+        <div className={styles["button-wrapper"]}>
+          <UIButton
+            onClick={closeModal}
+            variant="text"
+            icon={IconEnum.CROSS}
+            color="accent"
+          />
+        </div>
         {children}
       </div>
     </div>
