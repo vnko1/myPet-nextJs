@@ -14,6 +14,8 @@ const Article: FC<ArticleProps> = ({ classNames, article }) => {
         width={727}
         height={252}
         className={styles["article__image"]}
+        placeholder="blur"
+        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk8LpfDwADJQGq85EagQAAAABJRU5ErkJggg=="
       />
       <div className={styles["article__content"]}>
         <div className={styles["article__text"]}>

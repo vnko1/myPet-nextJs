@@ -22,6 +22,8 @@ const Pet: FC<PetProps> = ({ imageUrl, name, date, comments, type, _id }) => {
           height={240}
           alt="Pet"
           className={styles["image"]}
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk8LpfDwADJQGq85EagQAAAABJRU5ErkJggg=="
         />
       </div>
       <div className={styles["pet__bottom-wrapper"]}>
