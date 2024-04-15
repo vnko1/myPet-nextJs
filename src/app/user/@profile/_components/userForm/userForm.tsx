@@ -71,6 +71,8 @@ function UserForm({ user }: UserFormProps) {
               src={imageUrl}
               alt="user avatar"
               className={styles["image"]}
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk8LpfDwADJQGq85EagQAAAABJRU5ErkJggg=="
             />
             {isEditing && (
               <ImageField

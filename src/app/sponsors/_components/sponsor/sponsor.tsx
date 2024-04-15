@@ -28,7 +28,14 @@ const Sponsor: FC<SponsorProps> = ({
       <div className={styles["card__box"]}>
         <div className={styles["card__image"]}>
           {imageUrl ? (
-            <Image src={imageUrl} alt="Friends logo" width={146} height={104} />
+            <Image
+              src={imageUrl}
+              alt="Friends logo"
+              width={146}
+              height={104}
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk8LpfDwADJQGq85EagQAAAABJRU5ErkJggg=="
+            />
           ) : null}
         </div>
         <div className={styles["card__content"]}>

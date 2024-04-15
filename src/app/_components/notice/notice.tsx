@@ -83,7 +83,14 @@ const Notice: FC<NoticeProps> = ({
   return (
     <div className={styles["notice"]}>
       <div className={styles["notice__thumb"]}>
-        <Image src={imageUrl} alt="pet" sizes="(min-width:320px) 100%" fill />
+        <Image
+          src={imageUrl}
+          alt="pet"
+          sizes="(min-width:320px) 100%"
+          fill
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk8LpfDwADJQGq85EagQAAAABJRU5ErkJggg=="
+        />
         <p className={`${styles["label"]} ${styles["category"]}`}>
           {getCategory(category)}
         </p>
