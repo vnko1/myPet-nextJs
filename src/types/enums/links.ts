@@ -6,7 +6,7 @@ export enum LinksEnum {
   NOTICES_SELL = NOTICES + "/sell",
   NOTICES_IN_GOOD_HANDS = NOTICES + "/in-good-hands",
   NOTICES_LOST_FOUND = NOTICES + "/lost-found",
-  NOTICES_FAVORITE = NOTICES + "/favorite",
+  NOTICES_FAVORITE = NOTICES + "/favorites",
   NOTICES_OWN = NOTICES + "/own",
   FRIENDS = "/friends",
   LOGIN = "/login",

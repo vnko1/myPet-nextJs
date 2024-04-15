@@ -46,8 +46,8 @@ export default abstract class DBConstructor {
 
     if (sex) queryParams.sex = sex.split(",");
 
-    if (category === "own" || category === "favorite") {
-      if (category === "favorite" && userId) {
+    if (category === "own" || category === "favorites") {
+      if (category === "favorites" && userId) {
         queryParams[category] = { $elemMatch: { $eq: userId } };
       } else if (userId) {
         queryParams.owner = userId;

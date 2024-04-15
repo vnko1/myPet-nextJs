@@ -6,7 +6,6 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  // console.log(error.message);
   return (
     <div>
       <h2>Something went wrong!</h2>

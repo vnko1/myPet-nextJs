@@ -11,16 +11,14 @@ type PageProps = { searchParams: NoticeQueryParams };
 export const dynamic = "force-dynamic";
 export const revalidate = 300;
 
-async function InGoodHandsPage({ searchParams }: PageProps) {
-  const query: NoticeQueryParams = {
-    ...searchParams,
-    category: "in-good-hands",
-  };
+async function FavoritePage({ searchParams }: PageProps) {
+  const query: NoticeQueryParams = { ...searchParams, category: "favorites" };
   const totals = await getNoticesPages(query);
   const data = await getNotices(query);
-  const notices = JSONParser(data);
-  const userId = headers().get(ConstantsEnum.USER_ID);
 
+  const notices = JSONParser(data);
+
+  const userId = headers().get(ConstantsEnum.USER_ID);
   return (
     <>
       <div className={layoutStyles["content-wrapper"]}>
@@ -31,4 +29,4 @@ async function InGoodHandsPage({ searchParams }: PageProps) {
   );
 }
 
-export default InGoodHandsPage;
+export default FavoritePage;
