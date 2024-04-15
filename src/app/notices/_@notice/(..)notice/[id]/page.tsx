@@ -22,7 +22,7 @@ async function NoticeModalPage({ params: { id } }: { params: { id: string } }) {
 export default NoticeModalPage;
 
 // const [noticeCard, setNoticeCard] = useState<NoticesTypes | null>(null);
-// console.log(noticeCard);
+
 // useEffect(() => {
 //   fetch("/notice/api/" + id).then(async (res) => {
 //     const notice = await res.json();

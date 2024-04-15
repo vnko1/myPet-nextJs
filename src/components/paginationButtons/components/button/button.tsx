@@ -16,7 +16,7 @@ const Button: FC<ButtonProps> = ({
   arrow = "left",
 }) => {
   const onHandleClick = (event: MouseEvent<HTMLButtonElement>) => {
-    console.log(event);
+    event;
   };
   const iconButtonClassNames = cn(
     styles["button"],

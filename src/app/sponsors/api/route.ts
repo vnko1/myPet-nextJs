@@ -19,6 +19,6 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(res);
   } catch (error) {
-    console.log("🚀 ~ GET ~ error:", error);
+    error;
   }
 }
