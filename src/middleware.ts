@@ -8,10 +8,14 @@ export default async function middleware(request: NextRequest) {
 
   const isAuthenticated = userData;
   const currentPath = request.nextUrl.pathname;
+
   const id = ((userData && userData?._id) || "").toString();
 
   if (currentPath.startsWith(EndpointsEnum.ADD_PET) && !isAuthenticated)
     return NextResponse.rewrite(new URL(LinksEnum.HOME, request.url));
+
+  if (currentPath.startsWith(LinksEnum.ADD_PET) && !isAuthenticated)
+    return NextResponse.rewrite(new URL(LinksEnum.LOGIN, request.url));
 
   if (
     (currentPath.startsWith(LinksEnum.NOTICES_FAVORITE) ||
