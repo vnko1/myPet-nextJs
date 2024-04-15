@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import cn from "classnames";
 
-import { IconEnum, LinksEnum, NoticesTypes } from "@/types";
+import { IconEnum, NoticesTypes } from "@/types";
 import { getCategory } from "@/utils";
 import {
   addToFavorite,
@@ -26,6 +26,7 @@ const Notice: FC<NoticeProps> = ({
   location,
   favorites,
   sex,
+  owner,
 }) => {
   const [isActive, setIsActive] = useState(false);
   const [authIsActive, setAuthIsActive] = useState(false);
@@ -101,7 +102,7 @@ const Notice: FC<NoticeProps> = ({
           />
           <span>{sex}</span>
         </p>
-        {pathName === LinksEnum.NOTICES_OWN ? (
+        {userId === owner ? (
           <button
             onClick={onTrashClick}
             className={`${styles["label"]} ${styles["label__btn"]} ${styles["trash"]}`}
