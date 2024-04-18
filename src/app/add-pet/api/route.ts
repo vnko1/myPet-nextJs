@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { redirect } from "next/navigation";
-import { Files } from "@/services/files/file";
+import Files from "@/services/files";
 import { LinksEnum, PetResponseValue } from "@/types";
 import { errorResponse } from "@/utils";
 import { Notices, Pets } from "@/lib/database";

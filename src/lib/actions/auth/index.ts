@@ -1,6 +1,11 @@
 "use server";
 import { getIronSession } from "iron-session";
-import { SessionData, defaultSession, sessionOptions, sleep } from "@/services";
+import {
+  SessionData,
+  defaultSession,
+  sessionOptions,
+  sleep,
+} from "@/services/session";
 import { cookies } from "next/headers";
 import { JSONParser } from "@/utils";
 import { revalidatePath } from "next/cache";

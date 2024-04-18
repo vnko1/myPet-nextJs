@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { loginSchema, registerSchema } from "@/schema";
 import { createUser, signIn, currentUser, updateUser } from "@/lib/database";
 import { LinksEnum, UserTypes } from "@/types";
-import { Files } from "@/services/files/file";
+import Files from "@/services/files";
 import { customError, errorResponse } from "@/utils";
 import { handleAuth, logout } from "../auth";
 //

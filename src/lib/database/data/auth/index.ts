@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import { customError } from "@/utils";
 import { Users } from "../../services";
 import { ID, UserTypes } from "@/types";
-import { SessionData } from "@/services";
+import { SessionData } from "@/services/session";
 import { getSession } from "@/lib/actions";
 
 const users = new Users();
