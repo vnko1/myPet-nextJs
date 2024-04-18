@@ -1,15 +1,15 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { ConstantsEnum, EndpointsEnum, LinksEnum } from "./types";
-import { userIsAuthenticated } from "./auth";
+import { cookies } from "next/headers";
+import { getIronSession } from "iron-session";
+import { EndpointsEnum, LinksEnum } from "./types";
+import { SessionData, sessionOptions } from "./services";
 
 export default async function middleware(request: NextRequest) {
-  const userData = await userIsAuthenticated();
+  const session = await getIronSession<SessionData>(cookies(), sessionOptions);
 
-  const isAuthenticated = userData;
+  const isAuthenticated = session.isLoggedIn;
   const currentPath = request.nextUrl.pathname;
-
-  const id = ((userData && userData?._id) || "").toString();
 
   if (currentPath.startsWith(EndpointsEnum.ADD_PET) && !isAuthenticated)
     return NextResponse.rewrite(new URL(LinksEnum.HOME, request.url));
@@ -34,15 +34,7 @@ export default async function middleware(request: NextRequest) {
   )
     return NextResponse.redirect(new URL(LinksEnum.USER, request.url));
 
-  const requestHeaders = new Headers(request.headers);
-
-  requestHeaders.set(ConstantsEnum.USER_ID, id);
-
-  const response = NextResponse.next({
-    request: {
-      headers: requestHeaders,
-    },
-  });
+  const response = NextResponse.next();
 
   return response;
 }

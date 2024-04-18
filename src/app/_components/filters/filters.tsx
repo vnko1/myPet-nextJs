@@ -12,7 +12,7 @@ import { Filter, FilterPopup } from "./components";
 import { FilterProps } from "./filters.type";
 import styles from "./filters.module.scss";
 
-const Filters: FC<FilterProps> = ({ user }) => {
+const Filters: FC<FilterProps> = ({ userIsLoggerIn }) => {
   const { push } = useRouter();
   const [screenSize] = useGetScreenSize();
   const [isActive, setIsActive] = useState(false);
@@ -49,7 +49,7 @@ const Filters: FC<FilterProps> = ({ user }) => {
   }, [pathname, replace, searchParams, selectedGenderCheckBoxes]);
 
   const onHandleNavClick = () => {
-    if (user) return push(LinksEnum.ADD_PET_CATEGORY);
+    if (userIsLoggerIn) return push(LinksEnum.ADD_PET_CATEGORY);
     setIsActive(true);
   };
 

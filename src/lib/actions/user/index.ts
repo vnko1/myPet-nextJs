@@ -1,19 +1,13 @@
 "use server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
 
 import { loginSchema, registerSchema } from "@/schema";
-import {
-  logOut,
-  createUser,
-  signIn,
-  currentUser,
-  updateUser,
-} from "@/lib/database";
+import { createUser, signIn, currentUser, updateUser } from "@/lib/database";
 import { LinksEnum, UserTypes } from "@/types";
 import { Files } from "@/services";
 import { customError, errorResponse } from "@/utils";
+import { handleAuth, logout } from "../auth";
 
 const files = new Files();
 
@@ -43,15 +37,8 @@ export async function login(formData: FormData) {
     });
 
     if (validatedFields.success) {
-      const user = await signIn(validatedFields.data);
-      const token: string = user.token;
-      const tokenLifeTime = user.tokenLifeTime;
-
-      cookies().set("token", token, {
-        secure: true,
-        expires: tokenLifeTime,
-        httpOnly: true,
-      });
+      const user: UserTypes = await signIn(validatedFields.data);
+      await handleAuth(user.name, user._id.toString(), user.email);
     }
   } catch (error) {
     if (error instanceof Error) return errorResponse(error.message, error.name);
@@ -62,7 +49,7 @@ export async function login(formData: FormData) {
 
 export async function signOut() {
   try {
-    await logOut();
+    await logout();
   } catch (error) {
     if (error instanceof Error) return errorResponse(error.message, error.name);
   }

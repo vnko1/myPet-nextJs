@@ -1,3 +1,4 @@
+"use server";
 import { getIronSession } from "iron-session";
 import { SessionData, defaultSession, sessionOptions, sleep } from "@/services";
 import { cookies } from "next/headers";
@@ -24,9 +25,15 @@ export async function getParsedSession() {
   return JSONParser(data);
 }
 
-export async function handleAuth(token: string) {
+export async function handleAuth(
+  username: string,
+  userId: string,
+  email: string
+) {
   const session = await getSession(true);
-  session.username = token;
+  session.username = username;
+  session.userId = userId;
+  session.email = email;
   session.isLoggedIn = true;
   await session.save();
 }

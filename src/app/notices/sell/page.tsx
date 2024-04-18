@@ -1,6 +1,7 @@
 import React from "react";
-import { headers } from "next/headers";
-import { ConstantsEnum, NOTICES_LIMIT, NoticeQueryParams } from "@/types";
+
+import { NOTICES_LIMIT, NoticeQueryParams } from "@/types";
+import { getParsedSession } from "@/lib/actions";
 import { JSONParser } from "@/utils";
 import { getNotices, getNoticesPages } from "@/lib/database";
 import { Pagination, Notices } from "@/app/_components";
@@ -18,7 +19,7 @@ async function SellPage({ searchParams }: PageProps) {
 
   const notices = JSONParser(data);
 
-  const userId = headers().get(ConstantsEnum.USER_ID);
+  const { userId } = await getParsedSession();
   return (
     <>
       <div className={layoutStyles["content-wrapper"]}>

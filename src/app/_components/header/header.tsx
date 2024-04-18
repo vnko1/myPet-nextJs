@@ -17,7 +17,7 @@ const links = [
   // { label: "Register", href: "/register" },
 ];
 
-const Header: FC<HeaderProps> = ({ user }) => {
+const Header: FC<HeaderProps> = ({ username }) => {
   const [isOpen, setIsOpen] = useState(false);
   const pathName = usePathname();
 
@@ -43,7 +43,7 @@ const Header: FC<HeaderProps> = ({ user }) => {
         </nav>
         <div className={styles["btn-wrapper"]}>
           <div className={styles["auth"]}>
-            <Buttons user={user} />
+            <Buttons username={username} />
           </div>
           <div className={styles["menu"]}>
             <UIButton variant="text" onClick={() => setIsOpen(!isOpen)}>
@@ -61,7 +61,7 @@ const Header: FC<HeaderProps> = ({ user }) => {
         setIsOpen={setIsOpen}
         links={links}
         pathName={pathName}
-        user={user}
+        username={username}
       />
     </header>
   );

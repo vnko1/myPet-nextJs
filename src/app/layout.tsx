@@ -3,10 +3,8 @@ import type { Metadata } from "next";
 import { manrope, inter, poppins } from "@/fonts";
 import { Header } from "@/app/_components";
 
+import { getParsedSession } from "@/lib/actions";
 import "../styles/globals.scss";
-
-import { userIsAuthenticated } from "@/auth";
-import { JSONParser } from "@/utils";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const metadata: Metadata = {
@@ -21,16 +19,14 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const data = (await userIsAuthenticated()) || null;
-
-  const user = JSONParser(data);
+  const data = await getParsedSession();
 
   return (
     <html lang="en">
       <body
         className={`${manrope.variable} ${inter.variable} ${poppins.variable}`}
       >
-        <Header user={user} />
+        <Header username={data.username} />
         {children}
       </body>
     </html>

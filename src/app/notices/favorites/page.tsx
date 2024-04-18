@@ -1,8 +1,8 @@
 import React from "react";
-import { headers } from "next/headers";
-import { ConstantsEnum, NOTICES_LIMIT, NoticeQueryParams } from "@/types";
+import { NOTICES_LIMIT, NoticeQueryParams } from "@/types";
 import { JSONParser } from "@/utils";
 import { getNotices, getNoticesPages } from "@/lib/database";
+import { getParsedSession } from "@/lib/actions";
 import { Pagination, Notices } from "@/app/_components";
 import layoutStyles from "@/app/notices/notices.module.scss";
 
@@ -17,8 +17,8 @@ async function FavoritePage({ searchParams }: PageProps) {
   const data = await getNotices(query);
 
   const notices = JSONParser(data);
+  const { userId } = await getParsedSession();
 
-  const userId = headers().get(ConstantsEnum.USER_ID);
   return (
     <>
       <div className={layoutStyles["content-wrapper"]}>

@@ -1,9 +1,9 @@
 import bcrypt from "bcrypt";
-import { cookies } from "next/headers";
-import { userIsAuthenticated } from "@/auth";
-import { TOKEN_LIFE, createToken, customError } from "@/utils";
+import { customError } from "@/utils";
 import { Users } from "../../services";
-import { ID, JWTPayloadType, UserTypes } from "@/types";
+import { ID, UserTypes } from "@/types";
+import { SessionData } from "@/services";
+import { getSession } from "@/lib/actions";
 
 const users = new Users();
 
@@ -13,24 +13,18 @@ const hashPassword = async (password: string) =>
 const passCompare = async (data: string, encrypted: string) =>
   await bcrypt.compare(data, encrypted);
 
-async function getUser(
-  payload?: JWTPayloadType | boolean
-): Promise<null | UserTypes> {
+async function getUser(session: SessionData): Promise<null | UserTypes> {
   const options = { projection: "-token -password" };
   let user = null;
-  if (payload && typeof payload === "object") {
-    if (payload.email)
-      user = await users.findUser({ email: payload.email }, options);
-    if (payload._id) user = await users.findUserById(payload._id, options);
-  }
+  if (session.userId) user = await users.findUserById(session.userId, options);
 
   return user;
 }
 
-export async function currentUser(type: "token" | "refreshToken" = "token") {
-  const isValidToken = await userIsAuthenticated(type);
+export async function currentUser() {
+  const session = await getSession();
 
-  return await getUser(isValidToken);
+  return await getUser(session);
 }
 
 export async function createUser(
@@ -67,20 +61,14 @@ export async function signIn(
 
   if (!isPasswordValid) throw customError(error);
 
-  const [token, tokenLifeTime] = await createToken(
-    { email: user.email, _id: user.id, name: user.name },
-    process.env.JWT_KEY || "",
-    TOKEN_LIFE
-  );
-
-  return { token, tokenLifeTime };
+  return user;
 }
 
 export const logOut = async () => {
   const user = await currentUser();
   if (!user) throw new Error("Something wrong");
 
-  cookies().delete("token");
+  return user;
 };
 
 export const updateUser = async (id: ID, userData: Partial<UserTypes>) => {

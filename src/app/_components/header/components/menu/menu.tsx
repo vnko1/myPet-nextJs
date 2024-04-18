@@ -12,7 +12,7 @@ const transitionClassNames = {
   exitActive: styles["modal-exit-active"],
 };
 
-const Menu: FC<IMenu> = ({ isOpen, links, pathName, user, setIsOpen }) => {
+const Menu: FC<IMenu> = ({ isOpen, links, pathName, username, setIsOpen }) => {
   return (
     <Modal
       isOpen={isOpen}
@@ -24,7 +24,7 @@ const Menu: FC<IMenu> = ({ isOpen, links, pathName, user, setIsOpen }) => {
       enableSwipeUpToScreen={1279}
     >
       <div className={styles["menu__auth"]}>
-        <Buttons user={user} />
+        <Buttons username={username} />
       </div>
       <nav className={styles["menu-nav"]}>
         <ul className={styles["menu-nav__links"]}>

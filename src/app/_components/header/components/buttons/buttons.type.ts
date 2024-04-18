@@ -1,3 +1,1 @@
-import { JWTPayloadType } from "@/types";
-
-export type ButtonsProps = { user: JWTPayloadType | null };
+export type ButtonsProps = { username: string | null };

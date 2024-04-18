@@ -1,7 +1,8 @@
 import React from "react";
-import { headers } from "next/headers";
-import { ConstantsEnum, NOTICES_LIMIT, NoticeQueryParams } from "@/types";
+
+import { NOTICES_LIMIT, NoticeQueryParams } from "@/types";
 import { JSONParser } from "@/utils";
+import { getParsedSession } from "@/lib/actions";
 import { getNotices, getNoticesPages } from "@/lib/database";
 import { Pagination, Notices } from "@/app/_components";
 import layoutStyles from "@/app/notices/notices.module.scss";
@@ -19,7 +20,7 @@ async function InGoodHandsPage({ searchParams }: PageProps) {
   const totals = await getNoticesPages(query);
   const data = await getNotices(query);
   const notices = JSONParser(data);
-  const userId = headers().get(ConstantsEnum.USER_ID);
+  const { userId } = await getParsedSession();
 
   return (
     <>

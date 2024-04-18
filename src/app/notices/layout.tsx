@@ -1,15 +1,12 @@
 import React from "react";
 
-import { JSONParser } from "@/utils";
-import { userIsAuthenticated } from "@/auth";
 import { Search } from "../_components";
 import { Categories, Filters } from "@/app/_components";
 import styles from "./notices.module.scss";
+import { getParsedSession } from "@/lib/actions";
 
 async function NoticesLayout({ children }: { children: React.ReactNode }) {
-  const data = (await userIsAuthenticated()) || null;
-
-  const user = JSONParser(data);
+  const user = await getParsedSession();
 
   return (
     <main>
@@ -19,10 +16,10 @@ async function NoticesLayout({ children }: { children: React.ReactNode }) {
           <Search />
           <div className={styles["notices__nav-bar"]}>
             <div className={styles["categories"]}>
-              <Categories user={user} />
+              <Categories userIsLoggerIn={user.isLoggedIn} />
             </div>
             <div className={styles["filters"]}>
-              <Filters user={user} />
+              <Filters userIsLoggerIn={user.isLoggedIn} />
             </div>
           </div>
           {children}

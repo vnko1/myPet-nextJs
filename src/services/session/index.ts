@@ -2,12 +2,16 @@ import { SessionOptions } from "iron-session";
 
 const pass = process.env.SECRET_PASS as string;
 export interface SessionData {
-  username: string;
+  username: string | null;
+  userId: string | null;
+  email: string | null;
   isLoggedIn: boolean;
 }
 
 export const defaultSession: SessionData = {
-  username: "",
+  username: null,
+  userId: null,
+  email: null,
   isLoggedIn: false,
 };
 

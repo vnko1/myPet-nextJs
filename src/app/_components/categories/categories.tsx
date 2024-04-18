@@ -35,7 +35,7 @@ const notices = [
   },
 ];
 
-const Categories: FC<CategoriesProps> = ({ user }) => {
+const Categories: FC<CategoriesProps> = ({ userIsLoggerIn }) => {
   const path = usePathname();
   const router = useRouter();
 
@@ -43,7 +43,7 @@ const Categories: FC<CategoriesProps> = ({ user }) => {
     router.push(event.target.value);
   };
 
-  const endSliceValue = user ? notices.length : 3;
+  const endSliceValue = userIsLoggerIn ? notices.length : 3;
   return (
     <ul className={styles["categories"]}>
       {notices.slice(0, endSliceValue).map((notice) => (

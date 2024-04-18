@@ -6,7 +6,7 @@ import { LogOutModal } from "@/app/_components";
 import { ButtonsProps } from "./buttons.type";
 import { useRouter } from "next/navigation";
 
-const Buttons: FC<ButtonsProps> = ({ user }) => {
+const Buttons: FC<ButtonsProps> = ({ username }) => {
   const router = useRouter();
   const [isActive, setIsActive] = useState(false);
   const onHandleClick = async () => {
@@ -18,7 +18,7 @@ const Buttons: FC<ButtonsProps> = ({ user }) => {
     router.refresh();
   };
 
-  const renderButtons = user ? (
+  const renderButtons = username ? (
     <>
       <UIButton
         variant="contained"
@@ -38,7 +38,7 @@ const Buttons: FC<ButtonsProps> = ({ user }) => {
         alignIcon="left"
         onClick={() => navigate(LinksEnum.USER)}
       >
-        {user.name}
+        {username}
       </UIButton>
     </>
   ) : (
