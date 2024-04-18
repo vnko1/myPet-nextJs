@@ -1,15 +1,15 @@
+import { getSession } from "@/lib/actions";
 import { Pets } from "@/lib/database";
-import { ConstantsEnum } from "@/types";
 import { errorResponse } from "@/utils";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 const pets = new Pets();
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
-    const userId = request.headers.get(ConstantsEnum.USER_ID) || "";
+    const { userId } = await getSession();
 
-    const userPets = await pets.findPets(userId);
+    const userPets = await pets.findPets(userId || "");
 
     return NextResponse.json(userPets);
   } catch (error) {

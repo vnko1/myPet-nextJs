@@ -1,15 +1,15 @@
 "use server";
-
-import { Pets } from "@/lib/database";
-import { ConstantsEnum, LinksEnum } from "@/types";
-import { revalidatePath } from "next/cache";
-import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
+
+import { LinksEnum } from "@/types";
+import { Pets } from "@/lib/database";
+import { getSession } from "../auth";
 
 const pets = new Pets();
 
 export async function getPets() {
-  const userId = headers().get(ConstantsEnum.USER_ID);
+  const { userId } = await getSession();
 
   if (userId) return await pets.findPets(userId);
 

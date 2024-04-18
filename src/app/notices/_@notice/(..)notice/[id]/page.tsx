@@ -1,16 +1,16 @@
 import React from "react";
-import { headers } from "next/headers";
-import { ConstantsEnum, NoticesTypes } from "@/types";
+
+import { NoticesTypes } from "@/types";
 import { JSONParser } from "@/utils";
 import { RouteModal } from "@/components";
-import { getNotice } from "@/lib/actions";
+import { getNotice, getParsedSession } from "@/lib/actions";
 import styles from "./notice.module.scss";
 import { Pet } from "@/app/_components";
 
 async function NoticeModalPage({ params: { id } }: { params: { id: string } }) {
   const data = await getNotice(id);
   const pet = JSONParser(data);
-  const userId = headers().get(ConstantsEnum.USER_ID);
+  const { userId } = await getParsedSession();
 
   return (
     <RouteModal classNames={styles["modal"]}>

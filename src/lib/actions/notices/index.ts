@@ -1,11 +1,11 @@
 "use server";
 
-import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
-import { ConstantsEnum, LinksEnum, NoticesTypes } from "@/types";
+import { LinksEnum, NoticesTypes } from "@/types";
 import { Notices } from "@/lib/database";
 import { redirect } from "next/navigation";
 import { JSONParser } from "@/utils";
+import { getSession } from "../auth";
 
 const notices = new Notices();
 
@@ -22,7 +22,8 @@ export async function deleteNotice(id: string) {
 }
 
 export async function addToFavorite(noticeId: string, path?: string) {
-  const userId = headers().get(ConstantsEnum.USER_ID);
+  const { userId } = await getSession();
+
   if (!userId) return redirect(LinksEnum.HOME);
 
   const response: NoticesTypes = await notices.updateNotice(
@@ -39,7 +40,7 @@ export async function addToFavorite(noticeId: string, path?: string) {
 }
 
 export async function removeFromFavorite(noticeId: string, path?: string) {
-  const userId = headers().get(ConstantsEnum.USER_ID);
+  const { userId } = await getSession();
 
   if (!userId) return redirect(LinksEnum.HOME);
 

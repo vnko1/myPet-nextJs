@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Files } from "@/services";
-import { ConstantsEnum, PetResponseValue } from "@/types";
+import { PetResponseValue } from "@/types";
 import { errorResponse } from "@/utils";
 import { Notices, Pets } from "@/lib/database";
+import { getSession } from "@/lib/actions";
 
 const files = new Files();
 const pets = new Pets();
@@ -10,7 +11,7 @@ const notices = new Notices();
 
 export async function POST(request: NextRequest) {
   try {
-    const userId = request.headers.get(ConstantsEnum.USER_ID);
+    const { userId } = await getSession();
     const res: PetResponseValue = await request.json();
     const folderName = res.category === "your-pet" ? "pets" : "notices";
 
