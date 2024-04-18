@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Files } from "@/services";
+import { Files } from "@/services/files/file";
 import { PetResponseValue } from "@/types";
 import { errorResponse } from "@/utils";
 import { Notices, Pets } from "@/lib/database";

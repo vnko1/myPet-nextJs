@@ -7,10 +7,10 @@ import { SessionData, sessionOptions } from "./services";
 
 export default async function middleware(request: NextRequest) {
   const session = await getIronSession<SessionData>(cookies(), sessionOptions);
-
-  const isAuthenticated = session.isLoggedIn;
+  console.log(session);
+  const isAuthenticated = false;
   const currentPath = request.nextUrl.pathname;
-
+  console.log(isAuthenticated);
   if (currentPath.startsWith(EndpointsEnum.ADD_PET) && !isAuthenticated)
     return NextResponse.rewrite(new URL(LinksEnum.HOME, request.url));
 
@@ -39,8 +39,8 @@ export default async function middleware(request: NextRequest) {
   return response;
 }
 
-export const config = {
-  matcher: [
-    "/((?!sponsors|friends|news|_next/static|_next/image|.webp|favicon.ico|.*\\.webp$|$).*)",
-  ],
-};
+// export const config = {
+//   matcher: [
+//     "/((?!sponsors|friends|news|_next/static|_next/image|.webp|favicon.ico|.*\\.webp$|$).*)",
+//   ],
+// };

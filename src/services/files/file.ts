@@ -52,4 +52,4 @@ class Files {
   }
 }
 
-export default Files;
+export { Files };
